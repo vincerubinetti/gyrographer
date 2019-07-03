@@ -3,10 +3,10 @@ import { Component } from 'react';
 
 import './app.css';
 
-import { Board } from './board.js';
+import { Graph } from './graph.js';
 
 export class App extends Component {
   render() {
-    return <Board />;
+    return <Graph />;
   }
 }

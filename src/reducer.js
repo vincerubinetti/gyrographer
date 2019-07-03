@@ -1,6 +1,15 @@
 export function Reducer(prevState = {}, action) {
   const newState = { ...prevState };
 
+  newState.paths = {};
+  newState.paths['1'] = {
+    spin: 2,
+    showPath: false
+  };
+  newState.paths['2'] = {
+    parent: '1'
+  };
+
   // //////////////////////////////////////////////////
   // set defaults
   // //////////////////////////////////////////////////
@@ -24,12 +33,11 @@ export function Reducer(prevState = {}, action) {
   // path properties
   if (!newState.paths)
     newState.paths = [];
-  for (const path of newState.paths) {
+  for (const key of Object.keys(newState.paths)) {
+    const path = newState.paths[key];
     // under-the-hood
-    if (typeof path.id !== 'number')
-      path.id = 0;
-    if (typeof path.parentId !== 'number')
-      path.parentId = null;
+    if (typeof path.parent !== 'string')
+      path.parent = null;
 
     // geometry
     if (typeof path.showPath !== 'boolean')
@@ -54,10 +62,10 @@ export function Reducer(prevState = {}, action) {
       path.fillColor = 'none';
     if (typeof path.strokeColor !== 'string')
       path.strokeColor = '#ffffffff';
-    if (typeof path.offset !== 'number')
-      path.strokeThickness = 5;
+    if (typeof path.strokeWidth !== 'number')
+      path.strokeWidth = 3;
     if (typeof path.close !== 'boolean')
-      path.close = false;
+      path.close = true;
     if (typeof path.dashArray !== 'string')
       path.dashArray = '';
     if (typeof path.dashOffset !== 'number')
@@ -68,5 +76,6 @@ export function Reducer(prevState = {}, action) {
       path.strokeLineJoin = 'round';
   }
 
+  console.log(newState)
   return newState;
 }
