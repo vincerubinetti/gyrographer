@@ -3,13 +3,98 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
-import { getContrastColor } from './util.js';
+import { View } from './view.js';
+import { Background } from './background.js';
+import { Grid } from './grid.js';
 import './board.css';
 
+const minZoom = 0.01;
+const maxZoom = 100;
+
 export class Board extends Component {
+  componentDidMount() {
+    this.createBoard();
+  }
+
+  onViewZoom = () => {
+    d3.select('#view').attr('transform', d3.event.transform);
+  };
+
+  resetView = () => {
+    const container = d3
+      .select('#board')
+      .node()
+      .getBoundingClientRect();
+
+    const scale = 1;
+    const translateX = container.width / 2;
+    const translateY = container.height / 2;
+
+    // perform view transform
+    d3.select('#board').call(
+      this.state.viewZoomHandler.transform,
+      d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+    );
+  };
+
+  fitView = () => {
+    const contents = d3
+      .select('#view')
+      .node()
+      .getBBox();
+    const container = d3
+      .select('#board')
+      .node()
+      .getBoundingClientRect();
+    const padding = 0;
+
+    if (contents.width === 0 || contents.height === 0)
+      return;
+
+    container.width -= 2;
+    container.height -= 2;
+
+    contents.midX = contents.x + contents.width / 2;
+    contents.midY = contents.y + contents.height / 2;
+
+    const scale =
+      1 /
+      Math.max(
+        contents.width / (container.width - padding),
+        contents.height / (container.height - padding)
+      );
+    const translateX = container.width / 2 - scale * contents.midX;
+    const translateY = container.height / 2 - scale * contents.midY;
+
+    d3.select('#board').call(
+      this.state.viewZoomHandler.transform,
+      d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+    );
+  };
+
+  createBoard = () => {
+    const svg = d3.select('#board');
+
+    const viewZoomHandler = d3
+      .zoom()
+      .scaleExtent([minZoom, maxZoom])
+      .on('zoom', this.onViewZoom);
+    svg.call(viewZoomHandler);
+
+    svg.on('dblclick.zoom', null);
+    svg.on('dblclick', this.fitView);
+
+    this.setState(
+      {
+        viewZoomHandler: viewZoomHandler
+      },
+      this.fitView
+    );
+  };
+
   render() {
-    let viewBox = '';
-    const render = true;
+    let viewBox;
+    const render = false;
     if (render) {
       viewBox = [
         this.props.left,
@@ -22,7 +107,7 @@ export class Board extends Component {
       <svg id='board' viewBox={viewBox}>
         <View>
           <Background />
-          <Grid />
+          {this.props.showGrid && <Grid />}
         </View>
       </svg>
     );
@@ -33,137 +118,5 @@ Board = connect((state) => ({
   top: state.board.top,
   right: state.board.right,
   bottom: state.board.bottom,
-  color: state.board.color
+  showGrid: state.board.showGrid
 }))(Board);
-
-class View extends Component {
-  render() {
-    return <g id='view'>{this.props.children}</g>;
-  }
-}
-
-class Background extends Component {
-  render() {
-    return (
-      <g id='background'>
-        <rect
-          x={this.props.left}
-          y={this.props.top}
-          width={this.props.right - this.props.left}
-          height={this.props.bottom - this.props.top}
-          fill={this.props.color}
-        />
-      </g>
-    );
-  }
-}
-Background = connect((state) => ({
-  left: state.board.left,
-  top: state.board.top,
-  right: state.board.right,
-  bottom: state.board.bottom,
-  color: state.board.color
-}))(Background);
-
-class Grid extends Component {
-  render() {
-    const color = getContrastColor(this.props.color);
-
-    const minorSpacing = 50;
-    const majorMultiple = 4;
-
-    const minorHorizontalLines = [];
-    const minorVerticalLines = [];
-    const majorHorizontalLines = [];
-    const majorVerticalLines = [];
-
-    for (let index = -1000; index < 1000; index++) {
-      if (index === 0)
-        continue;
-
-      const xy = index * minorSpacing;
-
-      if (xy > this.props.left && xy < this.props.right) {
-        const newLine = (
-          <line
-            key={index}
-            x1={this.props.left}
-            y1={xy}
-            x2={this.props.right}
-            y2={xy}
-            stroke={color}
-          />
-        );
-        if (index % majorMultiple === 0)
-          majorHorizontalLines.push(newLine);
-        else
-          minorHorizontalLines.push(newLine);
-      }
-      if (xy > this.props.top && xy < this.props.bottom) {
-        const newLine = (
-          <line
-            key={index}
-            x1={xy}
-            y1={this.props.top}
-            x2={xy}
-            y2={this.props.bottom}
-            stroke={color}
-          />
-        );
-        if (index % majorMultiple === 0)
-          majorVerticalLines.push(newLine);
-        else
-          minorVerticalLines.push(newLine);
-      }
-    }
-
-    const bounds = (
-      <rect
-        x={this.props.left}
-        y={this.props.top}
-        width={this.props.right - this.props.left}
-        height={this.props.bottom - this.props.top}
-        stroke={color}
-        fill='none'
-      />
-    );
-
-    const axes = (
-      <>
-        <line
-          x1={this.props.left}
-          y1='0'
-          x2={this.props.right}
-          y2='0'
-          stroke={color}
-        />
-        <line
-          x1='0'
-          y1={this.props.top}
-          x2='0'
-          y2={this.props.bottom}
-          stroke={color}
-        />
-      </>
-    );
-
-    return (
-      <g id='grid'>
-        <g id='bounds'>{bounds}</g>
-        <g id='minor_horizontal_lines'>{minorHorizontalLines}</g>
-        <g id='minor_vertical_lines'>{minorVerticalLines}</g>
-        <g id='major_horizontal_lines'>{majorHorizontalLines}</g>
-        <g id='major_vertical_lines'>{majorVerticalLines}</g>
-        <g id='axes'>{axes}</g>
-      </g>
-    );
-  }
-}
-Grid = connect((state) => ({
-  left: state.board.left,
-  top: state.board.top,
-  right: state.board.right,
-  bottom: state.board.bottom,
-  color: state.board.color,
-  show: state.board.showGrid
-}))(Grid);
