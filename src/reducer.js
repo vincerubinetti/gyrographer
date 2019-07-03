@@ -16,8 +16,8 @@ export function Reducer(prevState = {}, action) {
     newState.board.right = 1000;
   if (typeof newState.board.bottom !== 'number')
     newState.board.bottom = 1000;
-  if (typeof newState.board.backgroundColor !== 'string')
-    newState.board.backgroundColor = '#404040ff';
+  if (typeof newState.board.color !== 'string')
+    newState.board.color = '#404040ff';
   if (typeof newState.board.showGrid !== 'boolean')
     newState.board.showGrid = true;
 

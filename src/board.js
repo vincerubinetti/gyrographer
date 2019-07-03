@@ -3,12 +3,23 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
+import { getContrastColor } from './util.js';
 import './board.css';
 
 export class Board extends Component {
   render() {
+    let viewBox = '';
+    const render = true;
+    if (render) {
+      viewBox = [
+        this.props.left,
+        this.props.top,
+        this.props.right - this.props.left,
+        this.props.bottom - this.props.top
+      ].join(' ');
+    }
     return (
-      <svg id='board' viewBox="-100 -100 2000 2000">
+      <svg id='board' viewBox={viewBox}>
         <View>
           <Background />
           <Grid />
@@ -17,6 +28,14 @@ export class Board extends Component {
     );
   }
 }
+Board = connect((state) => ({
+  left: state.board.left,
+  top: state.board.top,
+  right: state.board.right,
+  bottom: state.board.bottom,
+  color: state.board.color
+}))(Board);
+
 class View extends Component {
   render() {
     return <g id='view'>{this.props.children}</g>;
@@ -43,34 +62,101 @@ Background = connect((state) => ({
   top: state.board.top,
   right: state.board.right,
   bottom: state.board.bottom,
-  color: state.board.backgroundColor
+  color: state.board.color
 }))(Background);
 
 class Grid extends Component {
   render() {
-    const color = '#ffffffff';
-    const thickness = 3;
+    const color = getContrastColor(this.props.color);
+
+    const minorSpacing = 50;
+    const majorMultiple = 4;
+
+    const minorHorizontalLines = [];
+    const minorVerticalLines = [];
+    const majorHorizontalLines = [];
+    const majorVerticalLines = [];
+
+    for (let index = -1000; index < 1000; index++) {
+      if (index === 0)
+        continue;
+
+      const xy = index * minorSpacing;
+
+      if (xy > this.props.left && xy < this.props.right) {
+        const newLine = (
+          <line
+            key={index}
+            x1={this.props.left}
+            y1={xy}
+            x2={this.props.right}
+            y2={xy}
+            stroke={color}
+          />
+        );
+        if (index % majorMultiple === 0)
+          majorHorizontalLines.push(newLine);
+        else
+          minorHorizontalLines.push(newLine);
+      }
+      if (xy > this.props.top && xy < this.props.bottom) {
+        const newLine = (
+          <line
+            key={index}
+            x1={xy}
+            y1={this.props.top}
+            x2={xy}
+            y2={this.props.bottom}
+            stroke={color}
+          />
+        );
+        if (index % majorMultiple === 0)
+          majorVerticalLines.push(newLine);
+        else
+          minorVerticalLines.push(newLine);
+      }
+    }
+
+    const bounds = (
+      <rect
+        x={this.props.left}
+        y={this.props.top}
+        width={this.props.right - this.props.left}
+        height={this.props.bottom - this.props.top}
+        stroke={color}
+        fill='none'
+      />
+    );
+
     const axes = (
       <>
         <line
-          stroke={color}
-          stroke-width={thickness}
           x1={this.props.left}
           y1='0'
           x2={this.props.right}
           y2='0'
+          stroke={color}
         />
         <line
-          stroke={color}
-          stroke-width={thickness}
           x1='0'
           y1={this.props.top}
           x2='0'
           y2={this.props.bottom}
+          stroke={color}
         />
       </>
     );
-    return <g id='grid'>{axes}</g>;
+
+    return (
+      <g id='grid'>
+        <g id='bounds'>{bounds}</g>
+        <g id='minor_horizontal_lines'>{minorHorizontalLines}</g>
+        <g id='minor_vertical_lines'>{minorVerticalLines}</g>
+        <g id='major_horizontal_lines'>{majorHorizontalLines}</g>
+        <g id='major_vertical_lines'>{majorVerticalLines}</g>
+        <g id='axes'>{axes}</g>
+      </g>
+    );
   }
 }
 Grid = connect((state) => ({
@@ -78,5 +164,6 @@ Grid = connect((state) => ({
   top: state.board.top,
   right: state.board.right,
   bottom: state.board.bottom,
+  color: state.board.color,
   show: state.board.showGrid
 }))(Grid);

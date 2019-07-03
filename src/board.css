@@ -2,3 +2,20 @@ svg {
   width: 100%;
   height: 100%;
 }
+#grid {
+  opacity: 0.75;
+}
+#bounds {
+  stroke-width: 4;
+}
+#axes {
+  stroke-width: 4;
+}
+#minor_horizontal_lines,
+#minor_vertical_lines {
+  stroke-width: 0.5;
+}
+#major_horizontal_lines,
+#major_vertical_lines {
+  stroke-width: 1;
+}
