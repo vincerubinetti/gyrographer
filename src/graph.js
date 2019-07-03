@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
+import { incrementTime } from './actions.js';
 import { View } from './view.js';
 import { Board } from './board.js';
 import { Paths } from './paths.js';
@@ -15,6 +16,9 @@ const maxZoom = 100;
 export class Graph extends Component {
   componentDidMount() {
     this.createGraph();
+    window.setInterval(() => {
+      this.props.dispatch(incrementTime());
+    }, 1000 / 60);
   }
 
   onViewZoom = () => {
@@ -110,7 +114,7 @@ export class Graph extends Component {
       .map((id, index) => <Path key={index} id={id} />);
 
     return (
-      <svg id='graph' viewBox={viewBox}>
+      <svg xmlns='http://www.w3.org/2000/svg' id='graph' viewBox={viewBox}>
         <View>
           <Board />
           <Paths>{paths}</Paths>
