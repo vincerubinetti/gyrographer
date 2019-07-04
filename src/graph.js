@@ -8,6 +8,8 @@ import { View } from './view.js';
 import { Board } from './board.js';
 import { Paths } from './paths.js';
 import { Path } from './path.js';
+import { Helpers } from './helpers.js';
+import { Helper } from './helper.js';
 import './graph.css';
 
 const minZoom = 0.01;
@@ -113,11 +115,16 @@ export class Graph extends Component {
       .filter((id) => this.props.paths[id].showPath)
       .map((id, index) => <Path key={index} id={id} />);
 
+    const helpers = Object.keys(this.props.paths)
+      .filter((id) => this.props.paths[id].showHelper)
+      .map((id, index) => <Helper key={index} id={id} />);
+
     return (
-      <svg xmlns='http://www.w3.org/2000/svg' id='graph' viewBox={viewBox}>
+      <svg xmlns="http://www.w3.org/2000/svg" id="graph" viewBox={viewBox}>
         <View>
           <Board />
           <Paths>{paths}</Paths>
+          <Helpers>{helpers}</Helpers>
         </View>
       </svg>
     );

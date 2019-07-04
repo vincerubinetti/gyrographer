@@ -10,12 +10,13 @@ export function Reducer(prevState = {}, action) {
   newState.paths['2'] = {
     spin: 33,
     radius: 200,
-    parent: '1'
+    parent: '1',
+    showPath: false
   };
   newState.paths['3'] = {
     spin: 55,
     radius: 50,
-    parent: '1'
+    parent: '2'
   };
 
   // //////////////////////////////////////////////////
@@ -38,9 +39,9 @@ export function Reducer(prevState = {}, action) {
   if (typeof newState.board.bottom !== 'number')
     newState.board.bottom = 1000;
   if (typeof newState.board.color !== 'string')
-    newState.board.color = '#404040ff';
+    newState.board.color = '#202020ff';
   if (typeof newState.board.showGrid !== 'boolean')
-    newState.board.showGrid = true;
+    newState.board.showGrid = false;
 
   // path properties
   if (!newState.paths)
@@ -54,14 +55,14 @@ export function Reducer(prevState = {}, action) {
     // geometry
     if (typeof path.showPath !== 'boolean')
       path.showPath = true;
-    if (typeof path.showHelpers !== 'boolean')
-      path.showHelpers = false;
+    if (typeof path.showHelper !== 'boolean')
+      path.showHelper = true;
     if (typeof path.from !== 'number')
       path.from = 0;
     if (typeof path.to !== 'number')
-      path.to = 100;
-    if (typeof path.steps !== 'number')
-      path.steps = 1000;
+      path.to = 70;
+    if (typeof path.step !== 'number')
+      path.step = 0.01;
     if (typeof path.radius !== 'number')
       path.radius = 100;
     if (typeof path.spin !== 'number')
@@ -96,8 +97,6 @@ export function Reducer(prevState = {}, action) {
     default:
       break;
   }
-
-  console.log(newState)
 
   return newState;
 }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { sin } from './util.js';
 import { cos } from './util.js';
+import { sign } from './util.js';
 
 const precision = 2;
 
@@ -18,14 +19,13 @@ export class Path extends Component {
       return '';
 
     const from = thisPath.from;
-    // const to = thisPath.to;
-    const to = time/10 % 100;
-    const steps = thisPath.steps;
+    const to = thisPath.to;
+    // const to = (time / 50) % 100;
 
-    const step = (to - from) / steps || 1;
+    const step = thisPath.step || 1;
 
     let d = [];
-    for (let t = from; t <= to; t += step) {
+    for (let t = from; t < to; t += step) {
       let x = 0;
       let y = 0;
 
@@ -37,7 +37,7 @@ export class Path extends Component {
 
         const spin = thePath.spin;
         const offset = thePath.offset;
-        const radius = thePath.radius;
+        const radius = thePath.radius + sin(time) * 10;
 
         x += cos((spin * 360 * t) / 100 + offset) * radius;
         y += -sin((spin * 360 * t) / 100 + offset) * radius;

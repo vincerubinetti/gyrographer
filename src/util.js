@@ -10,3 +10,12 @@ export function sin(degrees) {
 export function cos(degrees) {
   return Math.cos((2 * Math.PI * degrees) / 360);
 }
+
+export function sign(value) {
+  if (value > 0)
+    return 1;
+  else if (value < 0)
+    return -1;
+  else
+    return 0;
+}
