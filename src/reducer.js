@@ -8,13 +8,13 @@ export function Reducer(prevState = {}, action) {
     showPath: false
   };
   newState.paths['2'] = {
-    spin: 33,
+    spin: 20,
     radius: 200,
     parent: '1',
     showPath: false
   };
   newState.paths['3'] = {
-    spin: 55,
+    spin: -5,
     radius: 50,
     parent: '2'
   };
@@ -59,12 +59,14 @@ export function Reducer(prevState = {}, action) {
     // geometry
     if (typeof path.showPath !== 'boolean')
       path.showPath = true;
-    if (typeof path.showHelper !== 'boolean')
-      path.showHelper = true;
+    if (typeof path.showWheel !== 'boolean')
+      path.showWheel = true;
+    if (typeof path.showArrow !== 'boolean')
+      path.showArrow = true;
     if (typeof path.from !== 'number')
       path.from = 0;
     if (typeof path.to !== 'number')
-      path.to = 70;
+      path.to = 100;
     if (typeof path.step !== 'number')
       path.step = 0.01;
     if (typeof path.radius !== 'number')

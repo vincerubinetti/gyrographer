@@ -2,8 +2,13 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Point, vCircle } from './util.js';
+import { getContrastColor } from './util.js';
 import { sin } from './util.js';
+import { Point } from './util.js';
+import { vCircle } from './util.js';
+import { vSum } from './util.js';
+import { vLength } from './util.js';
+import './path.css';
 
 const precision = 2;
 
@@ -12,81 +17,152 @@ export class Path extends Component {
     const time = this.props.time;
     const paths = this.props.paths;
     const id = this.props.id;
-    const path = paths[thisId];
+    const path = paths[id];
+    const parent = paths[path.parent];
 
-    const from = getPathPropAtTime(path, 'from', time);
+    // helper styles
+    const showWheel = path.showWheel;
+    const showArrow = path.showArrow;
+    const color = getContrastColor(this.props.backgroundColor);
+    const circleFillColor = color + '30';
+    const circleStrokeColor = color + 'ff';
+    const arrowColor = color + 'ff';
+
+    // helper geometry
     const to = getPathPropAtTime(path, 'to', time);
-    const step = getPathPropAtTime(path, 'step', time);
+    const parentPoint = getPathAbsolutePoint(parent, paths, to, time);
+    const thisPoint = getPathAbsolutePoint(path, paths, to, time);
+    const radius = vLength(parentPoint, thisPoint);
+    const arrowD = [
+      'M',
+      parentPoint.x,
+      parentPoint.y,
+      'L',
+      thisPoint.x,
+      thisPoint.y
+    ].join(' ');
 
+    // path styles
+    const showPath = path.showPath;
     const fillColor = getPathPropAtTime(path, 'fillColor', time);
     const strokeColor = getPathPropAtTime(path, 'strokeColor', time);
     const strokeWidth = getPathPropAtTime(path, 'strokeWidth', time);
+    const close = path.close;
     const dashArray = getPathPropAtTime(path, 'dashArray', time);
     const dashOffset = getPathPropAtTime(path, 'dashOffset', time);
-    const strokeLineCap = getPathPropAtTime(path, 'strokeLineCap', time);
-    const strokeLineJoin = getPathPropAtTime(path, 'strokeLineJoin', time);
+    const strokeLineCap = path.strokeLineCap;
+    const strokeLineJoin = path.strokeLineJoin;
 
-    let d = [];
-    for (let t = from; t < to; t += step) {
-      let x = 0;
-      let y = 0;
-
-      function recurse(id) {
-        const thePath = paths[id];
-
-        if (!thePath)
-          return;
-
-        const spin = thePath.spin;
-        const offset = thePath.offset;
-        const radius = thePath.radius;
-
-        x += cos((spin * 360 * t) / 100 + offset) * radius;
-        y += -sin((spin * 360 * t) / 100 + offset) * radius;
-
-        recurse(thePath.parent);
-      }
-      recurse(thisId);
-      d.push({ x: x.toFixed(precision), y: y.toFixed(precision) });
-    }
-    d = d
+    // path geometry
+    const pathPoints = getPathPoints(path, paths, time);
+    let pathD = pathPoints
       .map((point, index) =>
-        ['\n', index === 0 ? 'M' : 'L', point.x, point.y].join(' ')
+        [
+          '\n',
+          index === 0 ? 'M' : 'L',
+          point.x.toFixed(precision),
+          point.y.toFixed(precision)
+        ].join(' ')
       )
       .join(' ');
-    if (thisPath.close)
-      d += 'z';
+    if (close)
+      pathD += 'z';
 
     return (
-      <path
-        fill={fillColor}
-        stroke={strokeColor}
-        strokeWidth={strokeWidth}
-        strokeDasharray={dashArray}
-        strokeDashoffset={dashOffset}
-        strokeLinecap={strokeLineCap}
-        strokeLinejoin={strokeLineJoin}
-        d={d}
-      />
+      <>
+        <g className='helper'>
+          {showWheel && (
+            <>
+              <circle
+                cx={parentPoint.x}
+                cy={parentPoint.y}
+                r={radius}
+                fill={circleFillColor}
+              />
+              <circle
+                cx={parentPoint.x}
+                cy={parentPoint.y}
+                r={radius}
+                fill='none'
+                stroke={circleStrokeColor}
+                strokeWidth={strokeWidth / 2}
+              />
+            </>
+          )}
+          {showArrow && (
+            <path
+              d={arrowD}
+              stroke={arrowColor}
+              strokeWidth={strokeWidth / 2}
+              strokeLinecap='round'
+              strokeLinejoin='miter'
+            />
+          )}
+        </g>
+        {showPath && (
+          <path
+            fill={fillColor}
+            stroke={strokeColor}
+            strokeWidth={strokeWidth}
+            strokeDasharray={dashArray}
+            strokeDashoffset={dashOffset}
+            strokeLinecap={strokeLineCap}
+            strokeLinejoin={strokeLineJoin}
+            d={pathD}
+          />
+        )}
+      </>
     );
   }
 }
 Path = connect((state) => ({
   paths: state.paths,
-  time: state.time
+  time: state.time,
+  backgroundColor: state.graph.backgroundColor
 }))(Path);
 
-export function getPathPoint(id, trace, paths, time) {
-  const spin = getPathPropAtTime(id, paths, 'spin', time);
-  const offset = getPathPropAtTime(id, paths, 'offset', time);
-  const radius = getPathPropAtTime(id, paths, 'radius', time);
+export function getPathPoints(path, paths, time) {
+  const from = getPathPropAtTime(path, 'from', time);
+  const to = getPathPropAtTime(path, 'to', time);
+  const step = path.step;
 
-  return vCircle((spin * 360 * trace) / 100 + offset, radius);
+  const points = [];
+
+  for (let trace = from; trace < to; trace += step)
+    points.push(getPathAbsolutePoint(path, paths, trace, time));
+
+  return points;
 }
 
 export function getPathPropAtTime(path, prop, time) {
   let value = path[prop];
   if (prop === 'radius')
     value += sin(time) * 50;
+  // if (prop === 'to')
+  //   value = (time / 10) % 100;
   return value;
+}
+
+export function getPathAbsolutePoint(path, paths, trace, time) {
+  const stack = [];
+
+  function recurse(thePath) {
+    if (!thePath)
+      return;
+    stack.push(getPathRelativePoint(thePath, trace, time));
+    recurse(paths[thePath.parent]);
+  }
+  recurse(path);
+
+  return vSum(stack);
+}
+
+export function getPathRelativePoint(path, trace, time) {
+  if (!path)
+    return new Point();
+  const spin = getPathPropAtTime(path, 'spin', time);
+  const offset = getPathPropAtTime(path, 'offset', time);
+  const radius = getPathPropAtTime(path, 'radius', time);
+
+  return vCircle((spin * 360 * trace) / 100 + offset, radius);
 }

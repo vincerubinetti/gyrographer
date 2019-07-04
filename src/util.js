@@ -28,7 +28,7 @@ export class Point {
 }
 
 export function vLength(pointA, pointB) {
-  if (point2) {
+  if (pointB) {
     return Math.sqrt(
       Math.pow(pointB.x - pointA.x, 2) + Math.pow(pointB.y - pointA.y, 2)
     );
@@ -41,4 +41,14 @@ export function vCircle(angle, radius, cx, cy) {
     (cx || 0) + cos(angle) * radius,
     (cy || 0) - sin(angle) * radius
   );
+}
+
+export function vSum(points) {
+  let x = 0;
+  let y = 0;
+  for (const point of points) {
+    x += point.x;
+    y += point.y;
+  }
+  return new Point(x, y);
 }

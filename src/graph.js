@@ -17,9 +17,9 @@ const maxZoom = 100;
 export class Graph extends Component {
   componentDidMount() {
     this.createGraph();
-    window.setInterval(() => {
-      this.props.dispatch(incrementTime());
-    }, 1000 / 60);
+    // window.setInterval(() => {
+    //   this.props.dispatch(incrementTime());
+    // }, 1000 / 60);
   }
 
   onViewZoom = () => {
@@ -110,19 +110,19 @@ export class Graph extends Component {
       ].join(' ');
     }
 
-    const paths = Object.keys(this.props.paths)
-      .filter((id) => this.props.paths[id].showPath)
-      .map((id, index) => <Path key={index} id={id} />);
+    const paths = Object.keys(this.props.paths).map((id, index) => (
+      <Path key={index} id={id} />
+    ));
 
     return (
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        id="graph"
+        xmlns='http://www.w3.org/2000/svg'
+        id='graph'
         viewBox={viewBox}
         style={{ background: this.props.backgroundColor }}
       >
         <View>
-          <g id="board">
+          <g id='board'>
             {this.props.showGrid && <Grid />}
             {this.props.showAxes && <Axes />}
             {this.props.showBounds && <Bounds />}

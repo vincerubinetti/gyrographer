@@ -2,6 +2,7 @@
   "name": "gyrographer",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "d3": "^5.9.7",
     "react": "^16.8.6",
