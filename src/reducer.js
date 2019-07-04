@@ -27,21 +27,25 @@ export function Reducer(prevState = {}, action) {
   if (typeof newState.time !== 'number')
     newState.time = 0;
 
-  // board properties
-  if (!newState.board)
-    newState.board = {};
-  if (typeof newState.board.left !== 'number')
-    newState.board.left = -1000;
-  if (typeof newState.board.top !== 'number')
-    newState.board.top = -1000;
-  if (typeof newState.board.right !== 'number')
-    newState.board.right = 1000;
-  if (typeof newState.board.bottom !== 'number')
-    newState.board.bottom = 1000;
-  if (typeof newState.board.color !== 'string')
-    newState.board.color = '#202020ff';
-  if (typeof newState.board.showGrid !== 'boolean')
-    newState.board.showGrid = false;
+  // graph properties
+  if (!newState.graph)
+    newState.graph = {};
+  if (typeof newState.graph.left !== 'number')
+    newState.graph.left = -1000;
+  if (typeof newState.graph.top !== 'number')
+    newState.graph.top = -1000;
+  if (typeof newState.graph.right !== 'number')
+    newState.graph.right = 1000;
+  if (typeof newState.graph.bottom !== 'number')
+    newState.graph.bottom = 1000;
+  if (typeof newState.graph.backgroundColor !== 'string')
+    newState.graph.backgroundColor = '#202020ff';
+  if (typeof newState.graph.showBounds !== 'boolean')
+    newState.graph.showBounds = true;
+  if (typeof newState.graph.showAxes !== 'boolean')
+    newState.graph.showAxes = true;
+  if (typeof newState.graph.showGrid !== 'boolean')
+    newState.graph.showGrid = true;
 
   // path properties
   if (!newState.paths)

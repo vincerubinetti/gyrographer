@@ -5,11 +5,10 @@ import * as d3 from 'd3';
 
 import { incrementTime } from './actions.js';
 import { View } from './view.js';
-import { Board } from './board.js';
-import { Paths } from './paths.js';
+import { Grid } from './grid.js';
+import { Axes } from './axes.js';
+import { Bounds } from './bounds.js';
 import { Path } from './path.js';
-import { Helpers } from './helpers.js';
-import { Helper } from './helper.js';
 import './graph.css';
 
 const minZoom = 0.01;
@@ -115,26 +114,33 @@ export class Graph extends Component {
       .filter((id) => this.props.paths[id].showPath)
       .map((id, index) => <Path key={index} id={id} />);
 
-    const helpers = Object.keys(this.props.paths)
-      .filter((id) => this.props.paths[id].showHelper)
-      .map((id, index) => <Helper key={index} id={id} />);
-
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" id="graph" viewBox={viewBox}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        id="graph"
+        viewBox={viewBox}
+        style={{ background: this.props.backgroundColor }}
+      >
         <View>
-          <Board />
-          <Paths>{paths}</Paths>
-          <Helpers>{helpers}</Helpers>
+          <g id="board">
+            {this.props.showGrid && <Grid />}
+            {this.props.showAxes && <Axes />}
+            {this.props.showBounds && <Bounds />}
+          </g>
+          {paths}
         </View>
       </svg>
     );
   }
 }
 Graph = connect((state) => ({
-  left: state.board.left,
-  top: state.board.top,
-  right: state.board.right,
-  bottom: state.board.bottom,
-  showGrid: state.board.showGrid,
+  left: state.graph.left,
+  top: state.graph.top,
+  right: state.graph.right,
+  bottom: state.graph.bottom,
+  backgroundColor: state.graph.backgroundColor,
+  showBounds: state.graph.showBounds,
+  showAxes: state.graph.showAxes,
+  showGrid: state.graph.showGrid,
   paths: state.paths
 }))(Graph);

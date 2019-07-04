@@ -49,7 +49,7 @@ export class Helper extends Component {
     thisX += cos((spin * 360 * to) / 100 + offset) * radius;
     thisY += -sin((spin * 360 * to) / 100 + offset) * radius;
 
-    const color = getContrastColor(this.props.color);
+    const color = getContrastColor(this.props.backgroundColor);
     const circleFillColor = color + '30';
     const circleStrokeColor = color + 'ff';
     const arrowColor = color + 'ff';
@@ -82,5 +82,5 @@ export class Helper extends Component {
 Helper = connect((state) => ({
   paths: state.paths,
   time: state.time,
-  color: state.board.color
+  backgroundColor: state.graph.backgroundColor
 }))(Helper);
