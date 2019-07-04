@@ -2,9 +2,8 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Point, vCircle } from './util.js';
 import { sin } from './util.js';
-import { cos } from './util.js';
-import { sign } from './util.js';
 
 const precision = 2;
 
@@ -12,17 +11,20 @@ export class Path extends Component {
   render() {
     const time = this.props.time;
     const paths = this.props.paths;
-    const thisId = this.props.id;
-    const thisPath = paths[thisId];
+    const id = this.props.id;
+    const path = paths[thisId];
 
-    if (!thisPath)
-      return '';
+    const from = getPathPropAtTime(path, 'from', time);
+    const to = getPathPropAtTime(path, 'to', time);
+    const step = getPathPropAtTime(path, 'step', time);
 
-    const from = thisPath.from;
-    const to = thisPath.to;
-    // const to = (time / 50) % 100;
-
-    const step = thisPath.step || 1;
+    const fillColor = getPathPropAtTime(path, 'fillColor', time);
+    const strokeColor = getPathPropAtTime(path, 'strokeColor', time);
+    const strokeWidth = getPathPropAtTime(path, 'strokeWidth', time);
+    const dashArray = getPathPropAtTime(path, 'dashArray', time);
+    const dashOffset = getPathPropAtTime(path, 'dashOffset', time);
+    const strokeLineCap = getPathPropAtTime(path, 'strokeLineCap', time);
+    const strokeLineJoin = getPathPropAtTime(path, 'strokeLineJoin', time);
 
     let d = [];
     for (let t = from; t < to; t += step) {
@@ -37,7 +39,7 @@ export class Path extends Component {
 
         const spin = thePath.spin;
         const offset = thePath.offset;
-        const radius = thePath.radius + sin(time) * 10;
+        const radius = thePath.radius;
 
         x += cos((spin * 360 * t) / 100 + offset) * radius;
         y += -sin((spin * 360 * t) / 100 + offset) * radius;
@@ -57,13 +59,13 @@ export class Path extends Component {
 
     return (
       <path
-        fill={thisPath.fillColor}
-        stroke={thisPath.strokeColor}
-        strokeWidth={thisPath.strokeWidth}
-        strokeDasharray={thisPath.dashArray}
-        strokeDashoffset={thisPath.dashOffset}
-        strokeLinecap={thisPath.strokeLineCap}
-        strokeLinejoin={thisPath.strokeLineJoin}
+        fill={fillColor}
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
+        strokeDasharray={dashArray}
+        strokeDashoffset={dashOffset}
+        strokeLinecap={strokeLineCap}
+        strokeLinejoin={strokeLineJoin}
         d={d}
       />
     );
@@ -73,3 +75,18 @@ Path = connect((state) => ({
   paths: state.paths,
   time: state.time
 }))(Path);
+
+export function getPathPoint(id, trace, paths, time) {
+  const spin = getPathPropAtTime(id, paths, 'spin', time);
+  const offset = getPathPropAtTime(id, paths, 'offset', time);
+  const radius = getPathPropAtTime(id, paths, 'radius', time);
+
+  return vCircle((spin * 360 * trace) / 100 + offset, radius);
+}
+
+export function getPathPropAtTime(path, prop, time) {
+  let value = path[prop];
+  if (prop === 'radius')
+    value += sin(time) * 50;
+  return value;
+}
