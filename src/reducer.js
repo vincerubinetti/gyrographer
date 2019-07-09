@@ -1,107 +1,133 @@
 export function Reducer(prevState = {}, action) {
   const newState = { ...prevState };
 
-  newState.paths = {};
-  newState.paths['1'] = {
-    spin: 4,
+  newState.orbs = {};
+  newState.orbs['1'] = {
+    spin: 3,
     radius: 500,
     showPath: false
   };
-  newState.paths['2'] = {
-    spin: 20,
+  newState.orbs['2'] = {
+    spin: 10,
     radius: 200,
-    parent: '1',
+    parentId: '1',
     showPath: false
   };
-  newState.paths['3'] = {
-    spin: -5,
+  newState.orbs['3'] = {
+    spin: -1,
     radius: 50,
-    parent: '2'
+    parentId: '2',
+    stepSize: 0.1,
+    showArrow: true,
+    showWheel: true
+  };
+
+  newState.orbs['4'] = {
+    spin: 2,
+    radius: 500,
+    showPath: false
+  };
+  newState.orbs['5'] = {
+    spin: 9,
+    radius: 200,
+    parentId: '4',
+    showPath: false
+  };
+  newState.orbs['6'] = {
+    spin: -2,
+    radius: 50,
+    parentId: '5',
+    stepSize: 0.1,
+    showArrow: true,
+    showWheel: true
   };
 
   // //////////////////////////////////////////////////
   // set defaults
   // //////////////////////////////////////////////////
 
-  // global properties
-  if (typeof newState.time !== 'number')
-    newState.time = 0;
-
   // graph properties
-  if (!newState.graph)
-    newState.graph = {};
-  if (typeof newState.graph.left !== 'number')
-    newState.graph.left = -1000;
-  if (typeof newState.graph.top !== 'number')
-    newState.graph.top = -1000;
-  if (typeof newState.graph.right !== 'number')
-    newState.graph.right = 1000;
-  if (typeof newState.graph.bottom !== 'number')
-    newState.graph.bottom = 1000;
-  if (typeof newState.graph.backgroundColor !== 'string')
-    newState.graph.backgroundColor = '#202020ff';
-  if (typeof newState.graph.showBounds !== 'boolean')
-    newState.graph.showBounds = true;
-  if (typeof newState.graph.showAxes !== 'boolean')
-    newState.graph.showAxes = true;
-  if (typeof newState.graph.showGrid !== 'boolean')
-    newState.graph.showGrid = true;
+  if (typeof newState.left !== 'number')
+    newState.left = -1000;
+  if (typeof newState.top !== 'number')
+    newState.top = -1000;
+  if (typeof newState.right !== 'number')
+    newState.right = 1000;
+  if (typeof newState.bottom !== 'number')
+    newState.bottom = 1000;
+  if (typeof newState.backgroundColor !== 'string')
+    newState.backgroundColor = '#202020ff';
+  if (typeof newState.fps !== 'number')
+    newState.fps = 60;
+  if (newState.fps < 1)
+    newState.fps = 1;
+  if (newState.fps > 500)
+    newState.fps = 500;
+  if (typeof newState.length !== 'number')
+    newState.length = 5;
+  if (newState.length < 0.1)
+    newState.length = 0.1;
+  if (newState.length > 300)
+    newState.length = 300;
+  if (typeof newState.loop !== 'boolean')
+    newState.loop = true;
+  if (typeof newState.showBounds !== 'boolean')
+    newState.showBounds = true;
+  if (typeof newState.showAxes !== 'boolean')
+    newState.showAxes = true;
+  if (typeof newState.showGrid !== 'boolean')
+    newState.showGrid = true;
 
-  // path properties
-  if (!newState.paths)
-    newState.paths = [];
-  for (const key of Object.keys(newState.paths)) {
-    const path = newState.paths[key];
+  // orb properties
+  if (!newState.orbs)
+    newState.orbs = [];
+  for (const key of Object.keys(newState.orbs)) {
+    const orb = newState.orbs[key];
     // under-the-hood
-    if (typeof path.parent !== 'string')
-      path.parent = null;
+    if (typeof orb.parentId !== 'string')
+      orb.parentId = null;
 
     // geometry
-    if (typeof path.showPath !== 'boolean')
-      path.showPath = true;
-    if (typeof path.showWheel !== 'boolean')
-      path.showWheel = true;
-    if (typeof path.showArrow !== 'boolean')
-      path.showArrow = true;
-    if (typeof path.from !== 'number')
-      path.from = 0;
-    if (typeof path.to !== 'number')
-      path.to = 100;
-    if (typeof path.step !== 'number')
-      path.step = 0.01;
-    if (typeof path.radius !== 'number')
-      path.radius = 100;
-    if (typeof path.spin !== 'number')
-      path.spin = 1;
-    if (typeof path.offset !== 'number')
-      path.offset = 0;
+    if (typeof orb.showPath !== 'boolean')
+      orb.showPath = true;
+    if (typeof orb.showArrow !== 'boolean')
+      orb.showArrow = false;
+    if (typeof orb.showWheel !== 'boolean')
+      orb.showWheel = false;
+    if (typeof orb.from !== 'number')
+      orb.from = 0;
+    if (typeof orb.to !== 'number')
+      orb.to = 100;
+    if (typeof orb.stepSize !== 'number')
+      orb.stepSize = 0.1;
+    if (orb.stepSize <= 0)
+      orb.stepSize = 0.1;
+    if (typeof orb.radius !== 'number')
+      orb.radius = 100;
+    if (typeof orb.spin !== 'number')
+      orb.spin = 1;
+    if (typeof orb.offset !== 'number')
+      orb.offset = 0;
 
     // styling
-    if (typeof path.fillColor !== 'string')
-      path.fillColor = 'none';
-    if (typeof path.strokeColor !== 'string')
-      path.strokeColor = '#ffffffff';
-    if (typeof path.strokeWidth !== 'number')
-      path.strokeWidth = 5;
-    if (typeof path.close !== 'boolean')
-      path.close = false;
-    if (typeof path.dashArray !== 'string')
-      path.dashArray = '0';
-    if (typeof path.dashOffset !== 'string')
-      path.dashOffset = '0';
-    if (typeof path.strokeLineCap !== 'string')
-      path.strokeLineCap = 'round';
-    if (typeof path.strokeLineJoin !== 'string')
-      path.strokeLineJoin = 'round';
-  }
-
-  switch (action.type) {
-    case 'increment_time':
-      newState.time = prevState.time += 1;
-      break;
-
-    default:
-      break;
+    if (typeof orb.fillColor !== 'string')
+      orb.fillColor = 'none';
+    if (typeof orb.strokeColor !== 'string')
+      orb.strokeColor = '#ffffffff';
+    if (typeof orb.strokeWidth !== 'number')
+      orb.strokeWidth = 5;
+    if (typeof orb.close !== 'boolean')
+      orb.close = false;
+    if (typeof orb.dashArray !== 'string')
+      orb.dashArray = '0';
+    if (typeof orb.dashOffset !== 'string')
+      orb.dashOffset = '0';
+    if (typeof orb.strokeLineCap !== 'string')
+      orb.strokeLineCap = 'round';
+    if (typeof orb.strokeLineJoin !== 'string')
+      orb.strokeLineJoin = 'round';
+    if (typeof orb.order !== 'number')
+      orb.order = 0;
   }
 
   return newState;

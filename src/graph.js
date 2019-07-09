@@ -3,12 +3,13 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
-import { incrementTime } from './actions.js';
 import { View } from './view.js';
 import { Grid } from './grid.js';
 import { Axes } from './axes.js';
 import { Bounds } from './bounds.js';
 import { Path } from './path.js';
+import { Arrow } from './arrow.js';
+import { Wheel } from './wheel.js';
 import './graph.css';
 
 const minZoom = 0.01;
@@ -17,9 +18,6 @@ const maxZoom = 100;
 export class Graph extends Component {
   componentDidMount() {
     this.createGraph();
-    // window.setInterval(() => {
-    //   this.props.dispatch(incrementTime());
-    // }, 1000 / 60);
   }
 
   onViewZoom = () => {
@@ -54,8 +52,7 @@ export class Graph extends Component {
       .getBoundingClientRect();
     const padding = 0;
 
-    if (contents.width === 0 || contents.height === 0)
-      return;
+    if (contents.width === 0 || contents.height === 0) return;
 
     container.width -= 2;
     container.height -= 2;
@@ -100,19 +97,24 @@ export class Graph extends Component {
 
   render() {
     let viewBox;
-    const render = false;
-    if (render) {
-      viewBox = [
-        this.props.left,
-        this.props.top,
-        this.props.right - this.props.left,
-        this.props.bottom - this.props.top
-      ].join(' ');
-    }
 
-    const paths = Object.keys(this.props.paths).map((id, index) => (
-      <Path key={index} id={id} />
-    ));
+    const paths = this.props.orbTree
+      .filter((orb) => orb.showPath)
+      .map((orb, index) => (
+        <Path key={index} orb={orb} time={this.props.time} />
+      ));
+
+    const arrows = this.props.orbTree
+      .filter((orb) => orb.showArrow)
+      .map((orb, index) => (
+        <Arrow key={index} orb={orb} time={this.props.time} />
+      ));
+
+    const wheels = this.props.orbTree
+      .filter((orb) => orb.showWheel)
+      .map((orb, index) => (
+        <Wheel key={index} orb={orb} time={this.props.time} />
+      ));
 
     return (
       <svg
@@ -127,6 +129,8 @@ export class Graph extends Component {
             {this.props.showAxes && <Axes />}
             {this.props.showBounds && <Bounds />}
           </g>
+          {wheels}
+          {arrows}
           {paths}
         </View>
       </svg>
@@ -134,13 +138,12 @@ export class Graph extends Component {
   }
 }
 Graph = connect((state) => ({
-  left: state.graph.left,
-  top: state.graph.top,
-  right: state.graph.right,
-  bottom: state.graph.bottom,
-  backgroundColor: state.graph.backgroundColor,
-  showBounds: state.graph.showBounds,
-  showAxes: state.graph.showAxes,
-  showGrid: state.graph.showGrid,
-  paths: state.paths
+  left: state.left,
+  top: state.top,
+  right: state.right,
+  bottom: state.bottom,
+  backgroundColor: state.backgroundColor,
+  showBounds: state.showBounds,
+  showAxes: state.showAxes,
+  showGrid: state.showGrid
 }))(Graph);

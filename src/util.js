@@ -12,43 +12,36 @@ export function cos(degrees) {
 }
 
 export function sign(value) {
-  if (value > 0)
-    return 1;
-  else if (value < 0)
-    return -1;
-  else
-    return 0;
+  if (value > 0) return 1;
+  else if (value < 0) return -1;
+  else return 0;
 }
 
-export class Point {
+export class Vector {
   constructor(x, y) {
-    this.x = x || 0;
-    this.y = y || 0;
+    this.x = x;
+    this.y = y;
   }
-}
-
-export function vLength(pointA, pointB) {
-  if (pointB) {
-    return Math.sqrt(
-      Math.pow(pointB.x - pointA.x, 2) + Math.pow(pointB.y - pointA.y, 2)
+  add(vector) {
+    return new Vector(this.x + vector.x, this.y + vector.y);
+  }
+  subtract(vector) {
+    return new Vector(this.x - vector.x, this.y - vector.y);
+  }
+  length() {
+    return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+  }
+  normalize() {
+    const length = this.length();
+    return new Vector(this.x / length, this.y / length);
+  }
+  scale(length) {
+    return new Vector(this.x * length, this.y * length);
+  }
+  rotate(angle) {
+    return new Vector(
+      this.x * cos(angle) - this.y * sin(angle),
+      this.x * sin(angle) + this.y * cos(angle)
     );
-  } else
-    return Math.sqrt(Math.pow(pointA.x, 2) + Math.pow(pointA.y, 2));
-}
-
-export function vCircle(angle, radius, cx, cy) {
-  return new Point(
-    (cx || 0) + cos(angle) * radius,
-    (cy || 0) - sin(angle) * radius
-  );
-}
-
-export function vSum(points) {
-  let x = 0;
-  let y = 0;
-  for (const point of points) {
-    x += point.x;
-    y += point.y;
   }
-  return new Point(x, y);
 }
