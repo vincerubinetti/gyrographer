@@ -16,7 +16,6 @@ export class Wheel extends Component {
 
     // styles
     const color = getContrastColor(this.props.backgroundColor) + 'ff';
-    const strokeWidth = orb.strokeWidth / 2;
 
     // geometry
     const to = orb.computeProp('to', time);
@@ -28,27 +27,17 @@ export class Wheel extends Component {
     else
       a = new Vector(0, 0);
     const b = orb.computePoint(to, time);
-    const radius = b.subtract(a).length() - strokeWidth / 2;
+    const radius = b.subtract(a).length();
 
     return (
-      <g className='wheel'>
-        <>
-          <circle
-            cx={a.x.toFixed(precision)}
-            cy={a.y.toFixed(precision)}
-            r={radius.toFixed(precision)}
-            fill={color}
-            opacity='0.5'
-          />
-          <circle
-            cx={a.x.toFixed(precision)}
-            cy={a.y.toFixed(precision)}
-            r={radius.toFixed(precision)}
-            fill='none'
-            stroke={color}
-            strokeWidth={strokeWidth}
-          />
-        </>
+      <g className="wheel">
+        <circle
+          cx={a.x.toFixed(precision)}
+          cy={a.y.toFixed(precision)}
+          r={radius.toFixed(precision)}
+          fill={color}
+          opacity="0.5"
+        />
       </g>
     );
   }

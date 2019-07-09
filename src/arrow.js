@@ -16,7 +16,7 @@ export class Arrow extends Component {
 
     // styles
     const color = getContrastColor(this.props.backgroundColor) + 'ff';
-    const strokeWidth = orb.strokeWidth / 2;
+    const strokeWidth = orb.strokeWidth;
     const headSize = strokeWidth * 4;
 
     // geometry
@@ -71,18 +71,17 @@ export class Arrow extends Component {
       e.y.toFixed(precision),
       'z'
     ].join(' ');
-    
+
     return (
-      <g className='arrow'>
+      <g className="arrow">
         <path
           d={shaft}
-          fill='none'
+          fill="none"
           stroke={color}
           strokeWidth={strokeWidth}
-          strokeLinecap='round'
-          strokeLinejoin='miter'
+          strokeLinecap="round"
         />
-        <path d={head} fill={color} stroke='none' />
+        <path d={head} fill={color} stroke="none" />
       </g>
     );
   }

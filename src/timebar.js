@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './timebar.css';
 
@@ -44,14 +45,9 @@ export class Timebar extends Component {
     const x = event.clientX || (event.touches ? event.touches[0].clientX : 0);
 
     const bbox = this.track.current.getBoundingClientRect();
-    let percent = (100 * (x - bbox.left)) / bbox.width;
-    if (!percent)
-      percent = 0;
-    if (percent > 100)
-      percent = 100;
-    if (percent < 0)
-      percent = 0;
-    this.props.onChange(percent);
+    const time = Math.floor((this.props.length * (x - bbox.left)) / bbox.width);
+
+    this.props.onChange(time);
   };
 
   onFocus = () => {};
@@ -59,27 +55,51 @@ export class Timebar extends Component {
   onBlur = () => {};
 
   onKeyDown = (event) => {
-    let factor = 1;
-    if (event.ctrlKey)
-      factor = 0.1;
-    else if (event.shiftKey)
-      factor = 5;
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'ArrowRight':
+        let factor = 1;
+        if (event.ctrlKey)
+          factor = 0.1;
+        else if (event.shiftKey)
+          factor = 5;
+        if (event.key === 'ArrowLeft')
+          factor *= -1;
 
-    if (event.key === 'ArrowLeft')
-      this.props.onChange(this.props.value - factor);
+        this.props.onChange(
+          Math.round((this.props.time + factor) / factor) * factor
+        );
+        break;
 
-    if (event.key === 'ArrowRight')
-      this.props.onChange(this.props.value + factor);
+      case 'Home':
+        this.props.onChange(0);
+        break;
 
-    if (event.key === 'Home')
-      this.props.onChange(0);
+      default:
+        break;
+    }
   };
 
   render() {
+    const percent = (100 * this.props.time) / this.props.length;
+
+    const seconds = String(
+      Math.floor(this.props.time / this.props.fps)
+    ).padStart(2, '0');
+    const frames = String(
+      (this.props.time % this.props.fps).toFixed(1)
+    ).padStart(4, '0');
+
     return (
-      <div
-        className="timebar"
-      >
+      <div className="timebar">
+        <div className="timecode">
+          <div>
+            <span>{seconds}</span>
+            <small>sec</small>
+            <span>{frames}</span>
+            <small>frames</small>
+          </div>
+        </div>
         <div
           className="slider"
           tabIndex={0}
@@ -89,10 +109,15 @@ export class Timebar extends Component {
         >
           <div
             className="slider_marker"
-            style={{ right: 100 - this.props.value + '%' }}
+            style={{ right: 100 - percent + '%' }}
           />
         </div>
+        <div className="keyframe_markers" />
       </div>
     );
   }
 }
+Timebar = connect((state) => ({
+  fps: state.fps,
+  length: state.length
+}))(Timebar);

@@ -33,10 +33,13 @@ export class App extends Component {
   };
 
   changeTime = (time) => {
-    if (time < 0)
-      time = this.props.loop ? (time % 100) + 100 : 0;
-    if (time > 100)
-      time = this.props.loop ? time % 100 : 100;
+    if (time < 0) {
+      time = this.props.loop
+        ? (time % this.props.length) + this.props.length
+        : 0;
+    }
+    if (time > this.props.length)
+      time = this.props.loop ? time % this.props.length : this.props.length;
     this.setState({ time: time });
   };
 
@@ -44,7 +47,7 @@ export class App extends Component {
     return (
       <>
         <Graph time={this.state.time} orbTree={this.state.orbTree} />
-        <Timebar onChange={this.changeTime} value={this.state.time} />
+        <Timebar onChange={this.changeTime} time={this.state.time} />
       </>
     );
   }

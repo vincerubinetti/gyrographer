@@ -5,13 +5,17 @@ export function Reducer(prevState = {}, action) {
   newState.orbs['1'] = {
     spin: 3,
     radius: 500,
-    showPath: false
+    showPath: false,
+    showArrow: true,
+    showWheel: false
   };
   newState.orbs['2'] = {
     spin: 10,
     radius: 200,
     parentId: '1',
-    showPath: false
+    showPath: false,
+    showArrow: true,
+    showWheel: true
   };
   newState.orbs['3'] = {
     spin: -1,
@@ -25,13 +29,17 @@ export function Reducer(prevState = {}, action) {
   newState.orbs['4'] = {
     spin: 2,
     radius: 500,
-    showPath: false
+    showPath: false,
+    showArrow: true,
+    showWheel: true
   };
   newState.orbs['5'] = {
     spin: 9,
     radius: 200,
     parentId: '4',
-    showPath: false
+    showPath: false,
+    showArrow: true,
+    showWheel: true
   };
   newState.orbs['6'] = {
     spin: -2,
@@ -64,7 +72,7 @@ export function Reducer(prevState = {}, action) {
   if (newState.fps > 500)
     newState.fps = 500;
   if (typeof newState.length !== 'number')
-    newState.length = 5;
+    newState.length = 300;
   if (newState.length < 0.1)
     newState.length = 0.1;
   if (newState.length > 300)
