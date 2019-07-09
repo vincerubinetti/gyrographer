@@ -2,9 +2,9 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import './timebar.css';
+import './time_bar.css';
 
-export class Timebar extends Component {
+export class TimeBar extends Component {
   constructor() {
     super();
 
@@ -91,7 +91,9 @@ export class Timebar extends Component {
     ).padStart(4, '0');
 
     return (
-      <div className="timebar">
+      <div className="time_bar">
+        <button className="time_button">{'>'}</button>
+        <button className="time_button">o</button>
         <div className="timecode">
           <div>
             <span>{seconds}</span>
@@ -100,24 +102,28 @@ export class Timebar extends Component {
             <small>frames</small>
           </div>
         </div>
-        <div
-          className="slider"
-          tabIndex={0}
-          onTouchStart={this.onMouseDown}
-          onMouseDown={this.onMouseDown}
-          ref={this.track}
-        >
+        <button className="time_button_half">{'<'}</button>
+        <div className="time_rail">
           <div
-            className="slider_marker"
-            style={{ right: 100 - percent + '%' }}
-          />
+            className="slider"
+            tabIndex={0}
+            onTouchStart={this.onMouseDown}
+            onMouseDown={this.onMouseDown}
+            ref={this.track}
+          >
+            <div
+              className="slider_marker"
+              style={{ right: 100 - percent + '%' }}
+            />
+          </div>
+          <div className="keyframe_markers" />
         </div>
-        <div className="keyframe_markers" />
+        <button className="time_button_half">{'>'}</button>
       </div>
     );
   }
 }
-Timebar = connect((state) => ({
+TimeBar = connect((state) => ({
   fps: state.fps,
   length: state.length
-}))(Timebar);
+}))(TimeBar);

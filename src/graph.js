@@ -52,7 +52,8 @@ export class Graph extends Component {
       .getBoundingClientRect();
     const padding = 0;
 
-    if (contents.width === 0 || contents.height === 0) return;
+    if (contents.width === 0 || contents.height === 0)
+      return;
 
     container.width -= 2;
     container.height -= 2;
@@ -93,6 +94,8 @@ export class Graph extends Component {
       },
       this.fitView
     );
+
+    window.addEventListener('resize', this.fitView);
   };
 
   render() {
@@ -118,13 +121,13 @@ export class Graph extends Component {
 
     return (
       <svg
-        xmlns='http://www.w3.org/2000/svg'
-        id='graph'
+        xmlns="http://www.w3.org/2000/svg"
+        id="graph"
         viewBox={viewBox}
         style={{ background: this.props.backgroundColor }}
       >
         <View>
-          <g id='board'>
+          <g id="board">
             {this.props.showGrid && <Grid />}
             {this.props.showAxes && <Axes />}
             {this.props.showBounds && <Bounds />}

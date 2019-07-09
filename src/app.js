@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Graph } from './graph.js';
 import { Orb } from './orb.js';
-import { Timebar } from './timebar.js';
+import { TimeBar } from './time_bar.js';
 import './app.css';
 
 // import { Graph } from './graph.js';
@@ -47,7 +47,7 @@ export class App extends Component {
     return (
       <>
         <Graph time={this.state.time} orbTree={this.state.orbTree} />
-        <Timebar onChange={this.changeTime} time={this.state.time} />
+        <TimeBar onChange={this.changeTime} time={this.state.time} />
       </>
     );
   }

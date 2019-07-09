@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g transform="translate(50,50) scale(0.5) translate(-50,-50)">
+    <path
+      fill="currentColor"
+      d="
+        M 10 0
+        L 10 100
+        L 100 50
+        z
+      "
+    />
+  </g>
+</svg>
