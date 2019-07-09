@@ -7,7 +7,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border-top: solid 1px #808080;
   background: #202020;
   color: #ffffff;
   font-size: 0.75em;
@@ -17,6 +16,7 @@
   box-sizing: border-box;
   width: 60px;
   height: 60px;
+  padding: 20px;
 }
 .timecode {
   box-sizing: border-box;
@@ -40,6 +40,7 @@
 .time_button_half {
   width: 30px;
   height: 60px;
+  padding: 5px;
 }
 .slider {
   background: #808080;
@@ -71,6 +72,7 @@
   .time_button {
     width: 25%;
     height: 40px;
+    padding: 10px;
   }
   .timecode {
     width: 50%;
@@ -78,5 +80,8 @@
   }
   .time_button_half {
     height: 40px;
+  }
+  .time_rail {
+    padding: 0;
   }
 }

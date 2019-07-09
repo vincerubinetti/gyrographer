@@ -2,6 +2,13 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { ReactComponent as Play } from './images/play.svg';
+import { ReactComponent as Pause } from './images/pause.svg';
+import { ReactComponent as Loop } from './images/loop.svg';
+import { ReactComponent as NoLoop } from './images/no_loop.svg';
+import { ReactComponent as ArrowLeft } from './images/arrow_left.svg';
+import { ReactComponent as ArrowRight } from './images/arrow_right.svg';
+import { Button } from './button.js';
 import './time_bar.css';
 
 export class TimeBar extends Component {
@@ -91,10 +98,10 @@ export class TimeBar extends Component {
     ).padStart(4, '0');
 
     return (
-      <div className="time_bar">
-        <button className="time_button">{'>'}</button>
-        <button className="time_button">o</button>
-        <div className="timecode">
+      <div className='time_bar'>
+        <Button className='time_button' icon1={<Play />} />
+        <Button className='time_button' icon1={<Loop />} />
+        <div className='timecode'>
           <div>
             <span>{seconds}</span>
             <small>sec</small>
@@ -102,23 +109,23 @@ export class TimeBar extends Component {
             <small>frames</small>
           </div>
         </div>
-        <button className="time_button_half">{'<'}</button>
-        <div className="time_rail">
+        <Button className='time_button_half' icon1={<ArrowLeft />} />
+        <div className='time_rail'>
           <div
-            className="slider"
+            className='slider'
             tabIndex={0}
             onTouchStart={this.onMouseDown}
             onMouseDown={this.onMouseDown}
             ref={this.track}
           >
             <div
-              className="slider_marker"
+              className='slider_marker'
               style={{ right: 100 - percent + '%' }}
             />
           </div>
-          <div className="keyframe_markers" />
+          <div className='keyframe_markers' />
         </div>
-        <button className="time_button_half">{'>'}</button>
+        <Button className='time_button_half' icon1={<ArrowRight />} />
       </div>
     );
   }

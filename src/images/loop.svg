@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <path
+    d="
+      M 7.5 50
+      A 25 25 0 0 1 32.5 25
+      L 70 25
+    "
+    fill="none"
+    stroke="currentColor"
+    stroke-width="15"
+  />
+  <path
+    d="
+      M 65 0
+      L 100 25
+      L 65 50
+    "
+    fill="currentColor"
+  />
+  <path
+    d="
+      M 92.5 50
+      A 25 25 0 0 1 67.5 75
+      L 30 75
+    "
+    fill="none"
+    stroke="currentColor"
+    stroke-width="15"
+  />
+  <path
+    d="
+      M 35 100
+      L 0 75
+      L 35 50
+    "
+    fill="currentColor"
+  />
+</svg>

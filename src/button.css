@@ -1,0 +1,7 @@
+.button {
+  color: #ffffff;
+  transition: background 0.25s ease;
+}
+.button:hover {
+  background: #404040;
+}
