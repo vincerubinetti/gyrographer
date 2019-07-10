@@ -13,7 +13,7 @@ export class Orb {
     // if (prop === 'radius')
     //   value += sin((360 * time) / 100) * 50;
     if (prop === 'to')
-      value = 100 * time / 300;
+      value = (100 * time) / 300;
     return value;
   }
 

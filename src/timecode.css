@@ -1,0 +1,18 @@
+.timecode {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+}
+.timecode span {
+  margin: 0 5px;
+}
+
+@media (max-width: 640px) {
+  .timecode {
+    width: 50%;
+    height: 40px;
+  }
+}

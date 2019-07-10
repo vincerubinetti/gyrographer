@@ -30,13 +30,13 @@ export class Wheel extends Component {
     const radius = b.subtract(a).length();
 
     return (
-      <g className="wheel">
+      <g className='wheel'>
         <circle
           cx={a.x.toFixed(precision)}
           cy={a.y.toFixed(precision)}
           r={radius.toFixed(precision)}
           fill={color}
-          opacity="0.5"
+          opacity='0.5'
         />
       </g>
     );

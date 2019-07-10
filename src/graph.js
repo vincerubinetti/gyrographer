@@ -3,6 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
+import { AppContext } from './app-context.js';
 import { View } from './view.js';
 import { Grid } from './grid.js';
 import { Axes } from './axes.js';
@@ -101,33 +102,33 @@ export class Graph extends Component {
   render() {
     let viewBox;
 
-    const paths = this.props.orbTree
+    const paths = this.context.orbTree
       .filter((orb) => orb.showPath)
       .map((orb, index) => (
-        <Path key={index} orb={orb} time={this.props.time} />
+        <Path key={index} orb={orb} time={this.context.time} />
       ));
 
-    const arrows = this.props.orbTree
+    const arrows = this.context.orbTree
       .filter((orb) => orb.showArrow)
       .map((orb, index) => (
-        <Arrow key={index} orb={orb} time={this.props.time} />
+        <Arrow key={index} orb={orb} time={this.context.time} />
       ));
 
-    const wheels = this.props.orbTree
+    const wheels = this.context.orbTree
       .filter((orb) => orb.showWheel)
       .map((orb, index) => (
-        <Wheel key={index} orb={orb} time={this.props.time} />
+        <Wheel key={index} orb={orb} time={this.context.time} />
       ));
 
     return (
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        id="graph"
+        xmlns='http://www.w3.org/2000/svg'
+        id='graph'
         viewBox={viewBox}
         style={{ background: this.props.backgroundColor }}
       >
         <View>
-          <g id="board">
+          <g id='board'>
             {this.props.showGrid && <Grid />}
             {this.props.showAxes && <Axes />}
             {this.props.showBounds && <Bounds />}
@@ -140,6 +141,8 @@ export class Graph extends Component {
     );
   }
 }
+console.log(AppContext);
+Graph.contextType = AppContext;
 Graph = connect((state) => ({
   left: state.left,
   top: state.top,

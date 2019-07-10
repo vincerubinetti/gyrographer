@@ -5,9 +5,13 @@ import './button.css';
 
 export class Button extends Component {
   render() {
-    let contents = this.props.icon1;
     return (
-      <button className={'button ' + this.props.className}>{contents}</button>
+      <button
+        className={'button ' + this.props.className}
+        onClick={this.props.onClick}
+      >
+        {this.props.children}
+      </button>
     );
   }
 }

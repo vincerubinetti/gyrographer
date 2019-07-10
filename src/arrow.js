@@ -73,15 +73,15 @@ export class Arrow extends Component {
     ].join(' ');
 
     return (
-      <g className="arrow">
+      <g className='arrow'>
         <path
           d={shaft}
-          fill="none"
+          fill='none'
           stroke={color}
           strokeWidth={strokeWidth}
-          strokeLinecap="round"
+          strokeLinecap='round'
         />
-        <path d={head} fill={color} stroke="none" />
+        <path d={head} fill={color} stroke='none' />
       </g>
     );
   }

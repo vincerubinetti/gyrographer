@@ -10,14 +10,14 @@ export class Bounds extends Component {
     const color = getContrastColor(this.props.backgroundColor);
 
     return (
-      <g id="bounds">
+      <g id='bounds'>
         <rect
           x={this.props.left}
           y={this.props.top}
           width={this.props.right - this.props.left}
           height={this.props.bottom - this.props.top}
           stroke={color}
-          fill="none"
+          fill='none'
         />
       </g>
     );

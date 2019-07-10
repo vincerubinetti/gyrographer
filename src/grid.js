@@ -55,11 +55,11 @@ export class Grid extends Component {
     }
 
     return (
-      <g id="grid">
-        <g id="minor_horizontal_lines">{minorHorizontalLines}</g>
-        <g id="minor_vertical_lines">{minorVerticalLines}</g>
-        <g id="major_horizontal_lines">{majorHorizontalLines}</g>
-        <g id="major_vertical_lines">{majorVerticalLines}</g>
+      <g id='grid'>
+        <g id='minor_horizontal_lines'>{minorHorizontalLines}</g>
+        <g id='minor_vertical_lines'>{minorVerticalLines}</g>
+        <g id='major_horizontal_lines'>{majorHorizontalLines}</g>
+        <g id='major_vertical_lines'>{majorVerticalLines}</g>
       </g>
     );
   }
