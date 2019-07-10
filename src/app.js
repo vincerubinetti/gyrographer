@@ -3,9 +3,9 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { AppContext } from './app-context.js';
-import { Graph } from './graph.js';
-import { Orb } from './orb.js';
-import { TimePanel } from './time-panel.js';
+import { Graph } from './graph/graph.js';
+import { Orb } from './util/orb.js';
+import { TimePanel } from './time-panel/time-panel.js';
 import './app.css';
 
 export class App extends Component {

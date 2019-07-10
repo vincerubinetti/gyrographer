@@ -3,8 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
-import { AppContext } from './app-context.js';
-import { View } from './view.js';
+import { AppContext } from '../app-context.js';
 import { Grid } from './grid.js';
 import { Axes } from './axes.js';
 import { Bounds } from './bounds.js';
@@ -104,21 +103,15 @@ export class Graph extends Component {
 
     const paths = this.context.orbTree
       .filter((orb) => orb.showPath)
-      .map((orb, index) => (
-        <Path key={index} orb={orb} time={this.context.time} />
-      ));
+      .map((orb, index) => <Path key={index} orb={orb} />);
 
     const arrows = this.context.orbTree
       .filter((orb) => orb.showArrow)
-      .map((orb, index) => (
-        <Arrow key={index} orb={orb} time={this.context.time} />
-      ));
+      .map((orb, index) => <Arrow key={index} orb={orb} />);
 
     const wheels = this.context.orbTree
       .filter((orb) => orb.showWheel)
-      .map((orb, index) => (
-        <Wheel key={index} orb={orb} time={this.context.time} />
-      ));
+      .map((orb, index) => <Wheel key={index} orb={orb} />);
 
     return (
       <svg
@@ -127,7 +120,7 @@ export class Graph extends Component {
         viewBox={viewBox}
         style={{ background: this.props.backgroundColor }}
       >
-        <View>
+        <g id='view'>
           <g id='board'>
             {this.props.showGrid && <Grid />}
             {this.props.showAxes && <Axes />}
@@ -136,7 +129,7 @@ export class Graph extends Component {
           {wheels}
           {arrows}
           {paths}
-        </View>
+        </g>
       </svg>
     );
   }

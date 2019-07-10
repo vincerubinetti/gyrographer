@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 
+import { AppContext } from '../app-context.js';
 import './path.css';
 
 const precision = 2;
@@ -8,7 +9,7 @@ const precision = 2;
 export class Path extends Component {
   render() {
     const orb = this.props.orb;
-    const time = this.props.time;
+    const time = this.context.time;
 
     // styles
     const fillColor = orb.computeProp('fillColor', time);
@@ -49,3 +50,4 @@ export class Path extends Component {
     );
   }
 }
+Path.contextType = AppContext;

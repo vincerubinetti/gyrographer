@@ -2,8 +2,9 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getContrastColor } from './util.js';
-import { Vector } from './util.js';
+import { AppContext } from '../app-context.js';
+import { getContrastColor } from '../util/color.js';
+import { Vector } from '../util/math.js';
 import './arrow.css';
 
 const precision = 2;
@@ -11,7 +12,7 @@ const precision = 2;
 export class Arrow extends Component {
   render() {
     const orb = this.props.orb;
-    const time = this.props.time;
+    const time = this.context.time;
     const parent = orb.parent;
 
     // styles
@@ -86,6 +87,7 @@ export class Arrow extends Component {
     );
   }
 }
+Arrow.contextType = AppContext;
 Arrow = connect((state) => ({
   backgroundColor: state.backgroundColor
 }))(Arrow);

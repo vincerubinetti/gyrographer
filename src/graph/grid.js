@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getContrastColor } from './util.js';
+import { getContrastColor } from '../util/color.js';
 import './grid.css';
 
 const minorSpacing = 50;
