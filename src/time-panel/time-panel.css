@@ -5,7 +5,6 @@
   flex-direction: row;
   position: fixed;
   background: var(--black);
-  border-top: solid 2px var(--dark-gray);
   left: 0;
   right: 0;
   bottom: 0;

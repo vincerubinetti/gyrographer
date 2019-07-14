@@ -1,0 +1,21 @@
+.tooltip {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  padding: 5px;
+  background: var(--dark-gray);
+  color: var(--white);
+  font-size: 0.75em;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 1s ease;
+}
+@media (hover: none) {
+  .tooltip {
+    display: none;
+  }
+}
