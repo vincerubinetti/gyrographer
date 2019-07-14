@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { AppContext } from './app-context.js';
 import { Graph } from './graph/graph.js';
 import { Orb } from './util/orb.js';
+import { TopPanel } from './top-panel/top-panel.js';
 import { TimePanel } from './time-panel/time-panel.js';
 import './app.css';
 
@@ -141,6 +142,7 @@ export class App extends Component {
         }}
       >
         <Graph />
+        <TopPanel />
         <TimePanel />
       </AppContext.Provider>
     );

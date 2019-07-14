@@ -31,6 +31,18 @@ export function Reducer(prevState = {}, action) {
       newState.loop = !newState.loop;
       break;
 
+    case 'toggle_bounds':
+      newState.showBounds = !newState.showBounds;
+      break;
+
+    case 'toggle_axes':
+      newState.showAxes = !newState.showAxes;
+      break;
+
+    case 'toggle_grid':
+      newState.showGrid = !newState.showGrid;
+      break;
+
     case 'set_speed':
       newState.speed = action.payload.speed;
       break;

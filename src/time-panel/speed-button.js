@@ -27,7 +27,7 @@ export class SpeedButton extends Component {
         className="time_button"
         onClick={this.onClick}
         onCtrlClick={this.onCtrlClick}
-        tooltip="Play speed"
+        tooltip="Preview speed"
       >
         {this.props.speed} <b>&times;</b>
       </Button>
