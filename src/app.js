@@ -31,11 +31,19 @@ export class App extends Component {
   }
 
   incrementTime = () => {
-    this.changeTime(Math.floor(this.state.time + 1));
+    const increment = this.props.speed;
+
+    this.changeTime(
+      Math.round((this.state.time + increment) / increment) * increment
+    );
   };
 
   decrementTime = () => {
-    this.changeTime(Math.ceil(this.state.time - 1));
+    const increment = -this.props.speed;
+
+    this.changeTime(
+      Math.round((this.state.time + increment) / increment) * increment
+    );
   };
 
   changePlaying = (play) => {
@@ -89,16 +97,16 @@ export class App extends Component {
       case 'ArrowRight':
         event.preventDefault();
 
-        let factor = 1;
+        let increment = 1;
         if (event.ctrlKey)
-          factor = 0.1;
+          increment = 0.1;
         else if (event.shiftKey)
-          factor = 5;
+          increment = 5;
         if (event.key === 'ArrowLeft')
-          factor *= -1;
+          increment *= -1;
 
         this.changeTime(
-          Math.round((this.state.time + factor) / factor) * factor
+          Math.round((this.state.time + increment) / increment) * increment
         );
         break;
 
@@ -142,5 +150,6 @@ App = connect((state) => ({
   orbs: state.orbs,
   fps: state.fps,
   length: state.length,
-  loop: state.loop
+  loop: state.loop,
+  speed: state.speed
 }))(App);

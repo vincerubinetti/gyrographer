@@ -25,11 +25,16 @@ export function Reducer(prevState = {}, action) {
     showArrow: true,
     showWheel: true
   };
-  
+
   switch (action.type) {
     case 'toggle_loop':
       newState.loop = !newState.loop;
       break;
+
+    case 'set_speed':
+      newState.speed = action.payload.speed;
+      break;
+
     default:
       break;
   }
@@ -63,6 +68,8 @@ export function Reducer(prevState = {}, action) {
     newState.length = 300;
   if (typeof newState.loop !== 'boolean')
     newState.loop = false;
+  if (typeof newState.speed !== 'number')
+    newState.speed = 1;
   if (typeof newState.showBounds !== 'boolean')
     newState.showBounds = true;
   if (typeof newState.showAxes !== 'boolean')

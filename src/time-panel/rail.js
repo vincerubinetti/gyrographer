@@ -3,9 +3,9 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { AppContext } from '../app-context.js';
-import './time-rail.css';
+import './rail.css';
 
-export class TimeRail extends Component {
+export class Rail extends Component {
   constructor() {
     super();
 
@@ -54,16 +54,16 @@ export class TimeRail extends Component {
     const percent = (100 * this.context.time) / this.props.length;
 
     return (
-      <div className='time_rail'>
+      <div className='rail_container'>
         <div
-          className='slider'
+          className='rail'
           tabIndex={0}
           onTouchStart={this.onMouseDown}
           onMouseDown={this.onMouseDown}
           ref={this.track}
         >
           <div
-            className='slider_marker'
+            className='rail_marker'
             style={{ right: 100 - percent + '%' }}
           />
         </div>
@@ -72,7 +72,7 @@ export class TimeRail extends Component {
     );
   }
 }
-TimeRail.contextType = AppContext;
-TimeRail = connect((state) => ({
+Rail.contextType = AppContext;
+Rail = connect((state) => ({
   length: state.length
-}))(TimeRail);
+}))(Rail);

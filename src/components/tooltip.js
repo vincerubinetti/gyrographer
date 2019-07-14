@@ -15,19 +15,15 @@ export class Tooltip extends Component {
     this.state.x = 0;
     this.state.y = 0;
     this.state.opacity = 0;
-
-    this.onMouseEnter = this.onMouseEnter.bind(this);
-    this.openTooltip = this.openTooltip.bind(this);
-    this.onMouseLeave = this.onMouseLeave.bind(this);
   }
 
-  onMouseEnter(event) {
-    const target = event.target;
+  onMouseEnter = (event) => {
+    const target = event.currentTarget;
     window.setTimeout(() => this.openTooltip(target), delay);
     this.setState({ hover: true });
-  }
+  };
 
-  openTooltip(target) {
+  openTooltip = (target) => {
     if (!this.state.hover || !target) {
       this.setState({ open: false });
       return;
@@ -45,11 +41,11 @@ export class Tooltip extends Component {
       right: right,
       bottom: bottom
     });
-  }
+  };
 
-  onMouseLeave() {
+  onMouseLeave = () => {
     this.setState({ hover: false, open: false });
-  }
+  };
 
   render() {
     if (!this.props.text)
