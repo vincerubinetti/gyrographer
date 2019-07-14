@@ -7,7 +7,7 @@
   padding: 0 10px;
 }
 .slider {
-  background: #808080;
+  background: var(--gray);
   position: relative;
   width: 100%;
   height: 20px;
@@ -21,7 +21,7 @@
   top: 0;
   bottom: 0;
   right: 50%;
-  background: #4fc3f7;
+  background: var(--blue);
   pointer-events: none;
 }
 .keyframe_markers {

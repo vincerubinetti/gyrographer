@@ -134,7 +134,6 @@ export class Graph extends Component {
     );
   }
 }
-console.log(AppContext);
 Graph.contextType = AppContext;
 Graph = connect((state) => ({
   left: state.left,

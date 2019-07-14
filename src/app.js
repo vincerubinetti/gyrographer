@@ -17,6 +17,8 @@ export class App extends Component {
     this.state.playing = false;
     this.state.playTimer = null;
     this.state.orbTree = [];
+
+    window.addEventListener('keydown', this.onKeyDown);
   }
 
   componentDidMount() {
@@ -29,11 +31,11 @@ export class App extends Component {
   }
 
   incrementTime = () => {
-    this.changeTime(this.state.time + 1);
+    this.changeTime(Math.floor(this.state.time + 1));
   };
 
   decrementTime = () => {
-    this.changeTime(this.state.time - 1);
+    this.changeTime(Math.ceil(this.state.time - 1));
   };
 
   changePlaying = (play) => {
@@ -73,6 +75,48 @@ export class App extends Component {
       }
     }
     this.setState({ time: time });
+  };
+
+  onKeyDown = (event) => {
+    switch (event.key) {
+      case ' ':
+        event.preventDefault();
+
+        this.changePlaying(!this.state.playing);
+        break;
+
+      case 'ArrowLeft':
+      case 'ArrowRight':
+        event.preventDefault();
+
+        let factor = 1;
+        if (event.ctrlKey)
+          factor = 0.1;
+        else if (event.shiftKey)
+          factor = 5;
+        if (event.key === 'ArrowLeft')
+          factor *= -1;
+
+        this.changeTime(
+          Math.round((this.state.time + factor) / factor) * factor
+        );
+        break;
+
+      case 'Home':
+        event.preventDefault();
+
+        this.changeTime(0);
+        break;
+
+      case 'End':
+        event.preventDefault();
+
+        this.changeTime(this.props.length);
+        break;
+
+      default:
+        break;
+    }
   };
 
   render() {

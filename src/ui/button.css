@@ -1,7 +1,21 @@
 .button {
-  color: #ffffff;
+  background: var(--black);
+  color: var(--white);
   transition: background 0.25s ease;
 }
 .button:hover {
-  background: #404040;
+  background: var(--dark-gray);
+}
+
+.button[data-color='gray'] {
+  color: var(--gray);
+}
+.button[data-color='white'] {
+  color: var(--white);
+}
+.button[data-color='blue'] {
+  color: var(--blue);
+}
+.button[data-color='yellow'] {
+  color: var(--yellow);
 }

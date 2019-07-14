@@ -14,7 +14,6 @@ export class TimeRail extends Component {
 
     this.track = React.createRef();
 
-    window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('mouseup', this.onMouseUp);
     window.addEventListener('touchmove', this.onMouseMove);
@@ -49,36 +48,6 @@ export class TimeRail extends Component {
     const time = Math.floor((this.props.length * (x - bbox.left)) / bbox.width);
 
     this.context.changeTime(time);
-  };
-
-  onFocus = () => {};
-
-  onBlur = () => {};
-
-  onKeyDown = (event) => {
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'ArrowRight':
-        let factor = 1;
-        if (event.ctrlKey)
-          factor = 0.1;
-        else if (event.shiftKey)
-          factor = 5;
-        if (event.key === 'ArrowLeft')
-          factor *= -1;
-
-        this.context.changeTime(
-          Math.round((this.context.time + factor) / factor) * factor
-        );
-        break;
-
-      case 'Home':
-        this.context.changeTime(0);
-        break;
-
-      default:
-        break;
-    }
   };
 
   render() {

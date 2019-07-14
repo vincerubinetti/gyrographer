@@ -18,9 +18,9 @@ export class Timecode extends Component {
       <div className='timecode'>
         <div>
           <span>{seconds}</span>
-          <small>sec</small>
+          <small className='light_gray'>sec</small>
           <span>{frames}</span>
-          <small>frames</small>
+          <small className='light_gray'>frames</small>
         </div>
       </div>
     );

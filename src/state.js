@@ -6,49 +6,33 @@ export function Reducer(prevState = {}, action) {
     spin: 3,
     radius: 500,
     showPath: false,
-    showArrow: false,
-    showWheel: false
+    showArrow: true,
+    showWheel: true
   };
   newState.orbs['2'] = {
     spin: 10,
     radius: 200,
     parentId: '1',
     showPath: false,
-    showArrow: false,
-    showWheel: false
+    showArrow: true,
+    showWheel: true
   };
   newState.orbs['3'] = {
     spin: -1,
     radius: 50,
     parentId: '2',
     stepSize: 0.1,
-    showArrow: false,
-    showWheel: false
+    showArrow: true,
+    showWheel: true
   };
-
-  newState.orbs['4'] = {
-    spin: 2,
-    radius: 500,
-    showPath: false,
-    showArrow: false,
-    showWheel: false
-  };
-  newState.orbs['5'] = {
-    spin: 9,
-    radius: 200,
-    parentId: '4',
-    showPath: false,
-    showArrow: false,
-    showWheel: false
-  };
-  newState.orbs['6'] = {
-    spin: -2,
-    radius: 50,
-    parentId: '5',
-    stepSize: 0.1,
-    showArrow: false,
-    showWheel: false
-  };
+  
+  switch (action.type) {
+    case 'toggle_loop':
+      newState.loop = !newState.loop;
+      break;
+    default:
+      break;
+  }
 
   // //////////////////////////////////////////////////
   // set defaults
@@ -97,7 +81,7 @@ export function Reducer(prevState = {}, action) {
 
     // geometry
     if (typeof orb.showPath !== 'boolean')
-      orb.showPath = false;
+      orb.showPath = true;
     if (typeof orb.showArrow !== 'boolean')
       orb.showArrow = false;
     if (typeof orb.showWheel !== 'boolean')

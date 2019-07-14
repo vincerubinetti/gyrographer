@@ -4,12 +4,11 @@
   align-items: center;
   flex-direction: row;
   position: fixed;
+  background: var(--black);
+  border-top: solid 2px var(--dark-gray);
   left: 0;
   right: 0;
   bottom: 0;
-  background: #202020;
-  color: #ffffff;
-  font-size: 0.75em;
   user-select: none;
 }
 .time_button {

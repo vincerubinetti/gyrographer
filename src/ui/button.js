@@ -9,6 +9,7 @@ export class Button extends Component {
       <button
         className={'button ' + this.props.className}
         onClick={this.props.onClick}
+        data-color={this.props.color}
       >
         {this.props.children}
       </button>
