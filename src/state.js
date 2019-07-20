@@ -1,4 +1,4 @@
-export function Reducer(prevState = {}, action) {
+export function rootReducer(prevState = {}, action) {
   const newState = { ...prevState };
 
   newState.orbs = {};

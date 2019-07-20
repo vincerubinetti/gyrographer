@@ -89,5 +89,5 @@ export class Arrow extends Component {
 }
 Arrow.contextType = AppContext;
 Arrow = connect((state) => ({
-  backgroundColor: state.backgroundColor
+  backgroundColor: state.present.backgroundColor
 }))(Arrow);

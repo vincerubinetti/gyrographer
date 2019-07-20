@@ -45,5 +45,5 @@ export class Wheel extends Component {
 }
 Wheel.contextType = AppContext;
 Wheel = connect((state) => ({
-  backgroundColor: state.backgroundColor
+  backgroundColor: state.present.backgroundColor
 }))(Wheel);

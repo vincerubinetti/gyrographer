@@ -11,7 +11,7 @@ export class AxesButton extends Component {
   render() {
     return (
       <Button
-        className="time_button"
+        className="top_button"
         onClick={() => this.props.dispatch(toggleAxes())}
         color={this.props.showAxes ? 'blue' : 'gray'}
         tooltip={this.props.showAxes ? "Don't show axes" : 'Show axes'}
@@ -23,5 +23,5 @@ export class AxesButton extends Component {
 }
 AxesButton.contextType = AppContext;
 AxesButton = connect((state) => ({
-  showAxes: state.showAxes
+  showAxes: state.present.showAxes
 }))(AxesButton);

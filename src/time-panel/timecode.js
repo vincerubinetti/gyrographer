@@ -28,5 +28,5 @@ export class Timecode extends Component {
 }
 Timecode.contextType = AppContext;
 Timecode = connect((state) => ({
-  fps: state.fps
+  fps: state.present.fps
 }))(Timecode);

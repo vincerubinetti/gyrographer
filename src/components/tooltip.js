@@ -122,6 +122,11 @@ class Popup extends Component {
     if (left + this.state.width > window.innerWidth)
       left = this.props.right - this.state.width;
 
+    if (top <= 0) {
+      top = this.props.bottom;
+      top += 5;
+    }
+
     return ReactDOM.createPortal(
       <div
         ref={this.ref}

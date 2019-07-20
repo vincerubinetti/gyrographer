@@ -50,13 +50,9 @@ export class Graph extends Component {
       .select('#graph')
       .node()
       .getBoundingClientRect();
-    const padding = 0;
 
     if (contents.width === 0 || contents.height === 0)
       return;
-
-    container.width -= 2;
-    container.height -= 2;
 
     contents.midX = contents.x + contents.width / 2;
     contents.midY = contents.y + contents.height / 2;
@@ -64,8 +60,8 @@ export class Graph extends Component {
     const scale =
       1 /
       Math.max(
-        contents.width / (container.width - padding),
-        contents.height / (container.height - padding)
+        contents.width / container.width,
+        contents.height / container.height
       );
     const translateX = container.width / 2 - scale * contents.midX;
     const translateY = container.height / 2 - scale * contents.midY;
@@ -115,13 +111,13 @@ export class Graph extends Component {
 
     return (
       <svg
-        xmlns='http://www.w3.org/2000/svg'
-        id='graph'
+        xmlns="http://www.w3.org/2000/svg"
+        id="graph"
         viewBox={viewBox}
         style={{ background: this.props.backgroundColor }}
       >
-        <g id='view'>
-          <g id='board'>
+        <g id="view">
+          <g id="board">
             {this.props.showGrid && <Grid />}
             {this.props.showAxes && <Axes />}
             {this.props.showBounds && <Bounds />}
@@ -136,12 +132,12 @@ export class Graph extends Component {
 }
 Graph.contextType = AppContext;
 Graph = connect((state) => ({
-  left: state.left,
-  top: state.top,
-  right: state.right,
-  bottom: state.bottom,
-  backgroundColor: state.backgroundColor,
-  showBounds: state.showBounds,
-  showAxes: state.showAxes,
-  showGrid: state.showGrid
+  left: state.present.left,
+  top: state.present.top,
+  right: state.present.right,
+  bottom: state.present.bottom,
+  backgroundColor: state.present.backgroundColor,
+  showBounds: state.present.showBounds,
+  showAxes: state.present.showAxes,
+  showGrid: state.present.showGrid
 }))(Graph);

@@ -11,7 +11,7 @@ export class BoundsButton extends Component {
   render() {
     return (
       <Button
-        className="time_button"
+        className="top_button"
         onClick={() => this.props.dispatch(toggleBounds())}
         color={this.props.showBounds ? 'blue' : 'gray'}
         tooltip={this.props.showBounds ? "Don't show bounds" : 'Show bounds'}
@@ -23,5 +23,5 @@ export class BoundsButton extends Component {
 }
 BoundsButton.contextType = AppContext;
 BoundsButton = connect((state) => ({
-  showBounds: state.showBounds
+  showBounds: state.present.showBounds
 }))(BoundsButton);

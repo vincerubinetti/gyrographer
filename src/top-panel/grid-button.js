@@ -11,7 +11,7 @@ export class GridButton extends Component {
   render() {
     return (
       <Button
-        className="time_button"
+        className="top_button"
         onClick={() => this.props.dispatch(toggleGrid())}
         color={this.props.showGrid ? 'blue' : 'gray'}
         tooltip={this.props.showGrid ? "Don't show grid" : 'Show grid'}
@@ -23,5 +23,5 @@ export class GridButton extends Component {
 }
 GridButton.contextType = AppContext;
 GridButton = connect((state) => ({
-  showGrid: state.showGrid
+  showGrid: state.present.showGrid
 }))(GridButton);

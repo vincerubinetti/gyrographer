@@ -23,5 +23,5 @@ export class LoopButton extends Component {
 }
 LoopButton.contextType = AppContext;
 LoopButton = connect((state) => ({
-  loop: state.loop
+  loop: state.present.loop
 }))(LoopButton);

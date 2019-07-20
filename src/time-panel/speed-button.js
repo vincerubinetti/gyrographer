@@ -35,5 +35,5 @@ export class SpeedButton extends Component {
   }
 }
 SpeedButton = connect((state) => ({
-  speed: state.speed
+  speed: state.present.speed
 }))(SpeedButton);

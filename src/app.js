@@ -149,9 +149,9 @@ export class App extends Component {
   }
 }
 App = connect((state) => ({
-  orbs: state.orbs,
-  fps: state.fps,
-  length: state.length,
-  loop: state.loop,
-  speed: state.speed
+  orbs: state.present.orbs,
+  fps: state.present.fps,
+  length: state.present.length,
+  loop: state.present.loop,
+  speed: state.present.speed
 }))(App);
