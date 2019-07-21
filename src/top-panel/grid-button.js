@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AppContext } from '../app-context.js';
 import { Button } from '../components/button.js';
 import { ReactComponent as Grid } from '../images/grid.svg';
-import { toggleGrid } from './actions.js';
+import { toggleGrid } from '../state/actions.js';
 
 export class GridButton extends Component {
   render() {
@@ -23,5 +23,5 @@ export class GridButton extends Component {
 }
 GridButton.contextType = AppContext;
 GridButton = connect((state) => ({
-  showGrid: state.present.showGrid
+  showGrid: state.showGrid
 }))(GridButton);

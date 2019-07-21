@@ -132,12 +132,12 @@ export class Graph extends Component {
 }
 Graph.contextType = AppContext;
 Graph = connect((state) => ({
-  left: state.present.left,
-  top: state.present.top,
-  right: state.present.right,
-  bottom: state.present.bottom,
-  backgroundColor: state.present.backgroundColor,
-  showBounds: state.present.showBounds,
-  showAxes: state.present.showAxes,
-  showGrid: state.present.showGrid
+  left: state.left,
+  top: state.top,
+  right: state.right,
+  bottom: state.bottom,
+  backgroundColor: state.backgroundColor,
+  showBounds: state.showBounds,
+  showAxes: state.showAxes,
+  showGrid: state.showGrid
 }))(Graph);

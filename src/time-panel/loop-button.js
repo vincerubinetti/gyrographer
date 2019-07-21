@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AppContext } from '../app-context.js';
 import { Button } from '../components/button.js';
 import { ReactComponent as Loop } from '../images/loop.svg';
-import { toggleLoop } from './actions.js';
+import { toggleLoop } from '../state/actions.js';
 
 export class LoopButton extends Component {
   render() {
@@ -23,5 +23,5 @@ export class LoopButton extends Component {
 }
 LoopButton.contextType = AppContext;
 LoopButton = connect((state) => ({
-  loop: state.present.loop
+  loop: state.loop
 }))(LoopButton);

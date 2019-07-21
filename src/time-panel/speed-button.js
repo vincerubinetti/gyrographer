@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button.js';
-import { setSpeed } from './actions.js';
+import { setSpeed } from '../state/actions.js';
 
 const speeds = [0.1, 0.25, 0.5, 1, 2, 4];
 
@@ -35,5 +35,5 @@ export class SpeedButton extends Component {
   }
 }
 SpeedButton = connect((state) => ({
-  speed: state.present.speed
+  speed: state.speed
 }))(SpeedButton);

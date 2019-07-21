@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { AppContext } from '../app-context.js';
 import { Button } from '../components/button.js';
@@ -19,3 +20,6 @@ export class EndButton extends Component {
   }
 }
 EndButton.contextType = AppContext;
+EndButton = connect((state) => ({
+  length: state.length
+}))(EndButton);

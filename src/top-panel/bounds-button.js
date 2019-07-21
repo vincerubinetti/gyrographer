@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AppContext } from '../app-context.js';
 import { Button } from '../components/button.js';
 import { ReactComponent as Bounds } from '../images/bounds.svg';
-import { toggleBounds } from './actions.js';
+import { toggleBounds } from '../state/actions.js';
 
 export class BoundsButton extends Component {
   render() {
@@ -23,5 +23,5 @@ export class BoundsButton extends Component {
 }
 BoundsButton.contextType = AppContext;
 BoundsButton = connect((state) => ({
-  showBounds: state.present.showBounds
+  showBounds: state.showBounds
 }))(BoundsButton);

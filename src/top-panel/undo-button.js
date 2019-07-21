@@ -1,10 +1,10 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { ActionCreators } from 'redux-undo';
 
 import { Button } from '../components/button.js';
 import { ReactComponent as Undo } from '../images/undo.svg';
+import { undo } from '../state/undoer.js';
 
 export class UndoButton extends Component {
   render() {
@@ -13,7 +13,7 @@ export class UndoButton extends Component {
         className="top_button"
         onClick={() => {
           if (this.props.past.length)
-            this.props.dispatch(ActionCreators.undo());
+            this.props.dispatch(undo());
         }}
         color={this.props.past.length ? 'white' : 'gray'}
         tooltip="Undo"
@@ -26,4 +26,3 @@ export class UndoButton extends Component {
 UndoButton = connect((state) => ({
   past: state.past
 }))(UndoButton);
-

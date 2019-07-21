@@ -74,5 +74,5 @@ export class Rail extends Component {
 }
 Rail.contextType = AppContext;
 Rail = connect((state) => ({
-  length: state.present.length
+  length: state.length
 }))(Rail);

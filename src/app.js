@@ -7,6 +7,9 @@ import { Graph } from './graph/graph.js';
 import { Orb } from './util/orb.js';
 import { TopPanel } from './top-panel/top-panel.js';
 import { TimePanel } from './time-panel/time-panel.js';
+import { undo } from './state/undoer.js';
+import { redo } from './state/undoer.js';
+
 import './app.css';
 
 export class App extends Component {
@@ -14,6 +17,7 @@ export class App extends Component {
     super();
 
     this.state = {};
+
     this.state.time = 0;
     this.state.playing = false;
     this.state.playTimer = null;
@@ -35,7 +39,7 @@ export class App extends Component {
     const increment = this.props.speed;
 
     this.changeTime(
-      Math.round((this.state.time + increment) / increment) * increment
+      Math.floor((this.state.time + increment) / increment) * increment
     );
   };
 
@@ -43,7 +47,7 @@ export class App extends Component {
     const increment = -this.props.speed;
 
     this.changeTime(
-      Math.round((this.state.time + increment) / increment) * increment
+      Math.ceil((this.state.time + increment) / increment) * increment
     );
   };
 
@@ -71,13 +75,13 @@ export class App extends Component {
   changeTime = (time) => {
     if (time < 0) {
       if (this.props.loop)
-        time = (time % this.props.length) + this.props.length;
+        time = (time % (this.props.length + 1)) + this.props.length + 1;
       else
         time = 0;
     }
     if (time > this.props.length) {
       if (this.props.loop)
-        time = time % this.props.length;
+        time = time % (this.props.length + 1);
       else {
         time = this.props.length;
         this.changePlaying(false);
@@ -123,6 +127,16 @@ export class App extends Component {
         this.changeTime(this.props.length);
         break;
 
+      case 'z':
+        if (event.ctrlKey && this.props.past.length)
+          this.props.dispatch(undo());
+        break;
+
+      case 'y':
+        if (event.ctrlKey && this.props.future.length)
+          this.props.dispatch(redo());
+        break;
+
       default:
         break;
     }
@@ -149,9 +163,11 @@ export class App extends Component {
   }
 }
 App = connect((state) => ({
-  orbs: state.present.orbs,
-  fps: state.present.fps,
-  length: state.present.length,
-  loop: state.present.loop,
-  speed: state.present.speed
+  past: state.past,
+  future: state.future,
+  orbs: state.orbs,
+  fps: state.fps,
+  length: state.length,
+  loop: state.loop,
+  speed: state.speed
 }))(App);

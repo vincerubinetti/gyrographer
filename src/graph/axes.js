@@ -32,9 +32,9 @@ export class Axes extends Component {
   }
 }
 Axes = connect((state) => ({
-  left: state.present.left,
-  top: state.present.top,
-  right: state.present.right,
-  bottom: state.present.bottom,
-  backgroundColor: state.present.backgroundColor
+  left: state.left,
+  top: state.top,
+  right: state.right,
+  bottom: state.bottom,
+  backgroundColor: state.backgroundColor
 }))(Axes);

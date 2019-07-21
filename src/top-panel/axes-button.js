@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AppContext } from '../app-context.js';
 import { Button } from '../components/button.js';
 import { ReactComponent as Axes } from '../images/axes.svg';
-import { toggleAxes } from './actions.js';
+import { toggleAxes } from '../state/actions.js';
 
 export class AxesButton extends Component {
   render() {
@@ -23,5 +23,5 @@ export class AxesButton extends Component {
 }
 AxesButton.contextType = AppContext;
 AxesButton = connect((state) => ({
-  showAxes: state.present.showAxes
+  showAxes: state.showAxes
 }))(AxesButton);
