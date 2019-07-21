@@ -42,7 +42,10 @@ export function undoer(reducer) {
         return {
           ...newState,
           past: newPast,
-          future: newFuture
+          future: newFuture,
+          actionDescription: action.payload
+            ? action.payload.description || ''
+            : ''
         };
     }
   };

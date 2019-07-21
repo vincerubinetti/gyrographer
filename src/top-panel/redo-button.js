@@ -8,6 +8,14 @@ import { redo } from '../state/undoer.js';
 
 export class RedoButton extends Component {
   render() {
+    let tooltip = 'Redo';
+    if (
+      this.props.future &&
+      this.props.future[0] &&
+      this.props.future[0].actionDescription
+    )
+      tooltip += ' ' + this.props.future[0].actionDescription;
+
     return (
       <Button
         className="top_button"
@@ -16,7 +24,7 @@ export class RedoButton extends Component {
             this.props.dispatch(redo());
         }}
         color={this.props.future.length ? 'white' : 'gray'}
-        tooltip="Redo"
+        tooltip={tooltip}
       >
         <Redo />
       </Button>

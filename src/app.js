@@ -75,13 +75,13 @@ export class App extends Component {
   changeTime = (time) => {
     if (time < 0) {
       if (this.props.loop)
-        time = (time % (this.props.length + 1)) + this.props.length + 1;
+        time = (time % this.props.length) + this.props.length;
       else
         time = 0;
     }
     if (time > this.props.length) {
       if (this.props.loop)
-        time = time % (this.props.length + 1);
+        time = time % this.props.length;
       else {
         time = this.props.length;
         this.changePlaying(false);
