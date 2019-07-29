@@ -11,7 +11,7 @@ export class ForwardButton extends Component {
       <Button
         className="time_button_half"
         onClick={this.context.incrementTime}
-        tooltip="One frame forward"
+        tooltip="Step forward"
       >
         <ArrowRight />
       </Button>

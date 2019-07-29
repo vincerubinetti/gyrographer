@@ -35,19 +35,19 @@ export class App extends Component {
       this.setState({ orbTree: Orb.buildTree(this.props.orbs) });
   }
 
-  incrementTime = () => {
-    const increment = this.props.speed;
+  incrementTime = (multiplier) => {
+    const increment = this.props.speed * (multiplier || 1);
 
     this.changeTime(
-      Math.floor((this.state.time + increment) / increment) * increment
+      Math.round((this.state.time + increment) / increment) * increment
     );
   };
 
-  decrementTime = () => {
-    const increment = -this.props.speed;
+  decrementTime = (multiplier) => {
+    const increment = -this.props.speed * (multiplier || 1);
 
     this.changeTime(
-      Math.ceil((this.state.time + increment) / increment) * increment
+      Math.round((this.state.time + increment) / increment) * increment
     );
   };
 
@@ -91,33 +91,28 @@ export class App extends Component {
   };
 
   onKeyDown = (event) => {
+    event.preventDefault();
+
+    let multiplier = 1;
+    if (event.shiftKey)
+      multiplier = 10;
+    else if (event.ctrlKey)
+      multiplier = 0.1;
+
     switch (event.key) {
       case ' ':
-        event.preventDefault();
-
         this.changePlaying(!this.state.playing);
         break;
 
       case 'ArrowLeft':
+        this.decrementTime(multiplier);
+        break;
+
       case 'ArrowRight':
-        event.preventDefault();
-
-        let increment = 1;
-        if (event.ctrlKey)
-          increment = 0.1;
-        else if (event.shiftKey)
-          increment = 5;
-        if (event.key === 'ArrowLeft')
-          increment *= -1;
-
-        this.changeTime(
-          Math.round((this.state.time + increment) / increment) * increment
-        );
+        this.incrementTime(multiplier);
         break;
 
       case 'Home':
-        event.preventDefault();
-
         this.changeTime(0);
         break;
 

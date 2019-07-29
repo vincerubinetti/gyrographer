@@ -1,5 +1,7 @@
-export function reducer(prevState = {}, action) {
-  const newState = { ...prevState };
+import { copyObject } from '../util/object.js';
+
+export function reducer(state = {}, action) {
+  const newState = copyObject(state);
 
   newState.orbs = {};
   newState.orbs['1'] = {
@@ -26,120 +28,452 @@ export function reducer(prevState = {}, action) {
     showWheel: true
   };
 
+  return {
+    loop: loop(newState.loop, action),
+    showBounds: showBounds(newState.showBounds, action),
+    showAxes: showAxes(newState.showAxes, action),
+    showGrid: showGrid(newState.showGrid, action),
+    speed: speed(newState.speed, action),
+    left: left(newState.left, action),
+    top: top(newState.top, action),
+    right: right(newState.right, action),
+    bottom: bottom(newState.bottom, action),
+    backgroundColor: backgroundColor(newState.backgroundColor, action),
+    fps: fps(newState.fps, action),
+    length: length(newState.length, action),
+    orbs: orbs(newState.orbs, action)
+  };
+}
+
+function loop(state = false, action) {
+  let newState = state;
   switch (action.type) {
     case 'toggle_loop':
-      newState.loop = !newState.loop;
-      break;
-
-    case 'toggle_bounds':
-      newState.showBounds = !newState.showBounds;
-      break;
-
-    case 'toggle_axes':
-      newState.showAxes = !newState.showAxes;
-      break;
-
-    case 'toggle_grid':
-      newState.showGrid = !newState.showGrid;
-      break;
-
-    case 'set_speed':
-      newState.speed = action.payload.speed;
+      newState = !state;
       break;
 
     default:
       break;
   }
 
-  // //////////////////////////////////////////////////
-  // set defaults
-  // //////////////////////////////////////////////////
+  if (typeof newState !== 'boolean')
+    newState = true;
 
-  // graph properties
-  if (typeof newState.left !== 'number')
-    newState.left = -1000;
-  if (typeof newState.top !== 'number')
-    newState.top = -1000;
-  if (typeof newState.right !== 'number')
-    newState.right = 1000;
-  if (typeof newState.bottom !== 'number')
-    newState.bottom = 1000;
-  if (typeof newState.backgroundColor !== 'string')
-    newState.backgroundColor = '#202020ff';
-  if (typeof newState.fps !== 'number')
-    newState.fps = 60;
-  if (newState.fps < 1)
-    newState.fps = 1;
-  if (newState.fps > 500)
-    newState.fps = 500;
-  if (typeof newState.length !== 'number')
-    newState.length = 300;
-  if (newState.length < 0.1)
-    newState.length = 0.1;
-  if (newState.length > 300)
-    newState.length = 300;
-  if (typeof newState.loop !== 'boolean')
-    newState.loop = false;
-  if (typeof newState.speed !== 'number')
-    newState.speed = 1;
-  if (typeof newState.showBounds !== 'boolean')
-    newState.showBounds = true;
-  if (typeof newState.showAxes !== 'boolean')
-    newState.showAxes = true;
-  if (typeof newState.showGrid !== 'boolean')
-    newState.showGrid = true;
+  return newState;
+}
 
-  // orb properties
-  if (!newState.orbs)
-    newState.orbs = [];
-  for (const key of Object.keys(newState.orbs)) {
-    const orb = newState.orbs[key];
-    // under-the-hood
-    if (typeof orb.parentId !== 'string')
-      orb.parentId = null;
+function showBounds(state = true, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'toggle_bounds':
+      newState = !state;
+      break;
 
-    // geometry
-    if (typeof orb.showPath !== 'boolean')
-      orb.showPath = true;
-    if (typeof orb.showArrow !== 'boolean')
-      orb.showArrow = false;
-    if (typeof orb.showWheel !== 'boolean')
-      orb.showWheel = false;
-    if (typeof orb.from !== 'number')
-      orb.from = 0;
-    if (typeof orb.to !== 'number')
-      orb.to = 100;
-    if (typeof orb.stepSize !== 'number')
-      orb.stepSize = 0.1;
-    if (orb.stepSize <= 0)
-      orb.stepSize = 0.1;
-    if (typeof orb.radius !== 'number')
-      orb.radius = 100;
-    if (typeof orb.spin !== 'number')
-      orb.spin = 1;
-    if (typeof orb.offset !== 'number')
-      orb.offset = 0;
-
-    // styling
-    if (typeof orb.fillColor !== 'string')
-      orb.fillColor = 'none';
-    if (typeof orb.strokeColor !== 'string')
-      orb.strokeColor = '#ffffffff';
-    if (typeof orb.strokeWidth !== 'number')
-      orb.strokeWidth = 5;
-    if (typeof orb.close !== 'boolean')
-      orb.close = false;
-    if (typeof orb.dashArray !== 'string')
-      orb.dashArray = '0';
-    if (typeof orb.dashOffset !== 'string')
-      orb.dashOffset = '0';
-    if (typeof orb.strokeLineCap !== 'string')
-      orb.strokeLineCap = 'round';
-    if (typeof orb.strokeLineJoin !== 'string')
-      orb.strokeLineJoin = 'round';
-    if (typeof orb.order !== 'number')
-      orb.order = 0;
+    default:
+      break;
   }
+
+  if (typeof newState !== 'boolean')
+    newState = true;
+
+  return newState;
+}
+
+function showAxes(state = true, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'toggle_axes':
+      newState = !state;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'boolean')
+    newState = true;
+
+  return newState;
+}
+
+function showGrid(state = true, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'toggle_grid':
+      newState = !state;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'boolean')
+    newState = true;
+
+  return newState;
+}
+
+function speed(state = 1, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_speed':
+      newState = action.payload.speed;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'number')
+    newState = 1;
+  if (newState < 0.1)
+    newState = 0.01;
+  if (newState > 10)
+    newState = 100;
+
+  return newState;
+}
+
+function left(state = -1000, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_left':
+      newState = action.payload.left;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'number')
+    newState = -1000;
+  if (newState < -10000)
+    newState = -10000;
+  if (newState > 10000)
+    newState = 10000;
+
+  return newState;
+}
+
+function top(state = -1000, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_top':
+      newState = action.payload.top;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'number')
+    newState = -1000;
+  if (newState < -10000)
+    newState = -10000;
+  if (newState > 10000)
+    newState = 10000;
+
+  return newState;
+}
+
+function right(state = 1000, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_right':
+      newState = action.payload.right;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'number')
+    newState = -1000;
+  if (newState < -10000)
+    newState = -10000;
+  if (newState > 10000)
+    newState = 10000;
+
+  return newState;
+}
+
+function bottom(state = 1000, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_bottom':
+      newState = action.payload.bottom;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'number')
+    newState = -1000;
+  if (newState < -10000)
+    newState = -10000;
+  if (newState > 10000)
+    newState = 10000;
+
+  return newState;
+}
+
+function backgroundColor(state = '#202020ff', action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_background_color':
+      newState = action.payload.backgroundColor;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'string')
+    newState = '#202020ff';
+
+  return newState;
+}
+
+function fps(state = 60, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_fps':
+      newState = action.payload.fps;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'number')
+    newState = 60;
+  if (newState < 1)
+    newState = 1;
+  if (newState > 500)
+    newState = 500;
+
+  return newState;
+}
+
+function length(state = 300, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_length':
+      newState = action.payload.length;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'number')
+    newState = 300;
+  if (newState < 0.1)
+    newState = 0.1;
+  if (newState > 300)
+    newState = 300;
+
+  return newState;
+}
+
+function orbs(state = {}, action) {
+  const newState = state;
+  for (const key of Object.keys(newState)) {
+    newState[key] = {
+      parentId: parentId(newState[key].parentId, action),
+      showPath: showPath(newState[key].showPath, action),
+      showArrow: showArrow(newState[key].showArrow, action),
+      showWheel: showWheel(newState[key].showWheel, action),
+      from: from(newState[key].from, action),
+      to: to(newState[key].to, action),
+      stepSize: stepSize(newState[key].stepSize, action),
+      radius: radius(newState[key].radius, action),
+      spin: spin(newState[key].spin, action),
+      offset: offset(newState[key].offset, action),
+      fillColor: fillColor(newState[key].fillColor, action),
+      strokeColor: strokeColor(newState[key].strokeColor, action),
+      strokeWidth: strokeWidth(newState[key].strokeWidth, action),
+      close: close(newState[key].close, action),
+      dashArray: dashArray(newState[key].dashArray, action),
+      dashOffset: dashOffset(newState[key].dashOffset, action),
+      strokeLineCap: strokeLineCap(newState[key].strokeLineCap, action),
+      strokeLineJoin: strokeLineJoin(newState[key].strokeLineJoin, action),
+      order: order(newState[key].order, action)
+    };
+  }
+  return newState;
+}
+
+function parentId(state = null, action) {
+  let newState = state;
+
+  if (typeof newState !== 'string')
+    newState = null;
+
+  return newState;
+}
+
+function showPath(state = true, action) {
+  let newState = state;
+
+  if (typeof newState !== 'boolean')
+    newState = true;
+
+  return newState;
+}
+
+function showArrow(state = false, action) {
+  let newState = state;
+
+  if (typeof newState !== 'boolean')
+    newState = false;
+
+  return newState;
+}
+
+function showWheel(state = false, action) {
+  let newState = state;
+
+  if (typeof newState !== 'boolean')
+    newState = false;
+
+  return newState;
+}
+
+function from(state = 0, action) {
+  let newState = state;
+
+  if (typeof newState !== 'number')
+    newState = 0;
+
+  return newState;
+}
+
+function to(state = 100, action) {
+  let newState = state;
+
+  if (typeof newState !== 'number')
+    newState = 100;
+
+  return newState;
+}
+
+function stepSize(state = 0.1, action) {
+  let newState = state;
+
+  if (typeof newState !== 'number')
+    newState = 0.1;
+  if (newState <= 0)
+    newState = 0.1;
+
+  return newState;
+}
+
+function radius(state = 100, action) {
+  let newState = state;
+
+  if (typeof newState !== 'number')
+    newState = 100;
+
+  return newState;
+}
+
+function spin(state = 1, action) {
+  let newState = state;
+
+  if (typeof newState !== 'number')
+    newState = 1;
+
+  return newState;
+}
+
+function offset(state = 0, action) {
+  let newState = state;
+
+  if (typeof newState !== 'number')
+    newState = 0;
+
+  return newState;
+}
+
+function fillColor(state = 'none', action) {
+  let newState = state;
+
+  if (typeof newState !== 'string')
+    newState = 'none';
+
+  return newState;
+}
+
+function strokeColor(state = '#ffffffff', action) {
+  let newState = state;
+
+  if (typeof newState !== 'string')
+    newState = '#ffffffff';
+
+  return newState;
+}
+
+function strokeWidth(state = 5, action) {
+  let newState = state;
+
+  if (typeof newState !== 'number')
+    newState = 5;
+
+  return newState;
+}
+
+function close(state = false, action) {
+  let newState = state;
+
+  if (typeof newState !== 'boolean')
+    newState = false;
+
+  return newState;
+}
+
+function dashArray(state = '0', action) {
+  let newState = state;
+
+  if (typeof newState !== 'string')
+    newState = '0';
+
+  return newState;
+}
+
+function dashOffset(state = '0', action) {
+  let newState = state;
+
+  if (typeof newState !== 'string')
+    newState = '0';
+
+  return newState;
+}
+
+function strokeLineCap(state = 'round', action) {
+  let newState = state;
+
+  if (typeof newState !== 'string')
+    newState = 'round';
+
+  return newState;
+}
+
+function strokeLineJoin(state = 'round', action) {
+  let newState = state;
+
+  if (typeof newState !== 'string')
+    newState = 'round';
+
+  return newState;
+}
+
+function order(state = 0, action) {
+  let newState = state;
+
+  if (typeof newState !== 'number')
+    newState = 0;
 
   return newState;
 }

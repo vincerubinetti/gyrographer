@@ -11,7 +11,7 @@ export class Timecode extends Component {
       Math.floor(this.context.time / this.props.fps)
     ).padStart(2, '0');
     const frames = String(
-      (this.context.time % this.props.fps).toFixed(1)
+      (this.context.time % this.props.fps).toFixed(2)
     ).padStart(4, '0');
 
     return (

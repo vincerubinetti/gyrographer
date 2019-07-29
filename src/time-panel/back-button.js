@@ -11,7 +11,7 @@ export class BackButton extends Component {
       <Button
         className="time_button_half"
         onClick={this.context.decrementTime}
-        tooltip="One frame back"
+        tooltip="Step back"
       >
         <ArrowLeft />
       </Button>

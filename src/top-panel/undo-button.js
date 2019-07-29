@@ -12,7 +12,6 @@ export class UndoButton extends Component {
     if (this.props.actionDescription)
       tooltip += ' ' + this.props.actionDescription;
 
-    console.log(tooltip);
     return (
       <Button
         className="top_button"

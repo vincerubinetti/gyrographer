@@ -5,16 +5,8 @@ export function copyObject(object) {
     return object;
 }
 
-export function compareObjects(object1, object2) {
-  return JSON.stringify(object1) === JSON.stringify(object2);
-}
-
-export function filterObject(object, keys) {
-  const result = {};
-  for (const key of Object.keys(object)) {
-    if (!keys.includes(key))
-      result[key] = copyObject(object[key]);
-  }
-
-  return result;
+export function filterObject(object, deleteKeys) {
+  for (const key of deleteKeys)
+    delete object[key];
+  return object;
 }

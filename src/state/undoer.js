@@ -1,8 +1,9 @@
+import { copyObject } from '../util/object.js';
 import { filterObject } from '../util/object.js';
 
 export function undoer(reducer) {
   return function(state, action) {
-    const filteredState = filterObject(state, ['past', 'future']);
+    const filteredState = filterObject(copyObject(state), ['past', 'future']);
     let newState = {};
     const past = state.past || [];
     const future = state.future || [];
