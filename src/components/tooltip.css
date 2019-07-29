@@ -3,6 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
   position: fixed;
   padding: 5px;
   background: var(--dark-gray);
@@ -18,4 +20,10 @@
   .tooltip {
     display: none;
   }
+}
+.tooltip > div {
+  padding: 2px;
+}
+.tooltip > div:not(:first-child) {
+  opacity: 0.5;
 }

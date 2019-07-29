@@ -19,6 +19,11 @@
 .top_button > svg {
   height: 33%;
 }
+.undo_redo_menu_item {
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+}
 
 @media (max-width: 640px) {
   .top_panel {

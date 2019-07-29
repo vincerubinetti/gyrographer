@@ -8,19 +8,29 @@ import { undo } from '../state/undoer.js';
 
 export class UndoButton extends Component {
   render() {
-    let tooltip = 'Undo';
-    if (this.props.actionDescription)
-      tooltip += ' ' + this.props.actionDescription;
+    let tooltip = [
+      this.props.actionDescription,
+      ...this.props.past.slice(0, 9).map((entry) => entry.actionDescription)
+    ]
+      .filter((entry) => (entry ? true : false))
+      .map((entry, index) => (
+        <div key={index} className='undo_redo_menu_item'>
+          Undo {entry}
+        </div>
+      ));
+
+    if (!tooltip.length)
+      tooltip = 'Undo';
 
     return (
       <Button
-        className="top_button"
+        className='top_button'
         onClick={() => {
           if (this.props.past.length)
             this.props.dispatch(undo());
         }}
         color={this.props.past.length ? 'white' : 'gray'}
-        tooltip={tooltip}
+        tooltip={<>{tooltip}</>}
       >
         <Undo />
       </Button>

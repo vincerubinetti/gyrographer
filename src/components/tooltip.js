@@ -130,7 +130,7 @@ class Popup extends Component {
     return ReactDOM.createPortal(
       <div
         ref={this.ref}
-        className="tooltip"
+        className='tooltip'
         style={{
           left: left + 'px',
           top: top + 'px'
