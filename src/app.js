@@ -6,6 +6,7 @@ import { AppContext } from './app-context.js';
 import { Graph } from './graph/graph.js';
 import { Orb } from './util/orb.js';
 import { TopPanel } from './top-panel/top-panel.js';
+import { OrbPanel } from './orb-panel/orb-panel.js';
 import { TimePanel } from './time-panel/time-panel.js';
 import { undo } from './state/undoer.js';
 import { redo } from './state/undoer.js';
@@ -152,6 +153,7 @@ export class App extends Component {
       >
         <Graph />
         <TopPanel />
+        <OrbPanel />
         <TimePanel />
       </AppContext.Provider>
     );

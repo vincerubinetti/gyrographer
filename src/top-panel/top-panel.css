@@ -10,6 +10,7 @@
   top: 0;
   border-bottom: solid 2px var(--dark-gray);
   user-select: none;
+  z-index: 1;
 }
 .top_button {
   box-sizing: border-box;
