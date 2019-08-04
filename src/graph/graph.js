@@ -10,6 +10,8 @@ import { Bounds } from './bounds.js';
 import { Path } from './path.js';
 import { Arrow } from './arrow.js';
 import { Wheel } from './wheel.js';
+import { OrbHandle } from './orb-handle.js';
+import { Color } from '../util/color';
 import './graph.css';
 
 const minZoom = 0.01;
@@ -42,6 +44,8 @@ export class Graph extends Component {
   };
 
   fitView = () => {
+    const padding = 100;
+
     const contents = d3
       .select('#view')
       .node()
@@ -60,8 +64,8 @@ export class Graph extends Component {
     const scale =
       1 /
       Math.max(
-        contents.width / container.width,
-        contents.height / container.height
+        contents.width / (container.width - padding * 2),
+        contents.height / (container.height - padding * 2)
       );
     const translateX = container.width / 2 - scale * contents.midX;
     const translateY = container.height / 2 - scale * contents.midY;
@@ -109,6 +113,10 @@ export class Graph extends Component {
       .filter((orb) => orb.showWheel)
       .map((orb, index) => <Wheel key={index} orb={orb} />);
 
+    const orbHandles = this.context.orbTree.map((orb, index) => (
+      <OrbHandle key={index} orb={orb} />
+    ));
+
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +125,12 @@ export class Graph extends Component {
         style={{ background: this.props.backgroundColor }}
       >
         <g id="view">
-          <g id="board">
+          <g
+            id="board"
+            data-active={!this.props.edit}
+            opacity={new Color(this.props.guideColor).a}
+            stroke={new Color(this.props.guideColor).hex(true)}
+          >
             {this.props.showGrid && <Grid />}
             {this.props.showAxes && <Axes />}
             {this.props.showBounds && <Bounds />}
@@ -125,6 +138,7 @@ export class Graph extends Component {
           {wheels}
           {arrows}
           {paths}
+          {orbHandles}
         </g>
       </svg>
     );
@@ -132,11 +146,13 @@ export class Graph extends Component {
 }
 Graph.contextType = AppContext;
 Graph = connect((state) => ({
+  edit: state.edit,
   left: state.left,
   top: state.top,
   right: state.right,
   bottom: state.bottom,
   backgroundColor: state.backgroundColor,
+  guideColor: state.guideColor,
   showBounds: state.showBounds,
   showAxes: state.showAxes,
   showGrid: state.showGrid

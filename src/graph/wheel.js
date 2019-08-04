@@ -3,7 +3,6 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { AppContext } from '../app-context.js';
-import { getContrastColor } from '../util/color.js';
 import { Vector } from '../util/math.js';
 import './wheel.css';
 
@@ -16,7 +15,7 @@ export class Wheel extends Component {
     const parent = orb.parent;
 
     // styles
-    const color = getContrastColor(this.props.backgroundColor) + 'ff';
+    const color = orb.computeProp('fillColor', time);
 
     // geometry
     const to = orb.computeProp('to', time);
@@ -31,13 +30,12 @@ export class Wheel extends Component {
     const radius = b.subtract(a).length();
 
     return (
-      <g className='wheel'>
+      <g className='wheel' data-active={!this.props.edit}>
         <circle
           cx={a.x.toFixed(precision)}
           cy={a.y.toFixed(precision)}
           r={radius.toFixed(precision)}
           fill={color}
-          opacity='0.5'
         />
       </g>
     );
@@ -45,5 +43,6 @@ export class Wheel extends Component {
 }
 Wheel.contextType = AppContext;
 Wheel = connect((state) => ({
+  edit: state.edit,
   backgroundColor: state.backgroundColor
 }))(Wheel);

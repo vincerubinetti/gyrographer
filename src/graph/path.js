@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { AppContext } from '../app-context.js';
 import './path.css';
@@ -38,7 +39,9 @@ export class Path extends Component {
 
     return (
       <path
-        fill={fillColor}
+        data-active={!this.props.edit}
+        className="path"
+        fill={close ? fillColor : 'none'}
         stroke={strokeColor}
         strokeWidth={strokeWidth}
         strokeDasharray={dashArray}
@@ -51,3 +54,6 @@ export class Path extends Component {
   }
 }
 Path.contextType = AppContext;
+Path = connect((state) => ({
+  edit: state.edit
+}))(Path);

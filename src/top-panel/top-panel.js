@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 
+import { EditButton } from './edit-button.js';
 import { BoundsButton } from './bounds-button.js';
 import { AxesButton } from './axes-button.js';
 import { GridButton } from './grid-button.js';
@@ -13,6 +14,7 @@ export class TopPanel extends Component {
   render() {
     return (
       <div className="top_panel">
+        <EditButton />
         <BoundsButton />
         <AxesButton />
         <GridButton />

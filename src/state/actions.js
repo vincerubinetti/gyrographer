@@ -1,3 +1,12 @@
+export function toggleEdit() {
+  return {
+    type: 'toggle_edit',
+    payload: {
+      description: 'toggle edit mode'
+    }
+  };
+}
+
 export function toggleBounds() {
   return {
     type: 'toggle_bounds',

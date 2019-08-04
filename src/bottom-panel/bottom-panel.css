@@ -1,4 +1,4 @@
-.time_panel {
+.bottom_panel {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -29,7 +29,7 @@
 }
 
 @media (max-width: 640px) {
-  .time_panel {
+  .bottom_panel {
     flex-wrap: wrap;
   }
   .time_button {

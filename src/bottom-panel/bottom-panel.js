@@ -11,12 +11,12 @@ import { ForwardButton } from './forward-button.js';
 import { EndButton } from './end-button.js';
 import { Rail } from './rail.js';
 
-import './time-panel.css';
+import './bottom-panel.css';
 
-export class TimePanel extends Component {
+export class BottomPanel extends Component {
   render() {
     return (
-      <div className="time_panel">
+      <div className="bottom_panel">
         <PlayButton />
         <LoopButton />
         <SpeedButton />

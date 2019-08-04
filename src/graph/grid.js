@@ -2,7 +2,6 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getContrastColor } from '../util/color.js';
 import './grid.css';
 
 const minorSpacing = 50;
@@ -10,8 +9,6 @@ const majorMultiple = 4;
 
 export class Grid extends Component {
   render() {
-    const color = getContrastColor(this.props.backgroundColor);
-
     const minorHorizontalLines = [];
     const minorVerticalLines = [];
     const majorHorizontalLines = [];
@@ -28,7 +25,6 @@ export class Grid extends Component {
             y1={xy}
             x2={this.props.right}
             y2={xy}
-            stroke={color}
           />
         );
         if (index % majorMultiple === 0)
@@ -44,7 +40,6 @@ export class Grid extends Component {
             y1={this.props.top}
             x2={xy}
             y2={this.props.bottom}
-            stroke={color}
           />
         );
         if (index % majorMultiple === 0)
@@ -55,11 +50,11 @@ export class Grid extends Component {
     }
 
     return (
-      <g id='grid'>
-        <g id='minor_horizontal_lines'>{minorHorizontalLines}</g>
-        <g id='minor_vertical_lines'>{minorVerticalLines}</g>
-        <g id='major_horizontal_lines'>{majorHorizontalLines}</g>
-        <g id='major_vertical_lines'>{majorVerticalLines}</g>
+      <g id="grid">
+        <g id="minor_horizontal_lines">{minorHorizontalLines}</g>
+        <g id="minor_vertical_lines">{minorVerticalLines}</g>
+        <g id="major_horizontal_lines">{majorHorizontalLines}</g>
+        <g id="major_vertical_lines">{majorVerticalLines}</g>
       </g>
     );
   }
@@ -68,6 +63,5 @@ Grid = connect((state) => ({
   left: state.left,
   top: state.top,
   right: state.right,
-  bottom: state.bottom,
-  backgroundColor: state.backgroundColor
+  bottom: state.bottom
 }))(Grid);

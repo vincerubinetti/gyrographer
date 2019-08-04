@@ -3,8 +3,8 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { AppContext } from '../app-context.js';
-import { getContrastColor } from '../util/color.js';
 import { Vector } from '../util/math.js';
+import { Color } from '../util/color.js';
 import './arrow.css';
 
 const precision = 2;
@@ -16,7 +16,7 @@ export class Arrow extends Component {
     const parent = orb.parent;
 
     // styles
-    const color = getContrastColor(this.props.backgroundColor) + 'ff';
+    const color = new Color(orb.computeProp('strokeColor', time));
     const strokeWidth = orb.strokeWidth;
     const headSize = strokeWidth * 4;
 
@@ -35,6 +35,8 @@ export class Arrow extends Component {
       a = new Vector(0, 0);
     const b = orb.computePoint(to, time);
     const ab = b.subtract(a);
+    if (parent)
+      a = a.add(ab.normalize().scale(strokeWidth / 2));
     const l = ab.length();
     const ac = ab.normalize().scale(l - headSize);
     const c = a.add(ac);
@@ -74,20 +76,20 @@ export class Arrow extends Component {
     ].join(' ');
 
     return (
-      <g className='arrow'>
+      <g className="arrow" data-active={!this.props.edit} opacity={color.a}>
         <path
           d={shaft}
-          fill='none'
-          stroke={color}
+          stroke={color.hex(true)}
           strokeWidth={strokeWidth}
-          strokeLinecap='round'
+          strokeLinecap="round"
         />
-        <path d={head} fill={color} stroke='none' />
+        <path d={head} fill={color.hex(true)} stroke="none" />
       </g>
     );
   }
 }
 Arrow.contextType = AppContext;
 Arrow = connect((state) => ({
+  edit: state.edit,
   backgroundColor: state.backgroundColor
 }))(Arrow);

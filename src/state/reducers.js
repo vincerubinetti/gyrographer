@@ -7,6 +7,8 @@ export function reducer(state = {}, action) {
   newState.orbs['1'] = {
     spin: 3,
     radius: 500,
+    fillColor: '#ffffff10',
+    strokeColor: '#ffffff20',
     showPath: false,
     showArrow: true,
     showWheel: true
@@ -15,20 +17,34 @@ export function reducer(state = {}, action) {
     spin: 10,
     radius: 200,
     parentId: '1',
+    fillColor: '#ffffff10',
+    strokeColor: '#ffffff20',
     showPath: false,
     showArrow: true,
     showWheel: true
   };
   newState.orbs['3'] = {
     spin: -1,
-    radius: 50,
+    radius: 75,
     parentId: '2',
     stepSize: 0.1,
+    fillColor: '#ffffff10',
+    strokeColor: '#ffffff20',
+    showPath: false,
     showArrow: true,
     showWheel: true
   };
+  newState.orbs['4'] = {
+    spin: -1,
+    radius: 75,
+    parentId: '2',
+    stepSize: 0.1,
+    strokeColor: '#ffffffff',
+    showPath: true
+  };
 
   return {
+    edit: edit(newState.edit, action),
     loop: loop(newState.loop, action),
     showBounds: showBounds(newState.showBounds, action),
     showAxes: showAxes(newState.showAxes, action),
@@ -39,10 +55,28 @@ export function reducer(state = {}, action) {
     right: right(newState.right, action),
     bottom: bottom(newState.bottom, action),
     backgroundColor: backgroundColor(newState.backgroundColor, action),
+    guideColor: guideColor(newState.guideColor, action),
     fps: fps(newState.fps, action),
     length: length(newState.length, action),
     orbs: orbs(newState.orbs, action)
   };
+}
+
+function edit(state = false, action) {
+  let newState = state;
+  switch (action.type) {
+    case 'toggle_edit':
+      newState = !state;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'boolean')
+    newState = false;
+
+  return newState;
 }
 
 function loop(state = false, action) {
@@ -235,6 +269,22 @@ function backgroundColor(state = '#202020ff', action) {
   return newState;
 }
 
+function guideColor(state = '#ffffff80', action) {
+  let newState = state;
+  switch (action.type) {
+    case 'set_guide_color':
+      newState = action.payload.guideColor;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof newState !== 'string')
+    newState = '#ffffff80';
+
+  return newState;
+}
 function fps(state = 60, action) {
   let newState = state;
   switch (action.type) {

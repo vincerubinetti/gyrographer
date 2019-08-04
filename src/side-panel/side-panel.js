@@ -1,12 +1,12 @@
 import React from 'react';
 import { Component } from 'react';
 
-import './orb-panel.css';
+import './side-panel.css';
 
-export class OrbPanel extends Component {
+export class SidePanel extends Component {
   render() {
     return (
-      <div className="orb_panel">
+      <div className="side_panel">
         showPath
         <br />
         showArrow
