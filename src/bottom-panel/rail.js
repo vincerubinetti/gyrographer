@@ -1,78 +1,95 @@
 import React from 'react';
-import { Component } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { useCallback } from 'react';
+import { useRef } from 'react';
 import { connect } from 'react-redux';
 
 import { AppContext } from '../app-context.js';
 import './rail.css';
 
-export class Rail extends Component {
-  constructor() {
-    super();
+let Rail = ({ length }) => {
+  const [clicking, setClicking] = useState(false);
+  const track = useRef();
+  const context = useContext(AppContext);
 
-    this.state = {};
-    this.state.clicking = false;
+  const seek = useCallback(
+    (event) => {
+      const x = event.clientX || (event.touches ? event.touches[0].clientX : 0);
 
-    this.track = React.createRef();
+      const bbox = track.current.getBoundingClientRect();
+      const time = Math.floor((length * (x - bbox.left)) / bbox.width);
 
-    window.addEventListener('mousemove', this.onMouseMove);
-    window.addEventListener('mouseup', this.onMouseUp);
-    window.addEventListener('touchmove', this.onMouseMove);
-    window.addEventListener('touchcancel', this.onMouseUp);
-    window.addEventListener('touchend', this.onMouseUp);
-  }
+      context.changeTime(time);
+    },
+    [context, length]
+  );
 
-  onMouseDown = (event) => {
-    this.setState({ clicking: true });
-    this.seek(event);
+  const onMouseDown = useCallback(
+    (event) => {
+      setClicking(true);
+      seek(event);
 
-    event.stopPropagation();
-  };
+      event.stopPropagation();
+    },
+    [seek]
+  );
 
-  onMouseUp = () => {
-    this.setState({ clicking: false });
-  };
+  const onMouseUp = useCallback(() => {
+    setClicking(false);
+  }, []);
 
-  onMouseMove = (event) => {
-    if (!this.state.clicking)
-      return;
+  const onMouseMove = useCallback(
+    (event) => {
+      if (!clicking)
+        return;
 
-    this.seek(event);
+      seek(event);
 
-    event.stopPropagation();
-  };
+      event.stopPropagation();
+    },
+    [seek, clicking]
+  );
 
-  seek = (event) => {
-    const x = event.clientX || (event.touches ? event.touches[0].clientX : 0);
+  const percent = (100 * context.time) / length;
 
-    const bbox = this.track.current.getBoundingClientRect();
-    const time = Math.floor((this.props.length * (x - bbox.left)) / bbox.width);
+  useEffect(() => {
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('touchmove', onMouseMove);
+    window.addEventListener('touchcancel', onMouseUp);
+    window.addEventListener('touchend', onMouseUp);
 
-    this.context.changeTime(time);
-  };
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('touchmove', onMouseMove);
+      window.removeEventListener('touchcancel', onMouseUp);
+      window.removeEventListener('touchend', onMouseUp);
+    };
+  }, [onMouseMove, onMouseUp]);
 
-  render() {
-    const percent = (100 * this.context.time) / this.props.length;
-
-    return (
-      <div className='rail_container'>
-        <div
-          className='rail'
-          tabIndex={0}
-          onTouchStart={this.onMouseDown}
-          onMouseDown={this.onMouseDown}
-          ref={this.track}
-        >
-          <div
-            className='rail_marker'
-            style={{ right: 100 - percent + '%' }}
-          />
-        </div>
-        <div className='keyframe_markers' />
+  return (
+    <div className="rail_container">
+      <div
+        className="rail"
+        tabIndex={0}
+        onTouchStart={onMouseDown}
+        onMouseDown={onMouseDown}
+        ref={track}
+      >
+        <div className="rail_marker" style={{ right: 100 - percent + '%' }} />
       </div>
-    );
-  }
-}
-Rail.contextType = AppContext;
-Rail = connect((state) => ({
+      <div className="keyframe_markers" />
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({
   length: state.length
-}))(Rail);
+});
+
+Rail = connect(mapStateToProps)(Rail);
+
+export { Rail };

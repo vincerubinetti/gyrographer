@@ -1,165 +1,184 @@
 import React from 'react';
-import { Component } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useRef } from 'react';
 import { connect } from 'react-redux';
 
 import { AppContext } from './app-context.js';
 import { Graph } from './graph/graph.js';
 import { Orb } from './util/orb.js';
-import { TopPanel } from './top-panel/top-panel.js';
-import { SidePanel } from './side-panel/side-panel.js';
-import { BottomPanel } from './bottom-panel/bottom-panel.js';
-import { undo } from './state/undoer.js';
-import { redo } from './state/undoer.js';
+import TopPanel from './top-panel';
+import SidePanel from './side-panel';
+import BottomPanel from './bottom-panel';
+import { undo } from './actions/undoer.js';
+import { redo } from './actions/undoer.js';
 
 import './app.css';
 
-export class App extends Component {
-  constructor() {
-    super();
+let App = ({ past, future, orbs, fps, length, loop, speed, undo, redo }) => {
+  const [time, setTime] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [orbTree, setOrbTree] = useState([]);
+  const timer = useRef();
 
-    this.state = {};
-
-    this.state.time = 0;
-    this.state.playing = false;
-    this.state.playTimer = null;
-    this.state.orbTree = [];
-
-    window.addEventListener('keydown', this.onKeyDown);
-  }
-
-  componentDidMount() {
-    this.setState({ orbTree: Orb.buildTree(this.props.orbs) });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.orbs !== prevProps.orbs)
-      this.setState({ orbTree: Orb.buildTree(this.props.orbs) });
-  }
-
-  incrementTime = (multiplier) => {
-    const increment = this.props.speed * (multiplier || 1);
-
-    this.changeTime(
-      Math.round((this.state.time + increment) / increment) * increment
-    );
-  };
-
-  decrementTime = (multiplier) => {
-    const increment = -this.props.speed * (multiplier || 1);
-
-    this.changeTime(
-      Math.round((this.state.time + increment) / increment) * increment
-    );
-  };
-
-  changePlaying = (play) => {
-    const newState = {};
-
-    if (play) {
-      newState.playTimer = window.setInterval(
-        this.incrementTime,
-        Math.floor(1000 / this.props.fps)
-      );
-      newState.playing = true;
-    } else {
-      window.clearInterval(this.state.playTimer);
-      newState.playTimer = null;
-      newState.playing = false;
-    }
-
-    if (play && !this.state.playing && this.state.time >= this.props.length)
-      newState.time = 0;
-
-    this.setState(newState);
-  };
-
-  changeTime = (time) => {
-    if (time < 0) {
-      if (this.props.loop)
-        time = (time % this.props.length) + this.props.length;
+  const changePlaying = useCallback(
+    (newPlaying) => {
+      if (newPlaying)
+        setPlaying(true);
       else
-        time = 0;
-    }
-    if (time > this.props.length) {
-      if (this.props.loop)
-        time = time % this.props.length;
-      else {
-        time = this.props.length;
-        this.changePlaying(false);
+        setPlaying(false);
+
+      if (newPlaying && time >= length)
+        setTime(0);
+    },
+    [time, length]
+  );
+
+  const changeTime = useCallback(
+    (newTime) => {
+      if (newTime < 0) {
+        if (loop)
+          newTime = (newTime % length) + length;
+        else
+          newTime = 0;
       }
-    }
-    this.setState({ time: time });
-  };
+      if (newTime > length) {
+        if (loop)
+          newTime = newTime % length;
+        else {
+          newTime = length;
+          changePlaying(false);
+        }
+      }
+      setTime(newTime);
+    },
+    [length, loop, changePlaying]
+  );
 
-  onKeyDown = (event) => {
-    event.preventDefault();
+  const incrementTime = useCallback(
+    (multiplier) => {
+      const increment = speed * (multiplier || 1);
 
-    let multiplier = 1;
-    if (event.shiftKey)
-      multiplier = 10;
-    else if (event.ctrlKey)
-      multiplier = 0.1;
+      changeTime(Math.round((time + increment) / increment) * increment);
+    },
+    [speed, time, changeTime]
+  );
 
-    switch (event.key) {
-      case ' ':
-        this.changePlaying(!this.state.playing);
-        break;
+  const decrementTime = useCallback(
+    (multiplier) => {
+      const increment = -speed * (multiplier || 1);
 
-      case 'ArrowLeft':
-        this.decrementTime(multiplier);
-        break;
+      changeTime(Math.round((time + increment) / increment) * increment);
+    },
+    [speed, time, changeTime]
+  );
 
-      case 'ArrowRight':
-        this.incrementTime(multiplier);
-        break;
+  const onKeyDown = useCallback(
+    (event) => {
+      let multiplier = 1;
+      if (event.shiftKey)
+        multiplier = 10;
+      else if (event.ctrlKey)
+        multiplier = 0.1;
 
-      case 'Home':
-        this.changeTime(0);
-        break;
+      switch (event.key) {
+        case ' ':
+          changePlaying(!playing);
+          event.preventDefault();
+          break;
 
-      case 'End':
-        event.preventDefault();
+        case 'ArrowLeft':
+          decrementTime(multiplier);
+          event.preventDefault();
+          break;
 
-        this.changeTime(this.props.length);
-        break;
+        case 'ArrowRight':
+          incrementTime(multiplier);
+          event.preventDefault();
+          break;
 
-      case 'z':
-        if (event.ctrlKey && this.props.past.length)
-          this.props.dispatch(undo());
-        break;
+        case 'Home':
+          changeTime(0);
+          event.preventDefault();
+          break;
 
-      case 'y':
-        if (event.ctrlKey && this.props.future.length)
-          this.props.dispatch(redo());
-        break;
+        case 'End':
+          changeTime(length);
+          event.preventDefault();
+          break;
 
-      default:
-        break;
-    }
-  };
+        case 'z':
+          if (event.ctrlKey && past.length) {
+            undo();
+            event.preventDefault();
+          }
+          break;
 
-  render() {
-    return (
-      <AppContext.Provider
-        value={{
-          orbTree: this.state.orbTree,
-          changeTime: this.changeTime,
-          changePlaying: this.changePlaying,
-          playing: this.state.playing,
-          time: this.state.time,
-          incrementTime: this.incrementTime,
-          decrementTime: this.decrementTime
-        }}
-      >
-        <Graph />
-        <TopPanel />
-        <SidePanel />
-        <BottomPanel />
-      </AppContext.Provider>
-    );
-  }
-}
-App = connect((state) => ({
+        case 'y':
+          if (event.ctrlKey && future.length) {
+            redo();
+            event.preventDefault();
+          }
+          break;
+
+        default:
+          break;
+      }
+    },
+    [
+      playing,
+      length,
+      past,
+      future,
+      undo,
+      redo,
+      changePlaying,
+      changeTime,
+      decrementTime,
+      incrementTime
+    ]
+  );
+
+  useEffect(() => {
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [onKeyDown]);
+
+  useEffect(() => {
+    setOrbTree(Orb.buildTree(orbs));
+  }, [orbs]);
+
+  useEffect(() => {
+    if (playing)
+      timer.current = window.setInterval(incrementTime, Math.floor(1000 / fps));
+    else
+      window.clearInterval(timer.current);
+
+    return () => window.clearInterval(timer.current);
+  }, [playing, incrementTime, fps]);
+
+  return (
+    <AppContext.Provider
+      value={{
+        orbTree: orbTree,
+        changeTime: changeTime,
+        changePlaying: changePlaying,
+        playing: playing,
+        time: time,
+        incrementTime: incrementTime,
+        decrementTime: decrementTime
+      }}
+    >
+      {/* <Graph /> */}
+      <TopPanel />
+      <SidePanel />
+      <BottomPanel />
+    </AppContext.Provider>
+  );
+};
+
+const mapStateToProps = (state) => ({
   past: state.past,
   future: state.future,
   orbs: state.orbs,
@@ -167,4 +186,13 @@ App = connect((state) => ({
   length: state.length,
   loop: state.loop,
   speed: state.speed
-}))(App);
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  undo: () => dispatch(undo()),
+  redo: () => dispatch(redo())
+});
+
+App = connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default App;

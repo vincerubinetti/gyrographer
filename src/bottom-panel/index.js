@@ -1,5 +1,4 @@
 import React from 'react';
-import { Component } from 'react';
 
 import { PlayButton } from './play-button.js';
 import { LoopButton } from './loop-button.js';
@@ -11,22 +10,20 @@ import { ForwardButton } from './forward-button.js';
 import { EndButton } from './end-button.js';
 import { Rail } from './rail.js';
 
-import './bottom-panel.css';
+import './index.css';
 
-export class BottomPanel extends Component {
-  render() {
-    return (
-      <div className="bottom_panel">
-        <PlayButton />
-        <LoopButton />
-        <SpeedButton />
-        <Timecode />
-        <StartButton />
-        <BackButton />
-        <Rail />
-        <ForwardButton />
-        <EndButton />
-      </div>
-    );
-  }
-}
+const BottomPanel = () => (
+  <div className="bottom_panel">
+    <PlayButton />
+    <LoopButton />
+    <SpeedButton />
+    <Timecode />
+    <StartButton />
+    <BackButton />
+    <Rail />
+    <ForwardButton />
+    <EndButton />
+  </div>
+);
+
+export default BottomPanel;

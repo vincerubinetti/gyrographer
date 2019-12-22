@@ -1,6 +1,8 @@
 import { copyObject } from '../util/object.js';
 import { filterObject } from '../util/object.js';
 
+import testSaveFile from '../test-save-file.json';
+
 const key = 'root';
 
 // for testing, clear storage on every page reload
@@ -28,7 +30,8 @@ export function getInitialState() {
       console.log(error);
     }
   }
-  console.groupCollapsed('load_state_from_storage');
+  results = testSaveFile;
+  console.groupCollapsed('LOAD_STATE_FROM_STORAGE');
   console.log(results);
   console.groupEnd();
   return results;

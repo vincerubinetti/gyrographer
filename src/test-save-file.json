@@ -1,0 +1,42 @@
+{
+  "orbs": {
+    "1": {
+      "spin": 3,
+      "radius": 500,
+      "fillColor": "#ffffff10",
+      "strokeColor": "#ffffff20",
+      "showPath": false,
+      "showArrow": true,
+      "showWheel": true
+    },
+    "2": {
+      "spin": 10,
+      "radius": 200,
+      "parentId": "1",
+      "fillColor": "#ffffff10",
+      "strokeColor": "#ffffff20",
+      "showPath": false,
+      "showArrow": true,
+      "showWheel": true
+    },
+    "3": {
+      "spin": -1,
+      "radius": 75,
+      "parentId": "2",
+      "stepSize": 0.1,
+      "fillColor": "#ffffff10",
+      "strokeColor": "#ffffff20",
+      "showPath": false,
+      "showArrow": true,
+      "showWheel": true
+    },
+    "4": {
+      "spin": -1,
+      "radius": 75,
+      "parentId": "2",
+      "stepSize": 0.1,
+      "strokeColor": "#ffffffff",
+      "showPath": true
+    }
+  }
+}

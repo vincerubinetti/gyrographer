@@ -1,27 +1,29 @@
 import React from 'react';
-import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { AppContext } from '../app-context.js';
 import { Button } from '../components/button.js';
 import { ReactComponent as Bounds } from '../images/bounds.svg';
-import { toggleBounds } from '../state/actions.js';
+import { toggleBounds } from '../actions/actions.js';
 
-export class BoundsButton extends Component {
-  render() {
-    return (
-      <Button
-        className="top_button"
-        onClick={() => this.props.dispatch(toggleBounds())}
-        color={this.props.showBounds ? 'blue' : 'gray'}
-        tooltip={this.props.showBounds ? "Don't show bounds" : 'Show bounds'}
-      >
-        <Bounds />
-      </Button>
-    );
-  }
-}
-BoundsButton.contextType = AppContext;
-BoundsButton = connect((state) => ({
+let BoundsButton = ({ showBounds, toggleBounds }) => (
+  <Button
+    className="top_button"
+    onClick={toggleBounds}
+    color={showBounds ? 'blue' : 'gray'}
+    tooltip={showBounds ? "Don't show bounds" : 'Show bounds'}
+  >
+    <Bounds />
+  </Button>
+);
+
+const mapStateToProps = (state) => ({
   showBounds: state.showBounds
-}))(BoundsButton);
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleBounds: () => dispatch(toggleBounds())
+});
+
+BoundsButton = connect(mapStateToProps, mapDispatchToProps)(BoundsButton);
+
+export { BoundsButton };

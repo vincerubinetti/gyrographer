@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { AppContext } from '../app-context.js';
 import { Button } from '../components/button.js';
 import { ReactComponent as Edit } from '../images/edit.svg';
-import { toggleEdit } from '../state/actions.js';
+import { toggleEdit } from '../actions/actions.js';
 
 export class EditButton extends Component {
   render() {

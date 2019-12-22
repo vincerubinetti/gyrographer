@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import * as d3 from "d3";
 
 import { AppContext } from '../app-context.js';
 import { Vector } from '../util/math.js';
