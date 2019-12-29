@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { AppContext } from '../app-context.js';
+import { TimeContext } from '../time.js';
 import { Vector } from '../util/math.js';
 import './wheel.css';
 
@@ -41,7 +41,7 @@ export class Wheel extends Component {
     );
   }
 }
-Wheel.contextType = AppContext;
+Wheel.contextType = TimeContext;
 Wheel = connect((state) => ({
   edit: state.edit,
   backgroundColor: state.backgroundColor

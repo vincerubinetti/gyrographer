@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { AppContext } from '../app-context.js';
+import { TimeContext } from '../time.js';
 import { Vector } from '../util/math.js';
 import { Color } from '../util/color.js';
 import './arrow.css';
@@ -88,7 +88,7 @@ export class Arrow extends Component {
     );
   }
 }
-Arrow.contextType = AppContext;
+Arrow.contextType = TimeContext;
 Arrow = connect((state) => ({
   edit: state.edit,
   backgroundColor: state.backgroundColor

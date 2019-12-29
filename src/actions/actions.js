@@ -1,13 +1,13 @@
 import { createAction } from '.';
 
-export const toggleEdit = createAction('TOGGLE_EDIT', 'Toggle edit mode');
+export const toggleEdit = createAction('TOGGLE_EDIT', 'toggle edit mode');
 
-export const toggleBounds = createAction('TOGGLE_BOUNDS', 'Toggle show bounds');
+export const toggleBounds = createAction('TOGGLE_BOUNDS', 'toggle show bounds');
 
-export const toggleAxes = createAction('TOGGLE_AXES', 'Toggle show axes');
+export const toggleAxes = createAction('TOGGLE_AXES', 'toggle show axes');
 
-export const toggleGrid = createAction('TOGGLE_GRID', 'Toggle show grid');
+export const toggleGrid = createAction('TOGGLE_GRID', 'toggle show grid');
 
-export const toggleLoop = createAction('TOGGLE_LOOP', 'Toggle loop');
+export const toggleLoop = createAction('TOGGLE_LOOP', 'toggle loop');
 
-export const setSpeed = createAction('SET_SPEED', 'Set preview sped');
+export const setSpeed = createAction('SET_SPEED', 'set preview speed');

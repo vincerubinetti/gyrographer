@@ -11,6 +11,7 @@ let BoundsButton = ({ showBounds, toggleBounds }) => (
     onClick={toggleBounds}
     color={showBounds ? 'blue' : 'gray'}
     tooltip={showBounds ? "Don't show bounds" : 'Show bounds'}
+    tooltipVerticalAlign="bottom"
   >
     <Bounds />
   </Button>

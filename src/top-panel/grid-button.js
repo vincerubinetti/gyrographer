@@ -11,6 +11,7 @@ let GridButton = ({ showGrid, toggleGrid }) => (
     onClick={toggleGrid}
     color={showGrid ? 'blue' : 'gray'}
     tooltip={showGrid ? "Don't show grid" : 'Show grid'}
+    tooltipVerticalAlign="bottom"
   >
     <Grid />
   </Button>

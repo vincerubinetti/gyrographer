@@ -2,7 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { AppContext } from '../app-context.js';
+import { TimeContext } from '../time.js';
 import './path.css';
 
 const precision = 2;
@@ -53,7 +53,7 @@ export class Path extends Component {
     );
   }
 }
-Path.contextType = AppContext;
+Path.contextType = TimeContext;
 Path = connect((state) => ({
   edit: state.edit
 }))(Path);

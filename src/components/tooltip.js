@@ -1,144 +1,167 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Component } from 'react';
+import { Children } from 'react';
+import { isValidElement } from 'react';
+import { cloneElement } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 import './tooltip.css';
 
-const delay = 500;
+const delay = 250;
+const padding = 5;
 
-export class Tooltip extends Component {
-  constructor() {
-    super();
+const Tooltip = ({
+  children,
+  text = '',
+  horizontalAlign = 'center',
+  verticalAlign = 'top'
+}) => {
+  const [hover, setHover] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [timer, setTimer] = useState(null);
+  const [anchor, setAnchor] = useState(null);
+  const [style, setStyle] = useState({});
 
-    this.state = {};
-    this.state.open = false;
-    this.state.x = 0;
-    this.state.y = 0;
-    this.state.opacity = 0;
-  }
-
-  onMouseEnter = (event) => {
-    const target = event.currentTarget;
-    window.setTimeout(() => this.openTooltip(target), delay);
-    this.setState({ hover: true });
+  const onEnter = (event) => {
+    setAnchor(event.currentTarget);
+    setHover(true);
+  };
+  const onLeave = () => {
+    setAnchor(null);
+    setHover(false);
   };
 
-  openTooltip = (target) => {
-    if (!this.state.hover || !target) {
-      this.setState({ open: false });
-      return;
-    }
+  useEffect(() => {
+    if (hover) {
+      setTimer(
+        window.setTimeout(() => {
+          setOpen(true);
+        }, delay)
+      );
+    } else
+      setTimer(null);
+  }, [hover]);
 
-    const left = target.getBoundingClientRect().left + window.scrollX;
-    const top = target.getBoundingClientRect().top + window.scrollY;
-    const right = target.getBoundingClientRect().right + window.scrollX;
-    const bottom = target.getBoundingClientRect().bottom + window.scrollY;
+  useEffect(() => {
+    if (open && !hover)
+      setOpen(false);
+  }, [open, hover]);
 
-    this.setState({
-      open: true,
-      left: left,
-      top: top,
-      right: right,
-      bottom: bottom
-    });
+  useEffect(() => {
+    if (timer === null)
+      window.clearTimeout(timer);
+
+    return () => window.clearTimeout(timer);
+  }, [timer]);
+
+  useEffect(() => {
+    if (anchor)
+      setStyle(computeStyle({ anchor, horizontalAlign, verticalAlign }));
+  }, [anchor, horizontalAlign, verticalAlign]);
+
+  children = Children.map(children, (element) => {
+    if (isValidElement(element)) {
+      return cloneElement(element, {
+        'onMouseEnter': (...args) => {
+          if (element.onMouseEnter)
+            element.onMouseEnter(...args);
+          onEnter(...args);
+        },
+        'onMouseLeave': (...args) => {
+          if (element.onMouseLeave)
+            element.onMouseLeave(...args);
+          onLeave(...args);
+        },
+        'onFocus': (...args) => {
+          if (element.onFocus)
+            element.onFocus(...args);
+          onEnter(...args);
+        },
+        'onBlur': (...args) => {
+          if (element.onBlur)
+            element.onBlur(...args);
+          onLeave(...args);
+        },
+        'aria-label': text
+      });
+    } else if (typeof element === 'string') {
+      return (
+        <span
+          onMouseEnter={onEnter}
+          onMouseLeave={onLeave}
+          onFocus={onEnter}
+          onBlur={onLeave}
+        >
+          {element}
+        </span>
+      );
+    } else
+      return element;
+  });
+
+  return (
+    <>
+      {children}
+      {open && <Portal text={text} style={style} />}
+    </>
+  );
+};
+
+export { Tooltip };
+
+const Portal = ({ text, style }) => {
+  return createPortal(
+    <div className="tooltip text_small" style={style}>
+      {text}
+    </div>,
+    document.body
+  );
+};
+
+const computeStyle = ({ anchor, horizontalAlign, verticalAlign }) => {
+  const anchorBbox = anchor.getBoundingClientRect();
+  const bodyBbox = document.body.getBoundingClientRect();
+  const bbox = {
+    left: anchorBbox.left - bodyBbox.left,
+    top: anchorBbox.top - bodyBbox.top,
+    right: bodyBbox.right - (anchorBbox.left + anchorBbox.width),
+    bottom: bodyBbox.bottom - (anchorBbox.top + anchorBbox.height),
+    width: anchorBbox.width,
+    height: anchorBbox.height
   };
+  const style = {};
 
-  onMouseLeave = () => {
-    this.setState({ hover: false, open: false });
-  };
+  switch (horizontalAlign) {
+    case 'center':
+      style.left = bbox.left + bbox.width / 2 + 'px';
+      style.transform = 'translateX(-50%)';
+      break;
 
-  render() {
-    if (!this.props.text)
-      return <>{this.props.children}</>;
+    case 'left':
+      style.left = bbox.left + 'px';
+      break;
 
-    const props = {
-      onMouseEnter: this.onMouseEnter,
-      onMouseLeave: this.onMouseLeave
-    };
+    case 'right':
+      style.right = bbox.right + 'px';
+      break;
 
-    const children = React.Children.map(this.props.children, (element) => {
-      if (React.isValidElement(element))
-        return React.cloneElement(element, props);
-      else if (typeof element === 'string')
-        return <span {...props}>{element}</span>;
-      else
-        return element;
-    });
-
-    return (
-      <>
-        {children}
-        {this.state.open && (
-          <Popup
-            text={this.props.text}
-            open={this.state.open}
-            left={this.state.left}
-            top={this.state.top}
-            right={this.state.right}
-            bottom={this.state.bottom}
-          />
-        )}
-      </>
-    );
-  }
-}
-
-class Popup extends Component {
-  constructor() {
-    super();
-
-    this.ref = React.createRef();
-
-    this.state = {};
-    this.state.width = 0;
-    this.state.height = 0;
+    default:
+      break;
   }
 
-  componentDidMount() {
-    this.getDimensions();
+  switch (verticalAlign) {
+    case 'top':
+      style.bottom = bbox.bottom + bbox.height + padding + 'px';
+      break;
+
+    case 'bottom':
+      style.top = bbox.top + bbox.height + padding + 'px';
+      break;
+
+    default:
+      break;
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.text !== prevProps.text)
-      this.getDimensions();
-  }
-
-  getDimensions = () => {
-    const width = this.ref.current.getBoundingClientRect().width;
-    const height = this.ref.current.getBoundingClientRect().height;
-    this.setState({ width: width, height: height });
-  };
-
-  render() {
-    let left = (this.props.left + this.props.right) / 2;
-    let top = this.props.top;
-
-    left -= this.state.width / 2;
-    top -= this.state.height;
-    top -= 5;
-
-    if (left < 0)
-      left = 0;
-    if (left + this.state.width > window.innerWidth)
-      left = this.props.right - this.state.width;
-
-    if (top <= 0) {
-      top = this.props.bottom;
-      top += 5;
-    }
-
-    return ReactDOM.createPortal(
-      <div
-        ref={this.ref}
-        className='tooltip'
-        style={{
-          left: left + 'px',
-          top: top + 'px'
-        }}
-      >
-        {this.props.text}
-      </div>,
-      document.body
-    );
-  }
-}
+  return style;
+};

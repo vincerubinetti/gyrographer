@@ -154,7 +154,7 @@ export const right = (state, meta, type, payload) => {
   }
 
   if (typeof state.right !== 'number')
-    state.right = -1000;
+    state.right = 1000;
   if (state.right < -10000)
     state.right = -10000;
   if (state.right > 10000)
@@ -172,7 +172,7 @@ export const bottom = (state, meta, type, payload) => {
   }
 
   if (typeof state.bottom !== 'number')
-    state.bottom = -1000;
+    state.bottom = 1000;
   if (state.bottom < -10000)
     state.bottom = -10000;
   if (state.bottom > 10000)

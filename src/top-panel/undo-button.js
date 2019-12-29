@@ -29,6 +29,7 @@ let UndoButton = ({ past, actionDescription, undo }) => {
       }}
       color={past.length ? 'white' : 'gray'}
       tooltip={<>{tooltip}</>}
+      tooltipVerticalAlign="bottom"
     >
       <Undo />
     </Button>

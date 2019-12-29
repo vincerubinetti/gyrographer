@@ -6,13 +6,13 @@ import { useCallback } from 'react';
 import { useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { AppContext } from '../app-context.js';
+import { TimeContext } from '../time.js';
 import './rail.css';
 
 let Rail = ({ length }) => {
   const [clicking, setClicking] = useState(false);
   const track = useRef();
-  const context = useContext(AppContext);
+  const context = useContext(TimeContext);
 
   const seek = useCallback(
     (event) => {

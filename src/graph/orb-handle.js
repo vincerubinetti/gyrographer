@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from "d3";
 
-import { AppContext } from '../app-context.js';
+import { TimeContext } from '../time.js';
 import { Vector } from '../util/math.js';
 import { Color } from '../util/color.js';
 import './orb-handle.css';
@@ -50,7 +50,7 @@ export class OrbHandle extends Component {
     );
   }
 }
-OrbHandle.contextType = AppContext;
+OrbHandle.contextType = TimeContext;
 OrbHandle = connect((state) => ({
   edit: state.edit,
   backgroundColor: state.backgroundColor

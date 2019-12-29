@@ -1,5 +1,4 @@
 import React from 'react';
-import { useCallback } from 'react';
 
 import { Tooltip } from './tooltip.js';
 
@@ -8,12 +7,18 @@ import './button.css';
 export const Button = ({
   className,
   tooltip,
+  tooltipHorizontalAlign,
+  tooltipVerticalAlign,
   color,
   onClick,
   onCtrlClick,
   children
 }) => (
-  <Tooltip text={tooltip || ''}>
+  <Tooltip
+    text={tooltip || ''}
+    horizontalAlign={tooltipHorizontalAlign}
+    verticalAlign={tooltipVerticalAlign}
+  >
     <button
       className={'button ' + className}
       onClick={(event) => {

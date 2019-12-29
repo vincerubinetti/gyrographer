@@ -2,11 +2,11 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { AppContext } from '../app-context.js';
+import { TimeContext } from '../time.js';
 import './timecode.css';
 
 let Timecode = ({ fps }) => {
-  const context = useContext(AppContext);
+  const context = useContext(TimeContext);
 
   const seconds = String(Math.floor(context.time / fps)).padStart(2, '0');
   const frames = String((context.time % fps).toFixed(2)).padStart(5, '0');
