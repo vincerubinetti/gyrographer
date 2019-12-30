@@ -47,15 +47,8 @@ let Graph = ({
     <OrbHandle key={index} orb={orb} />
   ));
 
-  const viewbox = `${left} ${top} ${right - left} ${bottom - top}`;
-
   return (
-    <svg
-      ref={svg}
-      id="graph"
-      viewBox={viewbox}
-      style={{ background: backgroundColor }}
-    >
+    <svg ref={svg} id="graph" style={{ background: backgroundColor }}>
       <g id="view" ref={view}>
         <g
           id="board"

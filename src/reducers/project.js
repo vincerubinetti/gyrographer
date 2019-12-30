@@ -1,20 +1,24 @@
 export const project = (state, meta, type, payload) => {
   state = { ...state };
 
-  edit(state, meta, type, payload);
-  loop(state, meta, type, payload);
-  showBounds(state, meta, type, payload);
-  showAxes(state, meta, type, payload);
-  showGrid(state, meta, type, payload);
-  speed(state, meta, type, payload);
-  left(state, meta, type, payload);
-  top(state, meta, type, payload);
-  right(state, meta, type, payload);
-  bottom(state, meta, type, payload);
-  backgroundColor(state, meta, type, payload);
-  guideColor(state, meta, type, payload);
-  fps(state, meta, type, payload);
-  length(state, meta, type, payload);
+  const reducers = [
+    edit,
+    loop,
+    showBounds,
+    showAxes,
+    showGrid,
+    speed,
+    left,
+    top,
+    right,
+    bottom,
+    backgroundColor,
+    guideColor,
+    fps,
+    length
+  ];
+
+  reducers.forEach((reducer) => reducer(state, meta, type, payload));
 
   return state;
 };

@@ -4,6 +4,8 @@ import * as d3 from 'd3';
 
 const minZoom = 0.01;
 const maxZoom = 100;
+const hPadding = 10 * 2;
+const vPadding = 70 * 2;
 
 export const usePanZoom = () => {
   const svgRef = useRef();
@@ -23,7 +25,7 @@ export const usePanZoom = () => {
       .on('zoom', onViewChange);
 
     const onDblClick = () => {
-      const container = svg.node().getBoundingClientRect();
+      const container = svgRef.current.getBoundingClientRect();
       const contents = view.node().getBBox();
 
       contents.midX = contents.x + contents.width / 2;
@@ -34,8 +36,8 @@ export const usePanZoom = () => {
         scale =
           1 /
           Math.max(
-            contents.width / container.width,
-            contents.height / container.height
+            contents.width / (container.width - hPadding),
+            contents.height / (container.height - vPadding)
           );
       }
       const translateX = container.width / 2 - scale * contents.midX;
@@ -50,6 +52,8 @@ export const usePanZoom = () => {
     svg.call(viewHandler);
     svg.on('dblclick.zoom', null);
     svg.on('dblclick', onDblClick);
+
+    onDblClick();
   }, []);
 
   return [svgRef, viewRef];
