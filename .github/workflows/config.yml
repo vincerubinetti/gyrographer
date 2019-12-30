@@ -1,0 +1,25 @@
+name: gh-pages CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v1
+      - name: set up node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: install and build
+        run: |
+          yarn install
+          npm run build
+      - name: deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
