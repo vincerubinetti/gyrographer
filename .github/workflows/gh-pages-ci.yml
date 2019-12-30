@@ -1,4 +1,4 @@
-name: gh-pages CI
+name: gh-pages-ci
 
 on: [push]
 
