@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <path
+    fill="currentColor"
+    d="
+      M 0 0
+      h 60
+      v 10
+      h -50
+      v 50
+      h -10
+      M 20 20
+      h 60
+      v 10
+      h -50
+      v 50
+      h -10
+      M 40 40
+      h 60
+      v 60
+      h -60
+    "
+  />
+</svg>
