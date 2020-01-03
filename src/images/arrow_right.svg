@@ -2,7 +2,9 @@
   <path
     fill="none"
     stroke="currentColor"
-    stroke-width="20"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
     d="
       M 35 15
       L 70 50

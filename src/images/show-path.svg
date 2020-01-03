@@ -2,10 +2,11 @@
   <path
     fill="none"
     stroke="currentColor"
-    stroke-width="15"
+    stroke-width="10"
+    stroke-linecap="round"
     d="
-      M 10 100
-      C 10 25 90 75 90 0
+      M 20 90
+      C 20 40 80 60 80 10
     "
   />
 </svg>

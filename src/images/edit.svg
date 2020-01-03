@@ -1,23 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <path
-    fill-rule="evenodd"
-    d="
-      M 100 50
-      A 50 50 0 0 0 0 50
-      A 50 50 0 0 0 100 50
-      M 20 42.5
-      L 20 57.5
-      L 42.5 57.5
-      L 42.5 80
-      L 57.5 80
-      L 57.5 57.5
-      L 80 57.5
-      L 80 42.5
-      L 57.5 42.5
-      L 57.5 20
-      L 42.5 20
-      L 42.5 42.5
-    "
     fill="currentColor"
+    d="
+    "
   />
 </svg>

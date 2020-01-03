@@ -11,10 +11,12 @@
     fill="none"
     stroke="currentColor"
     stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
     d="
-      M 50 20
+      M 50 25
       L 50 50
-      L 70 60
+      L 65 60
     "
   />
 </svg>

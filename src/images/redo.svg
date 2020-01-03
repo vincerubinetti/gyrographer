@@ -2,18 +2,16 @@
   <path
     fill="none"
     stroke="currentColor"
-    stroke-width="20"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
     d="
-      M 50 90
-      A 40 40 0 1 1 78.3 21.7
-    "
-  />
-  <path
-    fill="currentColor"
-    d="
-      M 95 0
-      L 100 45
-      L 55 40
+      M 45 85
+      A 35 35 0 1 1 80 50
+      L 80 60
+      M 65 45
+      L 80 60
+      L 95 45
     "
   />
 </svg>
