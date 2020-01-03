@@ -7,7 +7,7 @@ import { toggleLoop } from '../actions/actions.js';
 
 let LoopButton = ({ loop, toggleLoop }) => (
   <Button
-    className="time_button"
+    className=""
     onClick={toggleLoop}
     color={loop ? 'blue' : 'gray'}
     tooltip={loop ? "Don't loop" : 'Loop'}

@@ -1,3 +1,6 @@
+#grid[data-show='false'] {
+  opacity: 0;
+}
 #minor_horizontal_lines,
 #minor_vertical_lines {
   stroke-width: 0.25;

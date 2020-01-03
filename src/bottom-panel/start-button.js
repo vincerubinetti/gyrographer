@@ -10,7 +10,7 @@ export const StartButton = () => {
 
   return (
     <Button
-      className="time_button_half"
+      className="thin_button"
       onClick={() => context.changeTime(0)}
       tooltip="To start"
       tooltipHorizontalAlign="left"

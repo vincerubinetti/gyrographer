@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button.js';
-import { ReactComponent as Axes } from '../images/axes.svg';
+import { ReactComponent as Eye } from '../images/eye.svg';
 import { toggleAxes } from '../actions/actions.js';
 
 let AxesButton = ({ showAxes, toggleAxes }) => (
   <Button
-    className="top_button"
+    className=""
     onClick={toggleAxes}
     color={showAxes ? 'blue' : 'gray'}
     tooltip={showAxes ? "Don't show axes" : 'Show axes'}
     tooltipVerticalAlign="bottom"
   >
-    <Axes />
+    <Eye />
   </Button>
 );
 

@@ -22,7 +22,7 @@ let RedoButton = ({ future, actionDescription, redo }) => {
 
   return (
     <Button
-      className="top_button"
+      className=""
       onClick={() => {
         if (future.length)
           redo();

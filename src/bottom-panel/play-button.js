@@ -11,7 +11,7 @@ export const PlayButton = () => {
 
   return (
     <Button
-      className="time_button"
+      className=""
       onClick={() => context.changePlaying(!context.playing)}
       color={context.playing ? 'blue' : 'white'}
       tooltip={context.playing ? 'Pause' : 'Play'}

@@ -7,7 +7,7 @@ import { toggleEdit } from '../actions/actions.js';
 
 let EditButton = ({ edit, toggleEdit }) => (
   <Button
-    className="top_button"
+    className=""
     onClick={toggleEdit}
     color={edit ? 'blue' : 'gray'}
     tooltip={edit ? 'Turn off edit mode' : 'Turn on edit mode'}

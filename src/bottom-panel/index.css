@@ -3,6 +3,7 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
   position: fixed;
   background: var(--black);
   left: 0;
@@ -11,33 +12,4 @@
   border-top: solid 2px var(--dark-gray);
   user-select: none;
   z-index: 1;
-}
-.time_button {
-  box-sizing: border-box;
-  width: 60px;
-  height: 60px;
-}
-.time_button_half {
-  width: 30px;
-  height: 60px;
-}
-.time_button > svg {
-  height: 33%;
-}
-.time_button_half > svg {
-  height: 33%;
-}
-
-@media (max-width: 640px) {
-  .bottom_panel {
-    flex-wrap: wrap;
-  }
-  .time_button {
-    width: 40px;
-    height: 40px;
-  }
-  .time_button_half {
-    height: 40px;
-    width: 30px;
-  }
 }

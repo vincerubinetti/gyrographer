@@ -1,46 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { Project } from './project.js';
+import { Orb } from './orb.js';
 
 import './index.css';
 
-const SidePanel = () => (
-  <div className="side_panel">
-    showPath
-    <br />
-    showStick
-    <br />
-    showWheel
-    <br />
-    from
-    <br />
-    to
-    <br />
-    stepSize
-    <br />
-    radius
-    <br />
-    spin
-    <br />
-    offset
-    <br />
-    fillColor
-    <br />
-    strokeColor
-    <br />
-    strokeWidth
-    <br />
-    close
-    <br />
-    dashArray
-    <br />
-    dashOffset
-    <br />
-    strokeLineCap
-    <br />
-    strokeLineJoin
-    <br />
-    order
-    <br />
+let SidePanel = ({ selectedOrb }) => (
+  <div className='side_panel'>
+    {!selectedOrb && <Project />}
+    {selectedOrb && <Orb />}
   </div>
 );
+
+const mapStateToProps = (state) => ({
+  selectedOrb: state.selectedOrb
+});
+
+SidePanel = connect(mapStateToProps)(SidePanel);
 
 export default SidePanel;

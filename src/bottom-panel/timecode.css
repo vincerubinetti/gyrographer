@@ -5,7 +5,7 @@
   align-items: center;
   padding: 0 10px;
   width: 110px;
-  height: 60px;
+  height: 50px;
   font-size: 0.75em;
 }
 .timecode span {
@@ -15,9 +15,9 @@
   margin-left: 0;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
   .timecode {
-    width: calc(100% - 40px - 40px - 40px);
+    width: calc(100% - 40px * 3);
     height: 40px;
   }
 }

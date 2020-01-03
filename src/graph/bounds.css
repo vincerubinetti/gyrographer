@@ -1,3 +1,6 @@
 #bounds {
   stroke-width: 3;
 }
+#bounds[data-show="false"] {
+  opacity: 0;
+}

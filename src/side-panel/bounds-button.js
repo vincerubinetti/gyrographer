@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button.js';
-import { ReactComponent as Bounds } from '../images/bounds.svg';
+import { ReactComponent as Eye } from '../images/eye.svg';
 import { toggleBounds } from '../actions/actions.js';
 
 let BoundsButton = ({ showBounds, toggleBounds }) => (
   <Button
-    className="top_button"
+    className=""
     onClick={toggleBounds}
     color={showBounds ? 'blue' : 'gray'}
     tooltip={showBounds ? "Don't show bounds" : 'Show bounds'}
     tooltipVerticalAlign="bottom"
   >
-    <Bounds />
+    <Eye />
   </Button>
 );
 

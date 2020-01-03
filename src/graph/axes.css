@@ -1,3 +1,6 @@
 #axes {
   stroke-width: 3;
 }
+#axes[data-show="false"] {
+  opacity: 0;
+}

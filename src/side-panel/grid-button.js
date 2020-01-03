@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button.js';
-import { ReactComponent as Grid } from '../images/grid.svg';
+import { ReactComponent as Eye } from '../images/eye.svg';
 import { toggleGrid } from '../actions/actions.js';
 
 let GridButton = ({ showGrid, toggleGrid }) => (
   <Button
-    className="top_button"
+    className=""
     onClick={toggleGrid}
     color={showGrid ? 'blue' : 'gray'}
     tooltip={showGrid ? "Don't show grid" : 'Show grid'}
     tooltipVerticalAlign="bottom"
   >
-    <Grid />
+    <Eye />
   </Button>
 );
 

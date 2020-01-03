@@ -10,7 +10,7 @@ export const ForwardButton = () => {
 
   return (
     <Button
-      className="time_button_half"
+      className="thin_button"
       onClick={context.incrementTime}
       tooltip="Step forward"
       tooltipHorizontalAlign="right"

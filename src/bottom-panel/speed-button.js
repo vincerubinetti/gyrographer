@@ -23,7 +23,7 @@ let SpeedButton = ({ speed, setSpeed }) => {
 
   return (
     <Button
-      className="time_button"
+      className=""
       onClick={onClick}
       onCtrlClick={onCtrlClick}
       tooltip="Preview speed"

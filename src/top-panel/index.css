@@ -12,26 +12,8 @@
   user-select: none;
   z-index: 1;
 }
-.top_button {
-  box-sizing: border-box;
-  width: 60px;
-  height: 60px;
-}
-.top_button > svg {
-  height: 33%;
-}
 .undo_redo_menu_item {
   width: 100%;
   text-align: left;
   white-space: nowrap;
-}
-
-@media (max-width: 640px) {
-  .top_panel {
-    flex-wrap: wrap;
-  }
-  .top_button {
-    width: 40px;
-    height: 40px;
-  }
 }

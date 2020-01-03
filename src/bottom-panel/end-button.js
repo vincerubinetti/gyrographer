@@ -10,7 +10,7 @@ let EndButton = ({ length }) => {
   const context = useContext(TimeContext);
   return (
     <Button
-      className="time_button_half"
+      className="thin_button"
       onClick={() => context.changeTime(length)}
       tooltip="To end"
       tooltipHorizontalAlign="right"

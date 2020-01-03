@@ -1,0 +1,25 @@
+.side_panel_row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  height: 40px;
+}
+.side_panel_row > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.side_panel_row > *:nth-child(1) {
+  width: 50px;
+}
+.side_panel_row > *:nth-child(1) > * {
+  color: var(--light-gray);
+  height: 50%;
+}
+.side_panel_row > *:nth-child(2) {
+  justify-content: flex-start;
+  width: 100px;
+}
+.side_panel_row > *:nth-child(3) {
+  width: 50px;
+}

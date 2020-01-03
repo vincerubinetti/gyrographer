@@ -15,18 +15,7 @@ import { Color } from '../util/color';
 
 import './index.css';
 
-let Graph = ({
-  edit,
-  left,
-  top,
-  right,
-  bottom,
-  backgroundColor,
-  guideColor,
-  showBounds,
-  showAxes,
-  showGrid
-}) => {
+let Graph = ({ edit, backgroundColor, guideColor }) => {
   const [svg, view] = usePanZoom();
   const context = useContext(TimeContext);
 
@@ -51,9 +40,9 @@ let Graph = ({
           opacity={new Color(guideColor).a}
           stroke={new Color(guideColor).hex(true)}
         >
-          {showGrid && <Grid />}
-          {showAxes && <Axes />}
-          {showBounds && <Bounds />}
+          <Grid />
+          <Axes />
+          <Bounds />
         </g>
         <g id='paths'>{paths}</g>
         <g id='wheels'>{wheels}</g>
@@ -65,15 +54,8 @@ let Graph = ({
 
 const mapStateToProps = (state) => ({
   edit: state.edit,
-  left: state.left,
-  top: state.top,
-  right: state.right,
-  bottom: state.bottom,
   backgroundColor: state.backgroundColor,
-  guideColor: state.guideColor,
-  showBounds: state.showBounds,
-  showAxes: state.showAxes,
-  showGrid: state.showGrid
+  guideColor: state.guideColor
 });
 
 Graph = connect(mapStateToProps)(Graph);

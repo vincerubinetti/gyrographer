@@ -10,6 +10,8 @@
   --white: #ffffff;
   --blue: #42a5f5;
   --yellow: #ffeb3b;
+
+  --fast: 0.25s ease;
 }
 html,
 body {
@@ -39,4 +41,8 @@ button:hover {
 *:focus {
   outline: none;
   box-shadow: inset 0 0 0 1px var(--blue);
+}
+svg {
+  width: 20px;
+  height: 20px;
 }
