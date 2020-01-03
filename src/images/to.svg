@@ -4,9 +4,9 @@
     stroke-width="10"
     stroke-linecap="round"
     x1="80"
-    y1="20"
+    y1="30"
     x2="80"
-    y2="80"
+    y2="70"
   />
   <line
     stroke="currentColor"

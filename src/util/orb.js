@@ -14,6 +14,9 @@ export class Orb {
     //   value += sin((360 * time) / 100) * 50;
     if (prop === 'to')
       value = (100 * time) / 300;
+    // if (prop === 'offset')
+    //   value = (360 * time) / 300;
+
     return value;
   }
 

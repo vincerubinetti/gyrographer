@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <polyline
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    points="15 85 50 50 85 85"
+  />
+  <circle
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-dasharray="4.634954084936208 15"
+    stroke-dashoffset="2.317477042468104"
+    cx="50"
+    cy="50"
+    r="25"
+  />
+</svg>

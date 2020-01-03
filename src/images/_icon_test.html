@@ -21,6 +21,9 @@
     </style>
   </head>
   <body>
+    <h3>controls</h3>
+    <div data-src="eye.svg"></div>
+    <div data-src="edit.svg"></div>
     <div data-src="play.svg"></div>
     <div data-src="pause.svg"></div>
     <div data-src="loop.svg"></div>
@@ -28,27 +31,40 @@
     <div data-src="arrow_right.svg"></div>
     <div data-src="arrow_start.svg"></div>
     <div data-src="arrow_end.svg"></div>
+    <div data-src="undo.svg"></div>
+    <div data-src="redo.svg"></div>
+    <h3>project</h3>
     <div data-src="length.svg"></div>
     <div data-src="fps.svg"></div>
     <div data-src="bounds.svg"></div>
     <div data-src="axes.svg"></div>
     <div data-src="grid.svg"></div>
-    <div data-src="undo.svg"></div>
-    <div data-src="redo.svg"></div>
-    <div data-src="edit.svg"></div>
+    <h3>orb - general</h3>
     <div data-src="show-path.svg"></div>
-    <div data-src="show-point.svg"></div>
+    <div data-src="show-stick.svg"></div>
     <div data-src="show-wheel.svg"></div>
+    <h3>orb - geometric</h3>
     <div data-src="from.svg"></div>
     <div data-src="to.svg"></div>
-    <div data-src="fill.svg"></div>
-    <div data-src="stroke.svg"></div>
-    <div data-src="eye.svg"></div>
+    <div data-src="step.svg"></div>
+    <div data-src="radius.svg"></div>
+    <div data-src="spin.svg"></div>
+    <div data-src="offset.svg"></div>
+    <h3>orb - style</h3>
+    <div data-src="fill-color.svg"></div>
+    <div data-src="stroke-color.svg"></div>
+    <div data-src="stroke-width.svg"></div>
+    <div data-src="dash-array.svg"></div>
+    <div data-src="dash-offset.svg"></div>
+    <div data-src="cap.svg"></div>
+    <div data-src="join.svg"></div>
+    <div data-src="order.svg"></div>
+    <div data-src="close.svg"></div>
     <script>
-      const divs = document.querySelectorAll("div");
+      const divs = document.querySelectorAll('div');
       for (const div of divs) {
-        const img = document.createElement("img");
-        img.src = div.getAttribute("data-src");
+        const img = document.createElement('img');
+        img.src = div.getAttribute('data-src');
         div.appendChild(img);
       }
     </script>

@@ -1,21 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <line
+  <path
+    fill="none"
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
-    x1="20"
-    y1="30"
-    x2="20"
-    y2="70"
+    stroke-linejoin="round"
+    d="
+      M 50 5
+      A 45 45 0 1 0 95 50
+    "
   />
-  <line
+  <path
+    fill="none"
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
-    stroke-dasharray="35 15 5 15 5"
-    x1="20"
-    y1="50"
-    x2="100"
-    y2="50"
+    stroke-linejoin="round"
+    stroke-dasharray="5 15"
+    d="
+      M 50 5
+      L 95 50
+    "
   />
 </svg>

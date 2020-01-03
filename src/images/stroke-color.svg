@@ -6,12 +6,12 @@
     stroke-linecap="round"
     stroke-linejoin="round"
     d="
-      M 80 15
+      M 85 10
       L 50 35
       L 47 48
       L 52 53
       L 65 50
-      L 85 20
+      L 90 15
       z
       M 35 60
       L 40 65
