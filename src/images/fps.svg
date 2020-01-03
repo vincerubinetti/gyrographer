@@ -1,23 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <path
-    fill="currentColor"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
     d="
-      M 0 0
-      h 60
-      v 10
-      h -50
-      v 50
-      h -10
-      M 20 20
-      h 60
-      v 10
-      h -50
-      v 50
-      h -10
-      M 40 40
-      h 60
-      v 60
-      h -60
+      M 5 50
+      L 5 5
+      L 50 5
+      M 25 75
+      L 25 25
+      L 75 25
     "
+  />
+  <rect
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linejoin="round"
+    x="45"
+    y="45"
+    width="50"
+    height="50"
   />
 </svg>

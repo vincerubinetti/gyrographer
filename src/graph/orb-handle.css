@@ -1,7 +1,0 @@
-.orb_handle[data-active="false"] {
-  opacity: 0;
-}
-.orb_handle[data-active="true"] {
-  opacity: 1;
-  pointer-events: none;
-}

@@ -4,28 +4,33 @@
       "spin": 3,
       "radius": 500,
       "fillColor": "#ffffff10",
-      "strokeColor": "#ffffff20"
+      "strokeColor": "#ffffff40",
+      "showPath": false,
+      "showStick": false
     },
     "2": {
       "spin": 2,
       "radius": 200,
       "parentId": "1",
       "fillColor": "#ffffff10",
-      "strokeColor": "#ffffff20"
+      "strokeColor": "#ffffff40",
+      "showPath": false
     },
     "3": {
-      "spin": -1,
-      "radius": 75,
+      "spin": -10,
+      "radius": 100 ,
       "parentId": "2",
       "stepSize": 0.1,
       "fillColor": "#ffffff10",
-      "strokeColor": "#ffffff20"
+      "strokeColor": "#ffffffff"
     },
     "4": {
-      "spin": -1,
-      "radius": 75,
+      "spin": -10,
+      "radius": 100 ,
+      "offset": 180,
       "parentId": "2",
       "stepSize": 0.1,
+      "fillColor": "#ffffff10",
       "strokeColor": "#ffffffff"
     }
   }

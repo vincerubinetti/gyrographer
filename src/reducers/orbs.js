@@ -4,7 +4,7 @@ export const orbs = (state, meta, type, payload) => {
   const reducers = [
     parentId,
     showPath,
-    showArrow,
+    showStick,
     showWheel,
     from,
     to,
@@ -39,9 +39,9 @@ export const showPath = (state, meta, type, payload) => {
     state.showPath = true;
 };
 
-export const showArrow = (state, meta, type, payload) => {
-  if (typeof state.showArrow !== 'boolean')
-    state.showArrow = true;
+export const showStick = (state, meta, type, payload) => {
+  if (typeof state.showStick !== 'boolean')
+    state.showStick = true;
 };
 
 export const showWheel = (state, meta, type, payload) => {

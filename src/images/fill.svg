@@ -1,31 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- <path
+  <path
     fill="none"
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
     stroke-linejoin="round"
     d="
-      M 30 5
-      L 85 55
-      L 55 85
-      A 23 23 0 1 1 15 50
-      L 50 15
+      M 35 10
+      L 75 50
+      L 50 75
+      A 21.213203436 21.213203436 0 0 1 20 45
+      L 45 20
     "
   />
   <path
     fill="currentColor"
     d="
-      M 65 65
-      L 50 80
-      A 23 23 0 1 1 15 50
+      M 13.786796565 60
+      A 21.213203436 21.213203436 0 0 0 50 75
+      L 65 60
     "
   />
   <path
     fill="currentColor"
     d="
-      M 90 70
-      C 120 110 55 110 90 70
+      M 85 70
+      C 115 110 55 110 85 70
     "
-  /> -->
+  />
 </svg>

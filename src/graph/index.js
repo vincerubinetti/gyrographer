@@ -9,9 +9,8 @@ import { Grid } from './grid.js';
 import { Axes } from './axes.js';
 import { Bounds } from './bounds.js';
 import { Path } from './path.js';
-import { Arrow } from './arrow.js';
+import { Stick } from './stick.js';
 import { Wheel } from './wheel.js';
-import { OrbHandle } from './orb-handle.js';
 import { Color } from '../util/color';
 
 import './index.css';
@@ -35,24 +34,20 @@ let Graph = ({
     .filter((orb) => orb.showPath)
     .map((orb, index) => <Path key={index} orb={orb} />);
 
-  const arrows = context.orbTree
-    .filter((orb) => orb.showArrow)
-    .map((orb, index) => <Arrow key={index} orb={orb} />);
+  const sticks = context.orbTree
+    .filter((orb) => edit || orb.showStick)
+    .map((orb, index) => <Stick key={index} orb={orb} />);
 
   const wheels = context.orbTree
     .filter((orb) => orb.showWheel)
     .map((orb, index) => <Wheel key={index} orb={orb} />);
 
-  const orbHandles = context.orbTree.map((orb, index) => (
-    <OrbHandle key={index} orb={orb} />
-  ));
-
   return (
-    <svg ref={svg} id="graph" style={{ background: backgroundColor }}>
-      <g id="view" ref={view}>
+    <svg ref={svg} id='graph' style={{ background: backgroundColor }}>
+      <g id='view' ref={view}>
         <g
-          id="board"
-          data-active={!edit}
+          id='board'
+          data-edit={edit}
           opacity={new Color(guideColor).a}
           stroke={new Color(guideColor).hex(true)}
         >
@@ -60,10 +55,9 @@ let Graph = ({
           {showAxes && <Axes />}
           {showBounds && <Bounds />}
         </g>
-        {wheels}
-        {arrows}
-        {paths}
-        {edit && orbHandles}
+        <g id='paths'>{paths}</g>
+        <g id='wheels'>{wheels}</g>
+        <g id='sticks'>{sticks}</g>
       </g>
     </svg>
   );

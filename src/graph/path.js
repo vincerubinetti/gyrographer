@@ -39,7 +39,7 @@ let Path = ({ orb, edit }) => {
 
   return (
     <path
-      data-active={!edit}
+      data-edit={edit}
       className="path"
       fill={close ? fillColor : 'none'}
       stroke={strokeColor}

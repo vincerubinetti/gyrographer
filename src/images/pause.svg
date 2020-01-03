@@ -1,4 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect fill="currentColor" x="15" y="0" width="20" height="100" />
-  <rect fill="currentColor" x="65" y="0" width="20" height="100" />
+  <rect
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linejoin="round"
+    x="20"
+    y="5"
+    width="15"
+    height="90"
+  />
+  <rect
+    fill="currentColor"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linejoin="round"
+    x="65"
+    y="5"
+    width="15"
+    height="90"
+  />
 </svg>

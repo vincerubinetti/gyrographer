@@ -6,7 +6,7 @@ const SidePanel = () => (
   <div className="side_panel">
     showPath
     <br />
-    showArrow
+    showStick
     <br />
     showWheel
     <br />

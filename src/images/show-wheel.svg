@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <path
-    fill="currentColor"
-    fill-rule="evenodd"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
     d="
       M 50 50
       m 45 0

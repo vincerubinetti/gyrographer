@@ -6,15 +6,13 @@
     stroke-linecap="round"
     d="
       M 10 90
-      L 75 25
+      L 80 20
     "
   />
-  <path
+  <circle
     fill="currentColor"
-    d="
-      M 95 5
-      L 50 15
-      L 85 50
-    "
+    cx="80"
+    cy="20"
+    r="15"
   />
 </svg>

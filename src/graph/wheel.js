@@ -19,8 +19,8 @@ let Wheel = ({ orb, edit }) => {
 
   // geometry
   const to = orb.computeProp('to', time);
-  // a = parent point, arrow start
-  // b = this orb's point, arrow end
+  // a = parent point
+  // b = this orb's point
   let a;
   if (parent)
     a = parent.computePoint(to, time);
@@ -30,7 +30,7 @@ let Wheel = ({ orb, edit }) => {
   const radius = b.subtract(a).length();
 
   return (
-    <g className="wheel" data-active={!edit}>
+    <g className="wheel" data-edit={edit}>
       <circle
         cx={a.x.toFixed(precision)}
         cy={a.y.toFixed(precision)}
