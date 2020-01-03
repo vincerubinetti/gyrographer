@@ -1,0 +1,6 @@
+.side_panel_header {
+  padding: 10px 0 5px 10px;
+  color: var(--light-gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

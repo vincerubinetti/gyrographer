@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Row } from './row.js';
+import { Header } from './header.js';
 import { BoundsButton } from './bounds-button.js';
 import { AxesButton } from './axes-button.js';
 import { GridButton } from './grid-button.js';
@@ -10,22 +11,23 @@ import { ReactComponent as Grid } from '../images/grid.svg';
 
 const Project = () => (
   <div>
+    <Header text='Guides' />
     <Row
       icon={<Bounds />}
-      text='Show Bounds'
-      tooltip='Show the boundaries of the image'
+      text='Bounds'
+      tooltip='Boundaries of the image'
       control={<BoundsButton />}
     />
     <Row
       icon={<Axes />}
-      text='Show Axes'
-      tooltip='Show the axes of the image'
+      text='Axes'
+      tooltip='X/Y axes and origin of the image'
       control={<AxesButton />}
     />
     <Row
       icon={<Grid />}
-      text='Show Grid'
-      tooltip='Show the grid'
+      text='Grid'
+      tooltip='Major and minor gridlines'
       control={<GridButton />}
     />
   </div>

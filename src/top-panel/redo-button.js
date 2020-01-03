@@ -29,6 +29,7 @@ let RedoButton = ({ future, actionDescription, redo }) => {
       }}
       color={future.length ? 'white' : 'gray'}
       tooltip={<>{tooltip}</>}
+      tooltipHorizontalAlign="left"
       tooltipVerticalAlign="bottom"
     >
       <Redo />
