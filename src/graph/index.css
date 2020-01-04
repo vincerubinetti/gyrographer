@@ -9,3 +9,6 @@
 #board[data-edit='true'] {
   opacity: 0;
 }
+#graph * {
+  transition: opacity var(--fast);
+}

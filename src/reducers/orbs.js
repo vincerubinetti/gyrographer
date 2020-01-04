@@ -1,3 +1,5 @@
+import { Color } from '../util/color.js';
+
 export const orbs = (state, meta, type, payload) => {
   state = { ...(state || {}) };
 
@@ -83,12 +85,12 @@ export const offset = (state, meta, type, payload) => {
 
 export const fillColor = (state, meta, type, payload) => {
   if (typeof state.fillColor !== 'string')
-    state.fillColor = 'none';
+    state.fillColor = new Color('#00000000');
 };
 
 export const strokeColor = (state, meta, type, payload) => {
   if (typeof state.strokeColor !== 'string')
-    state.strokeColor = '#ffffffff';
+    state.strokeColor = new Color('#ffffffff');
 };
 
 export const strokeWidth = (state, meta, type, payload) => {

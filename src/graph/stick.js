@@ -1,22 +1,20 @@
 import React from 'react';
 import { useContext } from 'react';
-import { connect } from 'react-redux';
 
 import { TimeContext } from '../time.js';
 import { Vector } from '../util/math.js';
-import { Color } from '../util/color.js';
 import './stick.css';
 
 const precision = 2;
 
-let Stick = ({ orb, edit }) => {
+const Stick = ({ orb }) => {
   const context = useContext(TimeContext);
 
   const time = context.time;
   const parent = orb.parent;
 
   // styles
-  const color = new Color(orb.computeProp('strokeColor', time));
+  const opacity = orb.showStick ? 1 : 0;
   const strokeWidth = orb.strokeWidth;
   const radius = strokeWidth * 1.5;
 
@@ -32,9 +30,8 @@ let Stick = ({ orb, edit }) => {
   const b = orb.computePoint(to, time);
 
   return (
-    <g className='stick' data-edit={edit} opacity={color.a}>
+    <g className='stick' opacity={opacity}>
       <line
-        stroke={color.hex(true)}
         strokeWidth={strokeWidth}
         strokeLinecap='round'
         x1={a.x.toFixed(precision)}
@@ -46,16 +43,9 @@ let Stick = ({ orb, edit }) => {
         cx={b.x.toFixed(precision)}
         cy={b.y.toFixed(precision)}
         r={radius.toFixed(precision)}
-        fill={color.hex(true)}
       />
     </g>
   );
 };
-
-const mapStateToProps = (state) => ({
-  edit: state.edit
-});
-
-Stick = connect(mapStateToProps)(Stick);
 
 export { Stick };

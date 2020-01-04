@@ -1,18 +1,18 @@
 import React from 'react';
 import { useContext } from 'react';
-import { connect } from 'react-redux';
 
 import { TimeContext } from '../time.js';
 import './path.css';
 
 const precision = 2;
 
-let Path = ({ orb, edit }) => {
+const Path = ({ orb }) => {
   const context = useContext(TimeContext);
 
   const time = context.time;
 
   // styles
+  const opacity = orb.showPath ? 1 : 0;
   const fillColor = orb.computeProp('fillColor', time);
   const strokeColor = orb.computeProp('strokeColor', time);
   const strokeWidth = orb.computeProp('strokeWidth', time);
@@ -39,8 +39,7 @@ let Path = ({ orb, edit }) => {
 
   return (
     <path
-      data-edit={edit}
-      className="path"
+      className='path'
       fill={close ? fillColor : 'none'}
       stroke={strokeColor}
       strokeWidth={strokeWidth}
@@ -48,15 +47,10 @@ let Path = ({ orb, edit }) => {
       strokeDashoffset={dashOffset}
       strokeLinecap={strokeLineCap}
       strokeLinejoin={strokeLineJoin}
+      opacity={opacity}
       d={d}
     />
   );
 };
-
-const mapStateToProps = (state) => ({
-  edit: state.edit
-});
-
-Path = connect(mapStateToProps)(Path);
 
 export { Path };

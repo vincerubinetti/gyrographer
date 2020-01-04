@@ -1,5 +1,5 @@
 import React from 'react';
 
-const Orb = () => <div>hi</div>;
+const Orb = () => <>hi</>;
 
 export { Orb };

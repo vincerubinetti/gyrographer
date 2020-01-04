@@ -6,7 +6,7 @@ import './grid.css';
 const minorSpacing = 50;
 const majorMultiple = 4;
 
-let Grid = ({ show, left, top, right, bottom }) => {
+let Grid = ({ left, top, right, bottom }) => {
   const minorHorizontalLines = [];
   const minorVerticalLines = [];
   const majorHorizontalLines = [];
@@ -32,17 +32,16 @@ let Grid = ({ show, left, top, right, bottom }) => {
   }
 
   return (
-    <g id="grid" data-show={show}>
-      <g id="minor_horizontal_lines">{minorHorizontalLines}</g>
-      <g id="minor_vertical_lines">{minorVerticalLines}</g>
-      <g id="major_horizontal_lines">{majorHorizontalLines}</g>
-      <g id="major_vertical_lines">{majorVerticalLines}</g>
-    </g>
+    <>
+      <g id='minor_horizontal_lines'>{minorHorizontalLines}</g>
+      <g id='minor_vertical_lines'>{minorVerticalLines}</g>
+      <g id='major_horizontal_lines'>{majorHorizontalLines}</g>
+      <g id='major_vertical_lines'>{majorVerticalLines}</g>
+    </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  show: state.showGrid,
   left: state.left,
   top: state.top,
   right: state.right,

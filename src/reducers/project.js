@@ -1,3 +1,5 @@
+import { Color } from '../util/color.js';
+
 export const project = (state, meta, type, payload) => {
   state = { ...state };
 
@@ -7,6 +9,9 @@ export const project = (state, meta, type, payload) => {
     showBounds,
     showAxes,
     showGrid,
+    showPaths,
+    showSticks,
+    showWheels,
     speed,
     left,
     top,
@@ -91,6 +96,49 @@ export const showGrid = (state, meta, type, payload) => {
 
   if (typeof state.showGrid !== 'boolean')
     state.showGrid = true;
+};
+
+
+export const showPaths = (state, meta, type, payload) => {
+  switch (type) {
+    case 'TOGGLE_PATHS':
+      state.showPaths = !state.showPaths;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof state.showPaths !== 'boolean')
+    state.showPaths = true;
+};
+
+export const showSticks = (state, meta, type, payload) => {
+  switch (type) {
+    case 'TOGGLE_STICKS':
+      state.showSticks = !state.showSticks;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof state.showSticks !== 'boolean')
+    state.showSticks = true;
+};
+
+export const showWheels = (state, meta, type, payload) => {
+  switch (type) {
+    case 'TOGGLE_WHEELS':
+      state.showWheels = !state.showWheels;
+      break;
+
+    default:
+      break;
+  }
+
+  if (typeof state.showWheels !== 'boolean')
+    state.showWheels = true;
 };
 
 export const speed = (state, meta, type, payload) => {
@@ -186,7 +234,7 @@ export const bottom = (state, meta, type, payload) => {
 export const backgroundColor = (state, meta, type, payload) => {
   switch (type) {
     case 'SET_BACKGROUND_COLOR':
-      state.backgroundColor = payload.backgroundColor;
+      state.backgroundColor = new Color('payload.backgroundColor');
       break;
 
     default:
@@ -194,13 +242,13 @@ export const backgroundColor = (state, meta, type, payload) => {
   }
 
   if (typeof state.backgroundColor !== 'string')
-    state.backgroundColor = '#202020ff';
+    state.backgroundColor = new Color('#202020ff');
 };
 
 export const guideColor = (state, meta, type, payload) => {
   switch (type) {
     case 'SET_GUIDE_COLOR':
-      state.guideColor = payload.guideColor;
+      state.guideColor = new Color('payload.guideColor');
       break;
 
     default:
@@ -208,7 +256,7 @@ export const guideColor = (state, meta, type, payload) => {
   }
 
   if (typeof state.guideColor !== 'string')
-    state.guideColor = '#ffffff80';
+    state.guideColor = new Color('#ffffff80');
 };
 
 export const fps = (state, meta, type, payload) => {

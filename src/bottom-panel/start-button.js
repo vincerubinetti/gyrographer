@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 import { TimeContext } from '../time.js';
 import { Button } from '../components/button.js';
-import { ReactComponent as ArrowStart } from '../images/arrow_start.svg';
+import { ReactComponent as ArrowStart } from '../images/arrow-start.svg';
 
 export const StartButton = () => {
   const context = useContext(TimeContext);
