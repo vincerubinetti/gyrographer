@@ -12,11 +12,20 @@ import './app.css';
 const App = () => (
   <Time>
     <Graph />
+    <Keyboard />
     <TopPanel />
     <SidePanel />
     <BottomPanel />
-    <Keyboard />
   </Time>
 );
 
 export default App;
+
+// detect fullscreen changes and set data attribute on body for readable state
+window.addEventListener('resize', () => {
+  window.clearTimeout(window.resizeTimer);
+  window.resizeTimer = window.setTimeout(() => {
+    document.body.dataset.fullscreen =
+      Math.abs(window.screen.height - window.outerHeight) <= 1;
+  }, 1000);
+});

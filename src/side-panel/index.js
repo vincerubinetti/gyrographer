@@ -7,7 +7,7 @@ import { Orb } from './orb.js';
 import './index.css';
 
 let SidePanel = ({ selectedOrb }) => (
-  <div className='side_panel'>
+  <div id='side_panel'>
     {!selectedOrb && <Project />}
     {selectedOrb && <Orb />}
   </div>

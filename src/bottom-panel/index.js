@@ -13,7 +13,7 @@ import { Rail } from './rail.js';
 import './index.css';
 
 const BottomPanel = () => (
-  <div className="bottom_panel">
+  <div id="bottom_panel">
     <PlayButton />
     <LoopButton />
     <SpeedButton />

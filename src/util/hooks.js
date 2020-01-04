@@ -1,11 +1,11 @@
-import { useRef } from 'react';
 import { useEffect } from 'react';
+import { useRef } from 'react';
 import * as d3 from 'd3';
 
 const minZoom = 0.01;
 const maxZoom = 100;
 const hPadding = 10 * 2;
-const vPadding = 70 * 2;
+const vPadding = 50 * 2;
 
 export const usePanZoom = () => {
   const svgRef = useRef();
@@ -54,6 +54,9 @@ export const usePanZoom = () => {
     svg.on('dblclick', onDblClick);
 
     onDblClick();
+
+    window.addEventListener('resize', onDblClick);
+    return () => window.removeEventListener('resize', onDblClick);
   }, []);
 
   return [svgRef, viewRef];

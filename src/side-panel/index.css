@@ -1,4 +1,4 @@
-.side_panel {
+#side_panel {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -12,4 +12,8 @@
   transform: translateY(-50%);
   border: solid 2px var(--dark-gray);
   border-left: none;
+  transition: opacity var(--slow);
+}
+body[data-fullscreen="true"] #side_panel {
+  opacity: 0;
 }

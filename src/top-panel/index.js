@@ -7,7 +7,7 @@ import { RedoButton } from './redo-button.js';
 import './index.css';
 
 const TopPanel = () => (
-  <div className='top_panel'>
+  <div id='top_panel'>
     <EditButton />
     <UndoButton />
     <RedoButton />

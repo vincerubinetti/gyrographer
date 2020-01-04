@@ -11,6 +11,7 @@
   --blue: #42a5f5;
   --yellow: #ffeb3b;
 
+  --slow: 1s ease;
   --fast: 0.25s ease;
 }
 html,
