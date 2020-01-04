@@ -7,14 +7,16 @@
       "spin": 3,
       "radius": 500,
       "fillColor": "#ffffff10",
-      "strokeColor": "#ffffff40"
+      "strokeColor": "#ffffff40",
+      "showPath": false
     },
     "2": {
       "spin": 2,
       "radius": 200,
       "parentId": "1",
       "fillColor": "#ffffff10",
-      "strokeColor": "#ffffff40"
+      "strokeColor": "#ffffff40",
+      "showPath": false
     },
     "3": {
       "spin": -10,
@@ -22,7 +24,8 @@
       "parentId": "2",
       "stepSize": 0.1,
       "fillColor": "#ffffff10",
-      "strokeColor": "#ffffffff"
+      "strokeColor": "#ffffffff",
+      "showPath": false
     },
     "4": {
       "spin": -10,

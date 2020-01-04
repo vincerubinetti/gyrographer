@@ -78,11 +78,6 @@ export class Orb {
       }
     }
 
-    for (const leaf of tree) {
-      delete leaf.id;
-      delete leaf.parentId;
-    }
-
     return tree;
   }
 }

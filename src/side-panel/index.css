@@ -4,6 +4,7 @@
   left: 0;
   top: 50%;
   text-align: right;
+  width: 220px;
   max-height: calc(100vh - 160px);
   overflow-x: hidden;
   overflow-y: auto;
@@ -15,8 +16,8 @@
 #side_panel[data-open="false"] {
   transform: translate(-180px, -50%);
 }
-#side_panel[data-open="false"] > *:not(:first-child){
-  opacity: 0;
+#side_panel[data-open="false"] > *:not(:first-child) {
+  visibility: hidden;
 }
 body[data-fullscreen="true"] #side_panel {
   opacity: 0;

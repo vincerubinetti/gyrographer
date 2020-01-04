@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <path
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="
+      M 55 25
+      L 80 50
+      L 55 75
+      M 25 25
+      L 50 50
+      L 25 75
+    "
+  />
+</svg>
