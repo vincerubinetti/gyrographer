@@ -6,6 +6,8 @@ export class Orb {
   constructor() {
     this.parent = null;
     this.children = [];
+
+    this.cache = {};
   }
 
   computeProp(prop, time) {
@@ -20,10 +22,10 @@ export class Orb {
     return value;
   }
 
-  computePoint(trace, time) {
-    const spin = this.computeProp('spin', time);
-    const offset = this.computeProp('offset', time);
-    const radius = this.computeProp('radius', time);
+  computePoint(trace, time, radius, spin, offset) {
+    radius = radius || this.computeProp('radius', time);
+    spin = spin || this.computeProp('spin', time);
+    offset = offset || this.computeProp('offset', time);
 
     const angle = (spin * 360 * trace) / 100 + offset;
 
@@ -31,24 +33,35 @@ export class Orb {
     if (this.parent)
       parentPoint = this.parent.computePoint(trace, time);
 
-    return new Vector(
+    const point = new Vector(
       parentPoint.x + cos(angle) * radius,
       parentPoint.y - sin(angle) * radius
     );
+
+    return point;
   }
 
   computePath(time) {
+    if (this.cache[time])
+      return this.cache[time];
+
     const from = this.computeProp('from', time);
     const to = this.computeProp('to', time);
+    const radius = this.computeProp('radius', time);
+    const spin = this.computeProp('spin', time);
+    const offset = this.computeProp('offset', time);
+
     const stepSize = this.stepSize;
 
-    const points = [];
+    const path = [];
 
     for (let trace = from; trace < to; trace += stepSize)
-      points.push(this.computePoint(trace, time));
-    points.push(this.computePoint(to, time));
+      path.push(this.computePoint(trace, time, radius, spin, offset));
+    path.push(this.computePoint(to, time, radius, spin, offset));
 
-    return points;
+    this.cache[time] = path;
+
+    return path;
   }
 
   static buildTree(orbs) {

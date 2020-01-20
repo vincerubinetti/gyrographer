@@ -18,54 +18,45 @@ let Time = ({ children, orbs, fps, length, loop, speed }) => {
 
   const changePlaying = useCallback(
     (newPlaying) => {
-      if (newPlaying)
-        setPlaying(true);
-      else
-        setPlaying(false);
-
-      if (newPlaying && time >= length)
-        setTime(0);
+      setPlaying(newPlaying ? true : false);
+      setTime((time) => (newPlaying && time >= length ? 0 : time));
     },
-    [time, length]
+    [length]
   );
 
   const changeTime = useCallback(
-    (newTime) => {
-      if (newTime < 0) {
-        if (loop)
-          newTime = (newTime % length) + length;
-        else
-          newTime = 0;
-      }
-      if (newTime > length) {
-        if (loop)
-          newTime = newTime % length;
-        else {
-          newTime = length;
-          changePlaying(false);
+    (newTime, relative) => {
+      setTime((time) => {
+        if (relative)
+          newTime = time + newTime;
+        if (newTime < 0) {
+          if (loop)
+            newTime = (newTime % length) + length;
+          else
+            newTime = 0;
         }
-      }
-      setTime(newTime);
+        if (newTime > length) {
+          if (loop)
+            newTime = newTime % length;
+          else {
+            newTime = length;
+            changePlaying(false);
+          }
+        }
+        return newTime;
+      });
     },
     [length, loop, changePlaying]
   );
 
   const incrementTime = useCallback(
-    (multiplier) => {
-      const increment = speed * (multiplier || 1);
-
-      changeTime(Math.round((time + increment) / increment) * increment);
-    },
-    [speed, time, changeTime]
+    (multiplier) => changeTime(speed * (multiplier || 1), true),
+    [speed, changeTime]
   );
 
   const decrementTime = useCallback(
-    (multiplier) => {
-      const increment = -speed * (multiplier || 1);
-
-      changeTime(Math.round((time + increment) / increment) * increment);
-    },
-    [speed, time, changeTime]
+    (multiplier) => changeTime(-speed * (multiplier || 1)),
+    [speed, changeTime]
   );
 
   useEffect(() => {
@@ -85,10 +76,10 @@ let Time = ({ children, orbs, fps, length, loop, speed }) => {
     <TimeContext.Provider
       value={{
         orbTree: orbTree,
-        changeTime: changeTime,
-        changePlaying: changePlaying,
         playing: playing,
         time: time,
+        changePlaying: changePlaying,
+        changeTime: changeTime,
         incrementTime: incrementTime,
         decrementTime: decrementTime
       }}
