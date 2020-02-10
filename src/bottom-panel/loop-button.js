@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button.js';
+import { Button } from '../components/button';
 import { ReactComponent as Loop } from '../images/loop.svg';
-import { toggleLoop } from '../actions/actions.js';
+import { toggleLoop } from '../actions/actions';
 
 let LoopButton = ({ loop, toggleLoop }) => (
   <Button

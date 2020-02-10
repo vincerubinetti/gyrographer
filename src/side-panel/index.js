@@ -2,9 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Project } from './project.js';
-import { Orb } from './orb.js';
-import { Button } from '../components/button.js';
+import { Project } from './project';
+import { Orb } from './orb';
+import { Button } from '../components/button';
 import { ReactComponent as Open } from '../images/arrow-double-right.svg';
 import { ReactComponent as Close } from '../images/arrow-double-left.svg';
 

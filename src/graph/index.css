@@ -6,9 +6,19 @@
 #board * {
   transition: opacity var(--fast);
 }
-#board[data-edit='true'] {
+#board[data-edit="true"] {
   opacity: 0;
 }
 #graph * {
   transition: opacity var(--fast);
+}
+
+*[data-hitbox="true"] {
+  opacity: 0;
+  transition: opacity var(--fast);
+  cursor: pointer;
+}
+*[data-hitbox="true"]:hover,
+*[data-hitbox="true"][data-selected="true"] {
+  opacity: 0.5;
 }

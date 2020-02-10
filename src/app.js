@@ -4,8 +4,8 @@ import Graph from './graph';
 import TopPanel from './top-panel';
 import SidePanel from './side-panel';
 import BottomPanel from './bottom-panel';
-import { Time } from './time.js';
-import { Keyboard } from './keyboard.js';
+import { Time } from './time';
+import { Keyboard } from './keyboard';
 
 import './app.css';
 

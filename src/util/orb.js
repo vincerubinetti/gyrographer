@@ -1,6 +1,6 @@
-import { sin } from './math.js';
-import { cos } from './math.js';
-import { Vector } from './math.js';
+import { sin } from './math';
+import { cos } from './math';
+import { Vector } from './math';
 
 export class Orb {
   constructor() {

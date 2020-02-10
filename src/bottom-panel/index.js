@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { PlayButton } from './play-button.js';
-import { LoopButton } from './loop-button.js';
-import { SpeedButton } from './speed-button.js';
-import { Timecode } from './timecode.js';
-import { StartButton } from './start-button.js';
-import { BackButton } from './back-button.js';
-import { ForwardButton } from './forward-button.js';
-import { EndButton } from './end-button.js';
-import { Rail } from './rail.js';
+import { PlayButton } from './play-button';
+import { LoopButton } from './loop-button';
+import { SpeedButton } from './speed-button';
+import { Timecode } from './timecode';
+import { StartButton } from './start-button';
+import { BackButton } from './back-button';
+import { ForwardButton } from './forward-button';
+import { EndButton } from './end-button';
+import { Rail } from './rail';
 
 import './index.css';
 

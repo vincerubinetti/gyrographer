@@ -1,8 +1,8 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { TimeContext } from '../time.js';
-import { Vector } from '../util/math.js';
+import { TimeContext } from '../time';
+import { Vector } from '../util/math';
 import './wheel.css';
 
 const precision = 2;

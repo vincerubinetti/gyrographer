@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button.js';
+import { Button } from '../components/button';
 import { ReactComponent as Eye } from '../images/eye.svg';
-import { toggleAxes } from '../actions/actions.js';
+import { toggleAxes } from '../actions/actions';
 
 let AxesButton = ({ showAxes, toggleAxes }) => (
   <Button

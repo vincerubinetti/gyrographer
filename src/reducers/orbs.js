@@ -1,4 +1,4 @@
-import { Color } from '../util/color.js';
+import { Color } from '../util/color';
 
 export const orbs = (state, meta, type, payload) => {
   state = { ...(state || {}) };

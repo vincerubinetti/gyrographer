@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { TimeContext } from '../time.js';
+import { TimeContext } from '../time';
 import './timecode.css';
 
 let Timecode = ({ fps }) => {

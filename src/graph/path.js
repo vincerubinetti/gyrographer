@@ -1,12 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { useContext } from 'react';
 
-import { TimeContext } from '../time.js';
+import { setSelected } from '../actions/actions';
+import { TimeContext } from '../time';
 import './path.css';
 
 const precision = 2;
 
-const Path = ({ orb }) => {
+let Path = ({ orb, selected, select }) => {
   const context = useContext(TimeContext);
 
   const time = context.time;
@@ -38,19 +40,42 @@ const Path = ({ orb }) => {
     d += 'z';
 
   return (
-    <path
-      className='path'
-      fill={close ? fillColor : 'none'}
-      stroke={strokeColor}
-      strokeWidth={strokeWidth}
-      strokeDasharray={dashArray}
-      strokeDashoffset={dashOffset}
-      strokeLinecap={strokeLineCap}
-      strokeLinejoin={strokeLineJoin}
-      opacity={opacity}
-      d={d}
-    />
+    <>
+      <path
+        className="path"
+        fill={close ? fillColor : 'none'}
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
+        strokeDasharray={dashArray}
+        strokeDashoffset={dashOffset}
+        strokeLinecap={strokeLineCap}
+        strokeLinejoin={strokeLineJoin}
+        opacity={opacity}
+        d={d}
+      />
+      <path
+        className="path"
+        fill="none"
+        stroke={strokeColor}
+        strokeWidth={strokeWidth * 5}
+        data-hitbox="true"
+        data-selected={selected === orb.id}
+        onClick={(event) => {
+          event.stopPropagation();
+          select({ id: orb.id });
+        }}
+        d={d}
+      />
+    </>
   );
 };
+
+const mapStateToProps = (state) => ({ selected: state.selected });
+
+const mapDispatchToProps = (dispatch) => ({
+  select: (...args) => dispatch(setSelected(...args))
+});
+
+Path = connect(mapStateToProps, mapDispatchToProps)(Path);
 
 export { Path };

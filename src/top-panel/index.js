@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { EditButton } from './edit-button.js';
-import { UndoButton } from './undo-button.js';
-import { RedoButton } from './redo-button.js';
+import { UndoButton } from './undo-button';
+import { RedoButton } from './redo-button';
 
 import './index.css';
 
 const TopPanel = () => (
   <div id='top_panel'>
-    <EditButton />
     <UndoButton />
     <RedoButton />
   </div>

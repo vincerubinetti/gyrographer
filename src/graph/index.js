@@ -2,15 +2,15 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { usePanZoom } from '../util/hooks.js';
-
-import { TimeContext } from '../time.js';
-import { Grid } from './grid.js';
-import { Axes } from './axes.js';
-import { Bounds } from './bounds.js';
-import { Path } from './path.js';
-import { Stick } from './stick.js';
-import { Wheel } from './wheel.js';
+import { setSelected } from '../actions/actions';
+import { usePanZoom } from '../util/hooks';
+import { TimeContext } from '../time';
+import { Grid } from './grid';
+import { Axes } from './axes';
+import { Bounds } from './bounds';
+import { Path } from './path';
+import { Stick } from './stick';
+import { Wheel } from './wheel';
 
 import './index.css';
 
@@ -22,7 +22,8 @@ let Graph = ({
   showGrid,
   showPaths,
   showSticks,
-  showWheels
+  showWheels,
+  select
 }) => {
   const [svg, view] = usePanZoom();
   const context = useContext(TimeContext);
@@ -40,32 +41,37 @@ let Graph = ({
   ));
 
   return (
-    <svg ref={svg} id='graph' style={{ background: backgroundColor.rgba }}>
-      <g id='view' ref={view}>
-        <g id='board' opacity={guideColor.a} stroke={guideColor.rgb}>
-          <g id='grid' opacity={showGrid ? 1 : 0}>
+    <svg
+      ref={svg}
+      id="graph"
+      style={{ background: backgroundColor.rgba }}
+      onClick={() => select()}
+    >
+      <g id="view" ref={view}>
+        <g id="board" opacity={guideColor.a} stroke={guideColor.rgb}>
+          <g id="grid" opacity={showGrid ? 1 : 0}>
             <Grid />
           </g>
-          <g id='axes' opacity={showAxes ? 1 : 0}>
+          <g id="axes" opacity={showAxes ? 1 : 0}>
             <Axes />
           </g>
-          <g id='bounds' opacity={showBounds ? 1 : 0}>
+          <g id="bounds" opacity={showBounds ? 1 : 0}>
             <Bounds />
           </g>
         </g>
-        <g id='paths' opacity={showPaths ? 1 : 0}>
-          {paths}
-        </g>
-        <g id='wheels' opacity={showWheels ? 1 : 0} fill={guideColor.rgb}>
+        <g id="wheels" opacity={showWheels ? 1 : 0} fill={guideColor.rgb}>
           {wheels}
         </g>
         <g
-          id='sticks'
+          id="sticks"
           opacity={showSticks ? guideColor.a : 0}
           fill={guideColor.rgb}
           stroke={guideColor.rgb}
         >
           {sticks}
+        </g>
+        <g id="paths" opacity={showPaths ? 1 : 0}>
+          {paths}
         </g>
       </g>
     </svg>
@@ -83,6 +89,10 @@ const mapStateToProps = (state) => ({
   showWheels: state.showWheels
 });
 
-Graph = connect(mapStateToProps)(Graph);
+const mapDispatchToProps = (dispatch) => ({
+  select: (...args) => dispatch(setSelected(...args))
+});
+
+Graph = connect(mapStateToProps, mapDispatchToProps)(Graph);
 
 export default Graph;

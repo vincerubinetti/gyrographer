@@ -6,26 +6,20 @@
     "1": {
       "spin": 3,
       "radius": 500,
-      "fillColor": "#ffffff10",
-      "strokeColor": "#ffffff40",
-      "showPath": false
+      "strokeColor": "#e91e6340"
     },
     "2": {
       "spin": 2,
       "radius": 200,
       "parentId": "1",
-      "fillColor": "#ffffff10",
-      "strokeColor": "#ffffff40",
-      "showPath": false
+      "strokeColor": "#9c27b040"
     },
     "3": {
       "spin": -10,
       "radius": 100,
       "parentId": "2",
       "stepSize": 0.1,
-      "fillColor": "#ffffff10",
-      "strokeColor": "#ffffffff",
-      "showPath": false
+      "strokeColor": "#2196f3ff"
     },
     "4": {
       "spin": -10,
@@ -33,8 +27,7 @@
       "offset": 180,
       "parentId": "2",
       "stepSize": 0.1,
-      "fillColor": "#ffffff10",
-      "strokeColor": "#ffffffff"
+      "strokeColor": "#00bcd4ff"
     }
   }
 }

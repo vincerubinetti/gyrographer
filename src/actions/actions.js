@@ -1,6 +1,6 @@
 import { createAction } from '.';
 
-export const toggleEdit = createAction('TOGGLE_EDIT', 'toggle edit mode');
+export const setSelected = createAction('SET_SELECTED');
 
 export const toggleBounds = createAction('TOGGLE_BOUNDS', 'toggle show bounds');
 

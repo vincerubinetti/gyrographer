@@ -2,8 +2,8 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { TimeContext } from '../time.js';
-import { Button } from '../components/button.js';
+import { TimeContext } from '../time';
+import { Button } from '../components/button';
 import { ReactComponent as ArrowEnd } from '../images/arrow-end.svg';
 
 let EndButton = ({ length }) => {

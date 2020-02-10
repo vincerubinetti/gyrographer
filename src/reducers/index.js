@@ -1,8 +1,8 @@
-import { project } from './project.js';
-import { orbs } from './orbs.js';
+import { project } from './project';
+import { orbs } from './orbs';
 
 const reducer = (state, action) => {
-  const { meta, type, payload } = action;
+  const { meta = {}, type = '', payload = {} } = action;
 
   const newState = {
     ...project(state, meta, type, payload),

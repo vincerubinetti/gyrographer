@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import { useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { TimeContext } from '../time.js';
+import { TimeContext } from '../time';
 import './rail.css';
 
 let Rail = ({ length }) => {

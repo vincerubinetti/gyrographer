@@ -1,8 +1,8 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { TimeContext } from '../time.js';
-import { Button } from '../components/button.js';
+import { TimeContext } from '../time';
+import { Button } from '../components/button';
 import { ReactComponent as Play } from '../images/play.svg';
 import { ReactComponent as Pause } from '../images/pause.svg';
 

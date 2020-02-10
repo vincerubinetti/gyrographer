@@ -1,10 +1,10 @@
-import { Color } from '../util/color.js';
+import { Color } from '../util/color';
 
 export const project = (state, meta, type, payload) => {
   state = { ...state };
 
   const reducers = [
-    edit,
+    selected,
     loop,
     showBounds,
     showAxes,
@@ -28,18 +28,18 @@ export const project = (state, meta, type, payload) => {
   return state;
 };
 
-export const edit = (state, meta, type, payload) => {
+export const selected = (state, meta, type, payload) => {
   switch (type) {
-    case 'TOGGLE_EDIT':
-      state.edit = !state.edit;
+    case 'SET_SELECTED':
+      state.selected = String(payload.id || '');
       break;
 
     default:
       break;
   }
 
-  if (typeof state.edit !== 'boolean')
-    state.edit = false;
+  if (typeof state.selected !== 'string')
+    state.selected = '';
 };
 
 export const loop = (state, meta, type, payload) => {
@@ -97,7 +97,6 @@ export const showGrid = (state, meta, type, payload) => {
   if (typeof state.showGrid !== 'boolean')
     state.showGrid = true;
 };
-
 
 export const showPaths = (state, meta, type, payload) => {
   switch (type) {

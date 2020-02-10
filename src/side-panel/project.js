@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Row } from './row.js';
-import { Header } from './header.js';
-import { BoundsButton } from './bounds-button.js';
-import { AxesButton } from './axes-button.js';
-import { GridButton } from './grid-button.js';
-import { PathsButton } from './paths-button.js';
-import { SticksButton } from './sticks-button.js';
-import { WheelsButton } from './wheels-button.js';
+import { Row } from './row';
+import { Header } from './header';
+import { BoundsButton } from './bounds-button';
+import { AxesButton } from './axes-button';
+import { GridButton } from './grid-button';
+import { PathsButton } from './paths-button';
+import { SticksButton } from './sticks-button';
+import { WheelsButton } from './wheels-button';
 import { ReactComponent as Bounds } from '../images/bounds.svg';
 import { ReactComponent as Axes } from '../images/axes.svg';
 import { ReactComponent as Grid } from '../images/grid.svg';

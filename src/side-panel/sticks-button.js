@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button.js';
+import { Button } from '../components/button';
 import { ReactComponent as Eye } from '../images/eye.svg';
-import { toggleSticks } from '../actions/actions.js';
+import { toggleSticks } from '../actions/actions';
 
 let SticksButton = ({ showSticks, toggleSticks }) => (
   <Button

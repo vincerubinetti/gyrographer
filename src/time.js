@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import { useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { Orb } from './util/orb.js';
+import { Orb } from './util/orb';
 
 const TimeContext = createContext({});
 
@@ -55,7 +55,7 @@ let Time = ({ children, orbs, fps, length, loop, speed }) => {
   );
 
   const decrementTime = useCallback(
-    (multiplier) => changeTime(-speed * (multiplier || 1)),
+    (multiplier) => changeTime(-speed * (multiplier || 1), true),
     [speed, changeTime]
   );
 

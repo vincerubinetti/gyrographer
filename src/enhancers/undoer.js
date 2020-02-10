@@ -1,8 +1,7 @@
-import { copyObject } from '../util/object.js';
 import { filterObject } from '../util/object.js';
 
 export const undoer = (reducer) => (state, action) => {
-  const filteredState = filterObject(copyObject(state), ['past', 'future']);
+  const filteredState = filterObject({ ...state }, ['past', 'future']);
   let newState = {};
   const past = state.past || [];
   const future = state.future || [];
@@ -36,6 +35,14 @@ export const undoer = (reducer) => (state, action) => {
 
     default:
       newState = reducer(filteredState, action);
+      if (!action?.meta?.description) {
+        return {
+          ...newState,
+          past,
+          future
+        };
+      }
+
       // if state isn't initial state loaded from localStorage
       if (state.past && state.future)
         newPast = [...past, filteredState];
@@ -43,9 +50,7 @@ export const undoer = (reducer) => (state, action) => {
         ...newState,
         past: newPast,
         future: newFuture,
-        actionDescription: action.meta ?
-          action.meta.description || '' :
-          ''
+        actionDescription: action?.meta?.description || ''
       };
   }
 };

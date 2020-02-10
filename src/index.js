@@ -5,11 +5,11 @@ import { applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
 import reducer from './reducers';
-import { undoer } from './enhancers/undoer.js';
-import { logger } from './enhancers/logger.js';
+import { undoer } from './enhancers/undoer';
+import { logger } from './enhancers/logger';
 import { persister } from './enhancers/persister';
-import { getInitialState } from './enhancers/persister.js';
-import App from './app.js';
+import { getInitialState } from './enhancers/persister';
+import App from './app';
 
 const store = createStore(
   undoer(reducer),

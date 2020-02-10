@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tooltip } from './tooltip.js';
+import { Tooltip } from './tooltip';
 
 import './button.css';
 

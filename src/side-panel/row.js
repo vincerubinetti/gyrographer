@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tooltip } from '../components/tooltip.js';
+import { Tooltip } from '../components/tooltip';
 
 import './row.css';
 

@@ -4,9 +4,9 @@ import { useCallback } from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { TimeContext } from './time.js';
-import { undo } from './actions/undoer.js';
-import { redo } from './actions/undoer.js';
+import { TimeContext } from './time';
+import { undo } from './actions/undoer';
+import { redo } from './actions/undoer';
 
 let Keyboard = ({ past, future, length, undo, redo }) => {
   const context = useContext(TimeContext);

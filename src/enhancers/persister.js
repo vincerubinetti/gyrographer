@@ -1,5 +1,4 @@
-import { copyObject } from '../util/object.js';
-import { filterObject } from '../util/object.js';
+import { filterObject } from '../util/object';
 
 import testSaveFile from '../test-save-file.json';
 
@@ -13,9 +12,7 @@ export const persister = (store) => (next) => (action) => {
   window.localStorage.clear();
   window.localStorage.setItem(
     key,
-    JSON.stringify(
-      filterObject(copyObject(store.getState()), ['past', 'future'])
-    )
+    JSON.stringify(filterObject({ ...store.getState() }, ['past', 'future']))
   );
   return results;
 };
