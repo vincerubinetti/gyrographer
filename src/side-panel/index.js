@@ -18,7 +18,6 @@ let SidePanel = ({ selectedOrb }) => {
       <Button
         onClick={() => setOpen(!open)}
         tooltip={(open ? 'Close' : 'Open') + ' panel'}
-        tooltipHorizontalAlign="left"
       >
         {open && <Close />}
         {!open && <Open />}

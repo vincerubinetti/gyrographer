@@ -26,7 +26,6 @@ window.addEventListener('resize', () => {
   window.clearTimeout(window.resizeTimer);
   window.resizeTimer = window.setTimeout(() => {
     document.body.dataset.fullscreen =
-      Math.abs(window.screen.height - window.outerHeight) <= 1 &&
-      window.matchMedia('(hover)').matches;
-  }, 1000);
+      Math.abs(window.screen.height - window.innerHeight) <= 1;
+  }, 500);
 });

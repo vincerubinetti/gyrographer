@@ -7,18 +7,12 @@ import './button.css';
 export const Button = ({
   className,
   tooltip,
-  tooltipHorizontalAlign,
-  tooltipVerticalAlign,
   color,
   onClick,
   onCtrlClick,
   children
 }) => (
-  <Tooltip
-    text={tooltip || ''}
-    horizontalAlign={tooltipHorizontalAlign}
-    verticalAlign={tooltipVerticalAlign}
-  >
+  <Tooltip text={tooltip || ''}>
     <button
       className={'button ' + className}
       onClick={(event) => {

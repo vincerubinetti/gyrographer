@@ -16,7 +16,6 @@ import './index.css';
 
 let Graph = ({
   backgroundColor,
-  guideColor,
   showBounds,
   showAxes,
   showGrid,
@@ -37,7 +36,7 @@ let Graph = ({
   ));
 
   const wheels = context.orbTree.map((orb, index) => (
-    <Wheel key={index} orb={orb} alpha={guideColor.a / 4} />
+    <Wheel key={index} orb={orb} />
   ));
 
   return (
@@ -48,26 +47,19 @@ let Graph = ({
       onClick={() => select()}
     >
       <g id="view" ref={view}>
-        <g id="board" opacity={guideColor.a} stroke={guideColor.rgb}>
-          <g id="grid" opacity={showGrid ? 1 : 0}>
-            <Grid />
-          </g>
-          <g id="axes" opacity={showAxes ? 1 : 0}>
-            <Axes />
-          </g>
-          <g id="bounds" opacity={showBounds ? 1 : 0}>
-            <Bounds />
-          </g>
+        <g id="grid" opacity={showGrid ? 1 : 0}>
+          <Grid />
         </g>
-        <g id="wheels" opacity={showWheels ? 1 : 0} fill={guideColor.rgb}>
+        <g id="axes" opacity={showAxes ? 1 : 0}>
+          <Axes />
+        </g>
+        <g id="bounds" opacity={showBounds ? 1 : 0}>
+          <Bounds />
+        </g>
+        <g id="wheels" opacity={showWheels ? 1 : 0}>
           {wheels}
         </g>
-        <g
-          id="sticks"
-          opacity={showSticks ? guideColor.a : 0}
-          fill={guideColor.rgb}
-          stroke={guideColor.rgb}
-        >
+        <g id="sticks" opacity={showSticks ? 1 : 0}>
           {sticks}
         </g>
         <g id="paths" opacity={showPaths ? 1 : 0}>
@@ -86,7 +78,8 @@ const mapStateToProps = (state) => ({
   showGrid: state.showGrid,
   showPaths: state.showPaths,
   showSticks: state.showSticks,
-  showWheels: state.showWheels
+  showWheels: state.showWheels,
+  selected: state.selected
 });
 
 const mapDispatchToProps = (dispatch) => ({

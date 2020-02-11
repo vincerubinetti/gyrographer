@@ -5,9 +5,9 @@ import { Tooltip } from '../components/tooltip';
 import './row.css';
 
 const Row = ({ icon, text, tooltip, control }) => (
-  <div className='side_panel_row'>
+  <div className="side_panel_row">
     <div>{icon}</div>
-    <Tooltip text={tooltip} horizontalAlign="left">
+    <Tooltip text={tooltip}>
       <div>{text}</div>
     </Tooltip>
     <div>{control}</div>

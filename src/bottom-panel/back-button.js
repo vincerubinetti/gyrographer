@@ -13,7 +13,6 @@ export const BackButton = () => {
       className="thin_button"
       onClick={context.decrementTime}
       tooltip="Step back"
-      tooltipHorizontalAlign="left"
     >
       <ArrowLeft />
     </Button>

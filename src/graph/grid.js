@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './grid.css';
-
+const majorStrokeWidth = 1;
+const minorStrokeWidth = 0.25;
 const minorSpacing = 50;
 const majorMultiple = 4;
 
-let Grid = ({ left, top, right, bottom }) => {
+let Grid = ({ left, top, right, bottom, guideColor }) => {
   const minorHorizontalLines = [];
   const minorVerticalLines = [];
   const majorHorizontalLines = [];
@@ -33,10 +33,34 @@ let Grid = ({ left, top, right, bottom }) => {
 
   return (
     <>
-      <g id='minor_horizontal_lines'>{minorHorizontalLines}</g>
-      <g id='minor_vertical_lines'>{minorVerticalLines}</g>
-      <g id='major_horizontal_lines'>{majorHorizontalLines}</g>
-      <g id='major_vertical_lines'>{majorVerticalLines}</g>
+      <g
+        id="minor_horizontal_lines"
+        stroke={guideColor.rgba}
+        strokeWidth={minorStrokeWidth}
+      >
+        {minorHorizontalLines}
+      </g>
+      <g
+        id="minor_vertical_lines"
+        stroke={guideColor.rgba}
+        strokeWidth={minorStrokeWidth}
+      >
+        {minorVerticalLines}
+      </g>
+      <g
+        id="major_horizontal_lines"
+        stroke={guideColor.rgba}
+        strokeWidth={majorStrokeWidth}
+      >
+        {majorHorizontalLines}
+      </g>
+      <g
+        id="major_vertical_lines"
+        stroke={guideColor.rgba}
+        strokeWidth={majorStrokeWidth}
+      >
+        {majorVerticalLines}
+      </g>
     </>
   );
 };
@@ -45,7 +69,8 @@ const mapStateToProps = (state) => ({
   left: state.left,
   top: state.top,
   right: state.right,
-  bottom: state.bottom
+  bottom: state.bottom,
+  guideColor: state.guideColor
 });
 
 Grid = connect(mapStateToProps)(Grid);

@@ -11,7 +11,6 @@ let SticksButton = ({ showSticks, toggleSticks }) => (
     onClick={toggleSticks}
     color={showSticks ? 'blue' : 'gray'}
     tooltip={showSticks ? 'Hide all sticks' : 'Show sticks'}
-    tooltipVerticalAlign='bottom'
   >
     <Eye />
   </Button>

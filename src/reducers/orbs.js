@@ -84,13 +84,13 @@ export const offset = (state, meta, type, payload) => {
 };
 
 export const fillColor = (state, meta, type, payload) => {
-  if (typeof state.fillColor !== 'string')
-    state.fillColor = new Color('#00000000');
+  if (state.fillColor instanceof Color === false)
+    state.fillColor = new Color(state.fillColor || '#00000000');
 };
 
 export const strokeColor = (state, meta, type, payload) => {
-  if (typeof state.strokeColor !== 'string')
-    state.strokeColor = new Color('#ffffffff');
+  if (state.strokeColor instanceof Color === false)
+    state.strokeColor = new Color(state.strokeColor || '#ffffffff');
 };
 
 export const strokeWidth = (state, meta, type, payload) => {

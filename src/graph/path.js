@@ -4,11 +4,10 @@ import { useContext } from 'react';
 
 import { setSelected } from '../actions/actions';
 import { TimeContext } from '../time';
-import './path.css';
 
 const precision = 2;
 
-let Path = ({ orb, selected, select }) => {
+let Path = ({ orb, guideColor, select }) => {
   const context = useContext(TimeContext);
 
   const time = context.time;
@@ -40,11 +39,10 @@ let Path = ({ orb, selected, select }) => {
     d += 'z';
 
   return (
-    <>
+    <g className="path" opacity={orb.showPath ? 1 : 0}>
       <path
-        className="path"
-        fill={close ? fillColor : 'none'}
-        stroke={strokeColor}
+        fill={close ? fillColor.rgba : 'none'}
+        stroke={strokeColor.rgba}
         strokeWidth={strokeWidth}
         strokeDasharray={dashArray}
         strokeDashoffset={dashOffset}
@@ -54,23 +52,30 @@ let Path = ({ orb, selected, select }) => {
         d={d}
       />
       <path
-        className="path"
         fill="none"
-        stroke={strokeColor}
-        strokeWidth={strokeWidth * 5}
-        data-hitbox="true"
-        data-selected={selected === orb.id}
+        stroke={guideColor.rgb}
+        strokeWidth={strokeWidth + 20}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        opacity="0"
         onClick={(event) => {
           event.stopPropagation();
           select({ id: orb.id });
         }}
         d={d}
       />
-    </>
+    </g>
   );
 };
 
-const mapStateToProps = (state) => ({ selected: state.selected });
+const mapStateToProps = (state, props) => ({
+  selected: state.selected ?
+    state.selected === props.orb.id ?
+      true :
+      false :
+    undefined,
+  guideColor: state.guideColor
+});
 
 const mapDispatchToProps = (dispatch) => ({
   select: (...args) => dispatch(setSelected(...args))

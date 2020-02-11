@@ -15,7 +15,6 @@ export const PlayButton = () => {
       onClick={() => context.changePlaying(!context.playing)}
       color={context.playing ? 'blue' : 'white'}
       tooltip={context.playing ? 'Pause' : 'Play'}
-      tooltipHorizontalAlign="left"
     >
       {context.playing ? <Pause /> : <Play />}
     </Button>

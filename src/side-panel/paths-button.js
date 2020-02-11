@@ -11,7 +11,6 @@ let PathsButton = ({ showPaths, togglePaths }) => (
     onClick={togglePaths}
     color={showPaths ? 'blue' : 'gray'}
     tooltip={showPaths ? 'Hide all paths' : 'Show paths'}
-    tooltipVerticalAlign='bottom'
   >
     <Eye />
   </Button>

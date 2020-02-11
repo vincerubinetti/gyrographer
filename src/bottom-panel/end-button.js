@@ -13,7 +13,6 @@ let EndButton = ({ length }) => {
       className="thin_button"
       onClick={() => context.changeTime(length)}
       tooltip="To end"
-      tooltipHorizontalAlign="right"
     >
       <ArrowEnd />
     </Button>

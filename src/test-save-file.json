@@ -1,25 +1,25 @@
 {
-  "loop": false,
-  "showAxes": false,
-  "showGrid": false,
   "orbs": {
     "1": {
       "spin": 3,
       "radius": 500,
-      "strokeColor": "#e91e6340"
+      "strokeColor": "#ffeb3b",
+      "strokeWidth": 3
     },
     "2": {
       "spin": 2,
       "radius": 200,
       "parentId": "1",
-      "strokeColor": "#9c27b040"
+      "strokeColor": "#2196f3",
+      "strokeWidth": 5
     },
     "3": {
       "spin": -10,
       "radius": 100,
       "parentId": "2",
       "stepSize": 0.1,
-      "strokeColor": "#2196f3ff"
+      "strokeColor": "#9c27b0",
+      "strokeWidth": 7
     },
     "4": {
       "spin": -10,
@@ -27,7 +27,8 @@
       "offset": 180,
       "parentId": "2",
       "stepSize": 0.1,
-      "strokeColor": "#00bcd4ff"
+      "strokeColor": "#e91e63",
+      "strokeWidth": 9
     }
   }
 }

@@ -13,7 +13,6 @@ export const StartButton = () => {
       className="thin_button"
       onClick={() => context.changeTime(0)}
       tooltip="To start"
-      tooltipHorizontalAlign="left"
     >
       <ArrowStart />
     </Button>

@@ -11,7 +11,6 @@ let AxesButton = ({ showAxes, toggleAxes }) => (
     onClick={toggleAxes}
     color={showAxes ? 'blue' : 'gray'}
     tooltip={showAxes ? "Don't show axes" : 'Show axes'}
-    tooltipVerticalAlign="bottom"
   >
     <Eye />
   </Button>

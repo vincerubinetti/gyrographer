@@ -11,7 +11,6 @@ let WheelsButton = ({ showWheels, toggleWheels }) => (
     onClick={toggleWheels}
     color={showWheels ? 'blue' : 'gray'}
     tooltip={showWheels ? 'Hide all wheels' : 'Show wheels'}
-    tooltipVerticalAlign='bottom'
   >
     <Eye />
   </Button>

@@ -53,7 +53,7 @@ export const loop = (state, meta, type, payload) => {
   }
 
   if (typeof state.loop !== 'boolean')
-    state.loop = true;
+    state.loop = false;
 };
 
 export const showBounds = (state, meta, type, payload) => {
@@ -81,7 +81,7 @@ export const showAxes = (state, meta, type, payload) => {
   }
 
   if (typeof state.showAxes !== 'boolean')
-    state.showAxes = true;
+    state.showAxes = false;
 };
 
 export const showGrid = (state, meta, type, payload) => {
@@ -95,7 +95,7 @@ export const showGrid = (state, meta, type, payload) => {
   }
 
   if (typeof state.showGrid !== 'boolean')
-    state.showGrid = true;
+    state.showGrid = false;
 };
 
 export const showPaths = (state, meta, type, payload) => {
@@ -137,7 +137,7 @@ export const showWheels = (state, meta, type, payload) => {
   }
 
   if (typeof state.showWheels !== 'boolean')
-    state.showWheels = true;
+    state.showWheels = false;
 };
 
 export const speed = (state, meta, type, payload) => {
@@ -233,29 +233,29 @@ export const bottom = (state, meta, type, payload) => {
 export const backgroundColor = (state, meta, type, payload) => {
   switch (type) {
     case 'SET_BACKGROUND_COLOR':
-      state.backgroundColor = new Color('payload.backgroundColor');
+      state.backgroundColor = new Color(payload.backgroundColor);
       break;
 
     default:
       break;
   }
 
-  if (typeof state.backgroundColor !== 'string')
-    state.backgroundColor = new Color('#202020ff');
+  if (state.backgroundColor instanceof Color === false)
+    state.backgroundColor = new Color(state.backgroundColor || '#202020ff');
 };
 
 export const guideColor = (state, meta, type, payload) => {
   switch (type) {
     case 'SET_GUIDE_COLOR':
-      state.guideColor = new Color('payload.guideColor');
+      state.guideColor = new Color(payload.guideColor);
       break;
 
     default:
       break;
   }
 
-  if (typeof state.guideColor !== 'string')
-    state.guideColor = new Color('#ffffff80');
+  if (state.guideColor instanceof Color === false)
+    state.guideColor = new Color(state.guideColor || '#ffffff80');
 };
 
 export const fps = (state, meta, type, payload) => {

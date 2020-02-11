@@ -1,12 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './axes.css';
+const strokeWidth = 3;
 
-let Axes = ({ left, top, right, bottom }) => (
+let Axes = ({ left, top, right, bottom, guideColor }) => (
   <>
-    <line x1={left} y1='0' x2={right} y2='0' strokeLinecap='square' />
-    <line x1='0' y1={top} x2='0' y2={bottom} strokeLinecap='square' />
+    <line
+      x1={left}
+      y1="0"
+      x2={right}
+      y2="0"
+      stroke={guideColor.rgba}
+      strokeWidth={strokeWidth}
+      strokeLinecap="square"
+    />
+    <line
+      x1="0"
+      y1={top}
+      x2="0"
+      y2={bottom}
+      stroke={guideColor.rgba}
+      strokeWidth={strokeWidth}
+      strokeLinecap="square"
+    />
   </>
 );
 
@@ -14,7 +30,8 @@ const mapStateToProps = (state) => ({
   left: state.left,
   top: state.top,
   right: state.right,
-  bottom: state.bottom
+  bottom: state.bottom,
+  guideColor: state.guideColor
 });
 
 Axes = connect(mapStateToProps)(Axes);

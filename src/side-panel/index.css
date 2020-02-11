@@ -16,9 +16,13 @@
 #side_panel[data-open="false"] {
   transform: translate(-180px, -50%);
 }
-#side_panel[data-open="false"] > *:not(:first-child) {
-  visibility: hidden;
+#side_panel .side_panel_row {
+  transition: transform var(--fast);
 }
+#side_panel[data-open="false"] .side_panel_row {
+  transform: translateX(15px);
+}
+
 body[data-fullscreen="true"] #side_panel {
   opacity: 0;
 }

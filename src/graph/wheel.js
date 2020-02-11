@@ -1,20 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { useContext } from 'react';
 
 import { TimeContext } from '../time';
 import { Vector } from '../util/math';
-import './wheel.css';
 
 const precision = 2;
 
-const Wheel = ({ orb, alpha }) => {
+let Wheel = ({ orb, guideColor }) => {
   const context = useContext(TimeContext);
 
   const time = context.time;
   const parent = orb.parent;
-
-  // styles
-  const opacity = orb.showWheel ? alpha : 0;
 
   // geometry
   const to = orb.computeProp('to', time);
@@ -29,14 +26,27 @@ const Wheel = ({ orb, alpha }) => {
   const radius = b.subtract(a).length();
 
   return (
-    <circle
-      className='wheel'
-      opacity={opacity}
-      cx={a.x.toFixed(precision)}
-      cy={a.y.toFixed(precision)}
-      r={radius.toFixed(precision)}
-    />
+    <g className="wheel" opacity={orb.showWheel ? 1 : 0}>
+      <circle
+        fill={guideColor.rgba}
+        opacity={0.25}
+        cx={a.x.toFixed(precision)}
+        cy={a.y.toFixed(precision)}
+        r={radius.toFixed(precision)}
+      />
+    </g>
   );
 };
+
+const mapStateToProps = (state, props) => ({
+  selected: state.selected ?
+    state.selected === props.orb.id ?
+      true :
+      false :
+    undefined,
+  guideColor: state.guideColor
+});
+
+Wheel = connect(mapStateToProps)(Wheel);
 
 export { Wheel };
