@@ -1,7 +1,7 @@
 import { Color } from '../util/color';
 
 export const project = (state, meta, type, payload) => {
-  state = { ...state };
+  state = { ...(state || {}) };
 
   const reducers = [
     selected,

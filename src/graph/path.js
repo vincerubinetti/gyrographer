@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useContext } from 'react';
 
-import { setSelected } from '../actions/actions';
+import { setSelected } from '../actions/project';
 import { TimeContext } from '../time';
 
 const precision = 2;
@@ -38,39 +38,56 @@ let Path = ({ orb, guideColor, select }) => {
   if (close)
     d += 'z';
 
+  const { x, y } = points[points.length - 1];
+
   return (
-    <g className="path" opacity={orb.showPath ? 1 : 0}>
-      <path
-        fill={close ? fillColor.rgba : 'none'}
-        stroke={strokeColor.rgba}
-        strokeWidth={strokeWidth}
-        strokeDasharray={dashArray}
-        strokeDashoffset={dashOffset}
-        strokeLinecap={strokeLineCap}
-        strokeLinejoin={strokeLineJoin}
-        opacity={opacity}
-        d={d}
-      />
-      <path
-        fill="none"
-        stroke={guideColor.rgb}
-        strokeWidth={strokeWidth + 20}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        opacity="0"
-        onClick={(event) => {
-          event.stopPropagation();
-          select({ id: orb.id });
-        }}
-        d={d}
-      />
-    </g>
+    <>
+      <g className='path' opacity={orb.showPath ? 1 : 0}>
+        <path
+          fill={close ? fillColor.rgba : 'none'}
+          stroke={strokeColor.rgba}
+          strokeWidth={strokeWidth}
+          strokeDasharray={dashArray}
+          strokeDashoffset={dashOffset}
+          strokeLinecap={strokeLineCap}
+          strokeLinejoin={strokeLineJoin}
+          opacity={opacity}
+          d={d}
+        />
+      </g>
+      <g className='path_hitbox' opacity={0}>
+        <path
+          fill='none'
+          stroke={guideColor.rgb}
+          strokeWidth={strokeWidth + 10}
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          d={d}
+          onClick={(event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            select({ id: orb.id });
+          }}
+        />
+        <circle
+          fill={guideColor.rgb}
+          cx={x}
+          cy={y}
+          r={strokeWidth + 20}
+          onClick={(event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            select({ id: orb.id });
+          }}
+        />
+      </g>
+    </>
   );
 };
 
 const mapStateToProps = (state, props) => ({
   selected: state.selected ?
-    state.selected === props.orb.id ?
+    state.selected.id === props.orb.id ?
       true :
       false :
     undefined,

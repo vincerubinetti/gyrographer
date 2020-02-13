@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button';
-import { ReactComponent as Eye } from '../images/eye.svg';
-import { toggleSticks } from '../actions/actions';
+import { Button } from '../../components/button';
+import { ReactComponent as EyeIcon } from '../../images/eye.svg';
+import { toggleSticks } from '../../actions/project';
 
 let SticksButton = ({ showSticks, toggleSticks }) => (
   <Button
@@ -12,7 +12,7 @@ let SticksButton = ({ showSticks, toggleSticks }) => (
     color={showSticks ? 'blue' : 'gray'}
     tooltip={showSticks ? 'Hide all sticks' : 'Show sticks'}
   >
-    <Eye />
+    <EyeIcon />
   </Button>
 );
 

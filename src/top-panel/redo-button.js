@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button';
-import { ReactComponent as Redo } from '../images/redo.svg';
+import { ReactComponent as RedoIcon } from '../images/redo.svg';
 import { redo } from '../actions/undoer';
 
 let RedoButton = ({ future, actionDescription, redo }) => {
@@ -27,7 +27,7 @@ let RedoButton = ({ future, actionDescription, redo }) => {
       color={future.length ? 'white' : 'gray'}
       tooltip={<>{tooltip}</>}
     >
-      <Redo />
+      <RedoIcon />
     </Button>
   );
 };

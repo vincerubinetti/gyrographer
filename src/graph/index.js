@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { setSelected } from '../actions/actions';
+import { setSelected } from '../actions/project';
 import { usePanZoom } from '../util/hooks';
 import { TimeContext } from '../time';
 import { Grid } from './grid';
@@ -16,6 +16,7 @@ import './index.css';
 
 let Graph = ({
   backgroundColor,
+  guideColor,
   showBounds,
   showAxes,
   showGrid,
@@ -42,28 +43,32 @@ let Graph = ({
   return (
     <svg
       ref={svg}
-      id="graph"
+      id='graph'
       style={{ background: backgroundColor.rgba }}
       onClick={() => select()}
     >
-      <g id="view" ref={view}>
-        <g id="grid" opacity={showGrid ? 1 : 0}>
-          <Grid />
+      <g id='view' ref={view}>
+        <g id='guides' opacity={guideColor.a}>
+          <g id='grid' opacity={showGrid ? 1 : 0}>
+            <Grid />
+          </g>
+          <g id='axes' opacity={showAxes ? 1 : 0}>
+            <Axes />
+          </g>
+          <g id='bounds' opacity={showBounds ? 1 : 0}>
+            <Bounds />
+          </g>
         </g>
-        <g id="axes" opacity={showAxes ? 1 : 0}>
-          <Axes />
-        </g>
-        <g id="bounds" opacity={showBounds ? 1 : 0}>
-          <Bounds />
-        </g>
-        <g id="wheels" opacity={showWheels ? 1 : 0}>
-          {wheels}
-        </g>
-        <g id="sticks" opacity={showSticks ? 1 : 0}>
-          {sticks}
-        </g>
-        <g id="paths" opacity={showPaths ? 1 : 0}>
-          {paths}
+        <g id='content'>
+          <g id='wheels' opacity={showWheels ? 1 : 0}>
+            {wheels}
+          </g>
+          <g id='sticks' opacity={showSticks ? 1 : 0}>
+            {sticks}
+          </g>
+          <g id='paths' opacity={showPaths ? 1 : 0}>
+            {paths}
+          </g>
         </g>
       </g>
     </svg>

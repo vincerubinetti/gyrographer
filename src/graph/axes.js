@@ -10,7 +10,7 @@ let Axes = ({ left, top, right, bottom, guideColor }) => (
       y1="0"
       x2={right}
       y2="0"
-      stroke={guideColor.rgba}
+      stroke={guideColor.rgb}
       strokeWidth={strokeWidth}
       strokeLinecap="square"
     />
@@ -19,7 +19,7 @@ let Axes = ({ left, top, right, bottom, guideColor }) => (
       y1={top}
       x2="0"
       y2={bottom}
-      stroke={guideColor.rgba}
+      stroke={guideColor.rgb}
       strokeWidth={strokeWidth}
       strokeLinecap="square"
     />

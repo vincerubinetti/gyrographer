@@ -3,8 +3,8 @@ import { useContext } from 'react';
 
 import { TimeContext } from '../time';
 import { Button } from '../components/button';
-import { ReactComponent as Play } from '../images/play.svg';
-import { ReactComponent as Pause } from '../images/pause.svg';
+import { ReactComponent as PlayIcon } from '../images/play.svg';
+import { ReactComponent as PauseIcon } from '../images/pause.svg';
 
 export const PlayButton = () => {
   const context = useContext(TimeContext);
@@ -16,7 +16,7 @@ export const PlayButton = () => {
       color={context.playing ? 'blue' : 'white'}
       tooltip={context.playing ? 'Pause' : 'Play'}
     >
-      {context.playing ? <Pause /> : <Play />}
+      {context.playing ? <PauseIcon /> : <PlayIcon />}
     </Button>
   );
 };

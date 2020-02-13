@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 import { TimeContext } from '../time';
 import { Button } from '../components/button';
-import { ReactComponent as ArrowRight } from '../images/arrow-right.svg';
+import { ReactComponent as ArrowRightIcon } from '../images/arrow-right.svg';
 
 export const ForwardButton = () => {
   const context = useContext(TimeContext);
@@ -14,7 +14,7 @@ export const ForwardButton = () => {
       onClick={context.incrementTime}
       tooltip="Step forward"
     >
-      <ArrowRight />
+      <ArrowRightIcon />
     </Button>
   );
 };

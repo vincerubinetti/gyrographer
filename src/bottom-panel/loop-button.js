@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button';
-import { ReactComponent as Loop } from '../images/loop.svg';
-import { toggleLoop } from '../actions/actions';
+import { ReactComponent as LoopIcon } from '../images/loop.svg';
+import { toggleLoop } from '../actions/project';
 
 let LoopButton = ({ loop, toggleLoop }) => (
   <Button
@@ -12,7 +12,7 @@ let LoopButton = ({ loop, toggleLoop }) => (
     color={loop ? 'blue' : 'gray'}
     tooltip={loop ? "Don't loop" : 'Loop'}
   >
-    <Loop />
+    <LoopIcon />
   </Button>
 );
 

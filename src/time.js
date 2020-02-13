@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import { useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { Orb } from './util/orb';
+import { Orb } from './orb';
 
 const TimeContext = createContext({});
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button';
-import { ReactComponent as Eye } from '../images/eye.svg';
-import { toggleGrid } from '../actions/actions';
+import { Button } from '../../components/button';
+import { ReactComponent as EyeIcon } from '../../images/eye.svg';
+import { toggleGrid } from '../../actions/project';
 
 let GridButton = ({ showGrid, toggleGrid }) => (
   <Button
@@ -12,7 +12,7 @@ let GridButton = ({ showGrid, toggleGrid }) => (
     color={showGrid ? 'blue' : 'gray'}
     tooltip={showGrid ? "Don't show grid" : 'Show grid'}
   >
-    <Eye />
+    <EyeIcon />
   </Button>
 );
 

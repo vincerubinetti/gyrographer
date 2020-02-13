@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 import { TimeContext } from '../time';
 import { Button } from '../components/button';
-import { ReactComponent as ArrowLeft } from '../images/arrow-left.svg';
+import { ReactComponent as ArrowLeftIcon } from '../images/arrow-left.svg';
 
 export const BackButton = () => {
   const context = useContext(TimeContext);
@@ -14,7 +14,7 @@ export const BackButton = () => {
       onClick={context.decrementTime}
       tooltip="Step back"
     >
-      <ArrowLeft />
+      <ArrowLeftIcon />
     </Button>
   );
 };

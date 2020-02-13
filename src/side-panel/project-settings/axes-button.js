@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button';
-import { ReactComponent as Eye } from '../images/eye.svg';
-import { toggleAxes } from '../actions/actions';
+import { Button } from '../../components/button';
+import { ReactComponent as EyeIcon } from '../../images/eye.svg';
+import { toggleAxes } from '../../actions/project';
 
 let AxesButton = ({ showAxes, toggleAxes }) => (
   <Button
@@ -12,7 +12,7 @@ let AxesButton = ({ showAxes, toggleAxes }) => (
     color={showAxes ? 'blue' : 'gray'}
     tooltip={showAxes ? "Don't show axes" : 'Show axes'}
   >
-    <Eye />
+    <EyeIcon />
   </Button>
 );
 

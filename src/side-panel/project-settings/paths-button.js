@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button';
-import { ReactComponent as Eye } from '../images/eye.svg';
-import { togglePaths } from '../actions/actions';
+import { Button } from '../../components/button';
+import { ReactComponent as EyeIcon } from '../../images/eye.svg';
+import { togglePaths } from '../../actions/project';
 
 let PathsButton = ({ showPaths, togglePaths }) => (
   <Button
@@ -12,7 +12,7 @@ let PathsButton = ({ showPaths, togglePaths }) => (
     color={showPaths ? 'blue' : 'gray'}
     tooltip={showPaths ? 'Hide all paths' : 'Show paths'}
   >
-    <Eye />
+    <EyeIcon />
   </Button>
 );
 

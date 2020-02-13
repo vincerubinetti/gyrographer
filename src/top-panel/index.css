@@ -10,7 +10,6 @@
   top: 0;
   border-bottom: solid 2px var(--dark-gray);
   user-select: none;
-  z-index: 1;
   transition: opacity var(--slow);
 }
 body[data-fullscreen="true"] #top_panel {

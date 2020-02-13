@@ -5,7 +5,7 @@ import { Tooltip } from './tooltip';
 import './button.css';
 
 export const Button = ({
-  className,
+  className = '',
   tooltip,
   color,
   onClick,

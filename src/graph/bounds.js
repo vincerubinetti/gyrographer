@@ -10,7 +10,7 @@ let Bounds = ({ left, top, right, bottom, guideColor }) => (
     width={right - left}
     height={bottom - top}
     fill='none'
-    stroke={guideColor.rgba}
+    stroke={guideColor.rgb}
     strokeWidth={strokeWidth}
   />
 );

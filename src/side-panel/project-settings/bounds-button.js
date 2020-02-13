@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button';
-import { ReactComponent as Eye } from '../images/eye.svg';
-import { toggleBounds } from '../actions/actions';
+import { Button } from '../../components/button';
+import { ReactComponent as EyeIcon } from '../../images/eye.svg';
+import { toggleBounds } from '../../actions/project';
 
 let BoundsButton = ({ showBounds, toggleBounds }) => (
   <Button
@@ -12,7 +12,7 @@ let BoundsButton = ({ showBounds, toggleBounds }) => (
     color={showBounds ? 'blue' : 'gray'}
     tooltip={showBounds ? "Don't show bounds" : 'Show bounds'}
   >
-    <Eye />
+    <EyeIcon />
   </Button>
 );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button';
-import { ReactComponent as Undo } from '../images/undo.svg';
+import { ReactComponent as UndoIcon } from '../images/undo.svg';
 import { undo } from '../actions/undoer';
 
 let UndoButton = ({ past, actionDescription, undo }) => {
@@ -12,7 +12,7 @@ let UndoButton = ({ past, actionDescription, undo }) => {
   ]
     .filter((entry) => (entry ? true : false))
     .map((entry, index) => (
-      <div key={index} className="undo_redo_menu_item">
+      <div key={index} className='undo_redo_menu_item'>
         Undo {entry}
       </div>
     ));
@@ -22,7 +22,7 @@ let UndoButton = ({ past, actionDescription, undo }) => {
 
   return (
     <Button
-      className=""
+      className=''
       onClick={() => {
         if (past.length)
           undo();
@@ -30,7 +30,7 @@ let UndoButton = ({ past, actionDescription, undo }) => {
       color={past.length ? 'white' : 'gray'}
       tooltip={<>{tooltip}</>}
     >
-      <Undo />
+      <UndoIcon />
     </Button>
   );
 };

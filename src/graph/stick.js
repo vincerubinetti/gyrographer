@@ -49,7 +49,7 @@ let Stick = ({ orb, guideColor }) => {
 
 const mapStateToProps = (state, props) => ({
   selected: state.selected ?
-    state.selected === props.orb.id ?
+    state.selected.id === props.orb.id ?
       true :
       false :
     undefined,

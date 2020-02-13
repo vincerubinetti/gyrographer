@@ -6,6 +6,7 @@
   transition: opacity var(--fast);
 }
 
-.path path:nth-child(2) {
+.path_hitbox:hover {
   cursor: pointer;
+  opacity: 1;
 }

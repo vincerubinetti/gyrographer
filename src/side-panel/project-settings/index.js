@@ -1,55 +1,56 @@
 import React from 'react';
 
-import { Row } from './row';
-import { Header } from './header';
+import { Row } from '../row';
+import { Heading } from '../heading';
 import { BoundsButton } from './bounds-button';
 import { AxesButton } from './axes-button';
 import { GridButton } from './grid-button';
 import { PathsButton } from './paths-button';
 import { SticksButton } from './sticks-button';
 import { WheelsButton } from './wheels-button';
-import { ReactComponent as Bounds } from '../images/bounds.svg';
-import { ReactComponent as Axes } from '../images/axes.svg';
-import { ReactComponent as Grid } from '../images/grid.svg';
-import { ReactComponent as Path } from '../images/show-path.svg';
-import { ReactComponent as Stick } from '../images/show-stick.svg';
-import { ReactComponent as Wheel } from '../images/show-wheel.svg';
+import { ReactComponent as BoundsIcon } from '../../images/bounds.svg';
+import { ReactComponent as AxesIcon } from '../../images/axes.svg';
+import { ReactComponent as GridIcon } from '../../images/grid.svg';
+import { ReactComponent as PathIcon } from '../../images/path.svg';
+import { ReactComponent as StickIcon } from '../../images/stick.svg';
+import { ReactComponent as WheelIcon } from '../../images/wheel.svg';
 
-const Project = () => (
+const ProjectSettings = () => (
   <>
-    <Header text='Guides' />
+    <Heading text='Guides' />
     <Row
-      icon={<Bounds />}
+      icon={<BoundsIcon />}
       text='Bounds'
       tooltip='Boundaries of the image'
       control={<BoundsButton />}
     />
     <Row
-      icon={<Axes />}
+      icon={<AxesIcon />}
       text='Axes'
       tooltip='X/Y axes and origin of the image'
       control={<AxesButton />}
     />
     <Row
-      icon={<Grid />}
+      icon={<GridIcon />}
       text='Grid'
       tooltip='Major and minor gridlines'
       control={<GridButton />}
     />
+    <Heading text='Markers' />
     <Row
-      icon={<Path />}
+      icon={<PathIcon />}
       text='Paths'
       tooltip='Curves traced by orbs'
       control={<PathsButton />}
     />
     <Row
-      icon={<Stick />}
+      icon={<StickIcon />}
       text='Sticks'
       tooltip='Visualization lines from parent orb to child orb'
       control={<SticksButton />}
     />
     <Row
-      icon={<Wheel />}
+      icon={<WheelIcon />}
       text='Wheels'
       tooltip='Visualization circles from parent orb to child orb'
       control={<WheelsButton />}
@@ -57,4 +58,4 @@ const Project = () => (
   </>
 );
 
-export { Project };
+export default ProjectSettings;

@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button';
-import { setSpeed } from '../actions/actions';
+import { setSpeed } from '../actions/project';
 
 const speeds = [0.1, 0.25, 0.5, 1, 2, 4];
 

@@ -35,28 +35,28 @@ let Grid = ({ left, top, right, bottom, guideColor }) => {
     <>
       <g
         id="minor_horizontal_lines"
-        stroke={guideColor.rgba}
+        stroke={guideColor.rgb}
         strokeWidth={minorStrokeWidth}
       >
         {minorHorizontalLines}
       </g>
       <g
         id="minor_vertical_lines"
-        stroke={guideColor.rgba}
+        stroke={guideColor.rgb}
         strokeWidth={minorStrokeWidth}
       >
         {minorVerticalLines}
       </g>
       <g
         id="major_horizontal_lines"
-        stroke={guideColor.rgba}
+        stroke={guideColor.rgb}
         strokeWidth={majorStrokeWidth}
       >
         {majorHorizontalLines}
       </g>
       <g
         id="major_vertical_lines"
-        stroke={guideColor.rgba}
+        stroke={guideColor.rgb}
         strokeWidth={majorStrokeWidth}
       >
         {majorVerticalLines}

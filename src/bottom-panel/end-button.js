@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { TimeContext } from '../time';
 import { Button } from '../components/button';
-import { ReactComponent as ArrowEnd } from '../images/arrow-end.svg';
+import { ReactComponent as ArrowEndIcon } from '../images/arrow-end.svg';
 
 let EndButton = ({ length }) => {
   const context = useContext(TimeContext);
@@ -14,7 +14,7 @@ let EndButton = ({ length }) => {
       onClick={() => context.changeTime(length)}
       tooltip="To end"
     >
-      <ArrowEnd />
+      <ArrowEndIcon />
     </Button>
   );
 };

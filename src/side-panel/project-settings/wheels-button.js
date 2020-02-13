@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from '../components/button';
-import { ReactComponent as Eye } from '../images/eye.svg';
-import { toggleWheels } from '../actions/actions';
+import { Button } from '../../components/button';
+import { ReactComponent as EyeIcon } from '../../images/eye.svg';
+import { toggleWheels } from '../../actions/project';
 
 let WheelsButton = ({ showWheels, toggleWheels }) => (
   <Button
@@ -12,7 +12,7 @@ let WheelsButton = ({ showWheels, toggleWheels }) => (
     color={showWheels ? 'blue' : 'gray'}
     tooltip={showWheels ? 'Hide all wheels' : 'Show wheels'}
   >
-    <Eye />
+    <EyeIcon />
   </Button>
 );
 
