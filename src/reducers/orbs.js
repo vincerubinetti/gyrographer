@@ -1,8 +1,10 @@
 import { Color } from '../util/color';
+import { isBoolean } from '../util/types';
+import { isString } from '../util/types';
+import { isNumber } from '../util/types';
+import { isObject } from '../util/types';
 
-export const orbs = (state, meta, type, payload) => {
-  state = { ...(state || {}) };
-
+export const orbs = (state = {}, meta, type, payload) => {
   const reducers = [
     id,
     parentId,
@@ -35,12 +37,12 @@ export const orbs = (state, meta, type, payload) => {
 };
 
 export const id = (orb, meta, type, payload, id) => {
-  if (typeof orb.id !== 'string')
+  if (!isString(orb.id))
     orb.id = String(id || '0');
 };
 
 export const parentId = (orb, meta, type, payload) => {
-  if (typeof orb.parentId !== 'string')
+  if (!isString(orb.parentId))
     orb.parentId = '';
 };
 
@@ -55,7 +57,7 @@ export const showPath = (orb, meta, type, payload) => {
       break;
   }
 
-  if (typeof orb.showPath !== 'boolean')
+  if (!isBoolean(orb.showPath))
     orb.showPath = true;
 };
 
@@ -69,7 +71,8 @@ export const showStick = (orb, meta, type, payload) => {
     default:
       break;
   }
-  if (typeof orb.showStick !== 'boolean')
+
+  if (!isBoolean(orb.showStick))
     orb.showStick = true;
 };
 
@@ -83,83 +86,104 @@ export const showWheel = (orb, meta, type, payload) => {
     default:
       break;
   }
-  if (typeof orb.showWheel !== 'boolean')
+
+  if (!isBoolean(orb.showWheel))
     orb.showWheel = true;
 };
 
 export const from = (orb, meta, type, payload) => {
-  if (typeof orb.from !== 'number')
+  switch (type) {
+    case 'SET_FROM':
+      if (payload.id === orb.id)
+        orb.from = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
+  if (!isNumber(orb.from))
     orb.from = 0;
 };
 
 export const to = (orb, meta, type, payload) => {
-  if (typeof orb.to !== 'number')
-    orb.to = 100;
+  switch (type) {
+    case 'SET_TO':
+      if (payload.id === orb.id)
+        orb.to = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
+  if (!isNumber(orb.to))
+    orb.to = 360;
 };
 
 export const stepSize = (orb, meta, type, payload) => {
-  if (typeof orb.stepSize !== 'number')
+  if (!isNumber(orb.stepSize))
     orb.stepSize = 0.1;
   if (orb.stepSize <= 0)
     orb.stepSize = 0.1;
 };
 
 export const radius = (orb, meta, type, payload) => {
-  if (typeof orb.radius !== 'number')
+  if (!isNumber(orb.radius))
     orb.radius = 100;
 };
 
 export const spin = (orb, meta, type, payload) => {
-  if (typeof orb.spin !== 'number')
+  if (!isNumber(orb.spin))
     orb.spin = 1;
 };
 
 export const offset = (orb, meta, type, payload) => {
-  if (typeof orb.offset !== 'number')
+  if (!isNumber(orb.offset))
     orb.offset = 0;
 };
 
 export const fillColor = (orb, meta, type, payload) => {
-  if (orb.fillColor instanceof Color === false)
+  if (!isObject(orb.fillColor))
     orb.fillColor = new Color(orb.fillColor || '#00000000');
 };
 
 export const strokeColor = (orb, meta, type, payload) => {
-  if (orb.strokeColor instanceof Color === false)
+  if (!isObject(orb.strokeColor))
     orb.strokeColor = new Color(orb.strokeColor || '#ffffffff');
 };
 
 export const strokeWidth = (orb, meta, type, payload) => {
-  if (typeof orb.strokeWidth !== 'number')
+  if (!isNumber(orb.strokeWidth))
     orb.strokeWidth = 5;
 };
 
 export const close = (orb, meta, type, payload) => {
-  if (typeof orb.close !== 'boolean')
+  if (!isBoolean(orb.close))
     orb.close = false;
 };
 
 export const dashArray = (orb, meta, type, payload) => {
-  if (typeof orb.dashArray !== 'string')
+  if (!isString(orb.dashArray))
     orb.dashArray = '0';
 };
 
 export const dashOffset = (orb, meta, type, payload) => {
-  if (typeof orb.dashOffset !== 'string')
+  if (!isString(orb.dashOffset))
     orb.dashOffset = '0';
 };
 
 export const strokeLineCap = (orb, meta, type, payload) => {
-  if (typeof orb.strokeLineCap !== 'string')
+  if (!isString(orb.strokeLineCap))
     orb.strokeLineCap = 'round';
 };
 
 export const strokeLineJoin = (orb, meta, type, payload) => {
-  if (typeof orb.strokeLineJoin !== 'string')
+  if (!isString(orb.strokeLineJoin))
     orb.strokeLineJoin = 'round';
 };
 
 export const order = (orb, meta, type, payload) => {
-  if (typeof orb.order !== 'number')
+  if (!isNumber(orb.order))
     orb.order = 0;
 };

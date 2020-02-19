@@ -1,7 +1,7 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700';
 
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 
   --black: #202020;
   --dark-gray: #404040;
@@ -46,4 +46,6 @@ button:hover {
 svg {
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
+  flex-grow: 0;
 }

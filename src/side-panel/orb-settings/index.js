@@ -15,6 +15,8 @@ import { ReactComponent as OffsetIcon } from '../../images/offset.svg';
 import { PathButton } from './path-button';
 import { StickButton } from './stick-button';
 import { WheelButton } from './wheel-button';
+import { FromBox } from './from-box';
+import { ToBox } from './to-box';
 
 const OrbSettings = () => (
   <>
@@ -39,8 +41,8 @@ const OrbSettings = () => (
         control={<WheelButton />}
       />
       <Heading text='Geometry' />
-      <Row icon={<FromIcon />} text='From' tooltip='' control={<NumberBox />} />
-      <Row icon={<ToIcon />} text='To' tooltip='' control={<NumberBox />} />
+      <Row icon={<FromIcon />} text='From' tooltip='' control={<FromBox />} />
+      <Row icon={<ToIcon />} text='To' tooltip='' control={<ToBox />} />
       <Row
         icon={<StepIcon />}
         text='Step Size'

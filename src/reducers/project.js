@@ -1,8 +1,10 @@
 import { Color } from '../util/color';
+import { isBoolean } from '../util/types';
+import { isString } from '../util/types';
+import { isNumber } from '../util/types';
+import { isObject } from '../util/types';
 
-export const project = (state, meta, type, payload) => {
-  state = { ...(state || {}) };
-
+export const project = (state = {}, meta, type, payload) => {
   const reducers = [
     selected,
     loop,
@@ -38,7 +40,7 @@ export const selected = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.selected !== 'string')
+  if (!isString(state.selected))
     state.selected = '';
 };
 
@@ -52,7 +54,7 @@ export const loop = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.loop !== 'boolean')
+  if (!isBoolean(state.loop))
     state.loop = false;
 };
 
@@ -66,7 +68,7 @@ export const showBounds = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.showBounds !== 'boolean')
+  if (!isBoolean(state.showBounds))
     state.showBounds = true;
 };
 
@@ -80,7 +82,7 @@ export const showAxes = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.showAxes !== 'boolean')
+  if (!isBoolean(state.showAxes))
     state.showAxes = false;
 };
 
@@ -94,7 +96,7 @@ export const showGrid = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.showGrid !== 'boolean')
+  if (!isBoolean(state.showGrid))
     state.showGrid = false;
 };
 
@@ -108,7 +110,7 @@ export const showPaths = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.showPaths !== 'boolean')
+  if (!isBoolean(state.showPaths))
     state.showPaths = true;
 };
 
@@ -122,7 +124,7 @@ export const showSticks = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.showSticks !== 'boolean')
+  if (!isBoolean(state.showSticks))
     state.showSticks = true;
 };
 
@@ -136,7 +138,7 @@ export const showWheels = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.showWheels !== 'boolean')
+  if (!isBoolean(state.showWheels))
     state.showWheels = false;
 };
 
@@ -150,7 +152,7 @@ export const speed = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.speed !== 'number')
+  if (!isNumber(state.speed))
     state.speed = 1;
   if (state.speed < 0.1)
     state.speed = 0.01;
@@ -168,7 +170,7 @@ export const left = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.left !== 'number')
+  if (!isNumber(state.left))
     state.left = -1000;
   if (state.left < -10000)
     state.left = -10000;
@@ -186,7 +188,7 @@ export const top = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.top !== 'number')
+  if (!isNumber(state.top))
     state.top = -1000;
   if (state.top < -10000)
     state.top = -10000;
@@ -204,7 +206,7 @@ export const right = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.right !== 'number')
+  if (!isNumber(state.right))
     state.right = 1000;
   if (state.right < -10000)
     state.right = -10000;
@@ -222,7 +224,7 @@ export const bottom = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.bottom !== 'number')
+  if (!isNumber(state.bottom))
     state.bottom = 1000;
   if (state.bottom < -10000)
     state.bottom = -10000;
@@ -240,7 +242,7 @@ export const backgroundColor = (state, meta, type, payload) => {
       break;
   }
 
-  if (state.backgroundColor instanceof Color === false)
+  if (!isObject(state.backgroundColor))
     state.backgroundColor = new Color(state.backgroundColor || '#202020ff');
 };
 
@@ -254,7 +256,7 @@ export const guideColor = (state, meta, type, payload) => {
       break;
   }
 
-  if (state.guideColor instanceof Color === false)
+  if (!isObject(state.guideColor))
     state.guideColor = new Color(state.guideColor || '#ffffff80');
 };
 
@@ -268,7 +270,7 @@ export const fps = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.fps !== 'number')
+  if (!isNumber(state.fps))
     state.fps = 60;
   if (state.fps < 1)
     state.fps = 1;
@@ -286,7 +288,7 @@ export const length = (state, meta, type, payload) => {
       break;
   }
 
-  if (typeof state.length !== 'number')
+  if (!isNumber(state.length))
     state.length = 300;
   if (state.length < 0.1)
     state.length = 0.1;

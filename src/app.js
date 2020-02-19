@@ -7,6 +7,8 @@ import BottomPanel from './bottom-panel';
 import { Time } from './time';
 import { Keyboard } from './keyboard';
 
+import './util/debug';
+
 import './app.css';
 
 const App = () => (

@@ -1,56 +1,48 @@
-import { filterObject } from '../util/object.js';
+import { filterObject, copyObject } from '../util/object.js';
 
 export const undoer = (reducer) => (state, action) => {
-  const filteredState = filterObject({ ...state }, ['past', 'future']);
-  let newState = {};
-  const past = state.past || [];
-  const future = state.future || [];
-  let newPast = [];
-  let newFuture = [];
+  const oldState = filterObject(state, ['past', 'future']);
+  const oldPast = copyObject(state.past) || [];
+  const oldFuture = copyObject(state.future) || [];
+  let newPast = copyObject(oldPast) || [];
+  let newFuture = copyObject(oldFuture) || [];
+  let newState = reducer(oldState, action);
+  newState.actionDescription = action?.meta?.description;
 
   switch (action.type) {
     case 'UNDO':
-      if (!past.length)
-        return filteredState;
-      newState = past[past.length - 1];
-      newPast = past.slice(0, past.length - 1);
-      newFuture = [filteredState, ...future];
-      return {
-        ...newState,
-        past: newPast,
-        future: newFuture
-      };
+      if (!oldPast.length)
+        break;
+
+      newState = oldPast[0];
+      newPast = oldPast.slice(1);
+      newFuture = [oldState, ...oldFuture];
+      break;
 
     case 'REDO':
-      if (!future.length)
-        return filteredState;
-      newState = future[0];
-      newPast = [...past, filteredState];
-      newFuture = future.slice(1);
-      return {
-        ...newState,
-        past: newPast,
-        future: newFuture
-      };
+      if (!oldFuture.length)
+        break;
+
+      newState = oldFuture[0];
+      newPast = [...oldPast, oldState];
+      newFuture = oldFuture.slice(1);
+      break;
 
     default:
-      newState = reducer(filteredState, action);
-      if (!action?.meta?.description) {
-        return {
-          ...newState,
-          past,
-          future
-        };
-      }
+      if (!isUndoable(action))
+        break;
 
-      // if state isn't initial state loaded from localStorage
-      if (state.past && state.future)
-        newPast = [...past, filteredState];
-      return {
-        ...newState,
-        past: newPast,
-        future: newFuture,
-        actionDescription: action?.meta?.description || ''
-      };
+      newPast = [oldState, ...oldPast];
+      newFuture = [];
+      break;
   }
+
+  return {
+    ...newState,
+    past: newPast,
+    future: newFuture
+  };
 };
+
+export const isUndoable = (action) =>
+  action?.meta?.description && !action?.payload?.noUndo;

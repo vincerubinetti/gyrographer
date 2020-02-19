@@ -10,7 +10,6 @@ let UndoButton = ({ past, actionDescription, undo }) => {
     actionDescription,
     ...past.slice(0, 9).map((entry) => entry.actionDescription)
   ]
-    .filter((entry) => (entry ? true : false))
     .map((entry, index) => (
       <div key={index} className='undo_redo_menu_item'>
         Undo {entry}
