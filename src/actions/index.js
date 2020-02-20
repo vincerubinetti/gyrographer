@@ -1,7 +1,7 @@
 import { createAction as reduxCreateAction } from 'redux-actions';
 
 export const createAction = (type, description = '') =>
-  reduxCreateAction(type, null, (action) => ({
+  reduxCreateAction(type, null, () => ({
     description: description
   }));
 

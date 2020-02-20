@@ -1,49 +1,59 @@
 import { copyObject } from '../util/object.js';
 import { filterObject } from '../util/object.js';
 
-export const undoer = (reducer) => (state, action) => {
+export const undoer = (reducer) => (state = {}, action) => {
   state = copyObject(state);
-  const oldState = filterObject(state, ['past', 'future']);
-  const oldPast = copyObject(state.past || []);
-  const oldFuture = copyObject(state.future || []);
-  let newPast = copyObject(oldPast || []);
-  let newFuture = copyObject(oldFuture || []);
-  let newState = reducer(oldState, action);
-  newState.actionDescription = action?.meta?.description;
+  const past = copyObject(state.past || []);
+  const future = copyObject(state.future || []);
+  state = filterObject(state, ['past', 'future']);
 
   switch (action.type) {
     case 'UNDO':
-      if (!oldPast.length)
-        break;
-
-      newState = copyObject(oldPast[0]);
-      newPast = copyObject(oldPast.slice(1));
-      newFuture = copyObject([oldState, ...oldFuture]);
-      break;
+      if (past.length) {
+        return {
+          ...past[0],
+          past: past.slice(1),
+          future: [state, ...future]
+        };
+      } else {
+        return {
+          ...state,
+          past,
+          future
+        };
+      }
 
     case 'REDO':
-      if (!oldFuture.length)
-        break;
-
-      newState = copyObject(oldFuture[0]);
-      newPast = copyObject([...oldPast, oldState]);
-      newFuture = copyObject(oldFuture.slice(1));
-      break;
+      if (future.length) {
+        return {
+          ...future[0],
+          past: [state, ...past],
+          future: future.slice(1)
+        };
+      } else {
+        return {
+          ...state,
+          past,
+          future
+        };
+      }
 
     default:
-      if (!isUndoable(action))
-        break;
-
-      newPast = copyObject([oldState, ...oldPast]);
-      newFuture = copyObject([]);
-      break;
+      if (isUndoable(action)) {
+        return {
+          ...reducer(state, action),
+          actionDescription: action?.meta?.description,
+          past: [state, ...past],
+          future: []
+        };
+      } else {
+        return {
+          ...reducer(state, action),
+          past,
+          future
+        };
+      }
   }
-
-  return {
-    ...newState,
-    past: newPast,
-    future: newFuture
-  };
 };
 
 export const isUndoable = (action) =>
