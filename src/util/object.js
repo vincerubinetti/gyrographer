@@ -2,7 +2,6 @@ import { isObject } from './types';
 import { isArray } from './types';
 
 export const filterObject = (object, deleteKeys) => {
-  object = copyObject(object);
   for (const key of deleteKeys)
     delete object[key];
   return object;

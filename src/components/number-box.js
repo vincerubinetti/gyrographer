@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
+import { useRef } from 'react';
 
-import { useDebounce } from 'use-debounce';
 import { sign } from '../util/math';
 import { precision } from '../util/math';
 import { ReactComponent as HandleIcon } from '../images/number-box-handle.svg';
@@ -27,15 +27,9 @@ export const NumberBox = ({
   step = cleanNumber(step, 1);
   smallStep = cleanNumber(smallStep, 0.1);
 
-  const [touched, setTouched] = useState(false);
   const [focused, setFocused] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const [internalValue, setInternalValue] = useState(value);
-  const [nudgeValue] = useDebounce(internalValue, 10, { maxWait: 100 });
-  const [changeValue] = useDebounce(internalValue, 500);
-
-  onChange = useCallback(onChange, []);
-  onNudge = useCallback(onNudge, []);
+  const timer = useRef();
 
   const getStep = useCallback(
     (event) => {
@@ -47,29 +41,33 @@ export const NumberBox = ({
     [step, smallStep]
   );
 
-  const changeInternalValue = useCallback(
+  const update = useCallback(
     (newValue) => {
       newValue = cleanNumber(newValue, min);
+
       if (newValue > max)
         newValue = max;
       if (newValue < min)
         newValue = min;
+
       if (!focused) {
         newValue = newValue.toFixed(precision(smallStep));
         newValue = cleanNumber(newValue);
       }
-      setInternalValue(newValue);
-      setTouched(true);
+
+      onNudge(newValue);
+      window.clearTimeout(timer.current);
+      timer.current = window.setTimeout(() => onChange(newValue), 500);
     },
-    [min, max, smallStep, focused]
+    [min, max, smallStep, focused, onChange, onNudge]
   );
 
   const onWheel = useCallback(
     (event) => {
       const delta = -getStep(event) * sign(event.deltaY);
-      changeInternalValue(internalValue + delta);
+      update(value + delta);
     },
-    [internalValue, changeInternalValue, getStep]
+    [value, update, getStep]
   );
 
   const onMouseDown = useCallback(() => {
@@ -85,12 +83,12 @@ export const NumberBox = ({
 
       if (prevMousePosition) {
         const delta = -getStep(event) * (mousePosition.y - prevMousePosition.y);
-        changeInternalValue(internalValue + delta);
+        update(value + delta);
       }
 
       prevMousePosition = mousePosition;
     },
-    [internalValue, clicked, getStep, changeInternalValue]
+    [value, clicked, getStep, update]
   );
 
   const onMouseUp = useCallback(() => {
@@ -107,29 +105,19 @@ export const NumberBox = ({
     };
   }, [onMouseMove, onMouseUp]);
 
-  useEffect(() => {
-    if (touched)
-      onChange(changeValue);
-  }, [touched, changeValue, onChange]);
-
-  useEffect(() => {
-    if (touched)
-      onNudge(nudgeValue);
-  }, [touched, nudgeValue, onNudge]);
-
   return (
-    <div className='number_box' onWheel={onWheel}>
+    <div className="number_box" onWheel={onWheel}>
       <input
-        type='number'
-        value={internalValue}
+        type="number"
+        value={value}
         min={min}
         max={max}
         step={step}
-        onChange={(event) => changeInternalValue(event.target.value)}
+        onChange={(event) => update(event.target.value)}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
       />
-      <HandleIcon className='number_box_handle' onMouseDown={onMouseDown} />
+      <HandleIcon className="number_box_handle" onMouseDown={onMouseDown} />
     </div>
   );
 };

@@ -15,7 +15,7 @@ export class Orb {
     // if (prop === 'radius')
     //   value += sin((360 * time) / 100) * 50;
     if (prop === 'to')
-      value = (100 * time) / 300;
+      value = time * (360 / 300);
     // if (prop === 'offset')
     //   value = (360 * time) / 300;
 
@@ -27,7 +27,7 @@ export class Orb {
     spin = spin || this.computeProp('spin', time);
     offset = offset || this.computeProp('offset', time);
 
-    const angle = (spin * 360 * trace) / 100 + offset;
+    const angle = spin * trace + offset;
 
     let parentPoint = { x: 0, y: 0 };
     if (this.parent)

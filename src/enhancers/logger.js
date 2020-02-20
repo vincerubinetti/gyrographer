@@ -1,4 +1,5 @@
 import { isUndoable } from './undoer';
+import {log} from '../util/debug';
 
 export const logger = (store) => (next) => (action) => {
   const prevState = store.getState();
@@ -9,19 +10,17 @@ export const logger = (store) => (next) => (action) => {
     '%c' + action.type,
     isUndoable(action) ? 'color: blue' : 'color: grey'
   );
-  {
-    console.group('%cprev state', 'color: grey');
-    console.logSync(prevState);
-    console.groupEnd();
+  console.groupCollapsed('%cprev state', 'color: grey');
+  log(prevState);
+  console.groupEnd();
 
-    console.group('%caction', 'color: blue');
-    console.logSync(action);
-    console.groupEnd();
+  console.groupCollapsed('%caction', 'color: blue');
+  log(action);
+  console.groupEnd();
 
-    console.group('%cnext state', 'color: green');
-    console.logSync(nextState);
-    console.groupEnd();
-  }
+  console.groupCollapsed('%cnext state', 'color: green');
+  log(nextState);
+  console.groupEnd();
   console.groupEnd();
 
   return results;

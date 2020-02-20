@@ -35,7 +35,7 @@ let UndoButton = ({ past, actionDescription, undo }) => {
 };
 
 const mapStateToProps = (state) => ({
-  past: state.past,
+  past: state.past || [],
   actionDescription: state.actionDescription
 });
 

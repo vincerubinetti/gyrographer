@@ -123,9 +123,9 @@ export const to = (orb, meta, type, payload) => {
 
 export const stepSize = (orb, meta, type, payload) => {
   if (!isNumber(orb.stepSize))
-    orb.stepSize = 0.1;
+    orb.stepSize = 1;
   if (orb.stepSize <= 0)
-    orb.stepSize = 0.1;
+    orb.stepSize = 1;
 };
 
 export const radius = (orb, meta, type, payload) => {

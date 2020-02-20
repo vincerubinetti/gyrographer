@@ -1,8 +1,13 @@
-window.console.logSync = (...args) => {
-  try {
-    args = args.map((arg) => JSON.parse(JSON.stringify(arg)));
-    console.log(...args);
-  } catch (error) {
-    console.log('Error trying to console.logSync()', ...args);
+import YAML from 'yaml';
+
+export const log = (...args) => {
+  const lines = YAML.stringify(args)
+    .split('\n')
+    .filter((line) => line.trim());
+  for (const line of lines) {
+    const index = line.indexOf(':');
+    const key = line.substr(0, index);
+    const value = line.substr(index + 1);
+    console.log('%c' + key + '%c' + value, 'color: gray;', 'color: blue;');
   }
 };

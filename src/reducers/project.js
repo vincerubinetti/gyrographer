@@ -292,6 +292,6 @@ export const length = (state, meta, type, payload) => {
     state.length = 300;
   if (state.length < 0.1)
     state.length = 0.1;
-  if (state.length > 300)
-    state.length = 300;
+  if (state.length > 180000)
+    state.length = 180000;
 };

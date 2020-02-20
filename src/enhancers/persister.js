@@ -1,5 +1,3 @@
-import { filterObject } from '../util/object';
-
 import testSaveFile from '../test-save-file.json';
 
 const key = 'root';
@@ -10,14 +8,11 @@ window.localStorage.clear();
 export const persister = (store) => (next) => (action) => {
   const results = next(action);
   window.localStorage.clear();
-  window.localStorage.setItem(
-    key,
-    JSON.stringify(filterObject({ ...store.getState() }, ['past', 'future']))
-  );
+  window.localStorage.setItem(key, JSON.stringify(store.getState()));
   return results;
 };
 
-export function getInitialState() {
+export const getStateFromStorage = () => {
   let results = {};
   const stored = window.localStorage.getItem(key);
   if (stored) {
@@ -28,8 +23,5 @@ export function getInitialState() {
     }
   }
   results = testSaveFile;
-  console.groupCollapsed('LOAD_STATE_FROM_STORAGE');
-  console.log(results);
-  console.groupEnd();
   return results;
-}
+};

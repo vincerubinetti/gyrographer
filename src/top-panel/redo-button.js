@@ -32,7 +32,7 @@ let RedoButton = ({ future, actionDescription, redo }) => {
 };
 
 const mapStateToProps = (state) => ({
-  future: state.future,
+  future: state.future || [],
   actionDescription: state.actionDescription
 });
 

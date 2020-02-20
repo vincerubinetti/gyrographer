@@ -8,12 +8,11 @@ import reducer from './reducers';
 import { undoer } from './enhancers/undoer';
 import { logger } from './enhancers/logger';
 import { persister } from './enhancers/persister';
-import { getInitialState } from './enhancers/persister';
 import App from './app';
 
 const store = createStore(
   undoer(reducer),
-  getInitialState(),
+  reducer(),
   applyMiddleware(persister, logger)
 );
 
