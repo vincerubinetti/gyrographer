@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import * as d3 from 'd3';
@@ -61,32 +60,4 @@ export const usePanZoom = () => {
   }, []);
 
   return [svgRef, viewRef];
-};
-
-export const usePrev = (value) => {
-  const prevValue = useRef();
-  useEffect(() => {
-    prevValue.current = value;
-  });
-  return prevValue.current;
-};
-
-export const useDiff = (value) => {
-  const prevValue = useRef();
-  useEffect(() => {
-    prevValue.current = value;
-  });
-  return (
-    value !== prevValue.current &&
-    value !== undefined &&
-    prevValue.current !== undefined
-  );
-};
-
-export const useMounted = () => {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  return mounted;
 };
