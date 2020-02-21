@@ -5,4 +5,4 @@ export const createAction = (type, description = '') =>
     description: description
   }));
 
-export const setState = createAction('SET_STATE');
+export const setState = createAction('SET_STATE', 'Load file');
