@@ -5,7 +5,6 @@ import { useCallback } from 'react';
 import { useRef } from 'react';
 
 import { sign } from '../util/math';
-import { precision } from '../util/math';
 import { ReactComponent as HandleIcon } from '../images/number-box-handle.svg';
 
 import './number-box.css';
@@ -13,57 +12,41 @@ import './number-box.css';
 let prevMousePosition;
 
 export const NumberBox = ({
-  value,
-  min,
-  max,
-  step,
-  smallStep,
+  value = 0,
+  step = 1,
+  precision = 1,
   onChange = () => {},
   onNudge = () => {}
 }) => {
-  value = cleanNumber(value, min);
-  min = cleanNumber(min, 0);
-  max = cleanNumber(max, 100);
-  step = cleanNumber(step, 1);
-  smallStep = cleanNumber(smallStep, 0.1);
-
   const [focused, setFocused] = useState(false);
   const [clicked, setClicked] = useState(false);
   const timer = useRef();
 
   const getStep = useCallback(
     (event) => {
-      if (event.shiftKey)
-        return smallStep;
+      if (event.altKey)
+        return step / 10;
+      else if (event.shiftKey)
+        return step * 10;
       else
         return step;
     },
-    [step, smallStep]
+    [step]
   );
 
   const update = useCallback(
     (newValue) => {
-      newValue = cleanNumber(newValue, min);
-
-      if (newValue > max)
-        newValue = max;
-      if (newValue < min)
-        newValue = min;
-
-      if (!focused) {
-        newValue = newValue.toFixed(precision(smallStep));
-        newValue = cleanNumber(newValue);
-      }
-
       onNudge(newValue);
       window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => onChange(newValue), 500);
     },
-    [min, max, smallStep, focused, onChange, onNudge]
+    [onChange, onNudge]
   );
 
   const onWheel = useCallback(
     (event) => {
+      event.target.blur();
+
       const delta = -getStep(event) * sign(event.deltaY);
       update(value + delta);
     },
@@ -109,9 +92,7 @@ export const NumberBox = ({
     <div className="number_box" onWheel={onWheel}>
       <input
         type="number"
-        value={value}
-        min={min}
-        max={max}
+        value={focused ? value : value.toFixed(precision)}
         step={step}
         onChange={(event) => update(event.target.value)}
         onFocus={() => setFocused(true)}
@@ -120,11 +101,4 @@ export const NumberBox = ({
       <HandleIcon className="number_box_handle" onMouseDown={onMouseDown} />
     </div>
   );
-};
-
-const cleanNumber = (value, fallback) => {
-  value = Number(value);
-  if (Number.isNaN(value))
-    value = fallback || 0;
-  return value;
 };

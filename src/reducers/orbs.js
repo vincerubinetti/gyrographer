@@ -7,7 +7,7 @@ import { isObject } from '../util/types';
 export const orbs = (state = {}, meta, type, payload) => {
   const reducers = [
     id,
-    parentId,
+    parent,
     showPath,
     showStick,
     showWheel,
@@ -41,9 +41,9 @@ export const id = (orb, meta, type, payload, id) => {
     orb.id = String(id || '0');
 };
 
-export const parentId = (orb, meta, type, payload) => {
-  if (!isString(orb.parentId))
-    orb.parentId = '';
+export const parent = (orb, meta, type, payload) => {
+  if (!isString(orb.parent))
+    orb.parent = '';
 };
 
 export const showPath = (orb, meta, type, payload) => {
@@ -122,25 +122,79 @@ export const to = (orb, meta, type, payload) => {
 };
 
 export const stepSize = (orb, meta, type, payload) => {
+  switch (type) {
+    case 'SET_STEP_SIZE':
+      if (payload.id === orb.id)
+        orb.stepSize = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
   if (!isNumber(orb.stepSize))
     orb.stepSize = 1;
-  if (orb.stepSize <= 0)
-    orb.stepSize = 1;
+  if (orb.stepSize <= 0.01)
+    orb.stepSize = 0.01;
+  if (orb.stepSize > 360)
+    orb.stepSize = 360;
 };
 
 export const radius = (orb, meta, type, payload) => {
+  switch (type) {
+    case 'SET_RADIUS':
+      if (payload.id === orb.id)
+        orb.radius = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
   if (!isNumber(orb.radius))
     orb.radius = 100;
+  if (orb.radius < -10000)
+    orb.radius = -10000;
+  if (orb.radius > 10000)
+    orb.radius = 10000;
 };
 
 export const spin = (orb, meta, type, payload) => {
+  switch (type) {
+    case 'SET_SPIN':
+      if (payload.id === orb.id)
+        orb.spin = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
   if (!isNumber(orb.spin))
     orb.spin = 1;
+  if (orb.radius < -1000)
+    orb.radius = -1000;
+  if (orb.radius > 1000)
+    orb.radius = 1000;
 };
 
 export const offset = (orb, meta, type, payload) => {
+  switch (type) {
+    case 'SET_OFFSET':
+      if (payload.id === orb.id)
+        orb.offset = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
   if (!isNumber(orb.offset))
     orb.offset = 0;
+  if (orb.radius < -3600)
+    orb.radius = -3600;
+  if (orb.radius > 3600)
+    orb.radius = 3600;
 };
 
 export const fillColor = (orb, meta, type, payload) => {

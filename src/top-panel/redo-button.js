@@ -5,8 +5,11 @@ import { Button } from '../components/button';
 import { ReactComponent as RedoIcon } from '../images/redo.svg';
 import { redo } from '../actions/undoer';
 
-let RedoButton = ({ future, actionDescription, redo }) => {
-  let tooltip = future.slice(0, 9).map((entry) => entry.actionDescription)
+let RedoButton = ({ future, redo }) => {
+  let tooltip = future
+    .slice(0, 9)
+    .map((entry) => entry.actionDescription)
+    .filter((entry) => entry)
     .map((entry, index) => (
       <div key={index} className="undo_redo_menu_item">
         Redo {entry}

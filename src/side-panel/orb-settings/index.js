@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { NumberBox } from '../../components/number-box';
 import { Row } from '../row';
 import { Heading } from '../heading';
 import { ReactComponent as PathIcon } from '../../images/path.svg';
@@ -17,50 +16,54 @@ import { StickButton } from './stick-button';
 import { WheelButton } from './wheel-button';
 import { FromBox } from './from-box';
 import { ToBox } from './to-box';
+import { StepSizeBox } from './step-size-box';
+import { RadiusBox } from './radius-box';
+import { SpinBox } from './spin-box';
+import { OffsetBox } from './offset-box';
 
 const OrbSettings = () => (
   <>
     <>
-      <Heading text='Markers' />
+      <Heading text="Markers" />
       <Row
         icon={<PathIcon />}
-        text='Path'
-        tooltip=''
+        text="Path"
+        tooltip=""
         control={<PathButton />}
       />
       <Row
         icon={<StickIcon />}
-        text='Stick'
-        tooltip=''
+        text="Stick"
+        tooltip=""
         control={<StickButton />}
       />
       <Row
         icon={<WheelIcon />}
-        text='Wheel'
-        tooltip=''
+        text="Wheel"
+        tooltip=""
         control={<WheelButton />}
       />
-      <Heading text='Geometry' />
-      <Row icon={<FromIcon />} text='From' tooltip='' control={<FromBox />} />
-      <Row icon={<ToIcon />} text='To' tooltip='' control={<ToBox />} />
+      <Heading text="Geometry" />
+      <Row icon={<FromIcon />} text="From" tooltip="" control={<FromBox />} />
+      <Row icon={<ToIcon />} text="To" tooltip="" control={<ToBox />} />
       <Row
         icon={<StepIcon />}
-        text='Step Size'
-        tooltip=''
-        control={<NumberBox />}
+        text="Step Size"
+        tooltip=""
+        control={<StepSizeBox />}
       />
       <Row
         icon={<RadiusIcon />}
-        text='Radius'
-        tooltip=''
-        control={<NumberBox />}
+        text="Radius"
+        tooltip=""
+        control={<RadiusBox />}
       />
-      <Row icon={<SpinIcon />} text='Spin' tooltip='' control={<NumberBox />} />
+      <Row icon={<SpinIcon />} text="Spin" tooltip="" control={<SpinBox />} />
       <Row
         icon={<OffsetIcon />}
-        text='Offset'
-        tooltip=''
-        control={<NumberBox />}
+        text="Offset"
+        tooltip=""
+        control={<OffsetBox />}
       />
     </>
   </>

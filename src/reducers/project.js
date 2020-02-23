@@ -42,6 +42,8 @@ export const selected = (state, meta, type, payload) => {
 
   if (!isString(state.selected))
     state.selected = '';
+  if (state.selected && !state.orbs[state.selected])
+    state.selected = '';
 };
 
 export const loop = (state, meta, type, payload) => {
@@ -139,7 +141,7 @@ export const showWheels = (state, meta, type, payload) => {
   }
 
   if (!isBoolean(state.showWheels))
-    state.showWheels = false;
+    state.showWheels = true;
 };
 
 export const speed = (state, meta, type, payload) => {

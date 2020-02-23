@@ -11,18 +11,6 @@ export const sign = (value) => {
     return 0;
 };
 
-export const precision = (number) => {
-  if (!Number.isFinite(number))
-    return 0;
-  let exponent = 1;
-  let precision = 0;
-  while (Math.round(number * exponent) / exponent !== number) {
-    exponent *= 10;
-    precision++;
-  }
-  return precision;
-};
-
 export class Vector {
   constructor(x, y) {
     this.x = x;

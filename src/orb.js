@@ -5,8 +5,6 @@ import { Vector } from './util/math';
 export class Orb {
   constructor() {
     this.parent = null;
-    this.children = [];
-
     this.cache = {};
   }
 
@@ -47,16 +45,21 @@ export class Orb {
 
     const from = this.computeProp('from', time);
     const to = this.computeProp('to', time);
+    const stepSize = this.stepSize;
     const radius = this.computeProp('radius', time);
     const spin = this.computeProp('spin', time);
     const offset = this.computeProp('offset', time);
 
-    const stepSize = this.stepSize;
-
     const path = [];
 
-    for (let trace = from; trace < to; trace += stepSize)
-      path.push(this.computePoint(trace, time, radius, spin, offset));
+    if (from < to) {
+      for (let trace = from; trace < to; trace += stepSize)
+        path.push(this.computePoint(trace, time, radius, spin, offset));
+    }
+    if (from > to) {
+      for (let trace = from; trace > to; trace -= stepSize)
+        path.push(this.computePoint(trace, time, radius, spin, offset));
+    }
     path.push(this.computePoint(to, time, radius, spin, offset));
 
     this.cache[time] = path;
@@ -67,29 +70,16 @@ export class Orb {
   static buildTree(orbs) {
     const tree = [];
 
-    const orbIds = Object.keys(orbs);
-    for (const orbId of orbIds) {
+    for (const [id, orb] of Object.entries(orbs)) {
       const leaf = new Orb();
-      const orb = orbs[orbId];
-      const props = Object.keys(orb);
-      for (const prop of props)
+      leaf.id = id;
+      for (const prop of Object.keys(orb))
         leaf[prop] = orb[prop];
-      leaf.id = orbId;
-      leaf.children = [];
       tree.push(leaf);
     }
 
-    for (let index = 0; index < tree.length; index++) {
-      for (let parentIndex = 0; parentIndex < tree.length; parentIndex++) {
-        if (
-          tree[index].id !== tree[parentIndex].id &&
-          tree[parentIndex].id === tree[index].parentId
-        ) {
-          tree[index].parent = tree[parentIndex];
-          tree[parentIndex].children.push(tree[index]);
-        }
-      }
-    }
+    for (const leaf of tree)
+      leaf.parent = tree.find((parent) => parent.id === leaf.parent);
 
     return tree;
   }

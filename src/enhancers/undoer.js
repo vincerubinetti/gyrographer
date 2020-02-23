@@ -17,6 +17,7 @@ export const undoer = (reducer) => (
         newPast = past.slice(1);
         newFuture = [present, ...future];
         newPresent = maintainStaticKeys(staticKeys, present, newPresent);
+        newPresent = reducer(newPresent, action);
       }
       break;
 
@@ -26,6 +27,7 @@ export const undoer = (reducer) => (
         newPast = [present, ...past];
         newFuture = future.slice(1);
         newPresent = maintainStaticKeys(staticKeys, present, newPresent);
+        newPresent = reducer(newPresent, action);
       }
       break;
 

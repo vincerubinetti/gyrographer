@@ -8,7 +8,7 @@ import { Vector } from '../util/math';
 const precision = 2;
 const strokeWidth = 5;
 
-let Stick = ({ orb, guideColor }) => {
+let Stick = ({ orb, selected, guideColor }) => {
   const context = useContext(TimeContext);
 
   const time = context.time;
@@ -26,7 +26,12 @@ let Stick = ({ orb, guideColor }) => {
   const b = orb.computePoint(to, time);
 
   return (
-    <g className="stick" opacity={orb.showStick ? 1 : 0}>
+    <g
+      className="stick"
+      opacity={
+        orb.showStick && (selected === true || selected === undefined) ? 1 : 0
+      }
+    >
       <line
         fill="none"
         stroke={guideColor.rgba}
@@ -49,7 +54,7 @@ let Stick = ({ orb, guideColor }) => {
 
 const mapStateToProps = (state, props) => ({
   selected: state.selected ?
-    state.selected.id === props.orb.id ?
+    state.selected === props.orb.id ?
       true :
       false :
     undefined,

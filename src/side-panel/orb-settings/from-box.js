@@ -7,8 +7,6 @@ import { setFrom } from '../../actions/orbs';
 let FromBox = ({ selected, value, setFrom }) => (
   <NumberBox
     value={value}
-    min={-999999}
-    max={999999}
     onNudge={(value) => {
       setFrom({ id: selected, value, noUndo: true });
     }}

@@ -7,7 +7,7 @@ import { Vector } from '../util/math';
 
 const precision = 2;
 
-let Wheel = ({ orb, guideColor }) => {
+let Wheel = ({ orb, selected, guideColor }) => {
   const context = useContext(TimeContext);
 
   const time = context.time;
@@ -26,7 +26,12 @@ let Wheel = ({ orb, guideColor }) => {
   const radius = b.subtract(a).length();
 
   return (
-    <g className="wheel" opacity={orb.showWheel ? 1 : 0}>
+    <g
+      className="wheel"
+      opacity={
+        orb.showWheel && (selected === true || selected === undefined) ? 1 : 0
+      }
+    >
       <circle
         fill={guideColor.rgba}
         opacity={0.25}
@@ -40,7 +45,7 @@ let Wheel = ({ orb, guideColor }) => {
 
 const mapStateToProps = (state, props) => ({
   selected: state.selected ?
-    state.selected.id === props.orb.id ?
+    state.selected === props.orb.id ?
       true :
       false :
     undefined,

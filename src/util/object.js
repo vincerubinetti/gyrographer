@@ -1,12 +1,6 @@
 import { isObject } from './types';
 import { isArray } from './types';
 
-export const filterObject = (object, deleteKeys) => {
-  for (const key of deleteKeys)
-    delete object[key];
-  return object;
-};
-
 export const copyObject = (item) => {
   if (isObject(item)) {
     const copy = {};

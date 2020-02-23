@@ -13,11 +13,11 @@ let Keyboard = ({ past, future, length, undo, redo }) => {
 
   const onKeyDown = useCallback(
     (event) => {
-      let multiplier = 1;
+      let step = 1;
       if (event.shiftKey)
-        multiplier = 10;
-      else if (event.ctrlKey)
-        multiplier = 0.1;
+        step = 10;
+      else if (event.altlKey)
+        step = 0.1;
 
       switch (event.key) {
         case ' ':
@@ -26,13 +26,17 @@ let Keyboard = ({ past, future, length, undo, redo }) => {
           break;
 
         case 'ArrowLeft':
-          context.decrementTime(multiplier);
-          event.preventDefault();
+          if (!document.activeElement.matches('input')) {
+            context.decrementTime(step);
+            event.preventDefault();
+          }
           break;
 
         case 'ArrowRight':
-          context.incrementTime(multiplier);
-          event.preventDefault();
+          if (!document.activeElement.matches('input')) {
+            context.incrementTime(step);
+            event.preventDefault();
+          }
           break;
 
         case 'Home':

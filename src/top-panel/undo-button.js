@@ -8,20 +8,22 @@ import { undo } from '../actions/undoer';
 let UndoButton = ({ past, actionDescription, undo }) => {
   let tooltip = [
     actionDescription,
-    ...past.slice(0, 9).map((entry) => entry.actionDescription)
-  ]
-    .map((entry, index) => (
-      <div key={index} className='undo_redo_menu_item'>
-        Undo {entry}
-      </div>
-    ));
+    ...past
+      .slice(0, 9)
+      .map((entry) => entry.actionDescription)
+      .filter((entry) => entry)
+  ].map((entry, index) => (
+    <div key={index} className="undo_redo_menu_item">
+      Undo {entry}
+    </div>
+  ));
 
   if (!tooltip.length)
     tooltip = 'Undo';
 
   return (
     <Button
-      className=''
+      className=""
       onClick={() => {
         if (past.length)
           undo();
