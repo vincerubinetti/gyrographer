@@ -20,7 +20,7 @@ export const NumberBox = ({
 }) => {
   const [focused, setFocused] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const timer = useRef();
+  const changeTimer = useRef();
 
   const getStep = useCallback(
     (event) => {
@@ -35,12 +35,17 @@ export const NumberBox = ({
   );
 
   const update = useCallback(
-    (newValue) => {
+    (newValue, debounce) => {
       onNudge(newValue);
-      window.clearTimeout(timer.current);
-      timer.current = window.setTimeout(() => onChange(newValue), 500);
+      if (debounce) {
+        window.clearTimeout(changeTimer.current);
+        changeTimer.current = window.setTimeout(
+          () => onChange(newValue),
+          debounce
+        );
+      }
     },
-    [onChange, onNudge]
+    [onNudge, onChange]
   );
 
   const onWheel = useCallback(
@@ -48,7 +53,7 @@ export const NumberBox = ({
       event.target.blur();
 
       const delta = -getStep(event) * sign(event.deltaY);
-      update(value + delta);
+      update(value + delta, 500);
     },
     [value, update, getStep]
   );
@@ -77,7 +82,9 @@ export const NumberBox = ({
   const onMouseUp = useCallback(() => {
     setClicked(false);
     prevMousePosition = null;
-  }, []);
+    if (clicked)
+      update(value, 1);
+  }, [value, clicked, update]);
 
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);
@@ -89,16 +96,19 @@ export const NumberBox = ({
   }, [onMouseMove, onMouseUp]);
 
   return (
-    <div className="number_box" onWheel={onWheel}>
+    <div className='number_box' onWheel={onWheel}>
       <input
-        type="number"
+        type='number'
         value={focused ? value : value.toFixed(precision)}
         step={step}
-        onChange={(event) => update(event.target.value)}
-        onFocus={() => setFocused(true)}
+        onChange={(event) => update(event.target.value, 500)}
+        onFocus={(event) => {
+          setFocused(true);
+          event.target.select();
+        }}
         onBlur={() => setFocused(false)}
       />
-      <HandleIcon className="number_box_handle" onMouseDown={onMouseDown} />
+      <HandleIcon className='number_box_handle' onMouseDown={onMouseDown} />
     </div>
   );
 };
