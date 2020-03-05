@@ -11,6 +11,7 @@ import { ReactComponent as StepIcon } from '../../images/step.svg';
 import { ReactComponent as RadiusIcon } from '../../images/radius.svg';
 import { ReactComponent as SpinIcon } from '../../images/spin.svg';
 import { ReactComponent as OffsetIcon } from '../../images/offset.svg';
+import { ReactComponent as FillIcon } from '../../images/fill-color.svg';
 import { PathButton } from './path-button';
 import { StickButton } from './stick-button';
 import { WheelButton } from './wheel-button';
@@ -20,50 +21,58 @@ import { StepSizeBox } from './step-size-box';
 import { RadiusBox } from './radius-box';
 import { SpinBox } from './spin-box';
 import { OffsetBox } from './offset-box';
+import { FillPicker } from './fill-picker';
 
 const OrbSettings = () => (
   <>
     <>
-      <Heading text="Markers" />
+      <Heading text='Markers' />
       <Row
         icon={<PathIcon />}
-        text="Path"
-        tooltip=""
+        text='Path'
+        tooltip=''
         control={<PathButton />}
       />
       <Row
         icon={<StickIcon />}
-        text="Stick"
-        tooltip=""
+        text='Stick'
+        tooltip=''
         control={<StickButton />}
       />
       <Row
         icon={<WheelIcon />}
-        text="Wheel"
-        tooltip=""
+        text='Wheel'
+        tooltip=''
         control={<WheelButton />}
       />
-      <Heading text="Geometry" />
-      <Row icon={<FromIcon />} text="From" tooltip="" control={<FromBox />} />
-      <Row icon={<ToIcon />} text="To" tooltip="" control={<ToBox />} />
+      <Heading text='Geometry' />
+      <Row icon={<FromIcon />} text='From' tooltip='' control={<FromBox />} />
+      <Row icon={<ToIcon />} text='To' tooltip='' control={<ToBox />} />
       <Row
         icon={<StepIcon />}
-        text="Step Size"
-        tooltip=""
+        text='Step Size'
+        tooltip=''
         control={<StepSizeBox />}
       />
       <Row
         icon={<RadiusIcon />}
-        text="Radius"
-        tooltip=""
+        text='Radius'
+        tooltip=''
         control={<RadiusBox />}
       />
-      <Row icon={<SpinIcon />} text="Spin" tooltip="" control={<SpinBox />} />
+      <Row icon={<SpinIcon />} text='Spin' tooltip='' control={<SpinBox />} />
       <Row
         icon={<OffsetIcon />}
-        text="Offset"
-        tooltip=""
+        text='Offset'
+        tooltip=''
         control={<OffsetBox />}
+      />
+      <Heading text='Style' />
+      <Row
+        icon={<FillIcon />}
+        text='Fill'
+        tooltip=''
+        control={<FillPicker />}
       />
     </>
   </>

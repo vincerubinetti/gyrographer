@@ -1,0 +1,51 @@
+.pcr-app {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 10px;
+  z-index: 10000;
+  background: var(--black);
+  outline: solid 2px var(--dark-gray);
+  opacity: 0;
+}
+.pickr {
+  width: 30px;
+  height: 30px;
+}
+.pcr-button {
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+}
+.pcr-app.visible {
+  visibility: visible;
+  opacity: 1;
+}
+.pcr-color-preview {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  height: 20px;
+}
+.pcr-last-color,
+.pcr-current-color {
+  background: currentColor;
+  width: 50%;
+  height: 100%;
+}
+.pcr-color-palette {
+  width: 200px;
+  height: 128px;
+}
+.pcr-palette {
+  width: 100%;
+  height: 100%;
+}
+.pcr-picker {
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  border: 2px solid var(--light-gray);
+  border-radius: 100%;
+}

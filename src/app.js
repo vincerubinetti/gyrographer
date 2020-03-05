@@ -40,10 +40,10 @@ App = connect(null, mapDispatchToProps)(App);
 export default App;
 
 // detect fullscreen changes and set data attribute on body for readable state
-window.addEventListener('resize', () => {
-  window.clearTimeout(window.resizeTimer);
-  window.resizeTimer = window.setTimeout(() => {
-    document.body.dataset.fullscreen =
-      Math.abs(window.screen.height - window.innerHeight) <= 1;
-  }, 500);
-});
+// window.addEventListener('resize', () => {
+//   window.clearTimeout(window.resizeTimer);
+//   window.resizeTimer = window.setTimeout(() => {
+//     document.body.dataset.fullscreen =
+//       Math.abs(window.screen.height - window.innerHeight) <= 1;
+//   }, 500);
+// });

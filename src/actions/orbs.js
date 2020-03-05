@@ -32,3 +32,5 @@ export const setOffset = createAction(
   'SET_OFFSET',
   'Orb: Change "offset" value'
 );
+
+export const setFill = createAction('SET_FILL', 'Orb: Change "fill" value');
