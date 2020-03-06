@@ -44,6 +44,8 @@ export const selected = (state, meta, type, payload) => {
     state.selected = '';
   if (state.selected && !state.orbs[state.selected])
     state.selected = '';
+
+  state.selected = '1';
 };
 
 export const loop = (state, meta, type, payload) => {

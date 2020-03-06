@@ -34,3 +34,18 @@ export const setOffset = createAction(
 );
 
 export const setFill = createAction('SET_FILL', 'Orb: Change "fill" value');
+
+export const setStroke = createAction(
+  'SET_STROKE',
+  'Orb: Change "stroke" value'
+);
+
+export const setStrokeWidth = createAction(
+  'SET_STROKE_WIDTH',
+  'Orb: Change "stroke width" value'
+);
+
+export const setDashArray = createAction(
+  'SET_DASH_ARRAY',
+  'Orb: Change "dash array" value'
+);

@@ -11,7 +11,10 @@ import { ReactComponent as StepIcon } from '../../images/step.svg';
 import { ReactComponent as RadiusIcon } from '../../images/radius.svg';
 import { ReactComponent as SpinIcon } from '../../images/spin.svg';
 import { ReactComponent as OffsetIcon } from '../../images/offset.svg';
-import { ReactComponent as FillIcon } from '../../images/fill-color.svg';
+import { ReactComponent as FillIcon } from '../../images/fill.svg';
+import { ReactComponent as StrokeIcon } from '../../images/stroke.svg';
+import { ReactComponent as StrokeWidthIcon } from '../../images/stroke-width.svg';
+import { ReactComponent as DashArrayIcon } from '../../images/dash-array.svg';
 import { PathButton } from './path-button';
 import { StickButton } from './stick-button';
 import { WheelButton } from './wheel-button';
@@ -22,6 +25,9 @@ import { RadiusBox } from './radius-box';
 import { SpinBox } from './spin-box';
 import { OffsetBox } from './offset-box';
 import { FillPicker } from './fill-picker';
+import { StrokePicker } from './stroke-picker';
+import { StrokeWidthBox } from './stroke-width-box';
+import { DashArrayBox } from './dash-array-box';
 
 const OrbSettings = () => (
   <>
@@ -73,6 +79,24 @@ const OrbSettings = () => (
         text='Fill'
         tooltip=''
         control={<FillPicker />}
+      />
+      <Row
+        icon={<StrokeIcon />}
+        text='Stroke'
+        tooltip=''
+        control={<StrokePicker />}
+      />
+      <Row
+        icon={<StrokeWidthIcon />}
+        text='Width'
+        tooltip=''
+        control={<StrokeWidthBox />}
+      />
+      <Row
+        icon={<DashArrayIcon />}
+        text='Dash Array'
+        tooltip=''
+        control={<DashArrayBox />}
       />
     </>
   </>

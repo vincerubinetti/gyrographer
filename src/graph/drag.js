@@ -14,6 +14,6 @@ export const onDragStart = (...args) => {
   console.log(args);
 };
 
-export const onDrag = () => {};
+export const onDrag = () => null;
 
-export const onDragEnd = () => {};
+export const onDragEnd = () => null;

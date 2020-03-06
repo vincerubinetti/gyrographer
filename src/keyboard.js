@@ -13,11 +13,10 @@ let Keyboard = ({ past, future, length, undo, redo }) => {
 
   const onKeyDown = useCallback(
     (event) => {
-      let step = 1;
-      if (event.shiftKey)
-        step = 10;
-      else if (event.altlKey)
-        step = 0.1;
+      if (document.activeElement.matches('input'))
+        return;
+
+      const step = keyMultiplier(event);
 
       switch (event.key) {
         case ' ':
@@ -26,17 +25,13 @@ let Keyboard = ({ past, future, length, undo, redo }) => {
           break;
 
         case 'ArrowLeft':
-          if (!document.activeElement.matches('input')) {
-            context.decrementTime(step);
-            event.preventDefault();
-          }
+          context.decrementTime(step);
+          event.preventDefault();
           break;
 
         case 'ArrowRight':
-          if (!document.activeElement.matches('input')) {
-            context.incrementTime(step);
-            event.preventDefault();
-          }
+          context.incrementTime(step);
+          event.preventDefault();
           break;
 
         case 'Home':
@@ -93,3 +88,12 @@ const mapDispatchToProps = (dispatch) => ({
 Keyboard = connect(mapStateToProps, mapDispatchToProps)(Keyboard);
 
 export { Keyboard };
+
+export const keyMultiplier = (event = {}, step = 1) => {
+  if (event.altKey)
+    return step / 10;
+  else if (event.shiftKey)
+    return step * 10;
+  else
+    return step;
+};

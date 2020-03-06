@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useRef } from 'react';
 
+import { keyMultiplier } from '../keyboard';
 import { Tooltip } from './tooltip';
 import { sign } from '../util/math';
 import { ReactComponent as HandleIcon } from '../images/number-box-handle.svg';
@@ -16,25 +17,13 @@ export const NumberBox = ({
   value = 0,
   step = 1,
   precision = 1,
-  onChange = () => {},
-  onNudge = () => {},
+  onChange = () => null,
+  onNudge = () => null,
   tooltip = ''
 }) => {
   const [focused, setFocused] = useState(false);
   const [clicked, setClicked] = useState(false);
   const changeTimer = useRef();
-
-  const getStep = useCallback(
-    (event) => {
-      if (event.altKey)
-        return step / 10;
-      else if (event.shiftKey)
-        return step * 10;
-      else
-        return step;
-    },
-    [step]
-  );
 
   const update = useCallback(
     (newValue, debounce) => {
@@ -54,10 +43,10 @@ export const NumberBox = ({
     (event) => {
       event.target.blur();
 
-      const delta = -getStep(event) * sign(event.deltaY);
+      const delta = -keyMultiplier(event, step) * sign(event.deltaY);
       update(value + delta, 500);
     },
-    [value, update, getStep]
+    [value, step, update]
   );
 
   const onMouseDown = useCallback(() => {
@@ -72,13 +61,14 @@ export const NumberBox = ({
       const mousePosition = { x: event.clientX, y: event.clientY };
 
       if (prevMousePosition) {
-        const delta = -getStep(event) * (mousePosition.y - prevMousePosition.y);
+        const delta =
+          -keyMultiplier(event, step) * (mousePosition.y - prevMousePosition.y);
         update(value + delta);
       }
 
       prevMousePosition = mousePosition;
     },
-    [value, clicked, getStep, update]
+    [value, step, clicked, update]
   );
 
   const onMouseUp = useCallback(() => {

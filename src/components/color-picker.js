@@ -41,8 +41,8 @@ export const swatches = [
 
 export const ColorPicker = ({
   value = new Color(),
-  onChange = () => {},
-  onNudge = () => {},
+  onChange = () => null,
+  onNudge = () => null,
   tooltip = ''
 }) => {
   const [anchor, setAnchor] = useState(null);
@@ -66,15 +66,16 @@ export const ColorPicker = ({
   return (
     <>
       <Tooltip content={tooltip}>
-        <div
+        <button
           ref={(element) => setAnchor(element)}
-          className='color_picker_box color_picker_frame color_picker_checkers'
+          className='color_picker_box color_picker_frame'
         >
-          <button
+          <div className='color_picker_checkers' />
+          <div
             style={{ backgroundColor: value.rgba }}
             onClick={() => setOpen(!open)}
           />
-        </div>
+        </button>
       </Tooltip>
       {open && (
         <Popover
@@ -90,27 +91,27 @@ export const ColorPicker = ({
           <div className='color_picker_hue color_picker_frame'>
             <div className='color_picker_hue_gradient' />
           </div>
-          <div className='color_picker_alpha color_picker_frame color_picker_checkers'>
+          <div className='color_picker_alpha color_picker_frame'>
+            <div className='color_picker_checkers' />
             <div className='color_picker_alpha_gradient' />
-          </div>
-          <div className='color_picker_swatches'>
-            {swatches.map((swatch, index) => (
-              <div
-                key={index}
-                className='color_picker_swatch color_picker_frame color_picker_checkers'
-              >
-                <button style={{ backgroundColor: swatch }} />
-              </div>
-            ))}
           </div>
           <div className='color_picker_hex color_picker_frame'>
             <input
               type='text'
               value={value.rgba}
-              onChange={(event) =>
-                update(event.target.value, 10000)
-              }
+              onChange={(event) => update(event.target.value, 10000)}
             />
+          </div>
+          <div className='color_picker_swatches'>
+            {swatches.map((swatch, index) => (
+              <button
+                key={index}
+                className='color_picker_swatch color_picker_frame'
+              >
+                <div className='color_picker_checkers' />
+                <div style={{ backgroundColor: swatch }} />
+              </button>
+            ))}
           </div>
         </Popover>
       )}

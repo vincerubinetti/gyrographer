@@ -20,12 +20,12 @@ export const orbs = (state = {}, meta, type, payload) => {
     fill,
     stroke,
     strokeWidth,
-    close,
     dashArray,
     dashOffset,
     strokeLineCap,
     strokeLineJoin,
-    order
+    order,
+    close
   ];
 
   for (const [orbId, orb] of Object.entries(state)) {
@@ -213,28 +213,64 @@ export const fill = (orb, meta, type, payload) => {
 };
 
 export const stroke = (orb, meta, type, payload) => {
+  switch (type) {
+    case 'SET_STROKE':
+      if (payload.id === orb.id)
+        orb.stroke = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
   if (!isObject(orb.stroke))
     orb.stroke = new Color(orb.stroke || '#ffffffff');
 };
 
 export const strokeWidth = (orb, meta, type, payload) => {
+  switch (type) {
+    case 'SET_STROKE_WIDTH':
+      if (payload.id === orb.id)
+        orb.strokeWidth = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
   if (!isNumber(orb.strokeWidth))
     orb.strokeWidth = 5;
-};
-
-export const close = (orb, meta, type, payload) => {
-  if (!isBoolean(orb.close))
-    orb.close = false;
+  if (orb.strokeWidth < 0)
+    orb.strokeWidth = 0;
+  if (orb.strokeWidth > 1000)
+    orb.strokeWidth = 1000;
 };
 
 export const dashArray = (orb, meta, type, payload) => {
+  switch (type) {
+    case 'SET_DASH_ARRAY':
+      if (payload.id === orb.id)
+        orb.dashArray = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
   if (!isString(orb.dashArray))
-    orb.dashArray = '0';
+    orb.dashArray = '';
+
+  orb.dashArray
+    .split(/\s/)
+    .filter((n) => n)
+    .map((n) => Number(n))
+    .filter((n) => n)
+    .join(' ');
 };
 
 export const dashOffset = (orb, meta, type, payload) => {
   if (!isString(orb.dashOffset))
-    orb.dashOffset = '0';
+    orb.dashOffset = '';
 };
 
 export const strokeLineCap = (orb, meta, type, payload) => {
@@ -250,4 +286,9 @@ export const strokeLineJoin = (orb, meta, type, payload) => {
 export const order = (orb, meta, type, payload) => {
   if (!isNumber(orb.order))
     orb.order = 0;
+};
+
+export const close = (orb, meta, type, payload) => {
+  if (!isBoolean(orb.close))
+    orb.close = false;
 };
