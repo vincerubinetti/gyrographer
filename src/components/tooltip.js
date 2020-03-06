@@ -3,7 +3,8 @@ import { Children } from 'react';
 import { isValidElement } from 'react';
 import { cloneElement } from 'react';
 import { useState } from 'react';
-import { useEffect } from 'react';
+import { useCallback } from 'react';
+import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import './tooltip.css';
@@ -12,85 +13,38 @@ const delay = 250;
 const padding = 5;
 
 const Tooltip = ({ children, text = '' }) => {
-  const [hover, setHover] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [timer, setTimer] = useState(null);
   const [anchor, setAnchor] = useState(null);
-  const [style, setStyle] = useState({});
+  const timer = useRef();
 
-  const onEnter = (event) => {
-    setAnchor(event.currentTarget);
-    setHover(true);
-  };
-  const onLeave = () => {
+  const onEnter = useCallback((event) => {
+    event.persist();
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => setAnchor(event.target), delay);
+  }, []);
+
+  const onLeave = useCallback(() => {
+    window.clearTimeout(timer.current);
     setAnchor(null);
-    setHover(false);
-  };
+  }, []);
 
-  useEffect(() => {
-    if (hover) {
-      setTimer(
-        window.setTimeout(() => {
-          setOpen(true);
-        }, delay)
-      );
-    } else
-      setTimer(null);
-  }, [hover]);
-
-  useEffect(() => {
-    if (open && !hover)
-      setOpen(false);
-  }, [open, hover]);
-
-  useEffect(() => {
-    if (timer === null)
-      window.clearTimeout(timer);
-
-    return () => window.clearTimeout(timer);
-  }, [timer]);
-
-  useEffect(() => {
-    if (anchor)
-      setStyle(computeStyle({ anchor }));
-  }, [anchor]);
+  const makeHandler = useCallback(
+    (name, element, func) => (...args) => {
+      if (element[name])
+        element[name](...args);
+      func(...args);
+    },
+    []
+  );
 
   children = Children.map(children, (element) => {
     if (isValidElement(element)) {
       return cloneElement(element, {
-        'onMouseEnter': (...args) => {
-          if (element.onMouseEnter)
-            element.onMouseEnter(...args);
-          onEnter(...args);
-        },
-        'onMouseLeave': (...args) => {
-          if (element.onMouseLeave)
-            element.onMouseLeave(...args);
-          onLeave(...args);
-        },
-        'onFocus': (...args) => {
-          if (element.onFocus)
-            element.onFocus(...args);
-          onEnter(...args);
-        },
-        'onBlur': (...args) => {
-          if (element.onBlur)
-            element.onBlur(...args);
-          onLeave(...args);
-        },
+        'onMouseEnter': makeHandler('onMouseEnter', element, onEnter),
+        'onMouseLeave': makeHandler('onMouseLeave', element, onLeave),
+        'onFocus': makeHandler('onFocus', element, onEnter),
+        'onBlur': makeHandler('onBlur', element, onLeave),
         'aria-label': text
       });
-    } else if (typeof element === 'string') {
-      return (
-        <span
-          onMouseEnter={onEnter}
-          onMouseLeave={onLeave}
-          onFocus={onEnter}
-          onBlur={onLeave}
-        >
-          {element}
-        </span>
-      );
     } else
       return element;
   });
@@ -98,62 +52,75 @@ const Tooltip = ({ children, text = '' }) => {
   return (
     <>
       {children}
-      {open && <Portal text={text} style={style} />}
+      {anchor && <Portal text={text} anchor={anchor} />}
     </>
   );
 };
 
 export { Tooltip };
 
-const Portal = ({ text, style }) => {
+const Portal = ({ text, anchor }) => {
+  const [tooltip, setTooltip] = useState(null);
+
+  const style = computeStyle({ anchor, tooltip });
+
   return createPortal(
-    <div className="tooltip text_small" style={style}>
+    <div
+      ref={(element) => setTooltip(element)}
+      className="tooltip text_small"
+      style={style}
+    >
       {text}
     </div>,
     document.body
   );
 };
 
-const horizontalMargin = 200;
-const verticalMargin = 100;
+const computeStyle = ({ anchor, tooltip }) => {
+  let style = { left: 0, top: 0 };
 
-const computeStyle = ({ anchor }) => {
-  const anchorBbox = anchor.getBoundingClientRect();
-  const bodyBbox = document.body.getBoundingClientRect();
-  const bbox = {
-    left: anchorBbox.left - bodyBbox.left,
-    top: anchorBbox.top - bodyBbox.top,
-    right: bodyBbox.right - (anchorBbox.left + anchorBbox.width),
-    bottom: bodyBbox.bottom - (anchorBbox.top + anchorBbox.height),
-    width: anchorBbox.width,
-    height: anchorBbox.height
+  anchor = anchor?.getBoundingClientRect();
+  tooltip = tooltip?.getBoundingClientRect();
+  const body = document.body.getBoundingClientRect();
+
+  if (!anchor || !tooltip)
+    return style;
+
+  style = {};
+
+  anchor = {
+    left: anchor.left - body.left,
+    top: anchor.top - body.top,
+    right: body.right - (anchor.left + anchor.width),
+    bottom: body.bottom - (anchor.top + anchor.height),
+    width: anchor.width,
+    height: anchor.height
   };
-  const style = {};
 
   let horizontalAlign = 'left';
   let verticalAlign = 'top';
 
-  if (anchorBbox.left > window.innerWidth - horizontalMargin) {
+  if (anchor.left + tooltip.width > window.innerWidth) {
     horizontalAlign = 'right';
-    if (anchorBbox.left < horizontalMargin)
+    if (anchor.left - tooltip.width < 0)
       horizontalAlign = 'center';
   }
 
-  if (anchorBbox.top < verticalMargin)
+  if (anchor.top - tooltip.height < 0)
     verticalAlign = 'bottom';
 
   switch (horizontalAlign) {
     case 'center':
-      style.left = bbox.left + bbox.width / 2 + 'px';
+      style.left = anchor.left + anchor.width / 2;
       style.transform = 'translateX(-50%)';
       break;
 
     case 'left':
-      style.left = bbox.left + 'px';
+      style.left = anchor.left;
       break;
 
     case 'right':
-      style.right = bbox.right + 'px';
+      style.right = anchor.right;
       break;
 
     default:
@@ -162,11 +129,11 @@ const computeStyle = ({ anchor }) => {
 
   switch (verticalAlign) {
     case 'top':
-      style.bottom = bbox.bottom + bbox.height + padding + 'px';
+      style.bottom = anchor.bottom + anchor.height + padding;
       break;
 
     case 'bottom':
-      style.top = bbox.top + bbox.height + padding + 'px';
+      style.top = anchor.top + anchor.height + padding;
       break;
 
     default:
