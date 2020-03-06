@@ -3,21 +3,21 @@
     "1": {
       "spin": 3,
       "radius": 500,
-      "strokeColor": "#ffeb3b",
+      "stroke": "#ffeb3b",
       "strokeWidth": 3
     },
     "2": {
       "spin": 2,
       "radius": 200,
       "parent": "1",
-      "strokeColor": "#2196f3",
+      "stroke": "#2196f3",
       "strokeWidth": 5
     },
     "3": {
       "spin": -10,
       "radius": 100,
       "parent": "2",
-      "strokeColor": "#9c27b0",
+      "stroke": "#9c27b0",
       "strokeWidth": 7
     },
     "4": {
@@ -25,7 +25,7 @@
       "radius": 100,
       "offset": 180,
       "parent": "2",
-      "strokeColor": "#e91e63",
+      "stroke": "#e91e63",
       "strokeWidth": 9
     }
   }

@@ -1,0 +1,27 @@
+.popover {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: fixed;
+  padding: 5px;
+  outline: solid 2px var(--dark-gray);
+  background: var(--black);
+  color: var(--white);
+  z-index: 99;
+}
+@media (hover: none) {
+  .popover {
+    display: none;
+  }
+}
+.popover_overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 98;
+}

@@ -6,23 +6,22 @@ import './button.css';
 
 export const Button = ({
   className = '',
-  tooltip,
-  color,
-  onClick,
-  onCtrlClick,
-  children
+  tooltip = '',
+  color = '',
+  onClick = () => null,
+  onCtrlClick = () => null,
+  children = <></>
 }) => (
-  <Tooltip text={tooltip || ''}>
+  <Tooltip content={tooltip}>
     <button
       className={'button ' + className}
       onClick={(event) => {
         if (event.ctrlKey)
-          (onCtrlClick || (() => null))();
+          onCtrlClick();
         else
-          (onClick || (() => null))();
+          onClick();
       }}
       data-color={color}
-      alt={tooltip || ''}
     >
       {children}
     </button>

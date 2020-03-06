@@ -12,8 +12,8 @@ let Path = ({ orb, selected, d }) => {
 
   // styles
   const opacity = orb.showPath ? 1 : 0;
-  const fillColor = orb.computeProp('fillColor', time);
-  const strokeColor = orb.computeProp('strokeColor', time);
+  const fill = orb.computeProp('fill', time);
+  const stroke = orb.computeProp('stroke', time);
   const strokeWidth = orb.computeProp('strokeWidth', time);
   const close = orb.close;
   const dashArray = orb.computeProp('dashArray', time);
@@ -29,8 +29,8 @@ let Path = ({ orb, selected, d }) => {
       }
     >
       <path
-        fill={close ? fillColor.rgba : 'none'}
-        stroke={strokeColor.rgba}
+        fill={close ? fill.rgba : 'none'}
+        stroke={stroke.rgba}
         strokeWidth={strokeWidth}
         strokeDasharray={dashArray}
         strokeDashoffset={dashOffset}

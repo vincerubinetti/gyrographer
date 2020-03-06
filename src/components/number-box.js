@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useRef } from 'react';
 
+import { Tooltip } from './tooltip';
 import { sign } from '../util/math';
 import { ReactComponent as HandleIcon } from '../images/number-box-handle.svg';
 
@@ -16,7 +17,8 @@ export const NumberBox = ({
   step = 1,
   precision = 1,
   onChange = () => {},
-  onNudge = () => {}
+  onNudge = () => {},
+  tooltip = ''
 }) => {
   const [focused, setFocused] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -96,19 +98,21 @@ export const NumberBox = ({
   }, [onMouseMove, onMouseUp]);
 
   return (
-    <div className='number_box' onWheel={onWheel}>
-      <input
-        type='number'
-        value={focused ? value : value.toFixed(precision)}
-        step={step}
-        onChange={(event) => update(event.target.value, 500)}
-        onFocus={(event) => {
-          setFocused(true);
-          event.target.select();
-        }}
-        onBlur={() => setFocused(false)}
-      />
-      <HandleIcon className='number_box_handle' onMouseDown={onMouseDown} />
-    </div>
+    <Tooltip content={tooltip}>
+      <div className='number_box' onWheel={onWheel}>
+        <input
+          type='number'
+          value={focused ? value : value.toFixed(precision)}
+          step={step}
+          onChange={(event) => update(event.target.value, 1000)}
+          onFocus={(event) => {
+            setFocused(true);
+            event.target.select();
+          }}
+          onBlur={() => setFocused(false)}
+        />
+        <HandleIcon className='number_box_handle' onMouseDown={onMouseDown} />
+      </div>
+    </Tooltip>
   );
 };

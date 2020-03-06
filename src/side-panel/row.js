@@ -7,7 +7,7 @@ import './row.css';
 const Row = ({ icon, text, tooltip, control }) => (
   <div className="side_panel_row">
     <div>{icon}</div>
-    <Tooltip text={tooltip}>
+    <Tooltip content={tooltip}>
       <div>{text}</div>
     </Tooltip>
     <div>{control}</div>

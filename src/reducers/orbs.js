@@ -17,8 +17,8 @@ export const orbs = (state = {}, meta, type, payload) => {
     radius,
     spin,
     offset,
-    fillColor,
-    strokeColor,
+    fill,
+    stroke,
     strokeWidth,
     close,
     dashArray,
@@ -197,14 +197,24 @@ export const offset = (orb, meta, type, payload) => {
     orb.radius = 3600;
 };
 
-export const fillColor = (orb, meta, type, payload) => {
-  if (!isObject(orb.fillColor))
-    orb.fillColor = new Color(orb.fillColor || '#00000000');
+export const fill = (orb, meta, type, payload) => {
+  switch (type) {
+    case 'SET_FILL':
+      if (payload.id === orb.id)
+        orb.fill = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
+  if (!isObject(orb.fill))
+    orb.fill = new Color(orb.fill || '#00000000');
 };
 
-export const strokeColor = (orb, meta, type, payload) => {
-  if (!isObject(orb.strokeColor))
-    orb.strokeColor = new Color(orb.strokeColor || '#ffffffff');
+export const stroke = (orb, meta, type, payload) => {
+  if (!isObject(orb.stroke))
+    orb.stroke = new Color(orb.stroke || '#ffffffff');
 };
 
 export const strokeWidth = (orb, meta, type, payload) => {
