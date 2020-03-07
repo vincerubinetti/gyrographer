@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { DashBox } from '../../components/dash-box';
+import { TextBox } from '../../components/text-box';
 import { setDashArray } from '../../actions/orbs';
 
 let DashArrayBox = ({ selected, value, setDashArray }) => (
-  <DashBox
+  <TextBox
     value={value}
+    onNudge={(value) => {
+      setDashArray({ id: selected, value, noUndo: true });
+    }}
     onChange={(value) => {
       setDashArray({ id: selected, value });
     }}

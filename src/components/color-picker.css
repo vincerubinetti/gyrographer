@@ -1,12 +1,8 @@
 .color_picker {
-  color: red;
   text-align: center;
 }
 .color_picker > *:not(:last-child) {
   margin-bottom: 10px;
-}
-.color_picker_checkers {
-  background-image: url(../images/checkers.png);
 }
 .color_picker_frame {
   position: relative;
@@ -18,43 +14,50 @@
   width: 100%;
   height: 100%;
 }
+.color_picker_frame > *:nth-child(1) {
+  background-image: url(../images/checkers.png);
+}
+.color_picker_frame > *:nth-child(2) {
+  background-color: currentColor;
+}
+.color_picker_circle > * { 
+  border-radius: 100%;
+}
+.color_picker_frame.color_picker_circle > *:nth-child(1) {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+}
 .color_picker_box {
   width: 25px;
   height: 25px;
-  overflow: hidden;
 }
 .color_picker_palette {
   position: relative;
   width: 200px;
   height: 200px;
 }
-.color_picker_palette_hue {
+.color_picker_palette > *:nth-child(2) {
   background-color: currentColor;
 }
-.color_picker_palette_white {
+.color_picker_palette > *:nth-child(3) {
   background: linear-gradient(
     to right,
     rgb(255, 255, 255),
     rgba(255, 255, 255, 0)
   );
 }
-.color_picker_palette_black {
+.color_picker_palette > *:nth-child(4) {
   background: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
 }
-.color_picker_swatches {
-  width: 200px;
-}
-.color_picker_swatch {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin: 2px;
-}
-.color_picker_hue {
+.color_picker_hue,
+.color_picker_alpha {
   width: 200px;
   height: 15px;
 }
-.color_picker_hue_gradient {
+.color_picker_hue > *:nth-child(2) {
   background: linear-gradient(
     to right,
     rgb(255, 0, 0) 0%,
@@ -66,15 +69,19 @@
     rgb(255, 0, 0) 100%
   );
 }
-
-.color_picker_alpha {
-  width: 200px;
-  height: 15px;
-}
-.color_picker_alpha_gradient {
+.color_picker_alpha > *:nth-child(2) {
   background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, currentColor 100%);
 }
 .color_picker_hex {
   width: 50%;
   height: 25px;
+}
+.color_picker_swatches {
+  width: 200px;
+}
+.color_picker_swatch {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin: 2px;
 }

@@ -42,6 +42,7 @@ export const NumberBox = ({
   const onWheel = useCallback(
     (event) => {
       event.target.blur();
+      event.preventDefault();
 
       const delta = -keyMultiplier(event, step) * sign(event.deltaY);
       update(value + delta, 500);
@@ -89,9 +90,9 @@ export const NumberBox = ({
 
   return (
     <Tooltip content={tooltip}>
-      <div className='number_box' onWheel={onWheel}>
+      <div className="number_box" onWheel={onWheel}>
         <input
-          type='number'
+          type="number"
           value={focused ? value : value.toFixed(precision)}
           step={step}
           onChange={(event) => update(event.target.value, 1000)}
@@ -101,7 +102,7 @@ export const NumberBox = ({
           }}
           onBlur={() => setFocused(false)}
         />
-        <HandleIcon className='number_box_handle' onMouseDown={onMouseDown} />
+        <HandleIcon className="number_box_handle" onMouseDown={onMouseDown} />
       </div>
     </Tooltip>
   );

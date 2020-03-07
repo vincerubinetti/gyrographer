@@ -13,6 +13,7 @@ export const Popover = ({
   noOverlay = false,
   onClose = () => null,
   className = '',
+  style = {},
   children = <></>
 }) => {
   const [content, setContent] = useState(null);
@@ -26,7 +27,7 @@ export const Popover = ({
       <div
         ref={(element) => setContent(element)}
         className={'popover ' + className}
-        style={{ left: x, top: y }}
+        style={{ ...style, left: x, top: y }}
       >
         {children}
       </div>

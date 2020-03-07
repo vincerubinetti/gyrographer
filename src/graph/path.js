@@ -22,12 +22,7 @@ let Path = ({ orb, selected, d }) => {
   const strokeLineJoin = orb.strokeLineJoin;
 
   return (
-    <g
-      className="path"
-      opacity={
-        orb.showPath && (selected === true || selected === undefined) ? 1 : 0
-      }
-    >
+    <g className="path" opacity={orb.showPath ? 1 : 0}>
       <path
         fill={close ? fill.rgba : 'none'}
         stroke={stroke.rgba}

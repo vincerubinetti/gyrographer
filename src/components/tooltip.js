@@ -53,8 +53,8 @@ export const Tooltip = ({ content = '', children = <></> }) => {
   return (
     <>
       {children}
-      {anchor && (
-        <Popover anchor={anchor} noOverlay className='tooltip'>
+      {anchor && content && (
+        <Popover anchor={anchor} noOverlay className="tooltip">
           {content}
         </Popover>
       )}

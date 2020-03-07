@@ -1,4 +1,4 @@
-.dash_box {
+.text_box {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   width: 100%;
   height: 100%;
 }
-.dash_box > input {
+.text_box > input {
   width: 100%;
   height: 100%;
   color: var(--white);
@@ -19,6 +19,6 @@
   appearance: none;
   transition: background var(--fast);
 }
-.dash_box > input:hover {
+.text_box > input:hover {
   background: var(--dark-gray);
 }

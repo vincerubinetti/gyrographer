@@ -2,20 +2,22 @@ import React from 'react';
 
 import { Tooltip } from './tooltip';
 
-import './dash-box.css';
+import './text-box.css';
 
-export const DashBox = ({
+export const TextBox = ({
   value = '',
   onChange = () => null,
+  onNudge = () => null,
   tooltip = ''
 }) => {
   return (
     <Tooltip content={tooltip}>
-      <div className='dash_box'>
+      <div className="text_box">
         <input
-          type='text'
+          type="text"
           value={value}
-          onChange={(event) => onChange(event.target.value)}
+          onChange={(event) => onNudge(event.target.value)}
+          onBlur={(event) => onChange(event.target.value)}
         />
       </div>
     </Tooltip>
