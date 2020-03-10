@@ -49,3 +49,8 @@ export const setDashArray = createAction(
   'SET_DASH_ARRAY',
   'Orb: Change "dash array" value'
 );
+
+export const setDashOffset = createAction(
+  'SET_DASH_OFFSET',
+  'Orb: Change "dash offset" value'
+);

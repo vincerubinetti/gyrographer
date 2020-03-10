@@ -12,17 +12,6 @@ export const isObject = (value) =>
 
 export const isFunction = (value) => typeof value === 'function';
 
-export const isEmpty = (payload) =>
-  (isArray(payload) && !payload.length) ||
-  (isObject(payload) && !Object.keys(payload).length);
-
-export const isBlank = (value) =>
-  value === undefined ||
-  value === null ||
-  isEmpty(value) ||
-  value === '' ||
-  Number.isNaN(value);
-
 export const getType = (value) => {
   if (isBoolean(value))
     return 'boolean';
@@ -45,3 +34,14 @@ export const getType = (value) => {
 
   return 'other';
 };
+
+export const isEmpty = (payload) =>
+  (isArray(payload) && !payload.length) ||
+  (isObject(payload) && !Object.keys(payload).length);
+
+export const isBlank = (value) =>
+  value === undefined ||
+  value === null ||
+  isEmpty(value) ||
+  (isString(value) && value.trim() === '') ||
+  Number.isNaN(value);

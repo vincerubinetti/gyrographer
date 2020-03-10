@@ -15,6 +15,7 @@ import { ReactComponent as FillIcon } from '../../images/fill.svg';
 import { ReactComponent as StrokeIcon } from '../../images/stroke.svg';
 import { ReactComponent as StrokeWidthIcon } from '../../images/stroke-width.svg';
 import { ReactComponent as DashArrayIcon } from '../../images/dash-array.svg';
+import { ReactComponent as DashOffsetIcon } from '../../images/dash-offset.svg';
 import { PathButton } from './path-button';
 import { StickButton } from './stick-button';
 import { WheelButton } from './wheel-button';
@@ -28,6 +29,7 @@ import { FillPicker } from './fill-picker';
 import { StrokePicker } from './stroke-picker';
 import { StrokeWidthBox } from './stroke-width-box';
 import { DashArrayBox } from './dash-array-box';
+import { DashOffsetBox } from './dash-offset-box';
 
 const OrbSettings = () => (
   <>
@@ -97,6 +99,12 @@ const OrbSettings = () => (
         text='Dash Array'
         tooltip=''
         control={<DashArrayBox />}
+      />
+      <Row
+        icon={<DashOffsetIcon />}
+        text='Dash Offset'
+        tooltip=''
+        control={<DashOffsetBox />}
       />
     </>
   </>

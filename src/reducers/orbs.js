@@ -269,8 +269,18 @@ export const dashArray = (orb, meta, type, payload) => {
 };
 
 export const dashOffset = (orb, meta, type, payload) => {
-  if (!isString(orb.dashOffset))
-    orb.dashOffset = '';
+  switch (type) {
+    case 'SET_DASH_OFFSET':
+      if (payload.id === orb.id)
+        orb.dashOffset = payload.value;
+      break;
+
+    default:
+      break;
+  }
+
+  if (!isNumber(orb.dashOffset))
+    orb.dashOffset = 0;
 };
 
 export const strokeLineCap = (orb, meta, type, payload) => {
