@@ -1,12 +1,14 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { useContext } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
-import { setSelected } from '../actions/project';
+import { ControllerContext } from '../controller';
 import { useMounted } from '../util/hooks';
 import { initViewHandler } from './view.js';
 import { initDragHandler } from './drag.js';
+import { fitView } from './view.js';
 import Guides from './guides';
 import Contents from './contents';
 
@@ -15,7 +17,8 @@ import './index.css';
 export let svg;
 export let view;
 
-let Graph = ({ backgroundColor, select }) => {
+let Graph = ({ background }) => {
+  const context = useContext(ControllerContext);
   const mounted = useMounted();
 
   useEffect(() => {
@@ -26,13 +29,18 @@ let Graph = ({ backgroundColor, select }) => {
     initDragHandler();
   }, [mounted]);
 
+  useEffect(() => {
+    window.addEventListener('resize', fitView);
+    return () => window.removeEventListener('resize', fitView);
+  }, []);
+
   return (
     <svg
-      id="graph"
-      style={{ background: backgroundColor.rgba }}
-      onClick={() => select()}
+      id='graph'
+      style={{ background: background.rgba }}
+      onClick={() => context.changeSelected()}
     >
-      <g id="view">
+      <g id='view'>
         <Guides />
         <Contents />
       </g>
@@ -41,13 +49,9 @@ let Graph = ({ backgroundColor, select }) => {
 };
 
 const mapStateToProps = (state) => ({
-  backgroundColor: state.backgroundColor
+  background: state.background
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  select: (...args) => dispatch(setSelected(...args))
-});
-
-Graph = connect(mapStateToProps, mapDispatchToProps)(Graph);
+Graph = connect(mapStateToProps)(Graph);
 
 export default Graph;

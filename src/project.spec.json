@@ -1,0 +1,80 @@
+{
+  "orbs": {
+    "type": "object",
+    "default": {},
+    "description": "Hierarchy of orbs"
+  },
+  "bounds": {
+    "type": "boolean",
+    "fallback": true,
+    "description": "Boundaries of the image"
+  },
+  "axes": {
+    "type": "boolean",
+    "fallback": false,
+    "description": "X/Y axes and origin of the image"
+  },
+  "grid": {
+    "type": "boolean",
+    "fallback": false,
+    "description": "Major and minor grid lines"
+  },
+  "left": {
+    "type": "number",
+    "fallback": -1000,
+    "min": -10000,
+    "max": 10000,
+    "step": 5,
+    "description": "Left boundary of the image"
+  },
+  "top": {
+    "type": "number",
+    "fallback": -1000,
+    "min": -10000,
+    "max": 10000,
+    "step": 5,
+    "description": "Top boundary of the image"
+  },
+  "right": {
+    "type": "number",
+    "fallback": 1000,
+    "min": -10000,
+    "max": 10000,
+    "step": 5,
+    "description": "Right boundary of the image"
+  },
+  "bottom": {
+    "type": "number",
+    "fallback": 1000,
+    "min": -10000,
+    "max": 10000,
+    "step": 5,
+    "description": "Bottom boundary of the image"
+  },
+  "background": {
+    "type": "color",
+    "fallback": "#202020ff",
+    "description": "Color of the background"
+  },
+  "guides": {
+    "type": "color",
+    "fallback": "#ffffff80",
+    "description": "Color of the bounds, axes, and grid"
+  },
+  "fps": {
+    "type": "number",
+    "fallback": 60,
+    "min": 1,
+    "max": 500,
+    "step": 1,
+    "description": "Frames per second of the animation"
+  },
+  "length": {
+    "type": "number",
+    "fallback": 300,
+    "min": 1,
+    "max": 180000,
+    "step": 1,
+    "description": "Length, in frames, of the animation"
+  }
+}

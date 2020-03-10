@@ -5,19 +5,19 @@ import { Button } from '../../components/button';
 import { ReactComponent as EyeIcon } from '../../images/eye.svg';
 import { toggleWheels } from '../../actions/project';
 
-let WheelsButton = ({ showWheels, toggleWheels }) => (
+let WheelsButton = ({ wheels, toggleWheels }) => (
   <Button
     className=''
     onClick={toggleWheels}
-    color={showWheels ? 'blue' : 'gray'}
-    tooltip={showWheels ? 'Hide all wheels' : 'Show wheels'}
+    color={wheels ? 'blue' : 'gray'}
+    tooltip={wheels ? 'Hide all wheels' : 'Show wheels'}
   >
     <EyeIcon />
   </Button>
 );
 
 const mapStateToProps = (state) => ({
-  showWheels: state.showWheels
+  wheels: state.wheels
 });
 
 const mapDispatchToProps = (dispatch) => ({

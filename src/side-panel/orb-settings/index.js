@@ -21,7 +21,7 @@ import { StickButton } from './stick-button';
 import { WheelButton } from './wheel-button';
 import { FromBox } from './from-box';
 import { ToBox } from './to-box';
-import { StepSizeBox } from './step-size-box';
+import { StepBox } from './step-size-box';
 import { RadiusBox } from './radius-box';
 import { SpinBox } from './spin-box';
 import { OffsetBox } from './offset-box';
@@ -60,7 +60,7 @@ const OrbSettings = () => (
         icon={<StepIcon />}
         text='Step Size'
         tooltip=''
-        control={<StepSizeBox />}
+        control={<StepBox />}
       />
       <Row
         icon={<RadiusIcon />}

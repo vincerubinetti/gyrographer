@@ -6,7 +6,7 @@ const minorStrokeWidth = 0.25;
 const minorSpacing = 50;
 const majorMultiple = 4;
 
-let Grid = ({ left, top, right, bottom, guideColor }) => {
+let Grid = ({ left, top, right, bottom, guides }) => {
   const minorHorizontalLines = [];
   const minorVerticalLines = [];
   const majorHorizontalLines = [];
@@ -35,28 +35,28 @@ let Grid = ({ left, top, right, bottom, guideColor }) => {
     <>
       <g
         id="minor_horizontal_lines"
-        stroke={guideColor.rgb}
+        stroke={guides.rgb}
         strokeWidth={minorStrokeWidth}
       >
         {minorHorizontalLines}
       </g>
       <g
         id="minor_vertical_lines"
-        stroke={guideColor.rgb}
+        stroke={guides.rgb}
         strokeWidth={minorStrokeWidth}
       >
         {minorVerticalLines}
       </g>
       <g
         id="major_horizontal_lines"
-        stroke={guideColor.rgb}
+        stroke={guides.rgb}
         strokeWidth={majorStrokeWidth}
       >
         {majorHorizontalLines}
       </g>
       <g
         id="major_vertical_lines"
-        stroke={guideColor.rgb}
+        stroke={guides.rgb}
         strokeWidth={majorStrokeWidth}
       >
         {majorVerticalLines}
@@ -70,7 +70,7 @@ const mapStateToProps = (state) => ({
   top: state.top,
   right: state.right,
   bottom: state.bottom,
-  guideColor: state.guideColor
+  guides: state.guides
 });
 
 Grid = connect(mapStateToProps)(Grid);

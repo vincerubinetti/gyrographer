@@ -4,7 +4,6 @@ import { Vector } from './util/math';
 
 export class Orb {
   constructor() {
-    this.parent = null;
     this.cache = {};
   }
 
@@ -45,7 +44,7 @@ export class Orb {
 
     const from = this.computeProp('from', time);
     const to = this.computeProp('to', time);
-    const stepSize = this.stepSize;
+    const step = this.step;
     const radius = this.computeProp('radius', time);
     const spin = this.computeProp('spin', time);
     const offset = this.computeProp('offset', time);
@@ -53,11 +52,11 @@ export class Orb {
     const path = [];
 
     if (from < to) {
-      for (let trace = from; trace < to; trace += stepSize)
+      for (let trace = from; trace < to; trace += step)
         path.push(this.computePoint(trace, time, radius, spin, offset));
     }
     if (from > to) {
-      for (let trace = from; trace > to; trace -= stepSize)
+      for (let trace = from; trace > to; trace -= step)
         path.push(this.computePoint(trace, time, radius, spin, offset));
     }
     path.push(this.computePoint(to, time, radius, spin, offset));

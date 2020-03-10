@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 const strokeWidth = 3;
 
-let Bounds = ({ left, top, right, bottom, guideColor }) => (
+let Bounds = ({ left, top, right, bottom, guides }) => (
   <rect
     x={left}
     y={top}
     width={right - left}
     height={bottom - top}
     fill='none'
-    stroke={guideColor.rgb}
+    stroke={guides.rgb}
     strokeWidth={strokeWidth}
   />
 );
@@ -20,7 +20,7 @@ const mapStateToProps = (state) => ({
   top: state.top,
   right: state.right,
   bottom: state.bottom,
-  guideColor: state.guideColor
+  guides: state.guides
 });
 
 Bounds = connect(mapStateToProps)(Bounds);

@@ -4,12 +4,12 @@ import { useCallback } from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { TimeContext } from './time';
+import { ControllerContext } from './controller';
 import { undo } from './actions/undoer';
 import { redo } from './actions/undoer';
 
-let Keyboard = ({ past, future, length, undo, redo }) => {
-  const context = useContext(TimeContext);
+let Keyboard = ({ length, undo, redo }) => {
+  const context = useContext(ControllerContext);
 
   const onKeyDown = useCallback(
     (event) => {
@@ -20,7 +20,7 @@ let Keyboard = ({ past, future, length, undo, redo }) => {
 
       switch (event.key) {
         case ' ':
-          context.changePlaying(!context.playing);
+          context.togglePlaying(!context.playing);
           event.preventDefault();
           break;
 
@@ -45,24 +45,20 @@ let Keyboard = ({ past, future, length, undo, redo }) => {
           break;
 
         case 'z':
-          if (event.ctrlKey && past.length) {
+          if (event.ctrlKey)
             undo();
-            event.preventDefault();
-          }
           break;
 
         case 'y':
-          if (event.ctrlKey && future.length) {
+          if (event.ctrlKey)
             redo();
-            event.preventDefault();
-          }
           break;
 
         default:
           break;
       }
     },
-    [context, length, past, future, undo, redo]
+    [context, length, undo, redo]
   );
 
   useEffect(() => {
@@ -74,8 +70,6 @@ let Keyboard = ({ past, future, length, undo, redo }) => {
 };
 
 const mapStateToProps = (state) => ({
-  past: state.past,
-  future: state.future,
   fps: state.fps,
   length: state.length
 });

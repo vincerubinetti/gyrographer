@@ -18,7 +18,7 @@ let PathButton = ({ selected, isOn, togglePath }) => (
 
 const mapStateToProps = (state) => ({
   selected: state.selected,
-  isOn: state.orbs[state.selected]?.showPath
+  isOn: state.orbs[state.selected]?.path
 });
 
 const mapDispatchToProps = (dispatch) => ({

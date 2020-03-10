@@ -18,7 +18,7 @@ let WheelButton = ({ selected, isOn, toggleWheel }) => (
 
 const mapStateToProps = (state) => ({
   selected: state.selected,
-  isOn: state.orbs[state.selected]?.showWheel
+  isOn: state.orbs[state.selected]?.wheel
 });
 
 const mapDispatchToProps = (dispatch) => ({

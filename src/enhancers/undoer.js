@@ -1,5 +1,3 @@
-const staticKeys = ['selected'];
-
 let lastUndoablePresent;
 
 export const undoer = (reducer) => (
@@ -16,7 +14,6 @@ export const undoer = (reducer) => (
         newPresent = past[0];
         newPast = past.slice(1);
         newFuture = [present, ...future];
-        newPresent = maintainStaticKeys(staticKeys, present, newPresent);
         newPresent = reducer(newPresent, action);
       }
       break;
@@ -26,7 +23,6 @@ export const undoer = (reducer) => (
         newPresent = future[0];
         newPast = [present, ...past];
         newFuture = future.slice(1);
-        newPresent = maintainStaticKeys(staticKeys, present, newPresent);
         newPresent = reducer(newPresent, action);
       }
       break;
@@ -51,10 +47,3 @@ export const undoer = (reducer) => (
 
 export const isUndoable = (action) =>
   action?.meta?.description && !action?.payload?.noUndo;
-
-const maintainStaticKeys = (staticKeys, present, newPresent) => {
-  for (const key of staticKeys)
-    newPresent[key] = present[key];
-
-  return newPresent;
-};

@@ -16,7 +16,7 @@ export const setFrom = createAction('SET_FROM', 'Orb: Change "from" value');
 
 export const setTo = createAction('SET_TO', 'Orb: Change "to" value');
 
-export const setStepSize = createAction(
+export const setStep = createAction(
   'SET_STEP_SIZE',
   'Orb: Change "step size" value'
 );

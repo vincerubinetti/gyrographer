@@ -10,9 +10,7 @@ export const initDragHandler = () => {
     .on('end', onDragEnd);
 };
 
-export const onDragStart = (...args) => {
-  console.log(args);
-};
+export const onDragStart = () => null;
 
 export const onDrag = () => null;
 

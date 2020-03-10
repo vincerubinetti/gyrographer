@@ -5,9 +5,9 @@ import { Grid } from './grid';
 import { Axes } from './axes';
 import { Bounds } from './bounds';
 
-let Guides = ({ guideColor, showGrid, showAxes, showBounds }) => {
+let Guides = ({ guides, showGrid, showAxes, showBounds }) => {
   return (
-    <g id="guides" opacity={guideColor.a}>
+    <g id="guides" opacity={guides.a}>
       <g id="grid" opacity={showGrid ? 1 : 0}>
         <Grid />
       </g>
@@ -22,7 +22,7 @@ let Guides = ({ guideColor, showGrid, showAxes, showBounds }) => {
 };
 
 const mapStateToProps = (state) => ({
-  guideColor: state.guideColor,
+  guides: state.guides,
   showBounds: state.showBounds,
   showAxes: state.showAxes,
   showGrid: state.showGrid

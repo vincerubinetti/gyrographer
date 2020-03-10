@@ -1,20 +1,22 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { TimeContext } from '../time';
+import { ControllerContext } from '../controller';
 import { Button } from '../components/button';
 import { ReactComponent as ArrowRightIcon } from '../images/arrow-right.svg';
 
-export const ForwardButton = () => {
-  const context = useContext(TimeContext);
+const ForwardButton = () => {
+  const context = useContext(ControllerContext);
 
   return (
     <Button
-      className="thin_button"
+      className='thin_button'
       onClick={context.incrementTime}
-      tooltip="Step forward"
+      tooltip='Step forward'
     >
       <ArrowRightIcon />
     </Button>
   );
 };
+
+export { ForwardButton };

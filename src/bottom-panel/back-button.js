@@ -1,20 +1,22 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { TimeContext } from '../time';
+import { ControllerContext } from '../controller';
 import { Button } from '../components/button';
 import { ReactComponent as ArrowLeftIcon } from '../images/arrow-left.svg';
 
-export const BackButton = () => {
-  const context = useContext(TimeContext);
+const BackButton = () => {
+  const context = useContext(ControllerContext);
 
   return (
     <Button
-      className="thin_button"
+      className='thin_button'
       onClick={context.decrementTime}
-      tooltip="Step back"
+      tooltip='Step back'
     >
       <ArrowLeftIcon />
     </Button>
   );
 };
+
+export { BackButton };

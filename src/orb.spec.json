@@ -1,0 +1,129 @@
+{
+  "id": {
+    "type": "string",
+    "fallback": "0",
+    "description": "Id of the orb"
+  },
+  "parent": {
+    "type": "string",
+    "fallback": "",
+    "description": "Id of the parent of the orb"
+  },
+  "path": {
+    "type": "boolean",
+    "fallback": true,
+    "description": "Show/hide the curve traced by the orb"
+  },
+  "stick": {
+    "type": "boolean",
+    "fallback": true,
+    "description": "Show/hide the stick from the parent to the orb"
+  },
+  "wheel": {
+    "type": "boolean",
+    "fallback": true,
+    "description": "Show/hide the wheel from the parent to the orb"
+  },
+  "from": {
+    "type": "number",
+    "fallback": 0,
+    "min": -36000,
+    "max": 36000,
+    "step": 1,
+    "description": "Cycle to trace the curve from"
+  },
+  "to": {
+    "type": "number",
+    "fallback": 360,
+    "min": -36000,
+    "max": 36000,
+    "step": 1,
+    "description": "Cycle to trace the curve to"
+  },
+  "step": {
+    "type": "number",
+    "fallback": 1,
+    "min": 0.01,
+    "max": 100,
+    "step": 0.1,
+    "description": "Number of points plotted per cycle"
+  },
+  "radius": {
+    "type": "number",
+    "fallback": 100,
+    "min": -10000,
+    "max": 10000,
+    "step": 1,
+    "description": "Radius at which the orb orbits around its parent"
+  },
+  "spin": {
+    "type": "number",
+    "fallback": 1,
+    "min": -1000,
+    "max": 1000,
+    "step": 1,
+    "description": "How many full orbits the orb makes around its parent in 360 cycles"
+  },
+  "offset": {
+    "type": "number",
+    "fallback": 0,
+    "min": -3600,
+    "max": 3600,
+    "step": 1,
+    "description": "The angle of the orb from its parent at the 0th cycle"
+  },
+  "fill": {
+    "type": "color",
+    "fallback": "#00000000",
+    "description": "Fill color of the curve"
+  },
+  "stroke": {
+    "type": "color",
+    "fallback": "#ffffffff",
+    "description": "Stroke color of the curve"
+  },
+  "strokeWidth": {
+    "type": "number",
+    "fallback": 5,
+    "min": 0,
+    "max": 500,
+    "step": 1,
+    "description": "Thickness of the curve's stroke"
+  },
+  "dashArray": {
+    "type": "string",
+    "fallback": "",
+    "description": "List of dash and gap lengths along the curve"
+  },
+  "dashOffset": {
+    "type": "number",
+    "fallback": 0,
+    "min": -1000,
+    "max": 1000,
+    "step": 1,
+    "description": "Offset of the dash array along the curve"
+  },
+  "lineCap": {
+    "type": "string",
+    "fallback": "round",
+    "description": "Shape of the stroke's end points"
+  },
+  "lineJoin": {
+    "type": "string",
+    "fallback": "round",
+    "description": "Shape of the stroke's joints"
+  },
+  "order": {
+    "type": "number",
+    "fallback": 0,
+    "min": -100,
+    "max": 100,
+    "step": 1,
+    "description": "Back-to-front index of the curve"
+  },
+  "close": {
+    "type": "boolean",
+    "fallback": false,
+    "description": "Whether to close the end of the curve back to the start, or leave it open"
+  }
+}

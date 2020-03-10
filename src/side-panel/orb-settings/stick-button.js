@@ -18,7 +18,7 @@ let StickButton = ({ selected, isOn, toggleStick }) => (
 
 const mapStateToProps = (state) => ({
   selected: state.selected,
-  isOn: state.orbs[state.selected]?.showStick
+  isOn: state.orbs[state.selected]?.path
 });
 
 const mapDispatchToProps = (dispatch) => ({

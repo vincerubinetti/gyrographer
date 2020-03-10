@@ -1,29 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useContext } from 'react';
 
+import { ControllerContext } from '../controller';
 import { Button } from '../components/button';
 import { ReactComponent as LoopIcon } from '../images/loop.svg';
-import { toggleLoop } from '../actions/project';
 
-let LoopButton = ({ loop, toggleLoop }) => (
-  <Button
-    className=""
-    onClick={toggleLoop}
-    color={loop ? 'blue' : 'gray'}
-    tooltip={loop ? "Don't loop" : 'Loop'}
-  >
-    <LoopIcon />
-  </Button>
-);
+const LoopButton = () => {
+  const context = useContext(ControllerContext);
 
-const mapStateToProps = (state) => ({
-  loop: state.loop
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  toggleLoop: () => dispatch(toggleLoop())
-});
-
-LoopButton = connect(mapStateToProps, mapDispatchToProps)(LoopButton);
+  return (
+    <Button
+      className=''
+      onClick={context.toggleLoop}
+      color={context.loop ? 'blue' : 'gray'}
+      tooltip={context.loop ? "Don't loop" : 'Loop'}
+    >
+      <LoopIcon />
+    </Button>
+  );
+};
 
 export { LoopButton };
