@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <line
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-dasharray="17.5 20"
+    x1="5"
+    y1="20"
+    x2="95"
+    y2="20"
+  />
+  <line
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-dasharray="17.5 20"
+    stroke-dashoffset="-7.5"
+    x1="5"
+    y1="50"
+    x2="95"
+    y2="50"
+  />
+  <line
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-dasharray="17.5 20"
+    stroke-dashoffset="-14.95"
+    x1="5"
+    y1="80"
+    x2="95"
+    y2="80"
+  />
+</svg>
