@@ -19,6 +19,8 @@ const Contents = () => {
   const paths = [];
   const hitboxes = [];
 
+  context.orbTree.sort((a, b) => a.order - b.order);
+
   for (const orb of context.orbTree) {
     const points = orb.computePath(time);
     let d = points
@@ -44,11 +46,11 @@ const Contents = () => {
   }
 
   return (
-    <g id='contents'>
-      <g id='wheels'>{wheels}</g>
-      <g id='sticks'>{sticks}</g>
-      <g id='paths'>{paths}</g>
-      <g id='hitboxes'>{hitboxes}</g>
+    <g id="contents">
+      <g id="wheels">{wheels}</g>
+      <g id="sticks">{sticks}</g>
+      <g id="paths">{paths}</g>
+      <g id="hitboxes">{hitboxes}</g>
     </g>
   );
 };

@@ -1,6 +1,7 @@
 import { Color } from '../util/color';
 import { copyObject } from '../util/object';
-import { getType, isObject } from '../util/types';
+import { getType } from '../util/types';
+import { isObject } from '../util/types';
 
 import projectSpec from '../project.spec.json';
 import orbSpec from '../orb.spec.json';
@@ -34,12 +35,17 @@ export default reducer;
 
 const reduce = (spec, object = {}, action, payload) => {
   for (const [key, { type, fallback, min, max }] of Object.entries(spec)) {
-    if (action === 'SET_' + key.toUpperCase())
+    if (
+      action === 'SET_' + key.toUpperCase() &&
+      (!payload.selected ||
+        (payload.selected && payload.selected === object.id))
+    )
       object[key] = payload.value;
 
-    if (type === 'color' && !isObject(object[key]))
-      object[key] = new Color(object[key] || fallback);
-    else if (getType(object[key]) !== type)
+    if (type === 'color') {
+      if (!isObject(object[key]))
+        object[key] = new Color(object[key] || fallback);
+    } else if (getType(object[key]) !== type)
       object[key] = fallback;
 
     if (type === 'number') {

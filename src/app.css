@@ -58,3 +58,15 @@ svg {
 .light {
   color: var(--light-gray);
 }
+*[data-color='gray'] {
+  color: var(--gray);
+}
+*[data-color='white'] {
+  color: var(--white);
+}
+*[data-color='blue'] {
+  color: var(--blue);
+}
+*[data-color='yellow'] {
+  color: var(--yellow);
+}

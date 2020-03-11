@@ -5,11 +5,11 @@ const strokeWidth = 3;
 
 let Bounds = ({ left, top, right, bottom, guides }) => (
   <rect
-    x={left}
-    y={top}
-    width={right - left}
-    height={bottom - top}
-    fill='none'
+    x={Math.min(left, right)}
+    y={Math.min(top, bottom)}
+    width={Math.abs(right - left)}
+    height={Math.abs(bottom - top)}
+    fill="none"
     stroke={guides.rgb}
     strokeWidth={strokeWidth}
   />

@@ -10,79 +10,102 @@
     "description": "Id of the parent of the orb"
   },
   "path": {
+    "name": "Path",
     "type": "boolean",
     "fallback": true,
-    "description": "Show/hide the curve traced by the orb"
+    "description": "Show/hide the curve traced by the orb",
+    "action": "Toggle orb path"
   },
   "stick": {
+    "name": "Stick",
     "type": "boolean",
     "fallback": true,
-    "description": "Show/hide the stick from the parent to the orb"
+    "description": "Show/hide the stick from the parent to the orb",
+    "action": "Toggle orb stick"
   },
   "wheel": {
+    "name": "Wheel",
     "type": "boolean",
     "fallback": true,
-    "description": "Show/hide the wheel from the parent to the orb"
+    "description": "Show/hide the wheel from the parent to the orb",
+    "action": "Toggle orb wheel"
   },
   "from": {
+    "name": "From",
     "type": "number",
     "fallback": 0,
     "min": -36000,
     "max": 36000,
     "step": 1,
-    "description": "Cycle to trace the curve from"
+    "description": "Cycle to trace the curve from",
+    "action": "Tweak orb from-cycle"
   },
   "to": {
+    "name": "To",
     "type": "number",
     "fallback": 360,
     "min": -36000,
     "max": 36000,
     "step": 1,
-    "description": "Cycle to trace the curve to"
+    "description": "Cycle to trace the curve to",
+    "action": "Tweak orb to-cycle"
   },
   "step": {
+    "name": "Step",
     "type": "number",
     "fallback": 1,
     "min": 0.01,
     "max": 100,
-    "step": 0.1,
-    "description": "Number of points plotted per cycle"
+    "step": 0.01,
+    "description": "Cycle-distance between plotted points on curve",
+    "action": "Tweak orb step"
   },
   "radius": {
+    "name": "Radius",
     "type": "number",
     "fallback": 100,
     "min": -10000,
     "max": 10000,
     "step": 1,
-    "description": "Radius at which the orb orbits around its parent"
+    "description": "Radius at which the orb orbits around its parent",
+    "action": "Tweak orb radius"
   },
   "spin": {
+    "name": "Spin",
     "type": "number",
     "fallback": 1,
     "min": -1000,
     "max": 1000,
     "step": 1,
-    "description": "How many full orbits the orb makes around its parent in 360 cycles"
+    "description": "How many full orbits the orb makes around its parent in 360 cycles",
+    "action": "Tweak orb spin"
   },
   "offset": {
+    "name": "Offset",
     "type": "number",
     "fallback": 0,
     "min": -3600,
     "max": 3600,
     "step": 1,
-    "description": "The angle of the orb from its parent at the 0th cycle"
+    "description": "The angle of the orb from its parent at the 0th cycle",
+    "action": "Tweak orb offset"
   },
   "fill": {
+    "name": "Fill",
     "type": "color",
     "fallback": "#00000000",
-    "description": "Fill color of the curve"
+    "description": "Fill color of the curve",
+    "action": "Tweak orb fill color"
   },
   "stroke": {
+    "name": "Stroke",
     "type": "color",
     "fallback": "#ffffffff",
-    "description": "Stroke color of the curve"
+    "description": "Stroke color of the curve",
+    "action": "Tweak orb stroke color"
   },
   "strokeWidth": {
+    "name": "Thickness",
     "type": "number",
     "fallback": 5,
     "min": 0,
@@ -91,39 +114,51 @@
     "description": "Thickness of the curve's stroke"
   },
   "dashArray": {
+    "name": "Dash Array",
     "type": "string",
     "fallback": "",
-    "description": "List of dash and gap lengths along the curve"
+    "description": "List of dash and gap lengths along the curve",
+    "action": "Change orb stroke dash array"
   },
   "dashOffset": {
+    "name": "Dash Offset",
     "type": "number",
     "fallback": 0,
     "min": -1000,
     "max": 1000,
     "step": 1,
-    "description": "Offset of the dash array along the curve"
+    "description": "Offset of the dash array along the curve",
+    "action": "Tweak orb stroke dash offset"
   },
   "lineCap": {
+    "name": "Line Cap",
     "type": "string",
     "fallback": "round",
-    "description": "Shape of the stroke's end points"
+    "description": "Shape of the stroke's end points",
+    "action": "Change orb stroke cap shape"
   },
   "lineJoin": {
+    "name": "Line Join",
     "type": "string",
     "fallback": "round",
-    "description": "Shape of the stroke's joints"
+    "description": "Shape of the stroke's joints",
+    "action": "Change orb stroke joint shape"
   },
   "order": {
+    "name": "Order",
     "type": "number",
     "fallback": 0,
     "min": -100,
     "max": 100,
     "step": 1,
-    "description": "Back-to-front index of the curve"
+    "description": "Back-to-front index of the curve",
+    "action": "Change orb order"
   },
   "close": {
+    "name": "Close",
     "type": "boolean",
     "fallback": false,
-    "description": "Whether to close the end of the curve back to the start, or leave it open"
+    "description": "Whether to close the end of the curve back to the start, or leave it open",
+    "action": "Toggle orb stroke close"
   }
 }

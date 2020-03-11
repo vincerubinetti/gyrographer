@@ -22,13 +22,7 @@
 }
 .color_picker_circle > * { 
   border-radius: 100%;
-}
-.color_picker_frame.color_picker_circle > *:nth-child(1) {
-  position: absolute;
-  left: 1px;
-  top: 1px;
-  width: calc(100% - 2px);
-  height: calc(100% - 2px);
+  box-shadow: inset 0 0 0 1px var(--white);
 }
 .color_picker_box {
   width: 25px;

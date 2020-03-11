@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useCallback } from 'react';
 import { useRef } from 'react';
 
-import { Tooltip } from './tooltip';
 import { Popover } from './popover';
 import { Color } from '../util/color';
 
@@ -42,8 +41,7 @@ export const swatches = [
 export const ColorPicker = ({
   value = new Color(),
   onChange = () => null,
-  onNudge = () => null,
-  tooltip = ''
+  onNudge = () => null
 }) => {
   const [anchor, setAnchor] = useState(null);
   const [open, setOpen] = useState(false);
@@ -65,17 +63,18 @@ export const ColorPicker = ({
 
   return (
     <>
-      <Tooltip content={tooltip}>
-        <button
-          ref={(element) => setAnchor(element)}
-          className="color_picker_box color_picker_frame color_picker_circle"
-          style={{ color: value.rgba }}
-          onClick={() => setOpen(!open)}
-        >
-          <div />
-          <div />
-        </button>
-      </Tooltip>
+      <button
+        ref={(element) => setAnchor(element)}
+        className="color_picker_box color_picker_frame color_picker_circle"
+        style={{ color: value.rgba }}
+        onClick={(event) => {
+          setOpen(!open);
+          event.target.blur();
+        }}
+      >
+        <div />
+        <div />
+      </button>
       {open && (
         <Popover
           anchor={anchor}

@@ -5,9 +5,6 @@ import { useCallback } from 'react';
 import { useRef } from 'react';
 
 import { keyMultiplier } from '../keyboard';
-import { Tooltip } from './tooltip';
-import { sign } from '../util/math';
-import { ReactComponent as HandleIcon } from '../images/number-box-handle.svg';
 
 import './number-box.css';
 
@@ -16,17 +13,16 @@ let prevMousePosition;
 export const NumberBox = ({
   value = 0,
   step = 1,
-  precision = 1,
   onChange = () => null,
-  onNudge = () => null,
-  tooltip = ''
+  onNudge = () => null
 }) => {
-  const [focused, setFocused] = useState(false);
   const [clicked, setClicked] = useState(false);
   const changeTimer = useRef();
 
   const update = useCallback(
     (newValue, debounce) => {
+      newValue = Number(newValue);
+
       onNudge(newValue);
       if (debounce) {
         window.clearTimeout(changeTimer.current);
@@ -37,17 +33,6 @@ export const NumberBox = ({
       }
     },
     [onNudge, onChange]
-  );
-
-  const onWheel = useCallback(
-    (event) => {
-      event.target.blur();
-      event.preventDefault();
-
-      const delta = -keyMultiplier(event, step) * sign(event.deltaY);
-      update(value + delta, 500);
-    },
-    [value, step, update]
   );
 
   const onMouseDown = useCallback(() => {
@@ -89,21 +74,14 @@ export const NumberBox = ({
   }, [onMouseMove, onMouseUp]);
 
   return (
-    <Tooltip content={tooltip}>
-      <div className="number_box" onWheel={onWheel}>
-        <input
-          type="number"
-          value={focused ? value : value.toFixed(precision)}
-          step={step}
-          onChange={(event) => update(event.target.value, 1000)}
-          onFocus={(event) => {
-            setFocused(true);
-            event.target.select();
-          }}
-          onBlur={() => setFocused(false)}
-        />
-        <HandleIcon className="number_box_handle" onMouseDown={onMouseDown} />
-      </div>
-    </Tooltip>
+    <div className="number_box">
+      <input
+        type="number"
+        value={value}
+        step={step}
+        onMouseDown={onMouseDown} 
+        onChange={(event) => update(event.target.value, 1000)}
+      />
+    </div>
   );
 };

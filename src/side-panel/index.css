@@ -3,7 +3,6 @@
   background: var(--black);
   left: 0;
   top: 80px;
-  width: 300px;
   border: solid 2px var(--dark-gray);
   border-left: none;
   transition: transform var(--fast), opacity var(--slow);

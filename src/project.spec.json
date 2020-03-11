@@ -5,76 +5,98 @@
     "description": "Hierarchy of orbs"
   },
   "bounds": {
+    "name": "Bounds",
     "type": "boolean",
     "fallback": true,
-    "description": "Boundaries of the image"
+    "description": "Boundaries of the image",
+    "action": "Toggle bounds"
   },
   "axes": {
+    "name": "Axes",
     "type": "boolean",
-    "fallback": false,
-    "description": "X/Y axes and origin of the image"
+    "fallback": true,
+    "description": "X/Y axes and origin of the image",
+    "action": "Toggle axes"
   },
   "grid": {
+    "name": "Grid",
     "type": "boolean",
-    "fallback": false,
-    "description": "Major and minor grid lines"
+    "fallback": true,
+    "description": "Major and minor grid lines",
+    "action": "Toggle grid"
   },
   "left": {
+    "name": "Left",
     "type": "number",
     "fallback": -1000,
     "min": -10000,
     "max": 10000,
     "step": 5,
-    "description": "Left boundary of the image"
+    "description": "Left boundary of the image",
+    "action": "Tweak left boundary"
   },
   "top": {
+    "name": "Top",
     "type": "number",
     "fallback": -1000,
     "min": -10000,
     "max": 10000,
     "step": 5,
-    "description": "Top boundary of the image"
+    "description": "Top boundary of the image",
+    "action": "Tweak top boundary"
   },
   "right": {
+    "name": "Right",
     "type": "number",
     "fallback": 1000,
     "min": -10000,
     "max": 10000,
     "step": 5,
-    "description": "Right boundary of the image"
+    "description": "Right boundary of the image",
+    "action": "Tweak right boundary"
   },
   "bottom": {
+    "name": "Bottom",
     "type": "number",
     "fallback": 1000,
     "min": -10000,
     "max": 10000,
     "step": 5,
-    "description": "Bottom boundary of the image"
+    "description": "Bottom boundary of the image",
+    "action": "Tweak bottom boundary"
   },
   "background": {
+    "name": "Background",
     "type": "color",
     "fallback": "#202020ff",
-    "description": "Color of the background"
+    "description": "Color of the background",
+    "action": "Change background color"
   },
   "guides": {
+    "name": "Guides",
     "type": "color",
     "fallback": "#ffffff80",
-    "description": "Color of the bounds, axes, and grid"
+    "description": "Color of the bounds, axes, and grid",
+    "action": "Change guide color"
   },
   "fps": {
+    "name": "FPS",
     "type": "number",
     "fallback": 60,
     "min": 1,
     "max": 500,
-    "step": 1,
-    "description": "Frames per second of the animation"
+    "step": 0.1,
+    "description": "Frames per second of the animation",
+    "action": "Tweak animation fps"
   },
   "length": {
+    "name": "Length",
     "type": "number",
     "fallback": 300,
     "min": 1,
     "max": 180000,
     "step": 1,
-    "description": "Length, in frames, of the animation"
+    "description": "Length of the animation in frames",
+    "action": "Tweak animation length"
   }
 }

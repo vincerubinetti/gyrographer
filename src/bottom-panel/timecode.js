@@ -16,8 +16,6 @@ let Timecode = ({ fps }) => {
   frames = String(frames).padStart(2, '0');
   frameDecimal = String(frameDecimal).padStart(2, '0');
 
-  console.log(seconds, frames, frameDecimal);
-
   return (
     <div className='timecode small'>
       {seconds.split('').map((digit, index) => (
@@ -25,7 +23,7 @@ let Timecode = ({ fps }) => {
           {digit}
         </span>
       ))}
-      <span className='timecode_suffix light'>sec</span>
+      <span className='timecode_suffix light'>s</span>
       {frames.split('').map((digit, index) => (
         <span key={index} className='timecode_digit'>
           {digit}
@@ -37,7 +35,7 @@ let Timecode = ({ fps }) => {
           {digit}
         </span>
       ))}
-      <span className='timecode_suffix light'>fr</span>
+      <span className='timecode_suffix light'>f</span>
     </div>
   );
 };

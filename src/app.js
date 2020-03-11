@@ -15,12 +15,12 @@ import './util/debug';
 
 import './app.css';
 
-// redux store - contains undoable and saveable global state
-// controller - contains all other global state
-
 let App = ({ setState }) => {
   useEffect(() => {
-    setState({ state: getStateFromStorage() });
+    setState({
+      state: getStateFromStorage(),
+      description: 'Load state from storage'
+    });
   }, [setState]);
 
   return (

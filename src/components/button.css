@@ -8,18 +8,6 @@
 .button:hover {
   background: var(--dark-gray);
 }
-.button[data-color='gray'] {
-  color: var(--gray);
-}
-.button[data-color='white'] {
-  color: var(--white);
-}
-.button[data-color='blue'] {
-  color: var(--blue);
-}
-.button[data-color='yellow'] {
-  color: var(--yellow);
-}
 .thin_button {
   width: 25px;
   height: 40px;

@@ -23,7 +23,7 @@ export const Popover = ({
 
   return createPortal(
     <>
-      {!noOverlay && <div className='popover_overlay' onClick={onClose} />}
+      {!noOverlay && <div className="popover_overlay" onClick={onClose} />}
       <div
         ref={(element) => setContent(element)}
         className={'popover ' + className}
@@ -42,17 +42,9 @@ const calculatePosition = ({ anchor, content }) => {
 
   anchor = anchor?.getBoundingClientRect();
   content = content?.getBoundingClientRect();
-  const body = document.body.getBoundingClientRect();
 
   if (!anchor || !content)
     return { x, y };
-
-  anchor = {
-    left: anchor.left - body.left,
-    top: anchor.top - body.top,
-    width: anchor.width,
-    height: anchor.height
-  };
 
   if (anchor.left + content.width < window.innerWidth)
     x = anchor.left;
@@ -61,9 +53,12 @@ const calculatePosition = ({ anchor, content }) => {
   else
     x = window.innerWidth / 2 - content.width / 2;
 
-  if (anchor.top - content.height > 0)
+  if (anchor.top - padding - content.height > 0)
     y = anchor.top - padding - content.height;
-  else if (anchor.top + anchor.height < window.innerHeight)
+  else if (
+    anchor.top + anchor.height + padding + content.height <
+    window.innerHeight
+  )
     y = anchor.top + anchor.height + padding;
   else
     y = window.innerHeight / 2 - content.height / 2;

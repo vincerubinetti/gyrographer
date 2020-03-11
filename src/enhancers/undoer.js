@@ -30,7 +30,7 @@ export const undoer = (reducer) => (
     default:
       newPresent = reducer(present, action);
       if (isUndoable(action)) {
-        newPresent.actionDescription = action?.meta?.description;
+        newPresent.actionDescription = action?.payload?.description;
         newPast = [lastUndoablePresent || present, ...past];
         newFuture = [];
         lastUndoablePresent = newPresent;
@@ -46,4 +46,4 @@ export const undoer = (reducer) => (
 };
 
 export const isUndoable = (action) =>
-  action?.meta?.description && !action?.payload?.noUndo;
+  action?.payload?.description && !action?.payload?.noUndo;

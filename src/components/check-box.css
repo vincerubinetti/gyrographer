@@ -1,0 +1,23 @@
+.check_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.check_box > button {
+  width: 100%;
+  height: 100%;
+  padding: 0 5px;
+  font-size: 1em;
+  text-align: center;
+  border: none;
+  background: none;
+  outline: none;
+  appearance: none;
+  transition: background var(--fast);
+}
+.check_box > button:hover {
+  background: var(--dark-gray);
+}

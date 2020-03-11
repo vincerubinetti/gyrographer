@@ -14,10 +14,10 @@
 }
 .side_panel_row > *:nth-child(2) {
   justify-content: flex-start;
-  width: 150px;
+  width: 120px;
 }
 .side_panel_row > *:nth-child(3) {
-  width: 100px;
+  width: 80px;
 }
 .side_panel_row > *:nth-child(1) > * {
   color: var(--light-gray);
