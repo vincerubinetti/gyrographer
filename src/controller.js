@@ -26,7 +26,7 @@ let Controller = ({ children, orbs, fps, length }) => {
           newTime = time + newTime;
         if (newTime < 0) {
           if (loop)
-            newTime = (newTime % length) + length;
+            newTime = newTime % length + length;
           else
             newTime = 0;
         }
@@ -55,20 +55,26 @@ let Controller = ({ children, orbs, fps, length }) => {
   );
 
   const incrementTime = useCallback(
-    (multiplier) => changeTime(speed * (multiplier || 1), true),
+    (multiplier) =>
+      changeTime(speed * (multiplier || 1), true),
     [speed, changeTime]
   );
 
   const decrementTime = useCallback(
-    (multiplier) => changeTime(-speed * (multiplier || 1), true),
+    (multiplier) =>
+      changeTime(-speed * (multiplier || 1), true),
     [speed, changeTime]
   );
 
-  const toStart = useCallback(() => changeTime(0), [changeTime]);
+  const toStart = useCallback(() =>
+    changeTime(0), [changeTime]);
 
-  const toEnd = useCallback(() => changeTime(length), [length, changeTime]);
+  const toEnd = useCallback(() =>
+    changeTime(length), [length, changeTime]);
 
-  const toggleLoop = useCallback(() => setLoop((loop) => !loop), []);
+  const toggleLoop = useCallback(() =>
+    setLoop((loop) =>
+      !loop), []);
 
   const toggleSpeed = useCallback(
     (value) =>
@@ -88,9 +94,11 @@ let Controller = ({ children, orbs, fps, length }) => {
     []
   );
 
-  const changeSelected = useCallback((id = '') => setSelected(id), []);
+  const changeSelected = useCallback((id = '') =>
+    setSelected(id), []);
 
-  useEffect(() => setOrbTree(Orb.buildTree(orbs)), [orbs]);
+  useEffect(() =>
+    setOrbTree(Orb.buildTree(orbs)), [orbs]);
 
   useEffect(() => {
     if (playing)
@@ -98,7 +106,8 @@ let Controller = ({ children, orbs, fps, length }) => {
     else
       window.clearInterval(timer.current);
 
-    return () => window.clearInterval(timer.current);
+    return () =>
+      window.clearInterval(timer.current);
   }, [playing, incrementTime, fps]);
 
   return (
@@ -126,11 +135,12 @@ let Controller = ({ children, orbs, fps, length }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  orbs: state.orbs,
-  fps: state.fps,
-  length: state.length
-});
+const mapStateToProps = (state) =>
+  ({
+    orbs: state.orbs,
+    fps: state.fps,
+    length: state.length
+  });
 
 Controller = connect(mapStateToProps)(Controller);
 

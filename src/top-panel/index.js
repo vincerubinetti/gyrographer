@@ -5,11 +5,10 @@ import { RedoButton } from './redo-button';
 
 import './index.css';
 
-const TopPanel = () => (
+const TopPanel = () =>
+
   <div id='top_panel'>
     <UndoButton />
     <RedoButton />
-  </div>
-);
-
+  </div>;
 export default TopPanel;

@@ -4,16 +4,19 @@ import { ReactComponent as EyeIcon } from '../images/eye.svg';
 
 import './check-box.css';
 
-const CheckBox = ({ value = '', onChange = () => null }) => (
-  <div className="check_box">
+const CheckBox = ({
+  value = '', onChange = () =>
+    null
+}) =>
+
+  <div className='check_box'>
     <button
-      type="text"
-      onClick={() => onChange(!value)}
+      type='text'
+      onClick={() =>
+        onChange(!value)}
       data-color={value ? 'blue' : 'gray'}
     >
       <EyeIcon />
     </button>
-  </div>
-);
-
+  </div>;
 export { CheckBox };

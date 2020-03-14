@@ -23,7 +23,8 @@ export const useWindowSize = () => {
     };
     window.addEventListener('resize', update);
     update();
-    return () => window.removeEventListener('resize', update);
+    return () =>
+      window.removeEventListener('resize', update);
   }, []);
 
   return { width, height };

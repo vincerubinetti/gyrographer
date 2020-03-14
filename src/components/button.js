@@ -8,10 +8,13 @@ export const Button = ({
   className = '',
   tooltip = '',
   color = '',
-  onClick = () => null,
-  onCtrlClick = () => null,
+  onClick = () =>
+    null,
+  onCtrlClick = () =>
+    null,
   children = <></>
-}) => (
+}) =>
+
   <Tooltip content={tooltip}>
     <button
       className={'button ' + className}
@@ -25,5 +28,5 @@ export const Button = ({
     >
       {children}
     </button>
-  </Tooltip>
-);
+  </Tooltip>;
+

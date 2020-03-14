@@ -40,8 +40,10 @@ export const swatches = [
 
 export const ColorPicker = ({
   value = new Color(),
-  onChange = () => null,
-  onNudge = () => null
+  onChange = () =>
+    null,
+  onNudge = () =>
+    null
 }) => {
   const [anchor, setAnchor] = useState(null);
   const [open, setOpen] = useState(false);
@@ -53,7 +55,8 @@ export const ColorPicker = ({
       if (debounce) {
         window.clearTimeout(changeTimer.current);
         changeTimer.current = window.setTimeout(
-          () => onChange(newValue),
+          () =>
+            onChange(newValue),
           debounce
         );
       }
@@ -64,8 +67,9 @@ export const ColorPicker = ({
   return (
     <>
       <button
-        ref={(element) => setAnchor(element)}
-        className="color_picker_box color_picker_frame color_picker_circle"
+        ref={(element) =>
+          setAnchor(element)}
+        className='color_picker_box color_picker_frame color_picker_circle'
         style={{ color: value.rgba }}
         onClick={(event) => {
           setOpen(!open);
@@ -75,47 +79,53 @@ export const ColorPicker = ({
         <div />
         <div />
       </button>
-      {open && (
+      {open &&
         <Popover
           anchor={anchor}
-          className="color_picker"
+          className='color_picker'
           style={{ color: value.rgba }}
-          onClose={() => setOpen(false)}
+          onClose={() =>
+            setOpen(false)}
         >
-          <div className="color_picker_palette color_picker_frame">
+          <div className='color_picker_palette color_picker_frame'>
             <div />
             <div />
             <div />
             <div />
           </div>
-          <div className="color_picker_hue color_picker_frame">
+          <div className='color_picker_hue color_picker_frame'>
             <div />
             <div />
           </div>
-          <div className="color_picker_alpha color_picker_frame">
+          <div className='color_picker_alpha color_picker_frame'>
             <div />
             <div />
           </div>
           <input
-            type="text"
+            type='text'
             value={value.rgba}
-            onChange={(event) => update(event.target.value, 10000)}
-            className="color_picker_hex"
+            onChange={(event) =>
+              update(event.target.value, 10000)}
+            className='color_picker_hex'
           />
-          <div className="color_picker_swatches">
-            {swatches.map((swatch, index) => (
+          <div className='color_picker_swatches'>
+            {swatches.map((swatch, index) =>
+
               <button
                 key={index}
-                className="color_picker_swatch color_picker_frame color_picker_circle"
+                className={`
+                  color_picker_swatch
+                  color_picker_frame
+                  color_picker_circle
+                `}
                 style={{ color: swatch }}
               >
                 <div />
                 <div />
-              </button>
-            ))}
+              </button>)}
           </div>
         </Popover>
-      )}
+      }
     </>
   );
 };

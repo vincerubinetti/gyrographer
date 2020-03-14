@@ -63,21 +63,26 @@ let Keyboard = ({ length, undo, redo }) => {
 
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    return () =>
+      window.removeEventListener('keydown', onKeyDown);
   }, [onKeyDown]);
 
   return <></>;
 };
 
-const mapStateToProps = (state) => ({
-  fps: state.fps,
-  length: state.length
-});
+const mapStateToProps = (state) =>
+  ({
+    fps: state.fps,
+    length: state.length
+  });
 
-const mapDispatchToProps = (dispatch) => ({
-  undo: () => dispatch(undo()),
-  redo: () => dispatch(redo())
-});
+const mapDispatchToProps = (dispatch) =>
+  ({
+    undo: () =>
+      dispatch(undo()),
+    redo: () =>
+      dispatch(redo())
+  });
 
 Keyboard = connect(mapStateToProps, mapDispatchToProps)(Keyboard);
 

@@ -34,9 +34,11 @@ let App = ({ setState }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setState: (...args) => dispatch(setState(...args))
-});
+const mapDispatchToProps = (dispatch) =>
+  ({
+    setState: (...args) =>
+      dispatch(setState(...args))
+  });
 
 App = connect(null, mapDispatchToProps)(App);
 

@@ -77,8 +77,10 @@ export class Orb {
       tree.push(leaf);
     }
 
-    for (const leaf of tree)
-      leaf.parent = tree.find((parent) => parent.id === leaf.parent);
+    for (const leaf of tree) {
+      leaf.parent = tree.find((parent) =>
+        parent.id === leaf.parent);
+    }
 
     return tree;
   }

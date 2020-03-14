@@ -20,7 +20,8 @@ export const Tooltip = ({ content = '', children = <></> }) => {
   const onEnter = useCallback((event) => {
     event.persist();
     window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => setAnchor(event.target), delay);
+    timer.current = window.setTimeout(() =>
+      setAnchor(event.target), delay);
   }, []);
 
   const onLeave = useCallback(() => {
@@ -29,11 +30,12 @@ export const Tooltip = ({ content = '', children = <></> }) => {
   }, []);
 
   const makeHandler = useCallback(
-    (element, prop, call) => (...args) => {
-      if (element.props[prop])
-        element.props[prop](...args);
-      call(...args);
-    },
+    (element, prop, call) =>
+      (...args) => {
+        if (element.props[prop])
+          element.props[prop](...args);
+        call(...args);
+      },
     []
   );
 
@@ -53,11 +55,11 @@ export const Tooltip = ({ content = '', children = <></> }) => {
   return (
     <>
       {children}
-      {anchor && content && (
-        <Popover anchor={anchor} noOverlay className="tooltip">
+      {anchor && content &&
+        <Popover anchor={anchor} noOverlay className='tooltip'>
           {content}
         </Popover>
-      )}
+      }
     </>
   );
 };

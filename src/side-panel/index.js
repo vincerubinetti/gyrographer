@@ -16,18 +16,21 @@ const SidePanel = () => {
   const context = useContext(ControllerContext);
 
   return (
-    <div id="side_panel" data-open={open}>
-      <div className="side_panel_header">
-        <span>{context.selected ? 'Orb' : 'Project'}</span>
+    <div id='side_panel' data-open={open}>
+      <div className='side_panel_header'>
+        <span>
+          {context.selected ? 'Orb' : 'Project'}
+        </span>
         <Button
-          onClick={() => setOpen(!open)}
+          onClick={() =>
+            setOpen(!open)}
           tooltip={(open ? 'Close' : 'Open') + ' panel'}
         >
           {open && <CollapseIcon />}
           {!open && <ExpandIcon />}
         </Button>
       </div>
-      <div className="side_panel_content">
+      <div className='side_panel_content'>
         {!context.selected && <Project />}
         {context.selected && <Orb />}
       </div>

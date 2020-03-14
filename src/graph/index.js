@@ -31,14 +31,16 @@ let Graph = ({ background }) => {
 
   useEffect(() => {
     window.addEventListener('resize', fitView);
-    return () => window.removeEventListener('resize', fitView);
+    return () =>
+      window.removeEventListener('resize', fitView);
   }, []);
 
   return (
     <svg
       id='graph'
       style={{ background: background.rgba }}
-      onClick={() => context.changeSelected()}
+      onClick={() =>
+        context.changeSelected()}
     >
       <g id='view'>
         <Guides />
@@ -48,9 +50,10 @@ let Graph = ({ background }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  background: state.background
-});
+const mapStateToProps = (state) =>
+  ({
+    background: state.background
+  });
 
 Graph = connect(mapStateToProps)(Graph);
 

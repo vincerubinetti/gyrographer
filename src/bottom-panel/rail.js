@@ -19,7 +19,7 @@ let Rail = ({ length }) => {
       const x = event.clientX || (event.touches ? event.touches[0].clientX : 0);
 
       const bbox = track.current.getBoundingClientRect();
-      const time = Math.floor((length * (x - bbox.left)) / bbox.width);
+      const time = Math.floor(length * (x - bbox.left) / bbox.width);
 
       context.changeTime(time);
     },
@@ -52,7 +52,7 @@ let Rail = ({ length }) => {
     [seek, clicking]
   );
 
-  const percent = (100 * context.time) / length;
+  const percent = 100 * context.time / length;
 
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);
@@ -71,24 +71,25 @@ let Rail = ({ length }) => {
   }, [onMouseMove, onMouseUp]);
 
   return (
-    <div className="rail_container">
+    <div className='rail_container'>
       <div
-        className="rail"
+        className='rail'
         tabIndex={0}
         onTouchStart={onMouseDown}
         onMouseDown={onMouseDown}
         ref={track}
       >
-        <div className="rail_marker" style={{ right: 100 - percent + '%' }} />
+        <div className='rail_marker' style={{ right: 100 - percent + '%' }} />
       </div>
-      <div className="keyframe_markers" />
+      <div className='keyframe_markers' />
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  length: state.length
-});
+const mapStateToProps = (state) =>
+  ({
+    length: state.length
+  });
 
 Rail = connect(mapStateToProps)(Rail);
 

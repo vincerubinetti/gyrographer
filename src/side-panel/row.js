@@ -25,12 +25,14 @@ let Row = ({ state, dispatch, prop, Icon, Control }) => {
   const type = 'SET_' + prop.toUpperCase();
 
   return (
-    <div className="side_panel_row">
+    <div className='side_panel_row'>
       <div>
         <Icon />
       </div>
       <Tooltip content={description}>
-        <div>{name}</div>
+        <div>
+          {name}
+        </div>
       </Tooltip>
       <Tooltip content={action}>
         <div>
@@ -38,23 +40,19 @@ let Row = ({ state, dispatch, prop, Icon, Control }) => {
             value={value}
             step={step}
             onNudge={(value) => {
-              dispatch(
-                createAction(type)({
-                  value,
-                  selected,
-                  description: action,
-                  noUndo: true
-                })
-              );
+              dispatch(createAction(type)({
+                value,
+                selected,
+                description: action,
+                noUndo: true
+              }));
             }}
             onChange={(value) => {
-              dispatch(
-                createAction(type)({
-                  value,
-                  selected,
-                  description: action
-                })
-              );
+              dispatch(createAction(type)({
+                value,
+                selected,
+                description: action
+              }));
             }}
           />
         </div>
@@ -63,9 +61,11 @@ let Row = ({ state, dispatch, prop, Icon, Control }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ state });
+const mapStateToProps = (state) =>
+  ({ state });
 
-const mapDispatchToProps = (dispatch) => ({ dispatch });
+const mapDispatchToProps = (dispatch) =>
+  ({ dispatch });
 
 Row = connect(mapStateToProps, mapDispatchToProps)(Row);
 

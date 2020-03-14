@@ -4,16 +4,20 @@ import './text-box.css';
 
 export const TextBox = ({
   value = '',
-  onChange = () => null,
-  onNudge = () => null
+  onChange = () =>
+    null,
+  onNudge = () =>
+    null
 }) => {
   return (
-    <div className="text_box">
+    <div className='text_box'>
       <input
-        type="text"
+        type='text'
         value={value}
-        onChange={(event) => onNudge(event.target.value)}
-        onBlur={(event) => onChange(event.target.value)}
+        onChange={(event) =>
+          onNudge(event.target.value)}
+        onBlur={(event) =>
+          onChange(event.target.value)}
       />
     </div>
   );

@@ -48,9 +48,10 @@ let Wheel = ({ orb, guides }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  guides: state.guides
-});
+const mapStateToProps = (state) =>
+  ({
+    guides: state.guides
+  });
 
 Wheel = connect(mapStateToProps)(Wheel);
 

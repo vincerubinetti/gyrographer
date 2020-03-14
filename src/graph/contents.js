@@ -19,7 +19,8 @@ const Contents = () => {
   const paths = [];
   const hitboxes = [];
 
-  context.orbTree.sort((a, b) => a.order - b.order);
+  context.orbTree.sort((a, b) =>
+    a.order - b.order);
 
   for (const orb of context.orbTree) {
     const points = orb.computePath(time);
@@ -30,8 +31,7 @@ const Contents = () => {
           index === 0 ? 'M' : 'L',
           point.x.toFixed(precision),
           point.y.toFixed(precision)
-        ].join(' ')
-      )
+        ].join(' '))
       .join(' ');
     if (orb.close)
       d += 'z';
@@ -40,17 +40,23 @@ const Contents = () => {
     wheels.push(<Wheel key={wheels.length} orb={orb} lastPoint={lastPoint} />);
     sticks.push(<Stick key={sticks.length} orb={orb} lastPoint={lastPoint} />);
     paths.push(<Path key={paths.length} orb={orb} d={d} />);
-    hitboxes.push(
-      <Hitbox key={hitboxes.length} orb={orb} d={d} lastPoint={lastPoint} />
-    );
+    hitboxes.push(<Hitbox key={hitboxes.length} orb={orb} d={d} lastPoint={lastPoint} />);
   }
 
   return (
-    <g id="contents">
-      <g id="wheels">{wheels}</g>
-      <g id="sticks">{sticks}</g>
-      <g id="paths">{paths}</g>
-      <g id="hitboxes">{hitboxes}</g>
+    <g id='contents'>
+      <g id='wheels'>
+        {wheels}
+      </g>
+      <g id='sticks'>
+        {sticks}
+      </g>
+      <g id='paths'>
+        {paths}
+      </g>
+      <g id='hitboxes'>
+        {hitboxes}
+      </g>
     </g>
   );
 };

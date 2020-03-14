@@ -42,9 +42,10 @@ let Hitbox = ({ orb, guides, d, lastPoint }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  guides: state.guides
-});
+const mapStateToProps = (state) =>
+  ({
+    guides: state.guides
+  });
 
 Hitbox = connect(mapStateToProps)(Hitbox);
 

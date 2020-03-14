@@ -38,7 +38,7 @@ const reduce = (spec, object = {}, action, payload) => {
     if (
       action === 'SET_' + key.toUpperCase() &&
       (!payload.selected ||
-        (payload.selected && payload.selected === object.id))
+        payload.selected && payload.selected === object.id)
     )
       object[key] = payload.value;
 

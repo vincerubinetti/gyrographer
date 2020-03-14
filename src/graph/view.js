@@ -8,7 +8,8 @@ const maxZoom = 100;
 const hPadding = 10 * 2;
 const vPadding = 50 * 2;
 
-export let viewHandler = () => null;
+export let viewHandler = () =>
+  null;
 
 export const initViewHandler = () => {
   viewHandler = d3

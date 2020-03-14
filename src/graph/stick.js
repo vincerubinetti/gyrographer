@@ -57,9 +57,10 @@ let Stick = ({ orb, guides }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  guides: state.guides
-});
+const mapStateToProps = (state) =>
+  ({
+    guides: state.guides
+  });
 
 Stick = connect(mapStateToProps)(Stick);
 

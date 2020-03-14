@@ -26,30 +26,29 @@ import { ReactComponent as LineJoinIcon } from '../images/join.svg';
 import { ReactComponent as OrderIcon } from '../images/order.svg';
 import { ReactComponent as CloseIcon } from '../images/close.svg';
 
-const Orb = () => (
-  <>
-    <Heading text="Markers" />
-    <Row prop="path" Icon={PathIcon} Control={CheckBox} />
-    <Row prop="stick" Icon={StickIcon} Control={CheckBox} />
-    <Row prop="wheel" Icon={WheelIcon} Control={CheckBox} />
-    <Heading text="Geometry" />
-    <Row prop="from" Icon={FromIcon} Control={NumberBox} />
-    <Row prop="to" Icon={ToIcon} Control={NumberBox} />
-    <Row prop="step" Icon={StepIcon} Control={NumberBox} />
-    <Row prop="radius" Icon={RadiusIcon} Control={NumberBox} />
-    <Row prop="spin" Icon={SpinIcon} Control={NumberBox} />
-    <Row prop="offset" Icon={OffsetIcon} Control={NumberBox} />
-    <Heading text="Style" />
-    <Row prop="fill" Icon={FillIcon} Control={ColorPicker} />
-    <Row prop="stroke" Icon={StrokeIcon} Control={ColorPicker} />
-    <Row prop="strokeWidth" Icon={StrokeWidthIcon} Control={NumberBox} />
-    <Row prop="dashArray" Icon={DashArrayIcon} Control={TextBox} />
-    <Row prop="dashOffset" Icon={DashOffsetIcon} Control={NumberBox} />
-    <Row prop="lineCap" Icon={LineCapIcon} Control={TextBox} />
-    <Row prop="lineJoin" Icon={LineJoinIcon} Control={TextBox} />
-    <Row prop="order" Icon={OrderIcon} Control={NumberBox} />
-    <Row prop="close" Icon={CloseIcon} Control={CheckBox} />
-  </>
-);
+const Orb = () =>
 
+  <>
+    <Heading text='Markers' />
+    <Row prop='path' Icon={PathIcon} Control={CheckBox} />
+    <Row prop='stick' Icon={StickIcon} Control={CheckBox} />
+    <Row prop='wheel' Icon={WheelIcon} Control={CheckBox} />
+    <Heading text='Geometry' />
+    <Row prop='from' Icon={FromIcon} Control={NumberBox} />
+    <Row prop='to' Icon={ToIcon} Control={NumberBox} />
+    <Row prop='step' Icon={StepIcon} Control={NumberBox} />
+    <Row prop='radius' Icon={RadiusIcon} Control={NumberBox} />
+    <Row prop='spin' Icon={SpinIcon} Control={NumberBox} />
+    <Row prop='offset' Icon={OffsetIcon} Control={NumberBox} />
+    <Heading text='Style' />
+    <Row prop='fill' Icon={FillIcon} Control={ColorPicker} />
+    <Row prop='stroke' Icon={StrokeIcon} Control={ColorPicker} />
+    <Row prop='strokeWidth' Icon={StrokeWidthIcon} Control={NumberBox} />
+    <Row prop='dashArray' Icon={DashArrayIcon} Control={TextBox} />
+    <Row prop='dashOffset' Icon={DashOffsetIcon} Control={NumberBox} />
+    <Row prop='lineCap' Icon={LineCapIcon} Control={TextBox} />
+    <Row prop='lineJoin' Icon={LineJoinIcon} Control={TextBox} />
+    <Row prop='order' Icon={OrderIcon} Control={NumberBox} />
+    <Row prop='close' Icon={CloseIcon} Control={CheckBox} />
+  </>;
 export { Orb };

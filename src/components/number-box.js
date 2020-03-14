@@ -13,8 +13,10 @@ let prevMousePosition;
 export const NumberBox = ({
   value = 0,
   step = 1,
-  onChange = () => null,
-  onNudge = () => null
+  onChange = () =>
+    null,
+  onNudge = () =>
+    null
 }) => {
   const [clicked, setClicked] = useState(false);
   const changeTimer = useRef();
@@ -27,7 +29,8 @@ export const NumberBox = ({
       if (debounce) {
         window.clearTimeout(changeTimer.current);
         changeTimer.current = window.setTimeout(
-          () => onChange(newValue),
+          () =>
+            onChange(newValue),
           debounce
         );
       }
@@ -74,13 +77,14 @@ export const NumberBox = ({
   }, [onMouseMove, onMouseUp]);
 
   return (
-    <div className="number_box">
+    <div className='number_box'>
       <input
-        type="number"
+        type='number'
         value={value}
         step={step}
-        onMouseDown={onMouseDown} 
-        onChange={(event) => update(event.target.value, 1000)}
+        onMouseDown={onMouseDown}
+        onChange={(event) =>
+          update(event.target.value, 1000)}
       />
     </div>
   );
