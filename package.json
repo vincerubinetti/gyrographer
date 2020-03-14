@@ -26,12 +26,6 @@
     "not dead"
   ],
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "js-yaml": "^3.13.1",
-    "eslint": "^6.8.0",
-    "eslint-plugin-html": "^6.0.0",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3"
+    "eslint-config-rubinetti": "git+https://git@github.com/vincerubinetti/eslint-config-rubinetti.git"
   }
 }
