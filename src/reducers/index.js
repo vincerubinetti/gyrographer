@@ -1,6 +1,7 @@
 import { Color } from '../util/color';
 import { copyObject } from '../util/object';
 import { getType } from '../util/types';
+import { isString } from '../util/types';
 import { isObject } from '../util/types';
 
 import projectSpec from '../project.spec.json';
@@ -34,7 +35,7 @@ const reducer = (state = {}, { type = '', payload = {} } = {}) => {
 export default reducer;
 
 const reduce = (spec, object = {}, action, payload) => {
-  for (const [key, { type, fallback, min, max }] of Object.entries(spec)) {
+  for (const [key, { type, fallback, min, max, choices }] of Object.entries(spec)) {
     if (
       action === 'SET_' + key.toUpperCase() &&
       (!payload.selected ||
@@ -42,18 +43,21 @@ const reduce = (spec, object = {}, action, payload) => {
     )
       object[key] = payload.value;
 
-    if (type === 'color') {
-      if (!isObject(object[key]))
-        object[key] = new Color(object[key] || fallback);
-    } else if (getType(object[key]) !== type)
-      object[key] = fallback;
-
     if (type === 'number') {
       if (object[key] > max)
         object[key] = max;
       if (object[key] < min)
         object[key] = min;
     }
+
+    if (type === 'color') {
+      if (!isObject(object[key]))
+        object[key] = new Color(object[key] || fallback);
+    } else if (type === 'choice') {
+      if (!isString(object[key]) || !choices.includes(object[key]))
+        object[key] = choices[0];
+    } else if (getType(object[key]) !== type)
+      object[key] = fallback;
   }
 
   return object;

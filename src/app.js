@@ -47,14 +47,3 @@ const mapDispatchToProps = (dispatch) => ({
 App = connect(null, mapDispatchToProps)(App);
 
 export default App;
-
-// detect fullscreen changes and set data attribute on body for readable state
-const onResize = () => {
-  document.body.dataset.fullscreen =
-    Math.abs(window.screen.height - window.innerHeight) <= 1;
-};
-window.addEventListener('resize', () => {
-  window.clearTimeout(window.resizeTimer);
-  window.resizeTimer = window.setTimeout(onResize, 500);
-});
-onResize();

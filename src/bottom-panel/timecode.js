@@ -19,37 +19,27 @@ let Timecode = ({ fps }) => {
   return (
     <div className='timecode small'>
       {seconds.split('').map((digit, index) =>
-
         <span key={index} className='timecode_digit'>
           {digit}
         </span>)}
-      <span className='timecode_suffix light'>
-s
-      </span>
+      <span className='timecode_suffix light'>s</span>
       {frames.split('').map((digit, index) =>
-
         <span key={index} className='timecode_digit'>
           {digit}
         </span>)}
-      <span>
-.
-      </span>
+      <span>.</span>
       {frameDecimal.split('').map((digit, index) =>
-
         <span key={index} className='timecode_digit'>
           {digit}
         </span>)}
-      <span className='timecode_suffix light'>
-f
-      </span>
+      <span className='timecode_suffix light'>f</span>
     </div>
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    fps: state.fps
-  });
+const mapStateToProps = (state) => ({
+  fps: state.fps
+});
 
 Timecode = connect(mapStateToProps)(Timecode);
 

@@ -11,6 +11,7 @@ let Wheel = ({ orb, guides }) => {
   const selectedContext = useContext(SelectedContext);
   const timeContext = useContext(TimeContext);
 
+  // geometry
   const selected = selectedContext.selected ?
     selectedContext.selected === orb.id ?
       true :
@@ -18,11 +19,7 @@ let Wheel = ({ orb, guides }) => {
     undefined;
   const time = timeContext.time;
   const parent = orb.parent;
-
-  // geometry
   const to = orb.computeProp('to', time);
-  // a = parent point
-  // b = this orb's point
   let a;
   if (parent)
     a = parent.computePoint(to, time);

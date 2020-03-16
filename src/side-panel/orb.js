@@ -6,6 +6,7 @@ import { CheckBox } from '../components/check-box';
 import { NumberBox } from '../components/number-box';
 import { TextBox } from '../components/text-box';
 import { ColorPicker } from '../components/color-picker';
+import { ChoiceBox } from '../components/choice-box';
 
 import { ReactComponent as PathIcon } from '../images/path.svg';
 import { ReactComponent as StickIcon } from '../images/stick.svg';
@@ -46,8 +47,8 @@ const Orb = () =>
     <Row prop='strokeWidth' Icon={StrokeWidthIcon} Control={NumberBox} />
     <Row prop='dashArray' Icon={DashArrayIcon} Control={TextBox} />
     <Row prop='dashOffset' Icon={DashOffsetIcon} Control={NumberBox} />
-    <Row prop='lineCap' Icon={LineCapIcon} Control={TextBox} />
-    <Row prop='lineJoin' Icon={LineJoinIcon} Control={TextBox} />
+    <Row prop='lineCap' Icon={LineCapIcon} Control={ChoiceBox} />
+    <Row prop='lineJoin' Icon={LineJoinIcon} Control={ChoiceBox} />
     <Row prop='order' Icon={OrderIcon} Control={NumberBox} />
     <Row prop='close' Icon={CloseIcon} Control={CheckBox} />
   </>;

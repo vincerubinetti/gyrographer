@@ -9,14 +9,15 @@ let Hitbox = ({ orb, guides, d }) => {
   const selectedContext = useContext(SelectedContext);
   const timeContext = useContext(TimeContext);
 
-  const time = timeContext.time;
-
   // geometry
+  const time = timeContext.time;
   const to = orb.computeProp('to', time);
   const b = orb.computePoint(to, time);
 
-  // styles
+  // style
   const strokeWidth = orb.computeProp('strokeWidth', time);
+  const lineCap = orb.computeProp('lineCap', time);
+  const lineJoin = orb.computeProp('lineJoin', time);
 
   return (
     <g className='path_hitbox' opacity={0}>
@@ -24,8 +25,8 @@ let Hitbox = ({ orb, guides, d }) => {
         fill='none'
         stroke={guides.rgb}
         strokeWidth={strokeWidth + 10}
-        strokeLinecap='round'
-        strokeLinejoin='round'
+        strokeLinecap={lineCap}
+        strokeLinejoin={lineJoin}
         d={d}
         onClick={(event) => {
           event.stopPropagation();

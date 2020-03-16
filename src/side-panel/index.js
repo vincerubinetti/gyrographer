@@ -17,18 +17,16 @@ const SidePanel = () => {
 
   return (
     <div id='side_panel' data-open={open}>
+      <Button
+        className='side_panel_button'
+        onClick={() => setOpen(!open)}
+        tooltip={(open ? 'Close' : 'Open') + ' panel'}
+      >
+        {open && <CollapseIcon />}
+        {!open && <ExpandIcon />}
+      </Button>
       <div className='side_panel_header'>
-        <span>
-          {context.selected ? 'Orb' : 'Project'}
-        </span>
-        <Button
-          onClick={() =>
-            setOpen(!open)}
-          tooltip={(open ? 'Close' : 'Open') + ' panel'}
-        >
-          {open && <CollapseIcon />}
-          {!open && <ExpandIcon />}
-        </Button>
+        {context.selected ? 'Orb' : 'Project'}
       </div>
       <div className='side_panel_content'>
         {!context.selected && <Project />}

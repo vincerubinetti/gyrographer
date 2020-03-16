@@ -132,14 +132,16 @@
   },
   "lineCap": {
     "name": "Line Cap",
-    "type": "string",
+    "type": "choice",
+    "choices": ["butt", "square", "round"],
     "fallback": "round",
     "description": "Shape of the stroke's end points",
     "action": "Change orb stroke cap shape"
   },
   "lineJoin": {
     "name": "Line Join",
-    "type": "string",
+    "type": "choice",
+    "choices": ["butt", "square", "round"],
     "fallback": "round",
     "description": "Shape of the stroke's joints",
     "action": "Change orb stroke joint shape"

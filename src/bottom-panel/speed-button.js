@@ -11,13 +11,11 @@ const SpeedButton = () => {
     <Button
       className='small'
       onClick={context.toggleSpeed}
-      onCtrlClick={() =>
-        context.toggleSpeed(1)}
+      onCtrlClick={() => context.toggleSpeed(1)}
       tooltip='Preview speed'
     >
-      {context.speed}
-      {' '}
-&times;
+      {context.speed + ' '}
+      &times;
     </Button>
   );
 };

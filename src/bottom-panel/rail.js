@@ -86,10 +86,9 @@ let Rail = ({ length }) => {
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    length: state.length
-  });
+const mapStateToProps = (state) => ({
+  length: state.length
+});
 
 Rail = connect(mapStateToProps)(Rail);
 

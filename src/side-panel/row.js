@@ -17,10 +17,11 @@ let Row = ({ state, dispatch, prop, Icon, Control }) => {
   const context = useContext(SelectedContext);
   const selected = context.selected;
 
-  const value = (selected ? state.orbs[selected] : state)[prop];
-  const step = spec[prop].step;
   const name = spec[prop].name;
   const description = spec[prop].description;
+  const value = (selected ? state.orbs[selected] : state)[prop];
+  const step = spec[prop].step;
+  const choices = spec[prop].choices;
   const action = spec[prop].action;
   const type = 'SET_' + prop.toUpperCase();
 
@@ -39,6 +40,7 @@ let Row = ({ state, dispatch, prop, Icon, Control }) => {
           <Control
             value={value}
             step={step}
+            choices={choices}
             onNudge={(value) => {
               dispatch(createAction(type)({
                 value,

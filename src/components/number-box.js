@@ -47,6 +47,8 @@ export const NumberBox = ({
       if (!clicked)
         return;
 
+      event.preventDefault();
+
       const mousePosition = { x: event.clientX, y: event.clientY };
 
       if (prevMousePosition) {

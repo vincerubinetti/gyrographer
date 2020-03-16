@@ -1,0 +1,28 @@
+.choice_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.choice_box > select {
+  width: 100%;
+  height: 100%;
+  color: var(--white);
+  padding: 0 5px;
+  font-size: 1em;
+  text-align: center;
+  text-align-last: center;
+  border: none;
+  background: none;
+  outline: none;
+  appearance: none;
+  transition: background var(--fast);
+}
+.choice_box > select:hover {
+  background: var(--dark-gray);
+}
+select option {
+  background: var(--black);
+}

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 const strokeWidth = 3;
 
 let Axes = ({ left, top, right, bottom, guides }) =>
-
   <>
     <line
       x1={left}
@@ -25,6 +24,7 @@ let Axes = ({ left, top, right, bottom, guides }) =>
       strokeLinecap='square'
     />
   </>;
+
 const mapStateToProps = (state) =>
   ({
     left: state.left,
