@@ -1,12 +1,12 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { ControllerContext } from '../controller';
+import { TimeContext } from '../controllers/time';
 import { Button } from '../components/button';
 import { ReactComponent as ArrowRightIcon } from '../images/arrow-right.svg';
 
 const ForwardButton = () => {
-  const context = useContext(ControllerContext);
+  const context = useContext(TimeContext);
 
   return (
     <Button

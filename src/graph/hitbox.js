@@ -2,12 +2,18 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { ControllerContext } from '../controller';
+import { SelectedContext } from '../controllers/selected';
+import { TimeContext } from '../controllers/time';
 
-let Hitbox = ({ orb, guides, d, lastPoint }) => {
-  const context = useContext(ControllerContext);
+let Hitbox = ({ orb, guides, d }) => {
+  const selectedContext = useContext(SelectedContext);
+  const timeContext = useContext(TimeContext);
 
-  const time = context.time;
+  const time = timeContext.time;
+
+  // geometry
+  const to = orb.computeProp('to', time);
+  const b = orb.computePoint(to, time);
 
   // styles
   const strokeWidth = orb.computeProp('strokeWidth', time);
@@ -24,28 +30,27 @@ let Hitbox = ({ orb, guides, d, lastPoint }) => {
         onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
-          context.changeSelected(orb.id);
+          selectedContext.changeSelected(orb.id);
         }}
       />
       <circle
         fill={guides.rgb}
-        cx={lastPoint.x}
-        cy={lastPoint.y}
+        cx={b.x}
+        cy={b.y}
         r={strokeWidth + 20}
         onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
-          context.changeSelected(orb.id);
+          selectedContext.changeSelected(orb.id);
         }}
       />
     </g>
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    guides: state.guides
-  });
+const mapStateToProps = (state) => ({
+  guides: state.guides
+});
 
 Hitbox = connect(mapStateToProps)(Hitbox);
 

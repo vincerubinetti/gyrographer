@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 
-import { ControllerContext } from '../controller';
+import { SelectedContext } from '../controllers/selected';
 import { useMounted } from '../util/hooks';
 import { initViewHandler } from './view.js';
 import { initDragHandler } from './drag.js';
@@ -18,7 +18,7 @@ export let svg;
 export let view;
 
 let Graph = ({ background }) => {
-  const context = useContext(ControllerContext);
+  const context = useContext(SelectedContext);
   const mounted = useMounted();
 
   useEffect(() => {

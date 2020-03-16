@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { ControllerContext } from '../controller';
+import { SelectedContext } from '../controllers/selected';
 import { Tooltip } from '../components/tooltip';
 import { createAction } from '../actions/';
 
@@ -14,7 +14,7 @@ import './row.css';
 const spec = { ...projectSpec, ...orbSpec };
 
 let Row = ({ state, dispatch, prop, Icon, Control }) => {
-  const context = useContext(ControllerContext);
+  const context = useContext(SelectedContext);
   const selected = context.selected;
 
   const value = (selected ? state.orbs[selected] : state)[prop];

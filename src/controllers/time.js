@@ -6,17 +6,13 @@ import { useCallback } from 'react';
 import { useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { Orb } from './orb';
+const TimeContext = createContext({});
 
-const ControllerContext = createContext({});
-
-let Controller = ({ children, orbs, fps, length }) => {
-  const [orbTree, setOrbTree] = useState([]);
+let Time = ({ children, fps, length }) => {
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [loop, setLoop] = useState(false);
   const [speed, setSpeed] = useState(1);
-  const [selected, setSelected] = useState('');
   const timer = useRef();
 
   const changeTime = useCallback(
@@ -55,26 +51,20 @@ let Controller = ({ children, orbs, fps, length }) => {
   );
 
   const incrementTime = useCallback(
-    (multiplier) =>
-      changeTime(speed * (multiplier || 1), true),
+    (multiplier) => changeTime(speed * (multiplier || 1), true),
     [speed, changeTime]
   );
 
   const decrementTime = useCallback(
-    (multiplier) =>
-      changeTime(-speed * (multiplier || 1), true),
+    (multiplier) => changeTime(-speed * (multiplier || 1), true),
     [speed, changeTime]
   );
 
-  const toStart = useCallback(() =>
-    changeTime(0), [changeTime]);
+  const toStart = useCallback(() => changeTime(0), [changeTime]);
 
-  const toEnd = useCallback(() =>
-    changeTime(length), [length, changeTime]);
+  const toEnd = useCallback(() => changeTime(length), [length, changeTime]);
 
-  const toggleLoop = useCallback(() =>
-    setLoop((loop) =>
-      !loop), []);
+  const toggleLoop = useCallback(() => setLoop((loop) => !loop), []);
 
   const toggleSpeed = useCallback(
     (value) =>
@@ -94,26 +84,18 @@ let Controller = ({ children, orbs, fps, length }) => {
     []
   );
 
-  const changeSelected = useCallback((id = '') =>
-    setSelected(id), []);
-
-  useEffect(() =>
-    setOrbTree(Orb.buildTree(orbs)), [orbs]);
-
   useEffect(() => {
     if (playing)
       timer.current = window.setInterval(incrementTime, Math.floor(1000 / fps));
     else
       window.clearInterval(timer.current);
 
-    return () =>
-      window.clearInterval(timer.current);
+    return () => window.clearInterval(timer.current);
   }, [playing, incrementTime, fps]);
 
   return (
-    <ControllerContext.Provider
+    <TimeContext.Provider
       value={{
-        orbTree,
         playing,
         togglePlaying,
         time,
@@ -125,25 +107,21 @@ let Controller = ({ children, orbs, fps, length }) => {
         loop,
         toggleLoop,
         speed,
-        toggleSpeed,
-        selected,
-        changeSelected
+        toggleSpeed
       }}
     >
       {children}
-    </ControllerContext.Provider>
+    </TimeContext.Provider>
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    orbs: state.orbs,
-    fps: state.fps,
-    length: state.length
-  });
+const mapStateToProps = (state) => ({
+  fps: state.fps,
+  length: state.length
+});
 
-Controller = connect(mapStateToProps)(Controller);
+Time = connect(mapStateToProps)(Time);
 
-export { Controller };
+export { Time };
 
-export { ControllerContext };
+export { TimeContext };

@@ -2,20 +2,21 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { ControllerContext } from '../controller';
-import { Vector } from '../util/math';
+import { SelectedContext } from '../controllers/selected';
+import { TimeContext } from '../controllers/time';
 
 const precision = 2;
 
 let Wheel = ({ orb, guides }) => {
-  const context = useContext(ControllerContext);
+  const selectedContext = useContext(SelectedContext);
+  const timeContext = useContext(TimeContext);
 
-  const selected = context.selected ?
-    context.selected === orb.id ?
+  const selected = selectedContext.selected ?
+    selectedContext.selected === orb.id ?
       true :
       false :
     undefined;
-  const time = context.time;
+  const time = timeContext.time;
   const parent = orb.parent;
 
   // geometry
@@ -26,9 +27,9 @@ let Wheel = ({ orb, guides }) => {
   if (parent)
     a = parent.computePoint(to, time);
   else
-    a = new Vector(0, 0);
+    a = { x: 0, y: 0 };
   const b = orb.computePoint(to, time);
-  const radius = b.subtract(a).length();
+  const radius = Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
 
   return (
     <g
@@ -48,10 +49,9 @@ let Wheel = ({ orb, guides }) => {
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    guides: state.guides
-  });
+const mapStateToProps = (state) => ({
+  guides: state.guides
+});
 
 Wheel = connect(mapStateToProps)(Wheel);
 

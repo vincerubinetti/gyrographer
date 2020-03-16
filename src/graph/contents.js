@@ -1,46 +1,33 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { ControllerContext } from '../controller';
+import { TreeContext } from '../controllers/tree';
+import { TimeContext } from '../controllers/time';
 import { Wheel } from './wheel';
 import { Stick } from './stick';
 import { Path } from './path';
 import { Hitbox } from './hitbox';
 
-const precision = 2;
-
 const Contents = () => {
-  const context = useContext(ControllerContext);
+  const treeContext = useContext(TreeContext);
+  const timeContext = useContext(TimeContext);
 
-  const time = context.time;
+  const time = timeContext.time;
 
   const wheels = [];
   const sticks = [];
   const paths = [];
   const hitboxes = [];
 
-  context.orbTree.sort((a, b) =>
-    a.order - b.order);
+  treeContext.orbTree.sort((a, b) => a.order - b.order);
 
-  for (const orb of context.orbTree) {
-    const points = orb.computePath(time);
-    let d = points
-      .map((point, index) =>
-        [
-          '\n',
-          index === 0 ? 'M' : 'L',
-          point.x.toFixed(precision),
-          point.y.toFixed(precision)
-        ].join(' '))
-      .join(' ');
-    if (orb.close)
-      d += 'z';
+  for (const orb of treeContext.orbTree) {
+    const d = orb.computePath(time);
 
-    const lastPoint = points[points.length - 1];
-    wheels.push(<Wheel key={wheels.length} orb={orb} lastPoint={lastPoint} />);
-    sticks.push(<Stick key={sticks.length} orb={orb} lastPoint={lastPoint} />);
+    wheels.push(<Wheel key={wheels.length} orb={orb} />);
+    sticks.push(<Stick key={sticks.length} orb={orb} />);
     paths.push(<Path key={paths.length} orb={orb} d={d} />);
-    hitboxes.push(<Hitbox key={hitboxes.length} orb={orb} d={d} lastPoint={lastPoint} />);
+    hitboxes.push(<Hitbox key={hitboxes.length} orb={orb} d={d} />);
   }
 
   return (

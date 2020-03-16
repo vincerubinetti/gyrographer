@@ -6,8 +6,10 @@ import Graph from './graph';
 import TopPanel from './top-panel';
 import SidePanel from './side-panel';
 import BottomPanel from './bottom-panel';
-import { Controller } from './controller';
-import { Keyboard } from './keyboard';
+import { Keyboard } from './controllers/keyboard';
+import { Tree } from './controllers/tree';
+import { Selected } from './controllers/selected';
+import { Time } from './controllers/time';
 import { getStateFromStorage } from './enhancers/persister';
 import { setState } from './actions';
 
@@ -24,21 +26,23 @@ let App = ({ setState }) => {
   }, [setState]);
 
   return (
-    <Controller>
-      <Graph />
-      <Keyboard />
-      <TopPanel />
-      <SidePanel />
-      <BottomPanel />
-    </Controller>
+    <Tree>
+      <Selected>
+        <Time>
+          <Keyboard />
+          <Graph />
+          <TopPanel />
+          <SidePanel />
+          <BottomPanel />
+        </Time>
+      </Selected>
+    </Tree>
   );
 };
 
-const mapDispatchToProps = (dispatch) =>
-  ({
-    setState: (...args) =>
-      dispatch(setState(...args))
-  });
+const mapDispatchToProps = (dispatch) => ({
+  setState: (...args) => dispatch(setState(...args))
+});
 
 App = connect(null, mapDispatchToProps)(App);
 

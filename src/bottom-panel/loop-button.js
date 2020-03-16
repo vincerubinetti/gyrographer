@@ -1,12 +1,12 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { ControllerContext } from '../controller';
+import { TimeContext } from '../controllers/time';
 import { Button } from '../components/button';
 import { ReactComponent as LoopIcon } from '../images/loop.svg';
 
 const LoopButton = () => {
-  const context = useContext(ControllerContext);
+  const context = useContext(TimeContext);
 
   return (
     <Button

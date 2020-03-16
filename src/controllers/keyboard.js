@@ -4,12 +4,12 @@ import { useCallback } from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { ControllerContext } from './controller';
-import { undo } from './actions/undoer';
-import { redo } from './actions/undoer';
+import { TimeContext } from './time';
+import { undo } from '../actions/undoer';
+import { redo } from '../actions/undoer';
 
 let Keyboard = ({ length, undo, redo }) => {
-  const context = useContext(ControllerContext);
+  const context = useContext(TimeContext);
 
   const onKeyDown = useCallback(
     (event) => {
@@ -63,26 +63,21 @@ let Keyboard = ({ length, undo, redo }) => {
 
   useEffect(() => {
     window.addEventListener('keydown', onKeyDown);
-    return () =>
-      window.removeEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
   }, [onKeyDown]);
 
   return <></>;
 };
 
-const mapStateToProps = (state) =>
-  ({
-    fps: state.fps,
-    length: state.length
-  });
+const mapStateToProps = (state) => ({
+  fps: state.fps,
+  length: state.length
+});
 
-const mapDispatchToProps = (dispatch) =>
-  ({
-    undo: () =>
-      dispatch(undo()),
-    redo: () =>
-      dispatch(redo())
-  });
+const mapDispatchToProps = (dispatch) => ({
+  undo: () => dispatch(undo()),
+  redo: () => dispatch(redo())
+});
 
 Keyboard = connect(mapStateToProps, mapDispatchToProps)(Keyboard);
 

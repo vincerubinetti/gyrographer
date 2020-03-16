@@ -2,21 +2,22 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { ControllerContext } from '../controller';
-import { Vector } from '../util/math';
+import { SelectedContext } from '../controllers/selected';
+import { TimeContext } from '../controllers/time';
 
 const precision = 2;
 const strokeWidth = 5;
 
 let Stick = ({ orb, guides }) => {
-  const context = useContext(ControllerContext);
+  const selectedContext = useContext(SelectedContext);
+  const timeContext = useContext(TimeContext);
 
-  const selected = context.selected ?
-    context.selected === orb.id ?
+  const selected = selectedContext.selected ?
+    selectedContext.selected === orb.id ?
       true :
       false :
     undefined;
-  const time = context.time;
+  const time = timeContext.time;
   const parent = orb.parent;
 
   // geometry
@@ -27,7 +28,7 @@ let Stick = ({ orb, guides }) => {
   if (parent)
     a = parent.computePoint(to, time);
   else
-    a = new Vector(0, 0);
+    a = { x: 0, y: 0 };
   const b = orb.computePoint(to, time);
 
   return (
@@ -57,10 +58,9 @@ let Stick = ({ orb, guides }) => {
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    guides: state.guides
-  });
+const mapStateToProps = (state) => ({
+  guides: state.guides
+});
 
 Stick = connect(mapStateToProps)(Stick);
 

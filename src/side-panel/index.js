@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 
-import { ControllerContext } from '../controller';
+import { SelectedContext } from '../controllers/selected';
 import { Project } from './project';
 import { Orb } from './orb';
 import { Button } from '../components/button';
@@ -13,7 +13,7 @@ import './index.css';
 
 const SidePanel = () => {
   const [open, setOpen] = useState(true);
-  const context = useContext(ControllerContext);
+  const context = useContext(SelectedContext);
 
   return (
     <div id='side_panel' data-open={open}>

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useRef } from 'react';
 
-import { keyMultiplier } from '../keyboard';
+import { keyMultiplier } from '../controllers/keyboard';
 
 import './number-box.css';
 

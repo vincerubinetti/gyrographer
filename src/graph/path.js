@@ -1,10 +1,10 @@
 import React from 'react';
 import { useContext } from 'react';
 
-import { ControllerContext } from '../controller';
+import { TimeContext } from '../controllers/time';
 
 const Path = ({ orb, d }) => {
-  const context = useContext(ControllerContext);
+  const context = useContext(TimeContext);
 
   const time = context.time;
 

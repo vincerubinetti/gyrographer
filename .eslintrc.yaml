@@ -1,1 +1,3 @@
-extends: rubinetti
+extends: 
+  - react-app
+  - rubinetti

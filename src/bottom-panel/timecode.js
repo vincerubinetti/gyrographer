@@ -2,11 +2,11 @@ import React from 'react';
 import { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { ControllerContext } from '../controller';
+import { TimeContext } from '../controllers/time';
 import './timecode.css';
 
 let Timecode = ({ fps }) => {
-  const context = useContext(ControllerContext);
+  const context = useContext(TimeContext);
 
   let seconds = Math.floor(context.time / fps);
   let frames = Math.floor(context.time % fps);
