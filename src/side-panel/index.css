@@ -6,7 +6,7 @@
   border: solid 2px var(--dark-gray);
   border-left: none;
   transform: translate(0, -50%);
-  transition: transform var(--fast), opacity var(--slow);
+  transition: transform var(--fast);
   z-index: 1;
 }
 #side_panel[data-open="false"] {
@@ -44,5 +44,5 @@
   overflow-y: auto;
 }
 body[data-fullscreen="true"] #side_panel {
-  opacity: 0;
+  visibility: hidden;
 }

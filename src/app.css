@@ -1,7 +1,7 @@
-@import 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700';
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 
   --black: #202020;
   --dark-gray: #404040;
@@ -58,15 +58,22 @@ svg {
 .light {
   color: var(--light-gray);
 }
-*[data-color='gray'] {
+.flex_grow {
+  flex-grow: 1;
+}
+*[data-color="gray"] {
   color: var(--gray);
 }
-*[data-color='white'] {
+*[data-color="white"] {
   color: var(--white);
 }
-*[data-color='blue'] {
+*[data-color="blue"] {
   color: var(--blue);
 }
-*[data-color='yellow'] {
+*[data-color="yellow"] {
   color: var(--yellow);
+}
+body[data-fullscreen='true'] * {
+  user-select: none;
+  pointer-events: none;
 }

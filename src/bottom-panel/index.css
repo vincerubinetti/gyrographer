@@ -11,8 +11,7 @@
   bottom: 0;
   border-top: solid 2px var(--dark-gray);
   user-select: none;
-  transition: opacity var(--slow);
 }
 body[data-fullscreen="true"] #bottom_panel {
-  opacity: 0;
+  visibility: hidden;
 }

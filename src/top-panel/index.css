@@ -10,10 +10,9 @@
   top: 0;
   border-bottom: solid 2px var(--dark-gray);
   user-select: none;
-  transition: opacity var(--slow);
 }
 body[data-fullscreen="true"] #top_panel {
-  opacity: 0;
+  visibility: hidden;
 }
 .undo_redo_menu_item {
   width: 100%;
