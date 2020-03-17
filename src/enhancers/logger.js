@@ -1,6 +1,6 @@
 import { isUndoable } from './undoer';
 
-// window.dontLog = true;
+window.dontLog = true;
 
 export const logger = (store) => (next) => (action) => {
   const prevState = store.getState();

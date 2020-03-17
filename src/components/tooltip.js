@@ -1,6 +1,5 @@
 import React from 'react';
 import { Children } from 'react';
-import { isValidElement } from 'react';
 import { cloneElement } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -21,7 +20,8 @@ export const Tooltip = ({ content = '', children = <></> }) => {
   const onEnter = useCallback((event) => {
     event.persist();
     window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => setAnchor(event.target), delay);
+    if (!event.target.classList.contains('popover_overlay'))
+      timer.current = window.setTimeout(() => setAnchor(event.target), delay);
   }, []);
 
   const onLeave = useCallback(() => {
@@ -42,18 +42,12 @@ export const Tooltip = ({ content = '', children = <></> }) => {
     []
   );
 
-  children = Children.map(children, (element) => {
-    if (isValidElement(element)) {
-      return cloneElement(element, {
-        'onMouseEnter': makeHandler(element, 'onMouseEnter', onEnter),
-        'onMouseLeave': makeHandler(element, 'onMouseLeave', onLeave),
-        'onFocus': makeHandler(element, 'onFocus', onEnter),
-        'onBlur': makeHandler(element, 'onBlur', onLeave),
-        'aria-label': isString(content) ? content : ''
-      });
-    } else
-      return element;
-  });
+  children = Children.map(children, (element) =>
+    cloneElement(element, {
+      'onMouseEnter': makeHandler(element, 'onMouseEnter', onEnter),
+      'onMouseLeave': makeHandler(element, 'onMouseLeave', onLeave),
+      'aria-label': isString(content) ? content : ''
+    }));
 
   return (
     <>

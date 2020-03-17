@@ -1,17 +1,20 @@
+import { isString } from './types';
+import { isNumber } from './types';
+import { isObject } from './types';
 import { toFixed } from './math';
 
 const precision = 4;
 
-export const toHex = ({ r = 255, g = 255, b = 255, a = 255 }) =>
+const toHex = ({ r = 255, g = 255, b = 255, a = 1 }) =>
   '#' +
-  [r, g, b, a]
+  [r, g, b, a * 255]
     .map((c) =>
       Math.round(c)
         .toString(16)
         .padStart(2, '0'))
     .join('');
 
-export const rgbToHsl = ({ r, g, b }) => {
+const rgbToHsv = ({ r, g, b }) => {
   r /= 255;
   g /= 255;
   b /= 255;
@@ -24,36 +27,29 @@ export const rgbToHsl = ({ r, g, b }) => {
   if (d === 0)
     h = 0;
   else if (max === r)
-    h = 60 * ((g - b) / d) + 60 * 0;
+    h = 60 * ((g - b) / d % 6);
   else if (max === g)
-    h = 60 * ((b - r) / d) + 60 * 2;
+    h = 60 * ((b - r) / d + 2);
   else if (max === b)
-    h = 60 * ((r - g) / d) + 60 * 4;
-  h = (360 + h) % 360;
-
-  let l = (max + min) / 2;
+    h = 60 * ((r - g) / d + 4);
 
   let s;
   if (d === 0)
     s = 0;
   else
-    s = d / (1 - Math.abs(2 * l - 1));
+    s = d / max;
 
-  h = Math.round(h);
-  s = toFixed(s, precision);
-  l = toFixed(l, precision);
+  const v = max;
 
-  return { h, s, l };
+  return { h, s, v };
 };
 
-export const hslToRgb = ({ h, s, l }) => {
+const hsvToRgb = ({ h, s, v }) => {
   h = h % 360;
-  s = Math.min(1, Math.max(0, s));
-  l = Math.min(1, Math.max(0, l));
 
-  const c = s * (1 - Math.abs(2 * l - 1));
+  const c = v * s;
   const x = c * (1 - Math.abs(h / 60 % 2 - 1));
-  const m = l - c / 2;
+  const m = v - c;
 
   let r;
   let g;
@@ -84,26 +80,87 @@ const contrast = ({ r, g, b }) => {
 };
 
 export class Color {
-  constructor(hex = '#ffffffff') {
-    const [r = 255, g = 255, b = 255, a = 255] = (
-      hex.match(/\w\w/g) || []
-    ).map((c) => parseInt(c, 16));
-    const { h, s, l } = rgbToHsl({ r, g, b });
+  constructor(color) {
+    if (isString(color))
+      this.fromString(color);
+    if (isObject(color))
+      this.fromObject(color);
 
+    if (this.hasRgb())
+      this.setHsv();
+    else if (this.hasHsv())
+      this.setRgb();
+
+    this.cleanAll();
+    this.setStrings();
+  }
+
+  fromString(color = '#ffffffff') {
+    const [r, g, b, a] = (color.match(/\w\w/g) || []).map((c) => parseInt(c, 16));
     this.r = r;
     this.g = g;
     this.b = b;
     this.a = toFixed(a / 255, precision);
-    this.h = h;
-    this.s = s;
-    this.l = l;
-    this.rgb = toHex({ r, g, b });
-    this.rgba = toHex({ r, g, b, a });
-    this.hrgb = toHex(hslToRgb({ h, s: 1, l: 0.5 }));
-    this.contrast = contrast({ r, g, b });
+  }
+
+  fromObject(color = {}) {
+    for (const [key, value] of Object.entries(color))
+      this[key] = value;
+  }
+
+  hasRgb() {
+    return this.r !== undefined && this.g !== undefined && this.b !== undefined;
+  }
+
+  hasHsv() {
+    return this.h !== undefined && this.s !== undefined && this.v !== undefined;
+  }
+
+  setRgb() {
+    const { r, g, b } = hsvToRgb({ h: this.h, s: this.s, v: this.v });
+    if (this.r === undefined)
+      this.r = r;
+    if (this.g === undefined)
+      this.g = g;
+    if (this.b === undefined)
+      this.b = b;
+  }
+
+  setHsv() {
+    const { h, s, v } = rgbToHsv({ r: this.r, g: this.g, b: this.b });
+    if (this.h === undefined)
+      this.h = h;
+    if (this.s === undefined)
+      this.s = s;
+    if (this.v === undefined)
+      this.v = v;
+  }
+
+  setStrings() {
+    this.rgb = toHex({ r: this.r, g: this.g, b: this.b });
+    this.rgba = toHex({ r: this.r, g: this.g, b: this.b, a: this.a });
+    this.hrgb = toHex(hsvToRgb({ h: this.h, s: 1, v: 1 }));
+    this.contrast = contrast({ r: this.r, g: this.g, b: this.b });
+  }
+
+  cleanAll() {
+    this.cleanKey('r', 255);
+    this.cleanKey('g', 255);
+    this.cleanKey('b', 255);
+    this.cleanKey('h', 360);
+    this.cleanKey('s', 1);
+    this.cleanKey('v', 1);
+    this.cleanKey('a', 1);
+  }
+
+  cleanKey(key, max) {
+    if (!isNumber(this[key]))
+      this[key] = max;
+    else {
+      if (this[key] < 0)
+        this[key] = 0;
+      if (this[key] > max)
+        this[key] = max;
+    }
   }
 }
-
-window.Color = Color;
-window.rgbToHsl = rgbToHsl;
-window.hslToRgb = hslToRgb;

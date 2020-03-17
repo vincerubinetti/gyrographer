@@ -8,10 +8,23 @@ const Mouse = () => {
     []
   );
 
+  const onTouchMove = useCallback(
+    (event) =>
+      window.mouse = {
+        x: event.touches[0].clientX,
+        y: event.touches[0].clientY
+      },
+    []
+  );
+
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);
-    return () => window.removeEventListener('mousemove', onKeyDown);
-  }, [onMouseMove]);
+    window.addEventListener('touchmove', onTouchMove);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchmove', onTouchMove);
+    };
+  }, [onMouseMove, onTouchMove]);
 
   return <></>;
 };

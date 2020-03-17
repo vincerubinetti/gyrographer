@@ -13,7 +13,6 @@ const Path = ({ orb, d }) => {
   const fill = orb.computeProp('fill', time);
   const stroke = orb.computeProp('stroke', time);
   const strokeWidth = orb.computeProp('strokeWidth', time);
-  const close = orb.computeProp('close', time);
   const dashArray = orb.computeProp('dashArray', time);
   const dashOffset = orb.computeProp('dashOffset', time);
   const lineCap = orb.computeProp('lineCap', time);
@@ -22,7 +21,7 @@ const Path = ({ orb, d }) => {
   return (
     <g className='path' opacity={orb.path ? 1 : 0}>
       <path
-        fill={close ? fill.rgba : 'none'}
+        fill={fill.rgba}
         stroke={stroke.rgba}
         strokeWidth={strokeWidth}
         strokeDasharray={dashArray}

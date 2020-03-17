@@ -6,16 +6,11 @@
   flex-direction: column;
   flex-wrap: wrap;
   position: fixed;
-  padding: 5px;
+  padding: 10px;
   outline: solid 2px var(--dark-gray);
   background: var(--black);
   color: var(--white);
   z-index: 99;
-}
-@media (hover: none) {
-  .popover {
-    display: none;
-  }
 }
 .popover_overlay {
   position: fixed;
