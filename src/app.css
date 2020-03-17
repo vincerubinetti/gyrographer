@@ -73,7 +73,3 @@ svg {
 *[data-color="yellow"] {
   color: var(--yellow);
 }
-body[data-fullscreen='true'] * {
-  user-select: none;
-  pointer-events: none;
-}

@@ -37,6 +37,7 @@
     "min": -36000,
     "max": 36000,
     "step": 1,
+    "precision": 2,
     "description": "Cycle to trace the curve from",
     "action": "Tweak orb from-cycle"
   },
@@ -47,6 +48,7 @@
     "min": -36000,
     "max": 36000,
     "step": 1,
+    "precision": 2,
     "description": "Cycle to trace the curve to",
     "action": "Tweak orb to-cycle"
   },
@@ -57,6 +59,7 @@
     "min": 0.01,
     "max": 100,
     "step": 0.01,
+    "precision": 3,
     "description": "Cycle-distance between plotted points on curve",
     "action": "Tweak orb step"
   },
@@ -67,6 +70,7 @@
     "min": -10000,
     "max": 10000,
     "step": 1,
+    "precision": 2,
     "description": "Radius at which the orb orbits around its parent",
     "action": "Tweak orb radius"
   },
@@ -77,6 +81,7 @@
     "min": -1000,
     "max": 1000,
     "step": 1,
+    "precision": 2,
     "description": "How many full orbits the orb makes around its parent in 360 cycles",
     "action": "Tweak orb spin"
   },
@@ -87,6 +92,7 @@
     "min": -3600,
     "max": 3600,
     "step": 1,
+    "precision": 2,
     "description": "The angle of the orb from its parent at the 0th cycle",
     "action": "Tweak orb offset"
   },
@@ -111,6 +117,7 @@
     "min": 0,
     "max": 500,
     "step": 1,
+    "precision": 2,
     "description": "Thickness of the curve's stroke"
   },
   "dashArray": {
@@ -127,6 +134,7 @@
     "min": -1000,
     "max": 1000,
     "step": 1,
+    "precision": 2,
     "description": "Offset of the dash array along the curve",
     "action": "Tweak orb stroke dash offset"
   },
@@ -153,6 +161,7 @@
     "min": -100,
     "max": 100,
     "step": 1,
+    "precision": 0,
     "description": "Back-to-front index of the curve",
     "action": "Change orb order"
   },

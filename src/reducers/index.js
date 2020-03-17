@@ -35,20 +35,16 @@ const reducer = (state = {}, { type = '', payload = {} } = {}) => {
 export default reducer;
 
 const reduce = (spec, object = {}, action, payload) => {
-  for (const [key, { type, fallback, min, max, choices }] of Object.entries(spec)) {
+  for (const [
+    key,
+    { type, fallback, min, max, precision, choices }
+  ] of Object.entries(spec)) {
     if (
       action === 'SET_' + key.toUpperCase() &&
       (!payload.selected ||
         payload.selected && payload.selected === object.id)
     )
       object[key] = payload.value;
-
-    if (type === 'number') {
-      if (object[key] > max)
-        object[key] = max;
-      if (object[key] < min)
-        object[key] = min;
-    }
 
     if (type === 'color') {
       if (!isObject(object[key]))
@@ -58,6 +54,14 @@ const reduce = (spec, object = {}, action, payload) => {
         object[key] = choices[0];
     } else if (getType(object[key]) !== type)
       object[key] = fallback;
+
+    if (type === 'number') {
+      if (object[key] > max)
+        object[key] = max;
+      if (object[key] < min)
+        object[key] = min;
+      object[key] = Number(object[key].toFixed(precision));
+    }
   }
 
   return object;

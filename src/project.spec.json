@@ -32,6 +32,7 @@
     "min": -10000,
     "max": 10000,
     "step": 5,
+    "precision": 0,
     "description": "Left boundary of the image",
     "action": "Tweak left boundary"
   },
@@ -42,6 +43,7 @@
     "min": -10000,
     "max": 10000,
     "step": 5,
+    "precision": 0,
     "description": "Top boundary of the image",
     "action": "Tweak top boundary"
   },
@@ -52,6 +54,7 @@
     "min": -10000,
     "max": 10000,
     "step": 5,
+    "precision": 0,
     "description": "Right boundary of the image",
     "action": "Tweak right boundary"
   },
@@ -62,6 +65,7 @@
     "min": -10000,
     "max": 10000,
     "step": 5,
+    "precision": 0,
     "description": "Bottom boundary of the image",
     "action": "Tweak bottom boundary"
   },
@@ -84,8 +88,9 @@
     "type": "number",
     "fallback": 60,
     "min": 1,
-    "max": 500,
+    "max": 240,
     "step": 0.1,
+    "precision": 0,
     "description": "Frames per second of the animation",
     "action": "Tweak animation fps"
   },
@@ -96,6 +101,7 @@
     "min": 1,
     "max": 180000,
     "step": 1,
+    "precision": 0,
     "description": "Length of the animation in frames",
     "action": "Tweak animation length"
   }
