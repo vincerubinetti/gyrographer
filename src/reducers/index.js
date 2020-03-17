@@ -1,8 +1,9 @@
-import { Color } from '../util/color';
+import { toFixed } from '../util/math';
 import { copyObject } from '../util/object';
 import { getType } from '../util/types';
 import { isString } from '../util/types';
 import { isObject } from '../util/types';
+import { Color } from '../util/color';
 
 import projectSpec from '../project.spec.json';
 import orbSpec from '../orb.spec.json';
@@ -60,7 +61,7 @@ const reduce = (spec, object = {}, action, payload) => {
         object[key] = max;
       if (object[key] < min)
         object[key] = min;
-      object[key] = Number(object[key].toFixed(precision));
+      object[key] = toFixed(object[key], precision);
     }
   }
 

@@ -83,7 +83,7 @@ export const ColorPicker = ({
         <Popover
           anchor={anchor}
           className='color_picker'
-          style={{ color: value.rgba }}
+          style={{ color: value.hrgb }}
           onClose={() =>
             setOpen(false)}
         >
