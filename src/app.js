@@ -7,6 +7,7 @@ import TopPanel from './top-panel';
 import SidePanel from './side-panel';
 import BottomPanel from './bottom-panel';
 import { Keyboard } from './controllers/keyboard';
+import { Mouse } from './controllers/mouse';
 import { Tree } from './controllers/tree';
 import { Selected } from './controllers/selected';
 import { Time } from './controllers/time';
@@ -30,6 +31,7 @@ let App = ({ setState }) => {
       <Selected>
         <Time>
           <Keyboard />
+          <Mouse />
           <Graph />
           <TopPanel />
           <SidePanel />

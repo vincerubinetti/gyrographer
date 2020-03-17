@@ -62,8 +62,8 @@ let Keyboard = ({ length, undo, redo }) => {
   );
 
   useEffect(() => {
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    window.addEventListener('keydown', onKeyDown, true);
+    return () => window.removeEventListener('keydown', onKeyDown, true);
   }, [onKeyDown]);
 
   return <></>;
@@ -84,7 +84,7 @@ Keyboard = connect(mapStateToProps, mapDispatchToProps)(Keyboard);
 export { Keyboard };
 
 export const keyMultiplier = (event = {}, step = 1) => {
-  if (event.altKey)
+  if (event.ctrlKey)
     return step / 10;
   else if (event.shiftKey)
     return step * 10;

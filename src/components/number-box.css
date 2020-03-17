@@ -21,6 +21,7 @@
 }
 .number_box > input:hover {
   background: var(--dark-gray);
+  cursor: ns-resize;
 }
 .number_box_handle {
   position: absolute;
