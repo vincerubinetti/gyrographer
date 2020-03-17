@@ -6,7 +6,7 @@
   width: 100%;
   height: 100%;
 }
-.choice_box > select {
+.choice_box > button {
   width: 100%;
   height: 100%;
   color: var(--white);
@@ -20,9 +20,6 @@
   appearance: none;
   transition: background var(--fast);
 }
-.choice_box > select:hover {
+.choice_box > button:hover {
   background: var(--dark-gray);
-}
-select option {
-  background: var(--black);
 }

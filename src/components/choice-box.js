@@ -9,12 +9,14 @@ export const ChoiceBox = ({
 }) => {
   return (
     <div className='choice_box'>
-      <select value={value} onChange={(event) => onChange(event.target.value)}>
-        {choices.map((choice, index) =>
-          <option key={index} value={choice}>
-            {choice}
-          </option>)}
-      </select>
+      <button
+        onClick={() => {
+          const index = choices.findIndex((choice) => choice === value) + 1;
+          onChange(choices[index % (choices.length || 1)] || '');
+        }}
+      >
+        {value}
+      </button>
     </div>
   );
 };
