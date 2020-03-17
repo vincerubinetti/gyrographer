@@ -7,16 +7,8 @@
   width: 110px;
   height: 40px;
 }
-.timecode_digit {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0 0 8px;
-}
 .timecode_suffix {
   margin-left: 2px;
-}
-.timecode_suffix:not(:last-child) {
   margin-right: 6px;
 }
 @media (max-width: 700px) {
