@@ -6,7 +6,14 @@
   width: 100%;
   height: 100%;
 }
-.number_box > input {
+.number_box > * {
+  box-sizing: border-box;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   color: var(--white);
@@ -19,7 +26,7 @@
   appearance: none;
   transition: background var(--fast);
 }
-.number_box > input:hover {
+.number_box > div:hover {
   background: var(--dark-gray);
   cursor: ns-resize;
 }

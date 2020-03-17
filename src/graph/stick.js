@@ -32,7 +32,7 @@ let Stick = ({ orb, guides }) => {
     <g
       className='stick'
       opacity={
-        orb.path && (selected === true || selected === undefined) ? 1 : 0
+        orb.stick && (selected === true || selected === undefined) ? 1 : 0
       }
     >
       <line

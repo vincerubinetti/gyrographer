@@ -1,12 +1,16 @@
 {
   "orbs": {
     "1": {
+      "path": false,
+      "wheel": false,
       "spin": 3,
       "radius": 500,
       "stroke": "#ffeb3b",
       "strokeWidth": 3
     },
     "2": {
+      "path": false,
+      "wheel": false,
       "spin": 2,
       "radius": 200,
       "parent": "1",

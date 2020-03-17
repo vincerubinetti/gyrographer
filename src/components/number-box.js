@@ -15,9 +15,10 @@ export const NumberBox = ({
   onChange = () => null,
   onNudge = () => null
 }) => {
-  const [clicked, setClicked] = useState(false);
-  const [clickedValue, setClickedValue] = useState(null);
-  const [clickedY, setClickedY] = useState(null);
+  const [edit, setEdit] = useState(false);
+  const [drag, setDrag] = useState(false);
+  const [dragValue, setDragValue] = useState(null);
+  const [dragY, setDragY] = useState(null);
   const changeTimer = useRef();
 
   const update = useCallback(
@@ -37,47 +38,44 @@ export const NumberBox = ({
   );
 
   const onMouseDown = useCallback(() => {
-    setClicked(true);
-    setClickedValue(value);
-    setClickedY(window.mouse.y);
+    setDrag(true);
+    setDragValue(value);
+    setDragY(window.mouse.y);
   }, [value]);
 
   const onMouseMove = useCallback(
     (event) => {
-      if (!clicked)
+      if (!drag)
         return;
-
       event.preventDefault();
-
-      const delta = -keyMultiplier(event, step) * (window.mouse.y - clickedY);
-
-      update(clickedValue + delta);
+      const delta = -keyMultiplier(event, step) * (window.mouse.y - dragY);
+      update(dragValue + delta);
     },
-    [step, clicked, clickedValue, clickedY, update]
+    [step, drag, dragValue, dragY, update]
   );
 
   const onMouseUp = useCallback(() => {
-    setClicked(false);
-    setClickedValue(null);
-    setClickedY(null);
+    setDrag(false);
+    setDragValue(null);
+    setDragY(null);
 
-    if (clicked)
+    if (drag)
       update(value, 1);
-  }, [value, clicked, update]);
+  }, [value, drag, update]);
 
   const onKeyDown = useCallback(() => {
-    if (clicked) {
-      setClickedValue(value);
-      setClickedY(window.mouse.y);
+    if (drag) {
+      setDragValue(value);
+      setDragY(window.mouse.y);
     }
-  }, [clicked, value]);
+  }, [drag, value]);
 
   const onKeyUp = useCallback(() => {
-    if (clicked) {
-      setClickedValue(value);
-      setClickedY(window.mouse.y);
+    if (drag) {
+      setDragValue(value);
+      setDragY(window.mouse.y);
     }
-  }, [clicked, value]);
+  }, [drag, value]);
 
   useKeyDown(onKeyDown);
 
@@ -94,13 +92,38 @@ export const NumberBox = ({
 
   return (
     <div className='number_box'>
-      <input
-        type='number'
-        value={value}
-        step={step}
-        onMouseDown={onMouseDown}
-        onChange={(event) => update(event.target.value, 1000)}
-      />
+      {!edit &&
+        <div
+          onMouseDown={onMouseDown}
+          onClick={() => {
+            setEdit(true);
+          }}
+        >
+          {value}
+        </div>
+      }
+      {edit &&
+        <input
+          ref={(element) => {
+            if (document.activeElement !== element) {
+              element?.focus();
+              element?.select();
+            }
+            return element;
+          }}
+          type='number'
+          defaultValue={value}
+          step={step}
+          onKeyPress={(event) => {
+            if (event.key === 'Esc' || event.key === 'Enter')
+              event.target.blur();
+          }}
+          onBlur={(event) => {
+            update(event.target.value, 1);
+            setEdit(false);
+          }}
+        />
+      }
     </div>
   );
 };

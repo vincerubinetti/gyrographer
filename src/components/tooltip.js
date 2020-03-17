@@ -3,6 +3,7 @@ import { Children } from 'react';
 import { isValidElement } from 'react';
 import { cloneElement } from 'react';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { useRef } from 'react';
 
@@ -20,8 +21,7 @@ export const Tooltip = ({ content = '', children = <></> }) => {
   const onEnter = useCallback((event) => {
     event.persist();
     window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() =>
-      setAnchor(event.target), delay);
+    timer.current = window.setTimeout(() => setAnchor(event.target), delay);
   }, []);
 
   const onLeave = useCallback(() => {
@@ -29,13 +29,16 @@ export const Tooltip = ({ content = '', children = <></> }) => {
     setAnchor(null);
   }, []);
 
+  useEffect(() => {
+    onLeave();
+  }, [children, onLeave]);
+
   const makeHandler = useCallback(
-    (element, prop, call) =>
-      (...args) => {
-        if (element.props[prop])
-          element.props[prop](...args);
-        call(...args);
-      },
+    (element, prop, call) => (...args) => {
+      if (element.props[prop])
+        element.props[prop](...args);
+      call(...args);
+    },
     []
   );
 

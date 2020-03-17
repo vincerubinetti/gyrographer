@@ -80,7 +80,7 @@
     "fallback": 1,
     "min": -1000,
     "max": 1000,
-    "step": 1,
+    "step": 0.1,
     "precision": 2,
     "description": "How many full orbits the orb makes around its parent in 360 cycles",
     "action": "Tweak orb spin"
