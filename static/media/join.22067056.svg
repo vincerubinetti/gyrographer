@@ -1,23 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <line
+  <polyline
     fill="none"
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
-    x1="5"
-    y1="50"
-    x2="50"
-    y2="50"
+    stroke-linejoin="round"
+    points="10 90 50 50 90 90"
   />
-  <circle
+  <path
     fill="none"
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
-    stroke-dasharray="4.634954084936208 15"
-    stroke-dashoffset="2.317477042468104"
-    cx="50"
-    cy="50"
-    r="25"
+    stroke-dasharray="5 15 5 15 5 50"
+    stroke-dashoffset="-7.5"
+    d="
+      M 50 20
+      A 30 30 0 0 0 50 80
+      M 50 20
+      A 30 30 0 0 1 50 80
+    "
   />
 </svg>

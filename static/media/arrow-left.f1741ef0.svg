@@ -4,9 +4,11 @@
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
+    stroke-linejoin="round"
     d="
-      M 20 90
-      C 20 40 80 60 80 10
+      M 65 10
+      L 25 50
+      L 65 90
     "
   />
 </svg>

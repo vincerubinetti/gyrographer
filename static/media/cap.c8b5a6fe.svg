@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <line
+    fill="none"
+    stroke="currentColor"
+    stroke-width="15"
+    stroke-linecap="round"
+    x1="10"
+    y1="50"
+    x2="50"
+    y2="50"
+  />
+  <path
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-dasharray="5 15 5 15 5 15 5 30"
+    stroke-dashoffset="-7.5"
+    d="
+      M 80 50
+      A 30 30 0 0 0 20 50
+      M 80 50
+      A 30 30 0 0 1 20 50
+    "
+  />
+</svg>

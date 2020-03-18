@@ -5,20 +5,29 @@
     stroke-width="10"
     stroke-linecap="round"
     stroke-linejoin="round"
+    stroke-dasharray="5 15 5 15 30"
     d="
-      M 20 15
-      L 55 50
-      L 20 85
+      M 10 60
+      A 40 40 0 0 1 50 20
+      L 65 20
+      M 90 40
+      A 40 40 0 0 1 50 80
+      L 35 80
     "
   />
-  <line
+  <path
     fill="none"
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
-    x1="80"
-    y1="10"
-    x2="80"
-    y2="90"
+    stroke-linejoin="round"
+    d="
+      M 50 5
+      L 65 20
+      L 50 35
+      M 50 95
+      L 35 80
+      L 50 65
+    "
   />
 </svg>

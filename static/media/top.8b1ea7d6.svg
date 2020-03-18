@@ -5,25 +5,10 @@
     stroke-width="10"
     stroke-linecap="round"
     stroke-linejoin="round"
-    stroke-dasharray="10 20"
-    stroke-dashoffset="5"
     x1="5"
     y1="5"
-    x2="5"
-    y2="95"
-  />
-  <line
-    fill="none"
-    stroke="currentColor"
-    stroke-width="10"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-dasharray="10 20"
-    stroke-dashoffset="5"
-    x1="95"
-    y1="5"
     x2="95"
-    y2="95"
+    y2="5"
   />
   <line
     fill="none"
@@ -31,9 +16,22 @@
     stroke-width="10"
     stroke-linecap="round"
     stroke-linejoin="round"
+    stroke-dasharray="5 15"
     x1="5"
     y1="95"
+    x2="5"
+    y2="5"
+  />
+  <line
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-dasharray="5 15"
+    x1="95"
+    y1="95"
     x2="95"
-    y2="95"
+    y2="5"
   />
 </svg>

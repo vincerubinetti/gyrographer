@@ -4,11 +4,15 @@
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
-    stroke-linejoin="round"
     d="
-      M 35 15
-      L 70 50
-      L 35 85
+      M 10 95
+      L 80 15
     "
+  />
+  <circle
+    fill="currentColor"
+    cx="80"
+    cy="15"
+    r="15"
   />
 </svg>

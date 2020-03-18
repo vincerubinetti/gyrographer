@@ -1,43 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <circle
-    fill="currentColor"
-    cx="30"
-    cy="50"
-    r="10"
-  />
-  <circle
-    fill="currentColor"
-    cx="70"
-    cy="50"
-    r="10"
-  />
   <line
+    fill="none"
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
-    x1="30"
-    y1="50"
-    x2="70"
-    y2="50"
-  />
-  <line
-    stroke="currentColor"
-    stroke-width="10"
-    stroke-linecap="round"
-    stroke-dasharray="15 5"
+    stroke-linejoin="round"
     x1="5"
-    y1="50"
-    x2="10"
-    y2="50"
+    y1="95"
+    x2="95"
+    y2="95"
   />
   <line
+    fill="none"
     stroke="currentColor"
     stroke-width="10"
     stroke-linecap="round"
-    stroke-dasharray="15 5"
+    stroke-linejoin="round"
+    stroke-dasharray="5 15"
+    x1="5"
+    y1="5"
+    x2="5"
+    y2="95"
+  />
+  <line
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-dasharray="5 15"
     x1="95"
-    y1="50"
-    x2="90"
-    y2="50"
+    y1="5"
+    x2="95"
+    y2="95"
   />
 </svg>

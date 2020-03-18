@@ -6,9 +6,9 @@
     stroke-linecap="round"
     stroke-linejoin="round"
     d="
-      M 80 15
-      L 45 50
-      L 80 85
+      M 80 10
+      L 40 50
+      L 80 90
     "
   />
   <line
