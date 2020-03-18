@@ -5,14 +5,14 @@
     stroke-width="10"
     stroke-linecap="round"
     d="
-      M 10 90
-      L 80 20
+      M 10 95
+      L 80 15
     "
   />
   <circle
     fill="currentColor"
     cx="80"
-    cy="20"
+    cy="15"
     r="15"
   />
 </svg>

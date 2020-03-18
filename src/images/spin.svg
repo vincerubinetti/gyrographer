@@ -5,14 +5,13 @@
     stroke-width="10"
     stroke-linecap="round"
     stroke-linejoin="round"
-    stroke-dasharray="5 15 5 15 20"
+    stroke-dasharray="5 15 5 15 30"
     d="
-      M 20 50
-      A 30 30 0 0 1 50 20
+      M 10 60
+      A 40 40 0 0 1 50 20
       L 65 20
-      L 65 20
-      M 80 50
-      A 30 30 0 0 1 50 80
+      M 90 40
+      A 40 40 0 0 1 50 80
       L 35 80
     "
   />

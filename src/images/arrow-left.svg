@@ -6,9 +6,9 @@
     stroke-linecap="round"
     stroke-linejoin="round"
     d="
-      M 65 15
-      L 30 50
-      L 65 85
+      M 65 10
+      L 25 50
+      L 65 90
     "
   />
 </svg>

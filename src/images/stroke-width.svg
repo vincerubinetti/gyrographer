@@ -5,10 +5,10 @@
     stroke-width="10"
     stroke-linecap="round"
     stroke-linejoin="round"
-    x="10"
+    x="5"
     y="15"
-    width="80"
-    height="1"
+    width="90"
+    height="0.01"
   />
   <rect
     fill="currentColor"
@@ -16,10 +16,10 @@
     stroke-width="10"
     stroke-linecap="round"
     stroke-linejoin="round"
-    x="10"
-    y="39"
-    width="80"
-    height="8"
+    x="5"
+    y="40"
+    width="90"
+    height="5"
   />
   <rect
     fill="currentColor"
@@ -27,9 +27,9 @@
     stroke-width="10"
     stroke-linecap="round"
     stroke-linejoin="round"
-    x="10"
+    x="5"
     y="70"
-    width="80"
-    height="14"
+    width="90"
+    height="15"
   />
 </svg>
