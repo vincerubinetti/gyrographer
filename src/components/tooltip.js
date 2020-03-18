@@ -33,19 +33,10 @@ export const Tooltip = ({ content = '', children = <></> }) => {
     onLeave();
   }, [children, onLeave]);
 
-  const makeHandler = useCallback(
-    (element, prop, call) => (...args) => {
-      if (element.props[prop])
-        element.props[prop](...args);
-      call(...args);
-    },
-    []
-  );
-
   children = Children.map(children, (element) =>
     cloneElement(element, {
-      'onMouseEnter': makeHandler(element, 'onMouseEnter', onEnter),
-      'onMouseLeave': makeHandler(element, 'onMouseLeave', onLeave),
+      'onMouseEnter': onEnter,
+      'onMouseLeave': onLeave,
       'aria-label': isString(content) ? content : ''
     }));
 

@@ -14,8 +14,7 @@ const SpeedButton = () => {
       onCtrlClick={() => context.toggleSpeed(1)}
       tooltip='Preview speed'
     >
-      {context.speed + ' '}
-      &times;
+      {(context.speed * 100).toFixed(0)}%
     </Button>
   );
 };
