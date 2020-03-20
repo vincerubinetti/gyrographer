@@ -1,9 +1,4 @@
 {
-  "orbs": {
-    "type": "object",
-    "default": {},
-    "description": "Hierarchy of orbs"
-  },
   "bounds": {
     "name": "Bounds",
     "type": "boolean",
@@ -104,5 +99,10 @@
     "precision": 0,
     "description": "Length of the animation in frames",
     "action": "Tweak animation length"
+  },
+  "orbs": {
+    "type": "object",
+    "default": {},
+    "description": "Hierarchy of orbs"
   }
 }
