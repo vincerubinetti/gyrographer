@@ -233,7 +233,12 @@ export const ColorPicker = ({
             />
           </div>
           {!edit &&
-            <div className='color_picker_hex' onClick={onHexClick}>
+            <div
+              className='color_picker_hex'
+              tabIndex='0'
+              onFocus={onHexClick}
+              onClick={onHexClick}
+            >
               {value.rgba}
             </div>
           }

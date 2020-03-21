@@ -9,7 +9,7 @@ import projectSpec from '../project.spec.json';
 import orbSpec from '../orb.spec.json';
 
 let SaveButton = ({ state }) =>
-  <Button className='' onClick={() => saveState(state)} tooltip='Save project'>
+  <Button onClick={() => saveState(state)} tooltip='Save project'>
     <SaveIcon />
   </Button>;
 const mapStateToProps = (state) => ({

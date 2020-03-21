@@ -27,9 +27,9 @@ let TitleBox = ({ title, dispatch }) => {
 
   return (
     <Tooltip content={description}>
-      <span className='title_box'>
+      <div className='title_box' >
         <TextBox value={title} onChange={onChange} />
-      </span>
+      </div>
     </Tooltip>
   );
 };

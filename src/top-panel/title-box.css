@@ -1,5 +1,5 @@
 .title_box {
-  flex-grow: 1;
+  width: 200px;
   height: 40px;
 }
 @media (max-width: 600px) {

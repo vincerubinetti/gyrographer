@@ -118,7 +118,12 @@ export const NumberBox = ({
   return (
     <div className='number_box'>
       {!edit &&
-        <div onMouseDown={onMouseDown} onClick={onClick}>
+        <div
+          tabIndex='0'
+          onFocus={onClick}
+          onClick={onClick}
+          onMouseDown={onMouseDown}
+        >
           {value}
         </div>
       }

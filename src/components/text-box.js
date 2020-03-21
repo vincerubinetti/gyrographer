@@ -34,7 +34,11 @@ export const TextBox = ({ value = '', onChange = () => null }) => {
 
   return (
     <div className='text_box'>
-      {!edit && <div onClick={onClick}>{value}</div>}
+      {!edit &&
+        <div tabIndex='0' onFocus={onClick} onClick={onClick}>
+          {value}
+        </div>
+      }
       {edit &&
         <input
           ref={onInputRef}
