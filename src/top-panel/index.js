@@ -15,7 +15,6 @@ const TopPanel = () =>
     <LoadButton />
     <UndoButton />
     <RedoButton />
-    <span className='flex_grow' />
     <TitleBox />
     <span className='flex_grow' />
     <FullscreenButton />

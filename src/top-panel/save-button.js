@@ -30,9 +30,7 @@ const saveState = (state) => {
   const link = window.document.createElement('a');
   link.href = window.URL.createObjectURL(new Blob([data], { type: 'text/json' }));
   link.download = title + '.gyr';
-  document.body.appendChild(link);
   link.click();
-  document.body.removeChild(link);
 };
 
 const cleanState = (state, order) => {
