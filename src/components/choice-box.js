@@ -10,7 +10,9 @@ export const ChoiceBox = ({
 }) => {
   const onClick = useCallback(() => {
     const index = choices.findIndex((choice) => choice === value) + 1;
-    onChange(choices[index % (choices.length || 1)] || '');
+    const newValue = choices[index % (choices.length || 1)] || '';
+    if (newValue !== value)
+      onChange(newValue);
   }, [value, choices, onChange]);
 
   return (

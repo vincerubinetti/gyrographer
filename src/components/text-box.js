@@ -26,10 +26,12 @@ export const TextBox = ({ value = '', onChange = () => null }) => {
 
   const onBlur = useCallback(
     (event) => {
-      onChange(event.target.value, 1);
+      const newValue = event.target.value;
+      if (newValue !== value)
+        onChange(newValue);
       setEdit(false);
     },
-    [onChange]
+    [value, onChange]
   );
 
   return (

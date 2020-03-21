@@ -52,16 +52,18 @@ export const ColorPicker = ({
 
   const update = useCallback(
     (newValue, debounce) => {
+      if (newValue === value)
+        return;
+
       onNudge(newValue);
       if (debounce) {
         window.clearTimeout(changeTimer.current);
-        changeTimer.current = window.setTimeout(
-          () => onChange(newValue),
-          debounce
-        );
+        changeTimer.current = window.setTimeout(() => {
+          onChange(newValue);
+        }, debounce);
       }
     },
-    [onNudge, onChange]
+    [value, onNudge, onChange]
   );
 
   const tweak = useCallback(

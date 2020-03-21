@@ -14,7 +14,7 @@ let UndoButton = ({ past, actionDescription, undo }) => {
       .filter((entry) => entry)
   ].map((entry, index) =>
     <div key={index} className='undo_redo_menu_item'>
-      Undo {entry}
+      {entry}
     </div>);
 
   if (!tooltip.length)

@@ -12,7 +12,7 @@ let RedoButton = ({ future, redo }) => {
     .filter((entry) => entry)
     .map((entry, index) =>
       <div key={index} className='undo_redo_menu_item'>
-        Redo {entry}
+        {entry}
       </div>);
 
   if (!tooltip.length)

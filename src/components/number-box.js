@@ -24,6 +24,8 @@ export const NumberBox = ({
   const update = useCallback(
     (newValue, debounce) => {
       newValue = Number(newValue);
+      if (newValue === value)
+        return;
 
       onNudge(newValue);
       if (debounce) {
@@ -34,7 +36,7 @@ export const NumberBox = ({
         );
       }
     },
-    [onNudge, onChange]
+    [value, onNudge, onChange]
   );
 
   const onInputRef = useCallback((element) => {
@@ -45,15 +47,20 @@ export const NumberBox = ({
     return element;
   }, []);
 
-  const onClick = useCallback(() => {
+  const onClick = useCallback((event) => {
     setEdit(true);
   }, []);
 
-  const onMouseDown = useCallback(() => {
-    setDrag(true);
-    setDragValue(value);
-    setDragY(window.mouse.y);
-  }, [value]);
+  const onMouseDown = useCallback(
+    (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      setDrag(true);
+      setDragValue(value);
+      setDragY(window.mouse.y);
+    },
+    [value]
+  );
 
   const onMouseMove = useCallback(
     (event) => {
