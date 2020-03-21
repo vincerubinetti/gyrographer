@@ -28,6 +28,7 @@ let Axes = ({ left, top, right, bottom, guides }) =>
       />
     }
   </>;
+
 const mapStateToProps = (state) => ({
   left: state.left,
   top: state.top,

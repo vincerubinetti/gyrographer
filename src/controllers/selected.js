@@ -3,9 +3,9 @@ import { createContext } from 'react';
 import { useState } from 'react';
 import { useCallback } from 'react';
 
-const SelectedContext = createContext({});
+export const SelectedContext = createContext({});
 
-const Selected = ({ children }) => {
+export const Selected = ({ children }) => {
   const [selected, setSelected] = useState('');
 
   const changeSelected = useCallback((id = '') => setSelected(id), []);
@@ -21,7 +21,3 @@ const Selected = ({ children }) => {
     </SelectedContext.Provider>
   );
 };
-
-export { Selected };
-
-export { SelectedContext };

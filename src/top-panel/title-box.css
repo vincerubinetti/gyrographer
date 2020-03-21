@@ -1,0 +1,10 @@
+.title_box {
+  flex-grow: 1;
+  height: 40px;
+}
+@media (max-width: 600px) {
+  .title_box {
+    width: 100%;
+    order: -1;
+  }
+}

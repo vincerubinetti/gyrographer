@@ -11,8 +11,7 @@ const padding = 5;
 export const Popover = ({
   anchor,
   noOverlay = false,
-  onClose = () =>
-    null,
+  onClose = () => null,
   className = '',
   style = {},
   children = <></>
@@ -26,8 +25,7 @@ export const Popover = ({
     <>
       {!noOverlay && <div className='popover_overlay' onClick={onClose} />}
       <div
-        ref={(element) =>
-          setContent(element)}
+        ref={(element) => setContent(element)}
         className={'popover ' + className}
         style={{ ...style, left: x, top: y }}
       >

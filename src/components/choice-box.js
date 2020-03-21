@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCallback } from 'react';
 
 import './choice-box.css';
 
@@ -7,16 +8,14 @@ export const ChoiceBox = ({
   choices = [],
   onChange = () => null
 }) => {
+  const onClick = useCallback(() => {
+    const index = choices.findIndex((choice) => choice === value) + 1;
+    onChange(choices[index % (choices.length || 1)] || '');
+  }, [value, choices, onChange]);
+
   return (
     <div className='choice_box'>
-      <button
-        onClick={() => {
-          const index = choices.findIndex((choice) => choice === value) + 1;
-          onChange(choices[index % (choices.length || 1)] || '');
-        }}
-      >
-        {value}
-      </button>
+      <button onClick={onClick}>{value}</button>
     </div>
   );
 };

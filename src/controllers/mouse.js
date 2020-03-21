@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 
-const Mouse = () => {
+export const Mouse = () => {
   const onMouseMove = useCallback(
     (event) => window.mouse = { x: event.clientX, y: event.clientY },
     []
@@ -28,5 +28,3 @@ const Mouse = () => {
 
   return <></>;
 };
-
-export { Mouse };

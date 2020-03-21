@@ -19,7 +19,6 @@ import { ReactComponent as FpsIcon } from '../images/fps.svg';
 import { ReactComponent as LengthIcon } from '../images/length.svg';
 
 const Project = () =>
-
   <>
     <Heading text='Guides' />
     <Row prop='bounds' Icon={BoundsIcon} Control={CheckBox} />
@@ -37,4 +36,5 @@ const Project = () =>
     <Row prop='fps' Icon={FpsIcon} Control={NumberBox} />
     <Row prop='length' Icon={LengthIcon} Control={NumberBox} />
   </>;
+
 export { Project };

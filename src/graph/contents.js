@@ -8,7 +8,7 @@ import { Stick } from './stick';
 import { Path } from './path';
 import { Hitbox } from './hitbox';
 
-const Contents = () => {
+export const Contents = () => {
   const treeContext = useContext(TreeContext);
   const timeContext = useContext(TimeContext);
 
@@ -32,20 +32,10 @@ const Contents = () => {
 
   return (
     <g id='contents'>
-      <g id='wheels'>
-        {wheels}
-      </g>
-      <g id='sticks'>
-        {sticks}
-      </g>
-      <g id='paths'>
-        {paths}
-      </g>
-      <g id='hitboxes'>
-        {hitboxes}
-      </g>
+      <g id='wheels'>{wheels}</g>
+      <g id='sticks'>{sticks}</g>
+      <g id='paths'>{paths}</g>
+      <g id='hitboxes'>{hitboxes}</g>
     </g>
   );
 };
-
-export default Contents;

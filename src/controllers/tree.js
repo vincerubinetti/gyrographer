@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { Orb } from './orb';
 
-const TreeContext = createContext({});
+export const TreeContext = createContext({});
 
 let Tree = ({ children, orbs }) => {
   const [orbTree, setOrbTree] = useState([]);
@@ -31,5 +31,3 @@ const mapStateToProps = (state) => ({
 Tree = connect(mapStateToProps)(Tree);
 
 export { Tree };
-
-export { TreeContext };

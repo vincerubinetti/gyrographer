@@ -38,7 +38,7 @@
   text-transform: uppercase;
 }
 .side_panel_content {
-  max-height: calc(100vh - 200px);
+  max-height: calc(100vh - (80px + 2px + 80px + 2px + 40px + 2px));
   overflow-x: hidden;
   overflow-y: auto;
 }

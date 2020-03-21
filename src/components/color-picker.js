@@ -9,7 +9,7 @@ import { Color } from '../util/color';
 
 import './color-picker.css';
 
-export const swatches = [
+const swatches = [
   '#ffffff00',
   '#f44336',
   '#e91e63',

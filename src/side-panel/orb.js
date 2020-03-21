@@ -28,7 +28,6 @@ import { ReactComponent as OrderIcon } from '../images/order.svg';
 import { ReactComponent as CloseIcon } from '../images/close.svg';
 
 const Orb = () =>
-
   <>
     <Heading text='Markers' />
     <Row prop='path' Icon={PathIcon} Control={CheckBox} />
@@ -52,4 +51,5 @@ const Orb = () =>
     <Row prop='order' Icon={OrderIcon} Control={NumberBox} />
     <Row prop='close' Icon={CloseIcon} Control={CheckBox} />
   </>;
+
 export { Orb };

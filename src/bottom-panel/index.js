@@ -13,7 +13,6 @@ import { Rail } from './rail';
 import './index.css';
 
 const BottomPanel = () =>
-
   <div id='bottom_panel'>
     <PlayButton />
     <LoopButton />
@@ -25,4 +24,5 @@ const BottomPanel = () =>
     <ForwardButton />
     <EndButton />
   </div>;
+
 export default BottomPanel;

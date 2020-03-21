@@ -10,16 +10,11 @@ let UndoButton = ({ past, actionDescription, undo }) => {
     actionDescription,
     ...past
       .slice(0, 9)
-      .map((entry) =>
-        entry.actionDescription)
-      .filter((entry) =>
-        entry)
+      .map((entry) => entry.actionDescription)
+      .filter((entry) => entry)
   ].map((entry, index) =>
-
     <div key={index} className='undo_redo_menu_item'>
-      Undo
-      {' '}
-      {entry}
+      Undo {entry}
     </div>);
 
   if (!tooltip.length)
@@ -33,26 +28,21 @@ let UndoButton = ({ past, actionDescription, undo }) => {
           undo();
       }}
       color={past.length ? 'white' : 'gray'}
-      tooltip={<>
-        {tooltip}
-      </>}
+      tooltip={<>{tooltip}</>}
     >
       <UndoIcon />
     </Button>
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    past: state.past || [],
-    actionDescription: state.actionDescription
-  });
+const mapStateToProps = (state) => ({
+  past: state.past || [],
+  actionDescription: state.actionDescription
+});
 
-const mapDispatchToProps = (dispatch) =>
-  ({
-    undo: () =>
-      dispatch(undo())
-  });
+const mapDispatchToProps = (dispatch) => ({
+  undo: () => dispatch(undo())
+});
 
 UndoButton = connect(mapStateToProps, mapDispatchToProps)(UndoButton);
 

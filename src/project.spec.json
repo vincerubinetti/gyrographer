@@ -1,4 +1,11 @@
 {
+  "title": {
+    "name": "Title",
+    "type": "string",
+    "fallback": "Untitled Project",
+    "description": "Title of the project",
+    "action": "Change title"
+  },
   "bounds": {
     "name": "Bounds",
     "type": "boolean",

@@ -9,8 +9,8 @@ import { useMounted } from '../util/hooks';
 import { initViewHandler } from './view.js';
 import { initDragHandler } from './drag.js';
 import { fitView } from './view.js';
-import Guides from './guides';
-import Contents from './contents';
+import { Guides } from './guides';
+import { Contents } from './contents';
 
 import './index.css';
 

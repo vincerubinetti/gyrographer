@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 
-export let dragHandler = () =>
-  null;
+export let dragHandler = () => null;
 
 export const initDragHandler = () => {
   dragHandler = d3
@@ -11,11 +10,8 @@ export const initDragHandler = () => {
     .on('end', onDragEnd);
 };
 
-export const onDragStart = () =>
-  null;
+export const onDragStart = () => null;
 
-export const onDrag = () =>
-  null;
+export const onDrag = () => null;
 
-export const onDragEnd = () =>
-  null;
+export const onDragEnd = () => null;

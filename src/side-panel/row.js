@@ -31,9 +31,7 @@ let Row = ({ state, dispatch, prop, Icon, Control }) => {
         <Icon />
       </div>
       <Tooltip content={description}>
-        <div>
-          {name}
-        </div>
+        <div>{name}</div>
       </Tooltip>
       <Tooltip content={action}>
         <div>
@@ -63,11 +61,9 @@ let Row = ({ state, dispatch, prop, Icon, Control }) => {
   );
 };
 
-const mapStateToProps = (state) =>
-  ({ state });
+const mapStateToProps = (state) => ({ state });
 
-const mapDispatchToProps = (dispatch) =>
-  ({ dispatch });
+const mapDispatchToProps = (dispatch) => ({ dispatch });
 
 Row = connect(mapStateToProps, mapDispatchToProps)(Row);
 

@@ -22,13 +22,14 @@ export { SaveButton };
 
 const saveState = (state) => {
   const { past, future, actionDescription, ...rest } = state;
+  const title = rest.title;
   const order = [...Object.keys(projectSpec), ...Object.keys(orbSpec)];
   const cleanedState = cleanState(rest, order);
   const data = JSON.stringify(cleanedState, null, 2);
 
   const link = window.document.createElement('a');
   link.href = window.URL.createObjectURL(new Blob([data], { type: 'text/json' }));
-  link.download = 'project.gyr';
+  link.download = title + '.gyr';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -36,8 +37,9 @@ const saveState = (state) => {
 
 const cleanState = (state, order) => {
   const result = {};
-  const sortFunc = (a, b) => order.indexOf(a[0]) > order.indexOf(b[0]);
+  const sortFunc = (a, b) => order.indexOf(a[0]) - order.indexOf(b[0]);
   const entries = Object.entries(state).sort(sortFunc);
+
   for (const [key, value] of entries) {
     if (isObject(value))
       result[key] = value.rgba || cleanState(value, order);

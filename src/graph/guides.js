@@ -27,4 +27,4 @@ const mapStateToProps = (state) => ({
 
 Guides = connect(mapStateToProps)(Guides);
 
-export default Guides;
+export { Guides };

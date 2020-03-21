@@ -11,7 +11,7 @@
   margin-left: 2px;
   margin-right: 6px;
 }
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .timecode {
     width: calc(100% - 40px * 3);
     height: 40px;

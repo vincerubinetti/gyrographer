@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import { useRef } from 'react';
 import { connect } from 'react-redux';
 
-const TimeContext = createContext({});
+export const TimeContext = createContext({});
 
 let Time = ({ children, fps, length }) => {
   const [playing, setPlaying] = useState(false);
@@ -123,5 +123,3 @@ const mapStateToProps = (state) => ({
 Time = connect(mapStateToProps)(Time);
 
 export { Time };
-
-export { TimeContext };
