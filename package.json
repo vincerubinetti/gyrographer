@@ -2,7 +2,7 @@
   "name": "gyrographer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://vincerubinetti.github.io/gyrographer/",
   "dependencies": {
     "d3": "^5.15.0",
     "d3-zoom": "^1.8.3",
