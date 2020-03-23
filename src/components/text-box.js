@@ -19,6 +19,11 @@ export const TextBox = ({ value = '', onChange = () => null }) => {
     setEdit(true);
   }, []);
 
+  const onMouseDown = useCallback((event) => {
+    event.stopPropagation();
+    event.preventDefault();
+  }, []);
+
   const onKeyPress = useCallback((event) => {
     if (event.key === 'Esc' || event.key === 'Enter')
       event.target.blur();
@@ -37,7 +42,12 @@ export const TextBox = ({ value = '', onChange = () => null }) => {
   return (
     <div className='text_box'>
       {!edit &&
-        <div tabIndex='0' onFocus={onClick} onClick={onClick}>
+        <div
+          tabIndex='0'
+          onFocus={onClick}
+          onClick={onClick}
+          onMouseDown={onMouseDown}
+        >
           {value}
         </div>
       }

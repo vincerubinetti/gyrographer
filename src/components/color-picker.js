@@ -108,6 +108,8 @@ export const ColorPicker = ({
 
   const onControlMouseDown = useCallback(
     (event) => {
+      event.stopPropagation();
+      event.preventDefault();
       const target = event.currentTarget;
       setClicking(target);
       tweak(target);
