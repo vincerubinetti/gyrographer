@@ -11,7 +11,8 @@ export const Button = ({
   color = '',
   onClick = () => null,
   onCtrlClick = () => null,
-  children = <></>
+  children = <></>,
+  ...rest
 }) => {
   const click = useCallback(
     (event) => {
@@ -29,6 +30,7 @@ export const Button = ({
         className={'button ' + className}
         onClick={click}
         data-color={color}
+        {...rest}
       >
         {children}
       </button>

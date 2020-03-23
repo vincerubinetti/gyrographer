@@ -5,16 +5,18 @@
   height: 40px;
 }
 .side_panel_row > * {
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .side_panel_row > *:nth-child(1) {
-  width: 50px;
+  width: 40px;
 }
 .side_panel_row > *:nth-child(2) {
   justify-content: flex-start;
   width: 120px;
+  padding-left: 5px;
 }
 .side_panel_row > *:nth-child(3) {
   width: 80px;

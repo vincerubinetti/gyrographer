@@ -1,10 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
-import { useContext } from 'react';
 
-import { SelectedContext } from '../controllers/selected';
-import { Project } from './project';
+import { Tree } from './tree';
 import { Orb } from './orb';
+import { Project } from './project';
 import { Button } from '../components/button';
 import { ReactComponent as ExpandIcon } from '../images/arrow-double-right.svg';
 import { ReactComponent as CollapseIcon } from '../images/arrow-double-left.svg';
@@ -13,7 +12,7 @@ import './index.css';
 
 const SidePanel = () => {
   const [open, setOpen] = useState(true);
-  const context = useContext(SelectedContext);
+  const [tab, setTab] = useState('project');
 
   return (
     <div id='side_panel' data-open={open}>
@@ -26,11 +25,32 @@ const SidePanel = () => {
         {!open && <ExpandIcon />}
       </Button>
       <div className='side_panel_header'>
-        {context.selected ? 'Orb' : 'Project'}
+        <Button
+          className='side_panel_tab'
+          onClick={() => setTab('tree')}
+          data-active={tab === 'tree'}
+        >
+          Tree
+        </Button>
+        <Button
+          className='side_panel_tab'
+          onClick={() => setTab('orb')}
+          data-active={tab === 'orb'}
+        >
+          Orb
+        </Button>
+        <Button
+          className='side_panel_tab'
+          onClick={() => setTab('project')}
+          data-active={tab === 'project'}
+        >
+          Project
+        </Button>
       </div>
       <div className='side_panel_content'>
-        {!context.selected && <Project />}
-        {context.selected && <Orb />}
+        {tab === 'tree' && <Tree />}
+        {tab === 'orb' && <Orb />}
+        {tab === 'project' && <Project />}
       </div>
     </div>
   );

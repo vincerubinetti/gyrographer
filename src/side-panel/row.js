@@ -13,13 +13,13 @@ import './row.css';
 
 const spec = { ...projectSpec, ...orbSpec };
 
-let Row = ({ state, dispatch, prop, Icon, Control }) => {
+let Row = ({ state, dispatch, prop, Icon, Control, orb }) => {
   const context = useContext(SelectedContext);
   const selected = context.selected;
 
   const name = spec[prop].name;
   const description = spec[prop].description;
-  const value = (selected ? state.orbs[selected] : state)[prop];
+  const value = (orb ? state.orbs[selected] : state)[prop];
   const step = spec[prop].step;
   const choices = spec[prop].choices;
   const action = spec[prop].action;

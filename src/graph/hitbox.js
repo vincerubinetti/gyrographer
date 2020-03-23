@@ -38,7 +38,7 @@ let Hitbox = ({ orb, guides, d }) => {
         fill={guides.rgb}
         cx={b.x}
         cy={b.y}
-        r={strokeWidth + 20}
+        r={strokeWidth + 10}
         onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
