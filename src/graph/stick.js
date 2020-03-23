@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 
 import { SelectedContext } from '../controllers/selected';
 import { TimeContext } from '../controllers/time';
+import { dim } from './';
 
 const precision = 2;
-const strokeWidth = 5;
+const strokeWidth = 3;
 
 let Stick = ({ orb, guides }) => {
   const selectedContext = useContext(SelectedContext);
@@ -28,13 +29,11 @@ let Stick = ({ orb, guides }) => {
     a = { x: 0, y: 0 };
   const b = orb.computePoint(to, time);
 
+  // style
+  const opacity = orb.stick ? selected === false ? dim : 1 : 0;
+
   return (
-    <g
-      className='stick'
-      opacity={
-        orb.stick && (selected === true || selected === undefined) ? 1 : 0
-      }
-    >
+    <g className='stick' opacity={opacity}>
       <line
         fill='none'
         stroke={guides.rgba}

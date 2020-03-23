@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { SelectedContext } from '../controllers/selected';
 import { TimeContext } from '../controllers/time';
+import { dim } from './';
 
 const precision = 2;
 
@@ -28,13 +29,11 @@ let Wheel = ({ orb, guides }) => {
   const b = orb.computePoint(to, time);
   const radius = Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
 
+  // style
+  const opacity = orb.wheel ? selected === false ? dim : 1 : 0;
+
   return (
-    <g
-      className='wheel'
-      opacity={
-        orb.wheel && (selected === true || selected === undefined) ? 1 : 0
-      }
-    >
+    <g className='wheel' opacity={opacity}>
       <circle
         fill={guides.rgba}
         opacity={0.25}

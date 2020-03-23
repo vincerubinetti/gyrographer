@@ -1,12 +1,20 @@
 import React from 'react';
+import { useContext } from 'react';
 import { connect } from 'react-redux';
+
+import { SelectedContext } from '../controllers/selected';
+import { dim } from './';
 
 const majorStrokeWidth = 1;
 const minorStrokeWidth = 0.25;
 const minorSpacing = 50;
 const majorMultiple = 4;
 
-let Grid = ({ left, top, right, bottom, guides }) => {
+let Grid = ({ grid, left, top, right, bottom, guides }) => {
+  const context = useContext(SelectedContext);
+
+  const opacity = grid ? context.selected ? dim : 1 : 0;
+
   const minorHorizontalLines = [];
   const minorVerticalLines = [];
   const majorHorizontalLines = [];
@@ -46,7 +54,7 @@ let Grid = ({ left, top, right, bottom, guides }) => {
   }
 
   return (
-    <>
+    <g id='grid' opacity={opacity}>
       <g
         id='minor_horizontal_lines'
         stroke={guides.rgb}
@@ -75,18 +83,18 @@ let Grid = ({ left, top, right, bottom, guides }) => {
       >
         {majorVerticalLines}
       </g>
-    </>
+    </g>
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    left: state.left,
-    top: state.top,
-    right: state.right,
-    bottom: state.bottom,
-    guides: state.guides
-  });
+const mapStateToProps = (state) => ({
+  grid: state.grid,
+  left: state.left,
+  top: state.top,
+  right: state.right,
+  bottom: state.bottom,
+  guides: state.guides
+});
 
 Grid = connect(mapStateToProps)(Grid);
 

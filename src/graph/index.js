@@ -14,6 +14,8 @@ import { Contents } from './contents';
 
 import './index.css';
 
+export const dim = 0.1;
+
 export let svg;
 export let view;
 

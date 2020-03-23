@@ -5,7 +5,9 @@
 #graph * {
   transition: opacity var(--fast);
 }
-
+#guides {
+  pointer-events: none;
+}
 .path_hitbox:hover {
   cursor: pointer;
   opacity: 1;

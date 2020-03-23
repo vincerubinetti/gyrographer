@@ -5,24 +5,15 @@ import { Grid } from './grid';
 import { Axes } from './axes';
 import { Bounds } from './bounds';
 
-let Guides = ({ guides, grid, axes, bounds }) =>
+let Guides = ({ guides }) =>
   <g id='guides' opacity={guides.a}>
-    <g id='grid' opacity={grid ? 1 : 0}>
-      <Grid />
-    </g>
-    <g id='axes' opacity={axes ? 1 : 0}>
-      <Axes />
-    </g>
-    <g id='bounds' opacity={bounds ? 1 : 0}>
-      <Bounds />
-    </g>
+    <Grid />
+    <Axes />
+    <Bounds />
   </g>;
 
 const mapStateToProps = (state) => ({
-  guides: state.guides,
-  bounds: state.bounds,
-  axes: state.axes,
-  grid: state.grid
+  guides: state.guides
 });
 
 Guides = connect(mapStateToProps)(Guides);
