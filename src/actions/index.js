@@ -3,4 +3,4 @@ export const createAction = (type) => (payload) => ({
   payload
 });
 
-export const setState = createAction('SET_STATE');
+export const setState = createAction('set_state');

@@ -23,7 +23,7 @@ let Row = ({ state, dispatch, prop, Icon, Control, orb }) => {
   const step = spec[prop].step;
   const choices = spec[prop].choices;
   const action = spec[prop].action;
-  const type = 'SET_' + prop.toUpperCase();
+  const type = 'set_' + prop;
 
   return (
     <div className='side_panel_row'>

@@ -30,7 +30,13 @@ let Stick = ({ orb, guides }) => {
   const b = orb.computePoint(to, time);
 
   // style
-  const opacity = orb.stick ? selected === false ? dim : 1 : 0;
+  let opacity;
+  if (selected === true)
+    opacity = orb.stick ? 1 : dim;
+  else if (selected === false)
+    opacity = orb.stick ? dim : 0;
+  else
+    opacity = orb.stick ? 1 : 0;
 
   return (
     <g className='stick' opacity={opacity}>

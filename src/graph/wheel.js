@@ -30,7 +30,13 @@ let Wheel = ({ orb, guides }) => {
   const radius = Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2));
 
   // style
-  const opacity = orb.wheel ? selected === false ? dim : 1 : 0;
+  let opacity;
+  if (selected === true)
+    opacity = orb.wheel ? 1 : dim;
+  else if (selected === false)
+    opacity = orb.wheel ? dim : 0;
+  else
+    opacity = orb.wheel ? 1 : 0;
 
   return (
     <g className='wheel' opacity={opacity}>

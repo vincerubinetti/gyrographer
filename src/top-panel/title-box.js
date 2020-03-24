@@ -13,7 +13,7 @@ import './title-box.css';
 let TitleBox = ({ title, dispatch }) => {
   const description = spec.title.description;
   const action = spec.title.action;
-  const type = 'SET_TITLE';
+  const type = 'set_title';
 
   const onChange = useCallback(
     (value) => {

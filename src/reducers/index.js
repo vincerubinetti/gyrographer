@@ -8,62 +8,94 @@ import { Color } from '../util/color';
 import projectSpec from '../project.spec.json';
 import orbSpec from '../orb.spec.json';
 
-const reducer = (state = {}, { type = '', payload = {} } = {}) => {
-  if (!type)
-    return state;
+const projectProps = Object.keys(projectSpec).map((prop) => prop.toLowerCase());
+const orbProps = Object.keys(orbSpec).map((prop) => prop.toLowerCase());
 
-  let newState;
-
-  if (type === 'SET_STATE')
-    newState = payload.state;
-  else
-    newState = copyObject(state);
-
-  const { orbs = {}, ...project } = newState;
-
-  const newProject = reduce(projectSpec, project, type, payload);
-
-  const newOrbs = {};
-
-  for (const [orbId, orb] of Object.entries(orbs))
-    newOrbs[orbId] = reduce(orbSpec, { ...orb, id: orbId }, type, payload);
-
-  newState = { ...newProject, orbs: newOrbs };
-
-  return newState;
+const reducer = (state, action) => {
+  return cleanState(reduce(copyObject(state), action));
 };
 
 export default reducer;
 
-const reduce = (spec, object = {}, action, payload) => {
-  for (const [
-    key,
-    { type, fallback, min, max, precision, choices }
-  ] of Object.entries(spec)) {
-    if (
-      action === 'SET_' + key.toUpperCase() &&
-      (!payload.selected ||
-        payload.selected && payload.selected === object.id)
-    )
-      object[key] = payload.value;
+const reduce = (state = {}, { type, payload } = {}) => {
+  if (!type || !payload)
+    return state;
 
-    if (type === 'color') {
-      if (!isObject(object[key]))
-        object[key] = new Color(object[key] || fallback);
-    } else if (type === 'choice') {
-      if (!isString(object[key]) || !choices.includes(object[key]))
-        object[key] = choices[0];
-    } else if (getType(object[key]) !== type)
-      object[key] = fallback;
+  if (type === 'set_state')
+    return payload.state;
 
-    if (type === 'number') {
-      if (object[key] > max)
-        object[key] = max;
-      if (object[key] < min)
-        object[key] = min;
-      object[key] = toFixed(object[key], precision);
-    }
+  const prop = type.replace('set_', '').toLowerCase();
+  const id = payload.selected;
+  const isProject = projectProps.includes(prop);
+  const isOrb = orbProps.includes(prop) && Object.keys(state.orbs).includes(id);
+
+  if (isProject)
+    return { ...state, [prop]: payload.value };
+
+  if (isOrb) {
+    return {
+      ...state,
+      orbs: {
+        ...state.orbs,
+        [id]: { ...state.orbs[id], [prop]: payload.value }
+      }
+    };
   }
 
-  return object;
+  return state;
+};
+
+const cleanState = (state) => {
+  const { orbs = {}, ...project } = state;
+
+  let newProject = {};
+  const newOrbs = {};
+
+  newProject = cleanSlice({ spec: projectSpec, slice: project });
+
+  for (const [orbId, orb] of Object.entries(orbs)) {
+    newOrbs[orbId] = cleanSlice({
+      spec: orbSpec,
+      slice: { ...orb, id: orbId }
+    });
+  }
+
+  return { ...newProject, orbs: newOrbs };
+};
+
+const cleanSlice = ({ spec, slice = {} }) => {
+  const newSlice = { ...slice };
+  for (const [key, value] of Object.entries(spec))
+    newSlice[key] = cleanValue({ value: slice[key], ...value });
+
+  return newSlice;
+};
+
+const cleanValue = ({
+  value,
+  type,
+  fallback,
+  min,
+  max,
+  precision,
+  choices
+}) => {
+  if (type === 'color') {
+    if (!isObject(value))
+      value = new Color(value || fallback);
+  } else if (type === 'choice') {
+    if (!isString(value) || !choices.includes(value))
+      value = choices[0];
+  } else if (getType(value) !== type)
+    value = fallback;
+
+  if (type === 'number') {
+    if (value > max)
+      value = max;
+    if (value < min)
+      value = min;
+    value = toFixed(value, precision);
+  }
+
+  return value;
 };

@@ -25,7 +25,13 @@ const Path = ({ orb, d }) => {
   const dashOffset = orb.computeProp('dashOffset', time);
   const lineCap = orb.computeProp('lineCap', time);
   const lineJoin = orb.computeProp('lineJoin', time);
-  const opacity = orb.path ? selected === false ? dim : 1 : 0;
+  let opacity;
+  if (selected === true)
+    opacity = orb.path ? 1 : dim;
+  else if (selected === false)
+    opacity = orb.path ? dim : 0;
+  else
+    opacity = orb.path ? 1 : 0;
 
   return (
     <g className='path' opacity={opacity}>
