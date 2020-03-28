@@ -52,9 +52,6 @@ export const ColorPicker = ({
 
   const update = useCallback(
     (newValue, debounce) => {
-      if (newValue === value)
-        return;
-
       onNudge(newValue);
       if (debounce) {
         window.clearTimeout(changeTimer.current);
@@ -63,7 +60,7 @@ export const ColorPicker = ({
         }, debounce);
       }
     },
-    [value, onNudge, onChange]
+    [onNudge, onChange]
   );
 
   const tweak = useCallback(
@@ -89,7 +86,7 @@ export const ColorPicker = ({
 
       const newColor = new Color({ h, s, v, a });
 
-      update(newColor, 2000);
+      update(newColor);
     },
     [update, value]
   );
@@ -104,7 +101,10 @@ export const ColorPicker = ({
     [open]
   );
 
-  const onClose = useCallback(() => setOpen(false), []);
+  const onClose = useCallback(() => {
+    setOpen(false);
+    update(value, 100);
+  }, [update, value]);
 
   const onControlMouseDown = useCallback(
     (event) => {
@@ -141,14 +141,14 @@ export const ColorPicker = ({
 
   const onHexBlur = useCallback(
     (event) => {
-      update(event.target.value, 10);
+      update(event.target.value, 100);
       setEdit(false);
     },
     [update]
   );
 
   const onSwatchClick = useCallback(
-    (event) => update(event.currentTarget.dataset.swatch, 10),
+    (event) => update(event.currentTarget.dataset.swatch, 100),
     [update]
   );
 
@@ -175,7 +175,7 @@ export const ColorPicker = ({
         <div className='color_picker_checkers' />
         <div style={{ backgroundColor: value.rgba }} />
       </button>
-      {open &&
+      {open && (
         <Popover
           anchor={anchor}
           className='color_picker'
@@ -209,7 +209,7 @@ export const ColorPicker = ({
             <div
               className='color_picker_marker_sliver'
               style={{
-                left: value.h / 360 * 100 + '%',
+                left: (value.h / 360) * 100 + '%',
                 top: '50%'
               }}
             />
@@ -236,7 +236,7 @@ export const ColorPicker = ({
               }}
             />
           </div>
-          {!edit &&
+          {!edit && (
             <div
               className='color_picker_hex'
               tabIndex='0'
@@ -245,8 +245,8 @@ export const ColorPicker = ({
             >
               {value.rgba}
             </div>
-          }
-          {edit &&
+          )}
+          {edit && (
             <input
               ref={onHexRef}
               className='color_picker_hex'
@@ -255,9 +255,9 @@ export const ColorPicker = ({
               onKeyPress={onHexKeyPress}
               onBlur={onHexBlur}
             />
-          }
+          )}
           <div className='color_picker_swatches'>
-            {swatches.map((swatch, index) =>
+            {swatches.map((swatch, index) => (
               <button
                 key={index}
                 className={`
@@ -270,10 +270,11 @@ export const ColorPicker = ({
               >
                 <div className='color_picker_checkers' />
                 <div style={{ backgroundColor: swatch }} />
-              </button>)}
+              </button>
+            ))}
           </div>
         </Popover>
-      }
+      )}
     </>
   );
 };
