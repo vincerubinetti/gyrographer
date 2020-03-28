@@ -10,7 +10,7 @@ const HelpLink = () => (
       className='button'
       target='_blank'
       rel='noopener noreferrer'
-      href='https://github.com/vincerubinetti/gyrographer'
+      href='https://github.com/vincerubinetti/gyrographer#readme'
     >
       <HelpIcon />
     </a>

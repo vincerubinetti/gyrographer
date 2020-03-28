@@ -18,6 +18,9 @@ jobs:
           yarn install
           npm run build
           ls
+          ls build -R
+          ls public -R
+          ls src -R
       - name: deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

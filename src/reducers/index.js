@@ -49,7 +49,7 @@ const cleanState = (state) => {
   const { orbs = {}, ...project } = state;
 
   let newProject = {};
-  const newOrbs = {};
+  let newOrbs = {};
 
   newProject = cleanSlice({ spec: projectSpec, slice: project });
 
@@ -59,6 +59,8 @@ const cleanState = (state) => {
       slice: { ...orb, id: orbId }
     });
   }
+
+  newOrbs = cleanTree({ orbs: newOrbs });
 
   return { ...newProject, orbs: newOrbs };
 };
@@ -98,4 +100,25 @@ const cleanValue = ({
   }
 
   return value;
+};
+
+const cleanTree = ({ orbs }) => {
+  for (const key of Object.keys(orbs)) {
+    if (!orbs[orbs[key].parent])
+      orbs[key].parent = '';
+  }
+
+  for (const key of Object.keys(orbs)) {
+    const visited = new Set();
+    const traverse = (id) => {
+      if (visited.has(id))
+        orbs[id].parent = '';
+      visited.add(id);
+      if (orbs[id]?.parent)
+        traverse(orbs[id].parent);
+    };
+    traverse(key);
+  }
+
+  return orbs;
 };

@@ -1,6 +1,7 @@
 {
   "orbs": {
     "1": {
+      "parent": "4",
       "path": false,
       "wheel": false,
       "spin": 3,
@@ -9,26 +10,26 @@
       "strokeWidth": 3
     },
     "2": {
+      "parent": "1",
       "path": false,
       "wheel": false,
       "spin": 2,
       "radius": 200,
-      "parent": "1",
       "stroke": "#2196f3",
       "strokeWidth": 5
     },
     "3": {
+      "parent": "2",
       "spin": -10,
       "radius": 100,
-      "parent": "2",
       "stroke": "#9c27b0",
       "strokeWidth": 7
     },
     "4": {
+      "parent": "2",
       "spin": -10,
       "radius": 100,
       "offset": 180,
-      "parent": "2",
       "stroke": "#e91e63",
       "strokeWidth": 9
     }
