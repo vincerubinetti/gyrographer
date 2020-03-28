@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/gyrographer/static/css/main.168ff91d.chunk.css",
-    "main.js": "/gyrographer/static/js/main.7e425e2c.chunk.js",
-    "main.js.map": "/gyrographer/static/js/main.7e425e2c.chunk.js.map",
+    "main.css": "/gyrographer/static/css/main.5e7aed00.chunk.css",
+    "main.js": "/gyrographer/static/js/main.db09b9b5.chunk.js",
+    "main.js.map": "/gyrographer/static/js/main.db09b9b5.chunk.js.map",
     "runtime-main.js": "/gyrographer/static/js/runtime-main.5163103c.js",
     "runtime-main.js.map": "/gyrographer/static/js/runtime-main.5163103c.js.map",
-    "static/js/2.06215ec2.chunk.js": "/gyrographer/static/js/2.06215ec2.chunk.js",
-    "static/js/2.06215ec2.chunk.js.map": "/gyrographer/static/js/2.06215ec2.chunk.js.map",
+    "static/js/2.ae7d9baf.chunk.js": "/gyrographer/static/js/2.ae7d9baf.chunk.js",
+    "static/js/2.ae7d9baf.chunk.js.map": "/gyrographer/static/js/2.ae7d9baf.chunk.js.map",
     "index.html": "/gyrographer/index.html",
-    "precache-manifest.7313e04ec5cf781d5f36e7beee032dd8.js": "/gyrographer/precache-manifest.7313e04ec5cf781d5f36e7beee032dd8.js",
+    "precache-manifest.d636a82c20922fb15c3ea1706f1eec61.js": "/gyrographer/precache-manifest.d636a82c20922fb15c3ea1706f1eec61.js",
     "service-worker.js": "/gyrographer/service-worker.js",
-    "static/css/main.168ff91d.chunk.css.map": "/gyrographer/static/css/main.168ff91d.chunk.css.map",
-    "static/js/2.06215ec2.chunk.js.LICENSE.txt": "/gyrographer/static/js/2.06215ec2.chunk.js.LICENSE.txt",
+    "static/css/main.5e7aed00.chunk.css.map": "/gyrographer/static/css/main.5e7aed00.chunk.css.map",
+    "static/js/2.ae7d9baf.chunk.js.LICENSE.txt": "/gyrographer/static/js/2.ae7d9baf.chunk.js.LICENSE.txt",
     "static/media/arrow-double-left.47043147.svg": "/gyrographer/static/media/arrow-double-left.47043147.svg",
     "static/media/arrow-double-right.9ee267e8.svg": "/gyrographer/static/media/arrow-double-right.9ee267e8.svg",
     "static/media/arrow-end.67d0a611.svg": "/gyrographer/static/media/arrow-end.67d0a611.svg",
@@ -31,6 +31,7 @@
     "static/media/from.2bfad441.svg": "/gyrographer/static/media/from.2bfad441.svg",
     "static/media/fullscreen.f7c76388.svg": "/gyrographer/static/media/fullscreen.f7c76388.svg",
     "static/media/grid.b7bdd5e4.svg": "/gyrographer/static/media/grid.b7bdd5e4.svg",
+    "static/media/help.cefb184b.svg": "/gyrographer/static/media/help.cefb184b.svg",
     "static/media/join.22067056.svg": "/gyrographer/static/media/join.22067056.svg",
     "static/media/left.fac033ee.svg": "/gyrographer/static/media/left.fac033ee.svg",
     "static/media/length.1f4760ff.svg": "/gyrographer/static/media/length.1f4760ff.svg",
@@ -57,8 +58,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5163103c.js",
-    "static/js/2.06215ec2.chunk.js",
-    "static/css/main.168ff91d.chunk.css",
-    "static/js/main.7e425e2c.chunk.js"
+    "static/js/2.ae7d9baf.chunk.js",
+    "static/css/main.5e7aed00.chunk.css",
+    "static/js/main.db09b9b5.chunk.js"
   ]
 }

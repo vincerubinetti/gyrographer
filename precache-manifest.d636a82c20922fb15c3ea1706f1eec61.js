@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "af35d5e41b799aca2086086e11720dc4",
+    "revision": "f91c887449d121b696733a07ee7b0868",
     "url": "/gyrographer/index.html"
   },
   {
-    "revision": "5e6a457f9ab2afc2a0c1",
-    "url": "/gyrographer/static/css/main.168ff91d.chunk.css"
+    "revision": "7963b7d06fc707ffc51d",
+    "url": "/gyrographer/static/css/main.5e7aed00.chunk.css"
   },
   {
-    "revision": "a7c17018ff8252959339",
-    "url": "/gyrographer/static/js/2.06215ec2.chunk.js"
+    "revision": "5a79d60e93d90a6be585",
+    "url": "/gyrographer/static/js/2.ae7d9baf.chunk.js"
   },
   {
-    "revision": "0b08544f54c9906705be39c03b7e79ad",
-    "url": "/gyrographer/static/js/2.06215ec2.chunk.js.LICENSE.txt"
+    "revision": "c64c486544348f10a6d6c716950bc223",
+    "url": "/gyrographer/static/js/2.ae7d9baf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5e6a457f9ab2afc2a0c1",
-    "url": "/gyrographer/static/js/main.7e425e2c.chunk.js"
+    "revision": "7963b7d06fc707ffc51d",
+    "url": "/gyrographer/static/js/main.db09b9b5.chunk.js"
   },
   {
     "revision": "4e21a1f51821133f8d05",
@@ -98,6 +98,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "b7bdd5e46e63310b4f62c865c1c0df02",
     "url": "/gyrographer/static/media/grid.b7bdd5e4.svg"
+  },
+  {
+    "revision": "cefb184befa6b55c4fa862651b359942",
+    "url": "/gyrographer/static/media/help.cefb184b.svg"
   },
   {
     "revision": "22067056c01b35d11f3bd29da3e4c9a7",
