@@ -20,6 +20,7 @@ jobs:
       - name: deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
+          DEBUG: true
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           CLEAN: true
