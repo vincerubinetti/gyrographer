@@ -24,9 +24,6 @@ export const NumberBox = ({
   const update = useCallback(
     (newValue, debounce) => {
       newValue = Number(newValue);
-      if (newValue === value)
-        return;
-
       onNudge(newValue);
       if (debounce) {
         window.clearTimeout(changeTimer.current);
@@ -36,7 +33,7 @@ export const NumberBox = ({
         );
       }
     },
-    [value, onNudge, onChange]
+    [onNudge, onChange]
   );
 
   const onInputRef = useCallback((element) => {
@@ -47,7 +44,8 @@ export const NumberBox = ({
     return element;
   }, []);
 
-  const onClick = useCallback((event) => {
+  const onClick = useCallback(() => {
+    window.clearTimeout(changeTimer.current);
     setEdit(true);
   }, []);
 
@@ -79,7 +77,7 @@ export const NumberBox = ({
     setDragY(null);
 
     if (drag)
-      update(value, 1);
+      update(value, 100);
   }, [value, drag, update]);
 
   const onKeyDown = useCallback(() => {
@@ -103,7 +101,7 @@ export const NumberBox = ({
 
   const onBlur = useCallback(
     (event) => {
-      update(event.target.value, 1);
+      update(event.target.value, 100);
       setEdit(false);
     },
     [update]
@@ -124,7 +122,7 @@ export const NumberBox = ({
 
   return (
     <div className='number_box'>
-      {!edit &&
+      {!edit && (
         <div
           tabIndex='0'
           onFocus={onClick}
@@ -133,8 +131,8 @@ export const NumberBox = ({
         >
           {value}
         </div>
-      }
-      {edit &&
+      )}
+      {edit && (
         <input
           ref={onInputRef}
           type='number'
@@ -143,7 +141,7 @@ export const NumberBox = ({
           onKeyPress={onKeyPress}
           onBlur={onBlur}
         />
-      }
+      )}
     </div>
   );
 };

@@ -8,8 +8,8 @@ import { Color } from '../util/color';
 import projectSpec from '../project.spec.json';
 import orbSpec from '../orb.spec.json';
 
-const projectProps = Object.keys(projectSpec).map((prop) => prop.toLowerCase());
-const orbProps = Object.keys(orbSpec).map((prop) => prop.toLowerCase());
+const projectProps = Object.keys(projectSpec);
+const orbProps = Object.keys(orbSpec);
 
 const reducer = (state, action) => {
   return cleanState(reduce(copyObject(state), action));
@@ -24,7 +24,7 @@ const reduce = (state = {}, { type, payload } = {}) => {
   if (type === 'set_state')
     return payload.state;
 
-  const prop = type.replace('set_', '').toLowerCase();
+  const prop = type.replace('set_', '');
   const id = payload.selected;
   const isProject = projectProps.includes(prop);
   const isOrb = orbProps.includes(prop) && Object.keys(state.orbs).includes(id);
