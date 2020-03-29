@@ -1,0 +1,13 @@
+#tree_panel {
+  position: relative;
+  width: unset;
+  height: unset;
+}
+.tree_node {
+  stroke: var(--white);
+  stroke-width: 1px;
+}
+.tree_link {
+  stroke: var(--white);
+  stroke-width: 1px;
+}

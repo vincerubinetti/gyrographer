@@ -1,5 +1,3 @@
-import testSaveFile from '../test-save-file.json';
-
 const key = 'root';
 
 // for testing, clear storage on every page reload
@@ -22,6 +20,5 @@ export const getStateFromStorage = () => {
       console.log(error);
     }
   }
-  results = testSaveFile;
   return results;
 };

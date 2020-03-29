@@ -5,8 +5,6 @@ const precision = 2;
 
 export class Orb {
   constructor(props) {
-    this.cache = {};
-
     for (const [key, value] of Object.entries(props))
       this[key] = value;
   }
@@ -44,9 +42,6 @@ export class Orb {
   }
 
   computePath(time) {
-    if (this.cache[time])
-      return this.cache[time];
-
     const from = this.computeProp('from', time);
     const to = this.computeProp('to', time);
     const step = this.computeProp('step', time);
@@ -87,20 +82,18 @@ export class Orb {
     if (close)
       d += 'z';
 
-    this.cache[time] = d;
-
     return d;
   }
-
-  static buildTree(orbs) {
-    const tree = [];
-
-    for (const id of Object.keys(orbs))
-      tree.push(new Orb({ id, ...orbs[id] }));
-
-    for (const leaf of tree)
-      leaf.parent = tree.find((parent) => parent.id === leaf.parent);
-
-    return tree;
-  }
 }
+
+export const buildTree = (orbs) => {
+  const tree = [];
+
+  for (const id of Object.keys(orbs))
+    tree.push(new Orb({ id, ...orbs[id] }));
+
+  for (const leaf of tree)
+    leaf.parent = tree.find((parent) => parent.id === leaf.parent);
+
+  return tree;
+};

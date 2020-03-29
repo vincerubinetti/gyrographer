@@ -11,8 +11,9 @@ import { Mouse } from './controllers/mouse';
 import { Tree } from './controllers/tree';
 import { Selected } from './controllers/selected';
 import { Time } from './controllers/time';
-import { getStateFromStorage } from './enhancers/persister';
 import { setState } from './actions';
+// import { getStateFromStorage } from './enhancers/persister';
+import testSaveFile from './test-save-file.json';
 
 import './util/debug';
 
@@ -21,8 +22,9 @@ import './app.css';
 let App = ({ setState }) => {
   useEffect(() => {
     setState({
-      state: getStateFromStorage(),
-      description: 'Load state from storage'
+      // state: getStateFromStorage(),
+      state: testSaveFile,
+      description: 'Load project from storage'
     });
   }, [setState]);
 

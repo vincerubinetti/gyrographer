@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect
+    fill="none"
+    stroke="currentColor"
+    stroke-width="10"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    x="10"
+    y="10"
+    width="80"
+    height="80"
+    rx="10"
+    ry="10"
+  />
+  <circle
+    fill="currentColor"
+    cx="32.5"
+    cy="32.5"
+    r="7.5"
+  />
+  <circle
+    fill="currentColor"
+    cx="50"
+    cy="50"
+    r="7.5"
+  />
+  <circle
+    fill="currentColor"
+    cx="67.5"
+    cy="67.5"
+    r="7.5"
+  />
+</svg>

@@ -8,10 +8,11 @@ import { ReactComponent as SaveIcon } from '../images/save.svg';
 import projectSpec from '../project.spec.json';
 import orbSpec from '../orb.spec.json';
 
-let SaveButton = ({ state }) =>
+let SaveButton = ({ state }) => (
   <Button onClick={() => saveState(state)} tooltip='Save project'>
     <SaveIcon />
-  </Button>;
+  </Button>
+);
 const mapStateToProps = (state) => ({
   state
 });
@@ -28,7 +29,9 @@ const saveState = (state) => {
   const data = JSON.stringify(cleanedState, null, 2);
 
   const link = window.document.createElement('a');
-  link.href = window.URL.createObjectURL(new Blob([data], { type: 'text/json' }));
+  link.href = window.URL.createObjectURL(
+    new Blob([data], { type: 'text/json' })
+  );
   link.download = title + '.gyr';
   link.click();
 };

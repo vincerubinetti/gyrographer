@@ -10,19 +10,19 @@ let Timecode = ({ fps }) => {
 
   let seconds = Math.floor(context.time / fps);
   let frames = Math.floor(context.time % fps);
-  let frameDecimal = Math.floor(context.time % fps % 1 * 100);
+  let frameDecimal = Math.floor(((context.time % fps) % 1) * 100);
 
   seconds = String(seconds).padStart(2, '0');
   frames = String(frames).padStart(2, '0');
   frameDecimal = String(frameDecimal).padStart(2, '0');
 
   return (
-    <div className='timecode small'>
+    <div id='timecode' className='small'>
       <span>{seconds}</span>
       <span className='timecode_suffix light'>s</span>
       <span>{frames}</span>
       <span>.</span>
-      <span> {frameDecimal}</span>
+      <span>{frameDecimal}</span>
       <span className='timecode_suffix light'>f</span>
     </div>
   );

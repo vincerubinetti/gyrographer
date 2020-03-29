@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { Orb } from './orb';
+import { buildTree } from './orb';
 
 export const TreeContext = createContext({});
 
 let Tree = ({ children, orbs }) => {
   const [orbTree, setOrbTree] = useState([]);
 
-  useEffect(() => setOrbTree(Orb.buildTree(orbs)), [orbs]);
+  useEffect(() => setOrbTree(buildTree(orbs)), [orbs]);
 
   return (
     <TreeContext.Provider

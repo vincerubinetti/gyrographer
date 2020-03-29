@@ -26,7 +26,7 @@
   "wheel": {
     "name": "Wheel",
     "type": "boolean",
-    "fallback": true,
+    "fallback": false,
     "description": "Show/hide the wheel from the parent to the orb",
     "action": "Toggle orb wheel"
   },

@@ -4,6 +4,7 @@ import { SaveButton } from './save-button';
 import { LoadButton } from './load-button';
 import { UndoButton } from './undo-button';
 import { RedoButton } from './redo-button';
+import { RandomButton } from './random-button';
 import { TitleBox } from './title-box';
 import { HelpLink } from './help-link';
 import { FullscreenButton } from './fullscreen-button';
@@ -16,6 +17,7 @@ const TopPanel = () =>
     <LoadButton />
     <UndoButton />
     <RedoButton />
+    <RandomButton />
     <TitleBox />
     <span className='flex_grow' />
     <HelpLink />

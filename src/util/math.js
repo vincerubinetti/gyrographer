@@ -1,6 +1,6 @@
-export const sin = (degrees) => Math.sin(2 * Math.PI * degrees / 360);
+export const sin = (degrees) => Math.sin((2 * Math.PI * degrees) / 360);
 
-export const cos = (degrees) => Math.cos(2 * Math.PI * degrees / 360);
+export const cos = (degrees) => Math.cos((2 * Math.PI * degrees) / 360);
 
 export const sign = (value) => {
   if (value > 0)
@@ -12,6 +12,9 @@ export const sign = (value) => {
 };
 
 export const toFixed = (value, precision) => Number(value.toFixed(precision));
+
+export const avg = (array) =>
+  array.reduce((total, current) => total + current, 0) / array.length;
 
 export class Vector {
   constructor(x, y) {

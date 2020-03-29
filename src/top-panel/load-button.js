@@ -4,10 +4,11 @@ import { useCallback } from 'react';
 import { connect } from 'react-redux';
 
 import { Button } from '../components/button';
-import { ReactComponent as LoadIcon } from '../images/load.svg';
 import { setState } from '../actions';
 
-let LoadButton = ({ state, setState }) => {
+import { ReactComponent as LoadIcon } from '../images/load.svg';
+
+let LoadButton = ({ setState }) => {
   const ref = useRef(null);
 
   const onClick = useCallback(() => {
@@ -27,7 +28,7 @@ let LoadButton = ({ state, setState }) => {
 
       setState({
         state: state,
-        description: 'Load state from file'
+        description: 'Load project from file'
       });
     },
     [setState]
@@ -47,14 +48,10 @@ let LoadButton = ({ state, setState }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  state
-});
-
 const mapDispatchToProps = (dispatch) => ({
   setState: (...args) => dispatch(setState(...args))
 });
 
-LoadButton = connect(mapStateToProps, mapDispatchToProps)(LoadButton);
+LoadButton = connect(null, mapDispatchToProps)(LoadButton);
 
 export { LoadButton };

@@ -71,17 +71,17 @@ let Rail = ({ length }) => {
   }, [onMouseMove, onMouseUp]);
 
   return (
-    <div className='rail_container'>
+    <div id='time_bar'>
       <div
-        className='rail'
+        id='rail'
         tabIndex={0}
         onTouchStart={onMouseDown}
         onMouseDown={onMouseDown}
         ref={track}
       >
-        <div className='rail_marker' style={{ right: 100 - percent + '%' }} />
+        <div id='rail_marker' style={{ right: 100 - percent + '%' }} />
       </div>
-      <div className='keyframe_markers' />
+      <div id='keyframe_markers' />
     </div>
   );
 };

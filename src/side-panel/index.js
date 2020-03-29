@@ -22,20 +22,20 @@ const SidePanel = () => {
     if (context.selected)
       setTab('orb');
     else
-      setTab('project');
+      setTab('tree');
   }, [context.selected]);
 
   return (
     <div id='side_panel' data-open={open}>
       <Button
-        className='side_panel_button'
+        id='side_panel_collapse'
         onClick={() => setOpen(!open)}
         tooltip={(open ? 'Close' : 'Open') + ' panel'}
       >
         {open && <CollapseIcon />}
         {!open && <ExpandIcon />}
       </Button>
-      <div className='side_panel_header'>
+      <div id='side_panel_header'>
         <Button
           className='side_panel_tab'
           onClick={() => setTab('tree')}
@@ -58,7 +58,7 @@ const SidePanel = () => {
           Project
         </Button>
       </div>
-      <div className='side_panel_content'>
+      <div id='side_panel_content'>
         {tab === 'tree' && <Tree />}
         {tab === 'orb' && <Orb />}
         {tab === 'project' && <Project />}
