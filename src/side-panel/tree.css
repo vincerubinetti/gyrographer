@@ -8,6 +8,9 @@
   stroke-width: 1px;
 }
 .tree_link {
+  fill: var(--white);
   stroke: var(--white);
   stroke-width: 1px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }

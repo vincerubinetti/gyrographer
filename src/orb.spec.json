@@ -19,7 +19,7 @@
   "stick": {
     "name": "Stick",
     "type": "boolean",
-    "fallback": true,
+    "fallback": false,
     "description": "Show/hide the stick from the parent to the orb",
     "action": "Toggle orb stick"
   },

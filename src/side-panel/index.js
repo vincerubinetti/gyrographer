@@ -38,6 +38,13 @@ const SidePanel = () => {
       <div id='side_panel_header'>
         <Button
           className='side_panel_tab'
+          onClick={() => setTab('project')}
+          data-active={tab === 'project'}
+        >
+          Project
+        </Button>
+        <Button
+          className='side_panel_tab'
           onClick={() => setTab('tree')}
           data-active={tab === 'tree'}
         >
@@ -50,18 +57,11 @@ const SidePanel = () => {
         >
           Orb
         </Button>
-        <Button
-          className='side_panel_tab'
-          onClick={() => setTab('project')}
-          data-active={tab === 'project'}
-        >
-          Project
-        </Button>
       </div>
       <div id='side_panel_content'>
+        {tab === 'project' && <Project />}
         {tab === 'tree' && <Tree />}
         {tab === 'orb' && <Orb />}
-        {tab === 'project' && <Project />}
       </div>
     </div>
   );

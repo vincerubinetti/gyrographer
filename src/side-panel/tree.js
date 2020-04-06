@@ -10,20 +10,13 @@ import './tree.css';
 const size = 20;
 const spacing = 40;
 
-const traverse = (leaf, depth) => {
-  if (depth === undefined)
-    depth = 0;
-  return leaf.parent ? traverse(leaf.parent, depth + 1) : depth;
-};
-
 const Tree = () => {
   const context = useContext(TreeContext);
 
   const table = [];
-  for (const leaf of context.orbTree) {
-    const depth = traverse(leaf);
-    table[depth] = table[depth] || [];
-    table[depth].push(leaf);
+  for (const leaf of context.tree) {
+    table[leaf.depth] = table[leaf.depth] || [];
+    table[leaf.depth].push(leaf);
   }
 
   for (const [rowIndex, row] of Object.entries(table)) {
@@ -54,17 +47,22 @@ const Tree = () => {
       {table.map((row, rowIndex) => (
         <Fragment key={rowIndex}>
           {row.map((leaf, colIndex) => (
-            <line
-              key={colIndex}
-              className='tree_link'
-              stroke='var(--white)'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              x1={leaf.parent?.x || 0}
-              y1={leaf.parent?.y || 0}
-              x2={leaf.x}
-              y2={leaf.y}
-            />
+            <Fragment key={colIndex}>
+              <line
+                className='tree_link'
+                x1={leaf.parent?.x || 0}
+                y1={leaf.parent?.y || 0}
+                x2={leaf.x}
+                y2={leaf.y}
+              />
+              <circle
+                className='tree_link'
+                x1={leaf.parent?.x || 0}
+                r={size / 8}
+                cx={leaf.x}
+                cy={leaf.y}
+              />
+            </Fragment>
           ))}
         </Fragment>
       ))}
@@ -74,6 +72,7 @@ const Tree = () => {
             <circle
               key={colIndex}
               className='tree_node'
+              opacity={leaf.path ? 1 : 0.1}
               fill={leaf.fill.a ? leaf.fill.rgb : leaf.stroke.rgb}
               r={size / 2}
               cx={leaf.x}

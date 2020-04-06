@@ -16,6 +16,8 @@ export const toFixed = (value, precision) => Number(value.toFixed(precision));
 export const avg = (array) =>
   array.reduce((total, current) => total + current, 0) / array.length;
 
+export const random = (array) => array[Math.floor(Math.random() * array.length)];
+
 export class Vector {
   constructor(x, y) {
     this.x = x;

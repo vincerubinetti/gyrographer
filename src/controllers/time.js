@@ -11,7 +11,7 @@ export const TimeContext = createContext({});
 let Time = ({ children, fps, length }) => {
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
-  const [loop, setLoop] = useState(false);
+  const [loop, setLoop] = useState(true);
   const [speed, setSpeed] = useState(1);
   const timer = useRef();
 

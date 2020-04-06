@@ -3,7 +3,6 @@
     "1": {
       "parent": "4",
       "path": false,
-      "wheel": false,
       "spin": 3,
       "radius": 500,
       "stroke": "#ffeb3b",
@@ -12,7 +11,6 @@
     "2": {
       "parent": "1",
       "path": false,
-      "wheel": false,
       "spin": 2,
       "radius": 200,
       "stroke": "#2196f3",

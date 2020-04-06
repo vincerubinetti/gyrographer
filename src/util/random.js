@@ -1,23 +1,35 @@
 import { swatches } from '../components/color-picker';
+import { random } from './math';
 
 const colors = swatches.slice(1, 17);
 
-const complexity = 5;
+const number = 10;
+const ratio = 0.5;
 
 export const generateRandomProject = () => {
-  const project = {};
+  const orbs = {};
 
-  project.orbs = {};
-  for (let i = 0; i < complexity; i++) {
-    project.orbs[i] = {
-      parent: String(Math.floor(Math.random() * complexity)),
-      path: Math.random() < 0.5,
-      radius: -400 + Math.random() * 200,
-      spin: -5 + Math.random() * 10,
-      offset: Math.random() * 360,
-      stroke: colors[Math.floor(Math.random() * colors.length)]
-    };
+  const hasChild = (id) => Object.values(orbs).find((orb) => orb.parent === id);
+  const withChild = () => Object.keys(orbs).filter((id) => hasChild(id));
+  const withoutChild = () => Object.keys(orbs).filter((id) => !hasChild(id));
+
+  for (let id = 0; id < number; id++) {
+    let parent = '';
+    if (Math.random() < ratio)
+      parent = random(['', ...withChild()]);
+    else
+      parent = random([...withoutChild()]);
+
+    orbs[id] = { parent };
   }
 
-  return project;
+  for (const [id, orb] of Object.entries(orbs)) {
+    orb.path = hasChild(id) ? false : true;
+    orb.radius = -300 + Math.random() * 150;
+    orb.spin = Math.round(-5 + Math.random() * 10);
+    orb.offset = Math.random() * 360;
+    orb.stroke = colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  return { orbs };
 };

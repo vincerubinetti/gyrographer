@@ -19,9 +19,7 @@ export const Contents = () => {
   const paths = [];
   const hitboxes = [];
 
-  treeContext.orbTree.sort((a, b) => a.order - b.order);
-
-  for (const orb of treeContext.orbTree) {
+  for (const orb of treeContext.tree) {
     const d = orb.computePath(time);
 
     wheels.push(<Wheel key={wheels.length} orb={orb} />);
