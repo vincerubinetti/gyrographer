@@ -6,11 +6,11 @@ import { TimeContext } from '../controllers/time';
 import './timecode.css';
 
 let Timecode = ({ fps }) => {
-  const context = useContext(TimeContext);
+  const { time } = useContext(TimeContext);
 
-  let seconds = Math.floor(context.time / fps);
-  let frames = Math.floor(context.time % fps);
-  let frameDecimal = Math.floor(((context.time % fps) % 1) * 100);
+  let seconds = Math.floor(time / fps);
+  let frames = Math.floor(time % fps);
+  let frameDecimal = Math.floor(((time % fps) % 1) * 100);
 
   seconds = String(seconds).padStart(2, '0');
   frames = String(frames).padStart(2, '0');

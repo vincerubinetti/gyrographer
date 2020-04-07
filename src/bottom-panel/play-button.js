@@ -7,16 +7,15 @@ import { ReactComponent as PlayIcon } from '../images/play.svg';
 import { ReactComponent as PauseIcon } from '../images/pause.svg';
 
 const PlayButton = () => {
-  const context = useContext(TimeContext);
+  const { playing, togglePlaying } = useContext(TimeContext);
 
   return (
     <Button
-      className=''
-      onClick={context.togglePlaying}
-      color={context.playing ? 'blue' : 'white'}
-      tooltip={context.playing ? 'Pause' : 'Play'}
+      onClick={togglePlaying}
+      color={playing ? 'blue' : 'white'}
+      tooltip={playing ? 'Pause' : 'Play'}
     >
-      {context.playing ? <PauseIcon /> : <PlayIcon />}
+      {playing ? <PauseIcon /> : <PlayIcon />}
     </Button>
   );
 };

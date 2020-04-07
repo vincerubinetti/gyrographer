@@ -8,13 +8,13 @@ import { dim } from './';
 const strokeWidth = 3;
 
 let Axes = ({ axes, left, top, right, bottom, guides }) => {
-  const context = useContext(SelectedContext);
+  const { selected } = useContext(SelectedContext);
 
-  const opacity = axes ? context.selected ? dim : 1 : 0;
+  const opacity = axes ? (selected !== null ? dim : 1) : 0;
 
   return (
     <g id='axes' opacity={opacity}>
-      {top < 0 && bottom > 0 &&
+      {top < 0 && bottom > 0 && (
         <line
           x1={left}
           y1='0'
@@ -24,8 +24,8 @@ let Axes = ({ axes, left, top, right, bottom, guides }) => {
           strokeWidth={strokeWidth}
           strokeLinecap='square'
         />
-      }
-      {left < 0 && right > 0 &&
+      )}
+      {left < 0 && right > 0 && (
         <line
           x1='0'
           y1={top}
@@ -35,7 +35,7 @@ let Axes = ({ axes, left, top, right, bottom, guides }) => {
           strokeWidth={strokeWidth}
           strokeLinecap='square'
         />
-      }
+      )}
     </g>
   );
 };

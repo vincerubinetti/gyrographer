@@ -6,16 +6,12 @@ import { TimeContext } from '../controllers/time';
 import { dim } from './';
 
 const Path = ({ orb, d }) => {
-  const selectedContext = useContext(SelectedContext);
-  const timeContext = useContext(TimeContext);
+  let { selected } = useContext(SelectedContext);
+  const { time } = useContext(TimeContext);
 
   // geometry
-  const selected = selectedContext.selected ?
-    selectedContext.selected === orb.id ?
-      true :
-      false :
-    undefined;
-  const time = timeContext.time;
+  selected =
+    selected !== null ? (selected === orb.id ? true : false) : undefined;
 
   // style
   const fill = orb.computeProp('fill', time);
@@ -27,7 +23,7 @@ const Path = ({ orb, d }) => {
   const lineJoin = orb.computeProp('lineJoin', time);
   let opacity;
   if (selected === true)
-    opacity = orb.path ? 1 : dim;
+    opacity = 1;
   else if (selected === false)
     opacity = orb.path ? dim : 0;
   else

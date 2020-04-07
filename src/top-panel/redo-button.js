@@ -20,7 +20,6 @@ let RedoButton = ({ future, redo }) => {
 
   return (
     <Button
-      className=''
       onClick={() => {
         if (future.length)
           redo();

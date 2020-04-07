@@ -6,12 +6,12 @@ import { Button } from '../components/button';
 import { ReactComponent as ArrowRightIcon } from '../images/arrow-right.svg';
 
 const ForwardButton = () => {
-  const context = useContext(TimeContext);
+  const { incrementTime } = useContext(TimeContext);
 
   return (
     <Button
       className='thin_button'
-      onClick={context.incrementTime}
+      onClick={incrementTime}
       tooltip='Step forward'
     >
       <ArrowRightIcon />

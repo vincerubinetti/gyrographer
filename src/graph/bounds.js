@@ -8,9 +8,9 @@ import { dim } from './';
 const strokeWidth = 3;
 
 let Bounds = ({ bounds, left, top, right, bottom, guides }) => {
-  const context = useContext(SelectedContext);
+  const { selected } = useContext(SelectedContext);
 
-  const opacity = bounds ? context.selected ? dim : 1 : 0;
+  const opacity = bounds ? (selected !== null ? dim : 1) : 0;
 
   return (
     <g id='bounds' opacity={opacity}>

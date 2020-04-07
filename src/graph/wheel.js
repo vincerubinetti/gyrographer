@@ -9,16 +9,12 @@ import { dim } from './';
 const precision = 2;
 
 let Wheel = ({ orb, guides }) => {
-  const selectedContext = useContext(SelectedContext);
-  const timeContext = useContext(TimeContext);
+  let { selected } = useContext(SelectedContext);
+  const { time } = useContext(TimeContext);
 
   // geometry
-  const selected = selectedContext.selected ?
-    selectedContext.selected === orb.id ?
-      true :
-      false :
-    undefined;
-  const time = timeContext.time;
+  selected =
+    selected !== null ? (selected === orb.id ? true : false) : undefined;
   const parent = orb.parent;
   const to = orb.computeProp('to', time);
   let a;
@@ -32,7 +28,7 @@ let Wheel = ({ orb, guides }) => {
   // style
   let opacity;
   if (selected === true)
-    opacity = orb.wheel ? 1 : dim;
+    opacity = 1;
   else if (selected === false)
     opacity = orb.wheel ? dim : 0;
   else

@@ -16,7 +16,6 @@ const FullscreenButton = () => {
 
   return (
     <Button
-      className=''
       onClick={() => {
         if (!document.fullscreenElement)
           document.body.requestFullscreen();

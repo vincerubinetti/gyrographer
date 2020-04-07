@@ -6,11 +6,10 @@ import { SelectedContext } from '../controllers/selected';
 import { TimeContext } from '../controllers/time';
 
 let Hitbox = ({ orb, guides, d }) => {
-  const selectedContext = useContext(SelectedContext);
-  const timeContext = useContext(TimeContext);
+  const { changeSelected } = useContext(SelectedContext);
+  const { time } = useContext(TimeContext);
 
   // geometry
-  const time = timeContext.time;
   const to = orb.computeProp('to', time);
   const b = orb.computePoint(to, time);
 
@@ -31,7 +30,7 @@ let Hitbox = ({ orb, guides, d }) => {
         onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
-          selectedContext.changeSelected(orb.id);
+          changeSelected(orb.id);
         }}
       />
       <circle
@@ -42,7 +41,7 @@ let Hitbox = ({ orb, guides, d }) => {
         onClick={(event) => {
           event.stopPropagation();
           event.preventDefault();
-          selectedContext.changeSelected(orb.id);
+          changeSelected(orb.id);
         }}
       />
     </g>

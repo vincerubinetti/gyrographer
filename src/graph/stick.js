@@ -10,16 +10,12 @@ const precision = 2;
 const strokeWidth = 3;
 
 let Stick = ({ orb, guides }) => {
-  const selectedContext = useContext(SelectedContext);
-  const timeContext = useContext(TimeContext);
+  let { selected } = useContext(SelectedContext);
+  const { time } = useContext(TimeContext);
 
   // geometry
-  const selected = selectedContext.selected ?
-    selectedContext.selected === orb.id ?
-      true :
-      false :
-    undefined;
-  const time = timeContext.time;
+  selected =
+    selected !== null ? (selected === orb.id ? true : false) : undefined;
   const parent = orb.parent;
   const to = orb.computeProp('to', time);
   let a;
@@ -32,7 +28,7 @@ let Stick = ({ orb, guides }) => {
   // style
   let opacity;
   if (selected === true)
-    opacity = orb.stick ? 1 : dim;
+    opacity = 1;
   else if (selected === false)
     opacity = orb.stick ? dim : 0;
   else

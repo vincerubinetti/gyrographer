@@ -20,7 +20,7 @@ export let svg;
 export let view;
 
 let Graph = ({ background }) => {
-  const context = useContext(SelectedContext);
+  const { changeSelected } = useContext(SelectedContext);
   const mounted = useMounted();
 
   useEffect(() => {
@@ -33,16 +33,14 @@ let Graph = ({ background }) => {
 
   useEffect(() => {
     window.addEventListener('resize', fitView);
-    return () =>
-      window.removeEventListener('resize', fitView);
+    return () => window.removeEventListener('resize', fitView);
   }, []);
 
   return (
     <svg
       id='graph'
       style={{ background: background.rgba }}
-      onClick={() =>
-        context.changeSelected()}
+      onClick={() => changeSelected()}
     >
       <g id='view'>
         <Guides />
@@ -52,10 +50,9 @@ let Graph = ({ background }) => {
   );
 };
 
-const mapStateToProps = (state) =>
-  ({
-    background: state.background
-  });
+const mapStateToProps = (state) => ({
+  background: state.background
+});
 
 Graph = connect(mapStateToProps)(Graph);
 

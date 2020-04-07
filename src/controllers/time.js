@@ -22,13 +22,13 @@ let Time = ({ children, fps, length }) => {
           newTime = time + newTime;
         if (newTime < 0) {
           if (loop)
-            newTime = newTime % length + length;
+            newTime = relative ? length : newTime % length + length;
           else
             newTime = 0;
         }
         if (newTime > length) {
           if (loop)
-            newTime = newTime % length;
+            newTime = relative ? 0 : newTime % length;
           else {
             newTime = length;
             setPlaying(false);

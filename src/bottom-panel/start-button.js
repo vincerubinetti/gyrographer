@@ -6,14 +6,10 @@ import { Button } from '../components/button';
 import { ReactComponent as ArrowStartIcon } from '../images/arrow-start.svg';
 
 const StartButton = () => {
-  const context = useContext(TimeContext);
+  const { toStart } = useContext(TimeContext);
 
   return (
-    <Button
-      className='thin_button'
-      onClick={context.toStart}
-      tooltip='To start'
-    >
+    <Button className='thin_button' onClick={toStart} tooltip='To start'>
       <ArrowStartIcon />
     </Button>
   );

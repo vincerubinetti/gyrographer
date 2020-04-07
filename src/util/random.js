@@ -1,7 +1,7 @@
 import { swatches } from '../components/color-picker';
 import { random } from './math';
 
-const colors = swatches.slice(1, 17);
+const colors = swatches.slice(1, swatches.length - 1);
 
 const number = 10;
 const ratio = 0.5;
@@ -14,9 +14,9 @@ export const generateRandomProject = () => {
   const withoutChild = () => Object.keys(orbs).filter((id) => !hasChild(id));
 
   for (let id = 0; id < number; id++) {
-    let parent = '';
+    let parent = null;
     if (Math.random() < ratio)
-      parent = random(['', ...withChild()]);
+      parent = random([null, ...withChild()]);
     else
       parent = random([...withoutChild()]);
 

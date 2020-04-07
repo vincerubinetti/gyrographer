@@ -1,9 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { useContext } from 'react';
 
-import { SelectedContext } from '../controllers/selected';
 import { Tree } from './tree';
 import { Orb } from './orb';
 import { Project } from './project';
@@ -15,15 +12,7 @@ import './index.css';
 
 const SidePanel = () => {
   const [open, setOpen] = useState(true);
-  const [tab, setTab] = useState('project');
-  const context = useContext(SelectedContext);
-
-  useEffect(() => {
-    if (context.selected)
-      setTab('orb');
-    else
-      setTab('tree');
-  }, [context.selected]);
+  const [tab, setTab] = useState('tree');
 
   return (
     <div id='side_panel' data-open={open}>

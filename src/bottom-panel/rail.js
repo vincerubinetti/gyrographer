@@ -12,18 +12,18 @@ import './rail.css';
 let Rail = ({ length }) => {
   const [clicking, setClicking] = useState(false);
   const track = useRef();
-  const context = useContext(TimeContext);
+  const { time, changeTime } = useContext(TimeContext);
 
   const seek = useCallback(
     (event) => {
       const x = event.clientX || (event.touches ? event.touches[0].clientX : 0);
 
-      const bbox = track.current.getBoundingClientRect();
-      const time = Math.floor(length * (x - bbox.left) / bbox.width);
+      const { left, width } = track.current.getBoundingClientRect();
+      const time = Math.floor((length * (x - left)) / width);
 
-      context.changeTime(time);
+      changeTime(time);
     },
-    [context, length]
+    [length, changeTime]
   );
 
   const onMouseDown = useCallback(
@@ -52,7 +52,7 @@ let Rail = ({ length }) => {
     [seek, clicking]
   );
 
-  const percent = 100 * context.time / length;
+  const percent = (100 * time) / length;
 
   useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);

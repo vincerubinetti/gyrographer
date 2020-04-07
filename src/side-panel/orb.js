@@ -30,9 +30,9 @@ import { ReactComponent as OrderIcon } from '../images/order.svg';
 import { ReactComponent as CloseIcon } from '../images/close.svg';
 
 const Orb = () => {
-  const context = useContext(SelectedContext);
+  const { selected } = useContext(SelectedContext);
 
-  if (!context.selected)
+  if (selected !== null)
     return <div className='side_panel_empty'>No orb selected</div>;
 
   return (

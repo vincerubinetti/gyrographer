@@ -6,14 +6,13 @@ import { Button } from '../components/button';
 import { ReactComponent as LoopIcon } from '../images/loop.svg';
 
 const LoopButton = () => {
-  const context = useContext(TimeContext);
+  const { loop, toggleLoop } = useContext(TimeContext);
 
   return (
     <Button
-      className=''
-      onClick={context.toggleLoop}
-      color={context.loop ? 'blue' : 'gray'}
-      tooltip={context.loop ? "Don't loop" : 'Loop'}
+      onClick={toggleLoop}
+      color={loop ? 'blue' : 'gray'}
+      tooltip={loop ? "Don't loop" : 'Loop'}
     >
       <LoopIcon />
     </Button>

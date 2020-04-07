@@ -74,7 +74,7 @@ const hsvToRgb = ({ h, s, v }) => {
   return { r, g, b };
 };
 
-const contrast = ({ r, g, b }) => {
+export const contrast = ({ r, g, b }) => {
   const yiq = (r * 299 + g * 587 + b * 114) / 1000;
   return yiq > 128 ? '#ffffffff' : '#00000000';
 };

@@ -9,14 +9,20 @@ import { buildTree } from './orb';
 export const TreeContext = createContext({});
 
 let Tree = ({ children, orbs }) => {
-  const [tree, setTree] = useState([]);
+  const [root, setRoot] = useState({});
+  const [list, setList] = useState([]);
 
-  useEffect(() => setTree(buildTree(orbs)), [orbs]);
+  useEffect(() => {
+    const { root, list } = buildTree(orbs);
+    setRoot(root);
+    setList(list);
+  }, [orbs]);
 
   return (
     <TreeContext.Provider
       value={{
-        tree
+        root,
+        list
       }}
     >
       {children}

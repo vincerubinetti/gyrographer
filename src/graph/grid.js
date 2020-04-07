@@ -11,9 +11,9 @@ const minorSpacing = 50;
 const majorMultiple = 4;
 
 let Grid = ({ grid, left, top, right, bottom, guides }) => {
-  const context = useContext(SelectedContext);
+  const { selected } = useContext(SelectedContext);
 
-  const opacity = grid ? context.selected ? dim : 1 : 0;
+  const opacity = grid ? (selected !== null ? dim : 1) : 0;
 
   const minorHorizontalLines = [];
   const minorVerticalLines = [];
@@ -24,28 +24,30 @@ let Grid = ({ grid, left, top, right, bottom, guides }) => {
     const xy = index * minorSpacing;
 
     if (xy > Math.min(top, bottom) && xy < Math.max(top, bottom)) {
-      const newLine =
+      const newLine = (
         <line
           key={index}
           x1={Math.min(left, right)}
           y1={xy}
           x2={Math.max(left, right)}
           y2={xy}
-        />;
+        />
+      );
       if (index % majorMultiple === 0)
         majorHorizontalLines.push(newLine);
       else
         minorHorizontalLines.push(newLine);
     }
     if (xy > Math.min(left, right) && xy < Math.max(left, right)) {
-      const newLine =
+      const newLine = (
         <line
           key={index}
           x1={xy}
           y1={Math.min(top, bottom)}
           x2={xy}
           y2={Math.max(top, bottom)}
-        />;
+        />
+      );
       if (index % majorMultiple === 0)
         majorVerticalLines.push(newLine);
       else

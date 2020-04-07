@@ -7,10 +7,18 @@
   stroke: var(--white);
   stroke-width: 1px;
 }
+.tree_node[data-selected="true"] {
+  stroke-width: 4px;
+}
 .tree_link {
   fill: var(--white);
   stroke: var(--white);
   stroke-width: 1px;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+.tree_button {
+  content: '';
+  width: 100%;
+  height: 100%;
 }

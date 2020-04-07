@@ -14,8 +14,7 @@ import './row.css';
 const spec = { ...projectSpec, ...orbSpec };
 
 let Row = ({ state, dispatch, prop, Icon, Control, orb }) => {
-  const context = useContext(SelectedContext);
-  const selected = context.selected;
+  const { selected } = useContext(SelectedContext);
 
   const name = spec[prop].name;
   const description = spec[prop].description;
@@ -40,19 +39,23 @@ let Row = ({ state, dispatch, prop, Icon, Control, orb }) => {
             step={step}
             choices={choices}
             onNudge={(value) => {
-              dispatch(createAction(type)({
-                value,
-                selected,
-                description: action,
-                noUndo: true
-              }));
+              dispatch(
+                createAction(type)({
+                  value,
+                  selected,
+                  description: action,
+                  noUndo: true
+                })
+              );
             }}
             onChange={(value) => {
-              dispatch(createAction(type)({
-                value,
-                selected,
-                description: action
-              }));
+              dispatch(
+                createAction(type)({
+                  value,
+                  selected,
+                  description: action
+                })
+              );
             }}
           />
         </div>

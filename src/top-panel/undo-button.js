@@ -22,7 +22,6 @@ let UndoButton = ({ past, actionDescription, undo }) => {
 
   return (
     <Button
-      className=''
       onClick={() => {
         if (past.length)
           undo();

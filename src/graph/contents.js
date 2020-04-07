@@ -9,19 +9,16 @@ import { Path } from './path';
 import { Hitbox } from './hitbox';
 
 export const Contents = () => {
-  const treeContext = useContext(TreeContext);
-  const timeContext = useContext(TimeContext);
-
-  const time = timeContext.time;
+  const { list } = useContext(TreeContext);
+  const { time } = useContext(TimeContext);
 
   const wheels = [];
   const sticks = [];
   const paths = [];
   const hitboxes = [];
 
-  for (const orb of treeContext.tree) {
+  for (const orb of list) {
     const d = orb.computePath(time);
-
     wheels.push(<Wheel key={wheels.length} orb={orb} />);
     sticks.push(<Stick key={sticks.length} orb={orb} />);
     paths.push(<Path key={paths.length} orb={orb} d={d} />);

@@ -87,25 +87,32 @@ export class Orb {
 }
 
 export const buildTree = (orbs) => {
-  const tree = [];
+  const list = [];
 
   for (let [id, orb] of Object.entries(orbs)) {
     orb = { ...orb };
     orb.id = id;
     orb.depth = 0;
-    tree.push(new Orb({ ...orb }));
+    orb.children = [];
+    list.push(new Orb({ ...orb }));
   }
 
-  for (const leaf of tree)
-    leaf.parent = tree.find((parent) => parent.id === leaf.parent);
+  for (const leaf of list)
+    leaf.parent = list.find((parent) => parent.id === leaf.parent) || null;
 
-  const traverse = (leaf, depth = 0) =>
+  for (const leaf of list) {
+    if (leaf.parent)
+      leaf.parent.children.push(leaf);
+  }
+
+
+  const traverse = (leaf, depth = 1) =>
     leaf.parent ? traverse(leaf.parent, depth + 1) : depth;
 
-  for (const leaf of tree)
+  for (const leaf of list)
     leaf.depth = traverse(leaf);
 
-  tree.sort((a, b) => {
+  list.sort((a, b) => {
     if (a.order > b.order)
       return -1;
     if (a.order < b.order)
@@ -119,5 +126,11 @@ export const buildTree = (orbs) => {
     return 0;
   });
 
-  return tree;
+  const root = {
+    id: 'root',
+    depth: 0,
+    children: [...list.filter((leaf) => !leaf.parent)]
+  };
+
+  return { root, list };
 };

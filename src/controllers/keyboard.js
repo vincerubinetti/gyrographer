@@ -9,7 +9,13 @@ import { undo } from '../actions/undoer';
 import { redo } from '../actions/undoer';
 
 let Keyboard = ({ length, undo, redo }) => {
-  const context = useContext(TimeContext);
+  const {
+    playing,
+    togglePlaying,
+    changeTime,
+    decrementTime,
+    incrementTime
+  } = useContext(TimeContext);
 
   const onKeyDown = useCallback(
     (event) => {
@@ -20,27 +26,27 @@ let Keyboard = ({ length, undo, redo }) => {
 
       switch (event.key) {
         case ' ':
-          context.togglePlaying(!context.playing);
+          togglePlaying(!playing);
           event.preventDefault();
           break;
 
         case 'ArrowLeft':
-          context.decrementTime(step);
+          decrementTime(step);
           event.preventDefault();
           break;
 
         case 'ArrowRight':
-          context.incrementTime(step);
+          incrementTime(step);
           event.preventDefault();
           break;
 
         case 'Home':
-          context.changeTime(0);
+          changeTime(0);
           event.preventDefault();
           break;
 
         case 'End':
-          context.changeTime(length);
+          changeTime(length);
           event.preventDefault();
           break;
 
@@ -58,7 +64,16 @@ let Keyboard = ({ length, undo, redo }) => {
           break;
       }
     },
-    [context, length, undo, redo]
+    [
+      playing,
+      length,
+      togglePlaying,
+      changeTime,
+      decrementTime,
+      incrementTime,
+      undo,
+      redo
+    ]
   );
 
   useEffect(() => {

@@ -103,16 +103,16 @@ const cleanValue = ({
 };
 
 const cleanTree = ({ orbs }) => {
-  for (const key of Object.keys(orbs)) {
-    if (!orbs[orbs[key].parent])
-      orbs[key].parent = '';
+  for (const [id, orb] of Object.entries(orbs)) {
+    if (!id || !orb || !orbs[orb.parent])
+      orbs[id].parent = null;
   }
 
   for (const key of Object.keys(orbs)) {
     const visited = new Set();
     const traverse = (id) => {
       if (visited.has(id))
-        orbs[id].parent = '';
+        orbs[id].parent = null;
       visited.add(id);
       if (orbs[id]?.parent)
         traverse(orbs[id].parent);

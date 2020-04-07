@@ -6,10 +6,10 @@ import { Button } from '../components/button';
 import { ReactComponent as ArrowEndIcon } from '../images/arrow-end.svg';
 
 const EndButton = () => {
-  const context = useContext(TimeContext);
+  const { toEnd } = useContext(TimeContext);
 
   return (
-    <Button className='thin_button' onClick={context.toEnd} tooltip='To end'>
+    <Button className='thin_button' onClick={toEnd} tooltip='To end'>
       <ArrowEndIcon />
     </Button>
   );
