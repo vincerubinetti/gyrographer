@@ -1,7 +1,7 @@
 import { swatches } from '../components/color-picker';
 import { random } from './math';
 
-const colors = swatches.slice(1, swatches.length - 1);
+const colors = swatches.slice(1, 17);
 
 const number = 10;
 const ratio = 0.5;

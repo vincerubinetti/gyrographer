@@ -14,7 +14,7 @@ const vSpacing = 40;
 
 const Tree = () => {
   const { root } = useContext(TreeContext);
-  const { selected, changeSelected } = useContext(SelectedContext);
+  const { changeSelected } = useContext(SelectedContext);
 
   const table = [];
   const traverse = (leaf) => {
@@ -22,6 +22,8 @@ const Tree = () => {
       for (const child of leaf.children)
         traverse(child);
     }
+
+
     if (!table[leaf.depth])
       table[leaf.depth] = [];
     table[leaf.depth].push(leaf);
@@ -42,9 +44,11 @@ const Tree = () => {
   }
 
   const width = 250;
-  const height = (table.length + 2) * vSpacing;
+  const height = (table.length + 1) * vSpacing;
   const x = -width / 2;
   const y = -hSpacing;
+
+  const list = table.flat();
 
   return (
     <svg
@@ -54,56 +58,66 @@ const Tree = () => {
       viewBox={`${x} ${y} ${width} ${height}`}
       onClick={() => changeSelected()}
     >
-      {table.map((row, rowIndex) => (
-        <Fragment key={rowIndex}>
-          {row.map((leaf, colIndex) => (
-            <Fragment key={colIndex}>
-              <line
-                className='tree_link'
-                x1={leaf.parent?.x || 0}
-                y1={leaf.parent?.y || 0}
-                x2={leaf.x}
-                y2={leaf.y}
-              />
-            </Fragment>
-          ))}
-        </Fragment>
+      {list
+        .filter((orb) => orb.path === false)
+        .map((leaf, index) => (
+          <Node key={index} leaf={leaf} opacity={0.25} />
+        ))}
+      {list.map((leaf, index) => (
+        <Link key={index} leaf={leaf} />
       ))}
-      {table.map((row, rowIndex) => (
-        <Fragment key={rowIndex}>
-          {row.map((leaf, colIndex) => (
-            <Fragment key={colIndex}>
-              <circle
-                key={colIndex}
-                className='tree_node'
-                data-selected={leaf.id === selected}
-                opacity={leaf.path ? 1 : 0.25}
-                fill={leaf.fill?.a ? leaf.fill?.rgb : leaf.stroke?.rgb}
-                r={size / 2}
-                cx={leaf.x}
-                cy={leaf.y}
-              />
-              <foreignObject
-                x={leaf.x - size / 2}
-                y={leaf.y - size / 2}
-                width={size}
-                height={size}
-              >
-                <button
-                  xmlns='http://www.w3.org/1999/xhtml'
-                  className='tree_button'
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    changeSelected(leaf.id);
-                  }}
-                />
-              </foreignObject>
-            </Fragment>
-          ))}
-        </Fragment>
-      ))}
+      {list
+        .filter((orb) => orb.path !== false)
+        .map((leaf, index) => (
+          <Node key={index} leaf={leaf} opacity={1} />
+        ))}
     </svg>
   );
 };
 
 export { Tree };
+
+const Link = ({ leaf }) => (
+  <line
+    className='tree_link'
+    x1={leaf.parent?.x || 0}
+    y1={leaf.parent?.y || 0}
+    x2={leaf.x}
+    y2={leaf.y}
+  />
+);
+
+const Node = ({ leaf, opacity }) => {
+  const { selected, changeSelected } = useContext(SelectedContext);
+
+  return (
+    <>
+      <circle
+        className='tree_node'
+        data-selected={leaf.id === selected}
+        opacity={opacity}
+        fill={
+          (leaf.fill?.a ? leaf.fill?.rgb : leaf.stroke?.rgb) || 'var(--black)'
+        }
+        r={size / 2}
+        cx={leaf.x}
+        cy={leaf.y}
+      />
+      <foreignObject
+        x={leaf.x - size / 2}
+        y={leaf.y - size / 2}
+        width={size}
+        height={size}
+      >
+        <button
+          xmlns='http://www.w3.org/1999/xhtml'
+          className='tree_button'
+          onClick={(event) => {
+            event.stopPropagation();
+            changeSelected(leaf.id);
+          }}
+        />
+      </foreignObject>
+    </>
+  );
+};

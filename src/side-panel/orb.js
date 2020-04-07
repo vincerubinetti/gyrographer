@@ -32,7 +32,7 @@ import { ReactComponent as CloseIcon } from '../images/close.svg';
 const Orb = () => {
   const { selected } = useContext(SelectedContext);
 
-  if (selected !== null)
+  if (selected === null)
     return <div className='side_panel_empty'>No orb selected</div>;
 
   return (
