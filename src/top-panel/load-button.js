@@ -18,7 +18,9 @@ let LoadButton = ({ setState }) => {
 
   const onChange = useCallback(
     async (event) => {
-      const text = await event.target.files[0].text();
+      event.persist();
+
+      const text = await event?.target?.files[0]?.text();
       let state = {};
       try {
         state = JSON.parse(text);

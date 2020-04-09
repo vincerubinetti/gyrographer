@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import Overlay from './overlay';
 import Graph from './graph';
 import TopPanel from './top-panel';
 import SidePanel from './side-panel';
@@ -34,6 +35,7 @@ let App = ({ setState }) => {
         <Time>
           <Keyboard />
           <Mouse />
+          <Overlay />
           <Graph />
           <TopPanel />
           <SidePanel />

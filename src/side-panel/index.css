@@ -3,7 +3,6 @@
   left: 0;
   top: 80px;
   transition: transform var(--fast);
-  z-index: 1;
 }
 #side_panel[data-open="false"] {
   transform: translateX(-100%);

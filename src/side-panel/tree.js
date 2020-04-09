@@ -1,5 +1,4 @@
 import React from 'react';
-import { Fragment } from 'react';
 import { useContext } from 'react';
 
 import { TreeContext } from '../controllers/tree';
