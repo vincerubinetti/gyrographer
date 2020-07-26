@@ -9,8 +9,10 @@
   background: var(--black);
   color: var(--white);
   transition: opacity var(--fast);
+  pointer-events: none;
 }
-#overlay[data-hover="true"] {
+#overlay[data-dragging="true"] {
+  pointer-events: all;
   z-index: 100;
   opacity: 1;
 }

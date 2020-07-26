@@ -22,7 +22,6 @@ const Tree = () => {
         traverse(child);
     }
 
-
     if (!table[leaf.depth])
       table[leaf.depth] = [];
     table[leaf.depth].push(leaf);

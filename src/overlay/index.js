@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { connect } from 'react-redux';
 
@@ -10,36 +11,46 @@ import { ReactComponent as LoadIcon } from '../images/load.svg';
 import './index.css';
 
 let Overlay = ({ setState }) => {
-  const [hover, setHover] = useState(false);
+  const [dragging, setDragging] = useState(false);
 
-  const onDrop = useCallback(async (event) => {
-    event.persist();
-    event.preventDefault();
-    event.stopPropagation();
+  const onDrop = useCallback(
+    async (event) => {
+      event.persist();
+      event.preventDefault();
+      event.stopPropagation();
 
-    const text = await event?.dataTransfer?.files[0]?.text();
-    let state = {};
-    try {
-      state = JSON.parse(text);
-    } catch (error) {
-      console.log(error);
-    }
+      const text = await event?.dataTransfer?.files[0]?.text();
+      let state = {};
+      try {
+        state = JSON.parse(text);
+      } catch (error) {
+        console.log(error);
+      }
 
-    setState({
-      state: state,
-      description: 'Load project from file'
-    });
+      setState({
+        state: state,
+        description: 'Load project from file'
+      });
 
-    setHover(false);
-  }, [setState]);
+      setDragging(false);
+    },
+    [setState]
+  );
+
+  useEffect(() => {
+    const start = () => setDragging(true);
+    window.addEventListener('dragover', start);
+    return () => window.removeEventListener('dragover', start);
+  }, []);
 
   return (
     <div
       id='overlay'
-      data-hover={hover}
-      onDragEnter={() => setHover(true)}
-      onDragLeave={() => setHover(false)}
+      data-dragging={dragging}
+      onDragEnter={() => setDragging(true)}
+      onDragLeave={() => setDragging(false)}
       onDragOver={(event) => event.preventDefault()}
+      onDragEnd={() => setDragging(false)}
       onDrop={onDrop}
     >
       <div>
