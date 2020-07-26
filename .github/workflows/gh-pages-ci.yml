@@ -5,7 +5,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: checkout code
         uses: actions/checkout@v1
@@ -17,10 +16,6 @@ jobs:
         run: |
           yarn install
           npm run build
-          ls
-          ls build -R
-          ls public -R
-          ls src -R
       - name: deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:

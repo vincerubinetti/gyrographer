@@ -14,7 +14,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "fresh": "rm -rf node_modules && yarn cache clean && yarn install && react-scripts start"
   },
   "browserslist": [
     ">0.1%",
